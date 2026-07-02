@@ -1,0 +1,2729 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>G Flexipack — Pouches, printed properly</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --cream: #f4efe7;
+      --cream-2: #eae0cd;
+      --ink: #3b2a20;
+      --ink-soft: rgba(59, 42, 32, 0.68);
+      --ink-line: rgba(59, 42, 32, 0.14);
+      --cream-soft: rgba(244, 239, 231, 0.72);
+      --cream-line: rgba(244, 239, 231, 0.18);
+      --burnt: #b25c2e;
+      --olive: #7a6e3f;
+      --sage: #7a8a6c;
+      --gold: #c89a3a;
+      --pale-gold: #d9c893;
+      --accent: #b25c2e;
+
+      --serif: "DM Serif Display", Georgia, serif;
+      --sans: "Space Grotesk", system-ui, sans-serif;
+
+      --tile-w: 200px;
+      --tile-h: 200px;
+      --tile-gap: 14px;
+    }
+
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      /* clip (not hidden) — kills sideways scroll without breaking position:sticky */
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* scroll reveal */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    [data-reveal].is-in {
+      opacity: 1;
+      transform: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal] { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244, 239, 231, 0.86);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 18px 48px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 48px;
+    }
+    .brand { display: inline-flex; align-items: center; }
+    .brand img {
+      height: 52px;
+      width: auto;
+      mix-blend-mode: multiply;
+      filter: contrast(1.02);
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .nav-links a {
+      position: relative;
+      padding: 6px 0;
+      opacity: 0.82;
+      transition: opacity 0.2s ease;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .nav-cta:hover { background: var(--ink); color: var(--cream); }
+
+    /* ---------- HERO SHELL — text left, vertical marquee right ---------- */
+    .hero {
+      padding: 40px 0 32px;
+    }
+    .hero-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 80px;
+      align-items: center;
+      min-height: 620px;
+    }
+    .hero-text { text-align: left; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 32px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: rgba(59, 42, 32, 0.32);
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(44px, 6vw, 86px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin: 0 0 28px;
+      max-width: 12ch;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 480px;
+      margin: 0 0 36px;
+    }
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .cta-primary {
+      padding: 14px 26px;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 999px;
+    }
+    .cta-primary:hover { transform: translateY(-1px); background: #2a1e17; }
+    .cta-ghost {
+      padding: 14px 4px;
+      color: var(--ink);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      position: relative;
+    }
+    .cta-ghost::after {
+      content: "";
+      position: absolute;
+      left: 4px; right: 4px;
+      bottom: 8px;
+      height: 1px;
+      background: var(--ink);
+      transform: scaleX(0.35);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .cta-ghost:hover { background: transparent; color: var(--ink); }
+    .cta-ghost:hover::after { transform: scaleX(1); }
+    .arrow { display: inline-block; transition: transform 0.25s ease; }
+    .cta:hover .arrow { transform: translateX(4px); }
+
+    /* ---------- VERTICAL MARQUEE — two columns, opposite directions ---------- */
+    .v-marquee {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      height: 660px;
+      position: relative;
+    }
+    .v-col {
+      overflow: hidden;
+      position: relative;
+      border-radius: 8px;
+    }
+    .v-col::before,
+    .v-col::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      height: 60px;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .v-col::before {
+      top: 0;
+      background: linear-gradient(to bottom, var(--cream), rgba(244,239,231,0));
+    }
+    .v-col::after {
+      bottom: 0;
+      background: linear-gradient(to top, var(--cream), rgba(244,239,231,0));
+    }
+    .v-track {
+      display: flex;
+      flex-direction: column;
+      gap: var(--tile-gap);
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    .v-track.v-down {
+      animation-name: scroll-down;
+      animation-duration: 50s;
+    }
+    .v-track.v-up {
+      animation-name: scroll-up;
+      animation-duration: 55s;
+    }
+    @keyframes scroll-down {
+      from { transform: translateY(calc((var(--tile-h) + var(--tile-gap)) * -6)); }
+      to   { transform: translateY(0); }
+    }
+    @keyframes scroll-up {
+      from { transform: translateY(0); }
+      to   { transform: translateY(calc((var(--tile-h) + var(--tile-gap)) * -6)); }
+    }
+    .v-marquee:hover .v-track { animation-play-state: paused; }
+    @media (prefers-reduced-motion: reduce) {
+      .v-track { animation: none !important; }
+    }
+    .v-col .tile { width: 100%; }
+
+    /* ---------- TILE (colour panel + pouch) ---------- */
+    .tile {
+      width: var(--tile-w);
+      height: var(--tile-h);
+      flex-shrink: 0;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 60%),
+        var(--bg);
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 28px 30px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .tile::before {
+      content: "";
+      position: absolute;
+      left: 18%;
+      right: 18%;
+      bottom: 26px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(2px);
+      z-index: 0;
+    }
+
+    .pouch {
+      width: 115px;
+      height: 155px;
+      background:
+        linear-gradient(112deg,
+          rgba(255,255,255,0.14) 0%,
+          rgba(255,255,255,0.02) 32%,
+          rgba(255,255,255,0) 55%,
+          rgba(255,255,255,0.06) 82%,
+          rgba(255,255,255,0.12) 100%),
+        linear-gradient(to right,
+          rgba(0,0,0,0.22) 0%,
+          rgba(0,0,0,0) 10%,
+          rgba(0,0,0,0) 90%,
+          rgba(0,0,0,0.24) 100%),
+        linear-gradient(to bottom,
+          rgba(255,255,255,0.04) 0%,
+          rgba(0,0,0,0) 40%,
+          rgba(0,0,0,0.08) 100%),
+        var(--body);
+      border-radius: 16px 16px 6px 6px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      box-shadow:
+        0 22px 34px -14px rgba(0, 0, 0, 0.45),
+        0 2px 4px -1px rgba(0, 0, 0, 0.15),
+        inset 0 -4px 0 rgba(0, 0, 0, 0.18);
+    }
+    .pouch::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 34px;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom,
+        rgba(255,255,255,0.05) 0%,
+        rgba(255,255,255,0.02) 60%,
+        rgba(0,0,0,0.06) 100%);
+      pointer-events: none;
+    }
+
+    .cap {
+      height: 20px;
+      background:
+        linear-gradient(to bottom,
+          rgba(255,255,255,0.06) 0%,
+          rgba(0,0,0,0) 40%,
+          rgba(0,0,0,0.25) 100%),
+        var(--cap);
+      position: relative;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.25);
+    }
+    .cap::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 5px;
+      height: 2.5px;
+      border-radius: 1.5px;
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(255,255,255,0.28) 0px,
+          rgba(255,255,255,0.28) 1.5px,
+          transparent 1.5px,
+          transparent 3px),
+        rgba(0,0,0,0.35);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .cap::after {
+      content: "";
+      position: absolute;
+      right: 16px;
+      top: 3px;
+      width: 5px;
+      height: 5px;
+      background: rgba(0,0,0,0.3);
+      transform: rotate(45deg);
+      border-radius: 1px;
+    }
+
+    .band {
+      margin: auto 0 14px;
+      padding: 8px 5px;
+      background: var(--band);
+      color: var(--band-text);
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 12px;
+      white-space: nowrap;
+      line-height: 1;
+      letter-spacing: 0.4px;
+      position: relative;
+      box-shadow:
+        inset 0 1px 2px rgba(0,0,0,0.18),
+        inset 0 -1px 0 rgba(255,255,255,0.08),
+        0 1px 0 rgba(255,255,255,0.06);
+      z-index: 2;
+    }
+
+    /* ---------- META STRIP ---------- */
+    .meta {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 56px 56px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    .meta > div {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .meta strong {
+      display: block;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .meta em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* ============================================================
+       CHAPTER 1 — TICKER BAND (full-bleed brown, horizontal marquee)
+       ============================================================ */
+    .ticker {
+      background: var(--ink);
+      color: var(--cream);
+      overflow: hidden;
+      padding: 26px 0;
+      position: relative;
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      gap: 0;
+      animation: ticker-scroll 46s linear infinite;
+    }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track { animation: none; }
+    }
+    .ticker-set {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .ticker-item {
+      font-family: var(--serif);
+      font-size: 24px;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      padding: 0 14px;
+    }
+    .ticker-item em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .ticker-star {
+      color: var(--burnt);
+      font-family: var(--sans);
+      font-size: 16px;
+      padding: 0 14px;
+    }
+
+    /* ============================================================
+       SHARED CHAPTER HEADING (left-aligned, editorial — no centering)
+       ============================================================ */
+    .chapter-head {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 110px 56px 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: end;
+    }
+    .chapter-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 24px;
+    }
+    .chapter-kicker::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: rgba(59, 42, 32, 0.32);
+    }
+    .chapter-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(38px, 4.6vw, 68px);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .chapter-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .chapter-side {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 420px;
+      padding-bottom: 8px;
+    }
+
+    /* ============================================================
+       CHAPTER 2 — FORMATS RAIL (horizontal scroll, bleeds off-canvas)
+       ============================================================ */
+    .rail-wrap {
+      position: relative;
+      padding-bottom: 40px;
+    }
+    .rail {
+      display: flex;
+      gap: 22px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 8px 56px 36px calc(max((100vw - 1440px) / 2, 0px) + 56px);
+      scrollbar-width: none;
+      cursor: grab;
+    }
+    .rail::-webkit-scrollbar { display: none; }
+    .rail.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+
+    .panel {
+      scroll-snap-align: start;
+      flex: 0 0 auto;
+      width: 360px;
+      height: 500px;
+      border-radius: 10px;
+      background:
+        radial-gradient(ellipse at 50% 24%, rgba(255,255,255,0.07) 0%, rgba(0,0,0,0) 62%),
+        var(--bg);
+      color: var(--panel-text, var(--cream));
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 30px 32px 30px;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .panel:hover { transform: translateY(-6px); }
+    .panel-idx {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 20px;
+      opacity: 0.75;
+    }
+    .panel-ghost {
+      position: absolute;
+      top: -34px;
+      right: 6px;
+      font-family: var(--serif);
+      font-size: 210px;
+      line-height: 1;
+      opacity: 0.09;
+      pointer-events: none;
+      user-select: none;
+    }
+    .panel-stage {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      position: relative;
+      padding-bottom: 26px;
+    }
+    .panel-stage::before {
+      content: "";
+      position: absolute;
+      left: 24%;
+      right: 24%;
+      bottom: 14px;
+      height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(3px);
+    }
+    .panel .pouch {
+      width: 150px;
+      height: 205px;
+      border-radius: 20px 20px 8px 8px;
+      transition: transform 0.4s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .panel:hover .pouch { transform: translateY(-8px) rotate(-1.5deg); }
+    .panel .cap { height: 24px; }
+    .panel .band { font-size: 14px; padding: 9px 6px; margin-bottom: 18px; }
+    .panel-name {
+      font-family: var(--serif);
+      font-size: 30px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+    .panel-use {
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.82;
+      margin: 0 0 14px;
+      min-height: 42px;
+    }
+    .panel-spec {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      opacity: 0.65;
+    }
+
+    /* film roll visual — for Poly Film Rolls (it's not a pouch, don't draw one) */
+    .roll {
+      position: relative;
+      width: 132px;
+      height: 196px;
+      z-index: 1;
+    }
+    .roll-body {
+      position: absolute;
+      inset: 12px 0 0;
+      border-radius: 14px;
+      background:
+        linear-gradient(to right,
+          rgba(0,0,0,0.3) 0%, rgba(255,255,255,0.16) 12%,
+          rgba(255,255,255,0.02) 45%, rgba(0,0,0,0.12) 78%,
+          rgba(0,0,0,0.34) 100%),
+        var(--body);
+      box-shadow:
+        0 22px 34px -14px rgba(0, 0, 0, 0.45),
+        inset 0 -4px 0 rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+    /* wound film edge lines */
+    .roll-body::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(90deg,
+        transparent 0 9px, rgba(0,0,0,0.05) 9px 10px);
+    }
+    .roll-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 26px;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 50% 50%, var(--cap) 0%, var(--cap) 24%, transparent 25%),
+        linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(0,0,0,0.08)),
+        var(--body);
+      box-shadow: inset 0 2px 3px rgba(255,255,255,0.25), inset 0 -2px 4px rgba(0,0,0,0.2);
+      z-index: 2;
+    }
+    .roll .band {
+      position: absolute;
+      left: 0; right: 0;
+      bottom: 30px;
+      margin: 0;
+      z-index: 3;
+    }
+
+    .rail-nav {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .rail-hint {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    /* scrubber — position in a 13-panel rail at a glance */
+    .rail-progress {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      max-width: 420px;
+    }
+    .rail-track {
+      flex: 1;
+      height: 2px;
+      background: var(--ink-line);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .rail-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 8%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.15s linear;
+    }
+    .rail-count {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--ink);
+      white-space: nowrap;
+      min-width: 74px;
+      text-align: right;
+    }
+    .rail-count em { color: var(--accent); font-style: italic; }
+    .rail-btns { display: flex; gap: 12px; }
+    .rail-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+    }
+    .rail-btn:hover { background: var(--ink); color: var(--cream); }
+    .rail-btn:disabled { opacity: 0.3; cursor: default; }
+    .rail-btn:disabled:hover { background: transparent; color: var(--ink); }
+
+    /* ============================================================
+       CHAPTER 3 — INSIDE THE FILM (sticky scrollytelling)
+       ============================================================ */
+    .anatomy {
+      background: var(--cream-2);
+      margin-top: 110px;
+    }
+    .anatomy .chapter-head { padding-top: 96px; }
+    .anatomy-grid {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px 60px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 80px;
+    }
+    .anatomy-sticky {
+      position: sticky;
+      top: 120px;
+      height: 560px;
+      align-self: start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* the film stack — three tilted sheets in exploded view */
+    .film-stack {
+      position: relative;
+      width: 380px;
+      height: 460px;
+    }
+    .sheet {
+      position: absolute;
+      left: 30px;
+      width: 320px;
+      height: 128px;
+      border-radius: 12px;
+      transform: rotate(-6deg) skewX(-14deg) translateY(30px);
+      opacity: 0;
+      transition:
+        opacity 0.6s cubic-bezier(0.2, 0.6, 0.2, 1),
+        top 0.7s cubic-bezier(0.2, 0.6, 0.2, 1),
+        transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+      box-shadow: 0 24px 40px -18px rgba(59, 42, 32, 0.4);
+    }
+    .sheet-label {
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%) skewX(14deg) translateX(100%);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      white-space: nowrap;
+      padding-left: 18px;
+      border-left: none;
+    }
+    .sheet-label::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 12px;
+      height: 1px;
+      background: rgba(59, 42, 32, 0.4);
+    }
+
+    .sheet-print {
+      top: 30px;
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(244,239,231,0.16) 0px, rgba(244,239,231,0.16) 3px,
+          transparent 3px, transparent 26px),
+        linear-gradient(112deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.08) 100%),
+        var(--burnt);
+    }
+    .sheet-barrier {
+      top: 176px;
+      background:
+        linear-gradient(112deg,
+          rgba(255,255,255,0.55) 0%,
+          rgba(255,255,255,0.08) 30%,
+          rgba(59,42,32,0.12) 55%,
+          rgba(255,255,255,0.34) 82%,
+          rgba(255,255,255,0.5) 100%),
+        var(--pale-gold);
+    }
+    .sheet-seal {
+      top: 322px;
+      background:
+        linear-gradient(112deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.3) 100%),
+        var(--cream);
+      border: 1px solid rgba(59, 42, 32, 0.12);
+    }
+
+    /* step states — layers appear one by one */
+    .film-stack[data-step="1"] .sheet-print { opacity: 1; transform: rotate(-6deg) skewX(-14deg) translateY(0); }
+    .film-stack[data-step="2"] .sheet-print,
+    .film-stack[data-step="2"] .sheet-barrier { opacity: 1; transform: rotate(-6deg) skewX(-14deg) translateY(0); }
+    .film-stack[data-step="3"] .sheet-print,
+    .film-stack[data-step="3"] .sheet-barrier,
+    .film-stack[data-step="3"] .sheet-seal { opacity: 1; transform: rotate(-6deg) skewX(-14deg) translateY(0); }
+
+    /* step 4 — collapse into one laminated film */
+    .film-stack[data-step="4"] .sheet { opacity: 1; transform: rotate(-6deg) skewX(-14deg) translateY(0); }
+    .film-stack[data-step="4"] .sheet-print   { top: 130px; }
+    .film-stack[data-step="4"] .sheet-barrier { top: 168px; }
+    .film-stack[data-step="4"] .sheet-seal    { top: 206px; }
+    .film-stack[data-step="4"] .sheet-label { opacity: 0; transition: opacity 0.3s ease; }
+
+    .stack-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      text-align: center;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--ink-soft);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+    }
+    .film-stack[data-step="4"] .stack-caption { opacity: 1; transform: none; }
+    .stack-caption em { color: var(--accent); }
+
+    .anatomy-steps { padding: 40px 0 80px; }
+    .a-step {
+      min-height: 66vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0.28;
+      transition: opacity 0.45s ease;
+    }
+    .a-step.is-active { opacity: 1; }
+    .a-step-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 20px;
+      color: var(--accent);
+      margin: 0 0 10px;
+    }
+    .a-step h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(28px, 2.6vw, 40px);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin: 0 0 16px;
+    }
+    .a-step p {
+      font-size: 16.5px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 460px;
+      margin: 0;
+    }
+    .laminate-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      max-width: 480px;
+    }
+    .laminate-chip {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 8px 14px;
+      border: 1px solid rgba(59, 42, 32, 0.3);
+      border-radius: 999px;
+      background: transparent;
+    }
+    .laminate-chip.is-reel { border-color: var(--olive); color: var(--olive); }
+
+    /* ============================================================
+       CHAPTER 4 — SECTORS SHELF (six panels, one screen, colour as accent)
+       ============================================================ */
+    .sectors {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px 20px;
+    }
+    .shelf {
+      display: flex;
+      gap: 14px;
+      height: 540px;
+    }
+    .shelf-panel {
+      flex: 1;
+      min-width: 0;
+      background: var(--cream);
+      border: 1px solid var(--ink-line);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition:
+        flex 0.65s cubic-bezier(0.25, 0.7, 0.2, 1),
+        background-color 0.5s ease,
+        border-color 0.5s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    /* the only always-on colour: a thin ribbon on top */
+    .shelf-panel::before {
+      content: "";
+      height: 5px;
+      background: var(--sc);
+      flex-shrink: 0;
+    }
+    .shelf-panel.is-open {
+      flex: 3.1;
+      background: color-mix(in srgb, var(--sc) 7%, var(--cream));
+      border-color: color-mix(in srgb, var(--sc) 36%, transparent);
+    }
+
+    /* collapsed face — number top, vertical name, pouch bottom */
+    .sp-closed {
+      position: absolute;
+      inset: 5px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 22px 10px 26px;
+      opacity: 1;
+      transition: opacity 0.3s ease 0.15s;
+    }
+    .shelf-panel.is-open .sp-closed { opacity: 0; transition-delay: 0s; pointer-events: none; }
+    .sp-closed .sp-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--accent);
+    }
+    .sp-closed .sp-name-v {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: var(--serif);
+      font-size: clamp(20px, 1.9vw, 27px);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    .sp-closed .mini-pouch { --pw: 54px; --ph: 74px; }
+    .sp-closed .mini-pouch .mp-band { display: none; }
+
+    /* expanded face */
+    .sp-open {
+      position: absolute;
+      inset: 5px 0 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      padding: 30px 32px 32px;
+      opacity: 0;
+      transition: opacity 0.35s ease 0.2s;
+      pointer-events: none;
+      min-width: 360px; /* keeps layout stable while flex animates */
+    }
+    .shelf-panel.is-open .sp-open { opacity: 1; pointer-events: auto; }
+    .sp-open .sp-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--accent);
+      display: block;
+      margin: 0 0 8px;
+    }
+    .sp-open h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(26px, 2.4vw, 36px);
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      margin: 0 0 18px;
+    }
+    .sp-open-top { align-self: start; }
+    .sp-apps {
+      list-style: none;
+      margin: 0 0 18px;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-width: 400px;
+    }
+    .sp-apps li {
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 7px 13px;
+      border: 1px solid rgba(59, 42, 32, 0.24);
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .sp-build {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0;
+      max-width: 380px;
+    }
+    .sp-build b { color: var(--ink); font-weight: 500; }
+    .sp-open .mini-pouch { --pw: 88px; --ph: 122px; }
+    .sp-open .mini-pouch .mp-band { font-size: 10px; padding: 5px 3px; }
+
+    .shelf-hint {
+      margin: 18px 0 0;
+      font-size: 12.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .hint-mobile { display: none; }
+    @media (max-width: 900px) {
+      .hint-desktop { display: none; }
+      .hint-mobile { display: inline; }
+    }
+
+    /* small pouch glyph for shelf panels */
+    .mini-pouch {
+      width: var(--pw, 64px);
+      height: var(--ph, 88px);
+      border-radius: 10px 10px 4px 4px;
+      background:
+        linear-gradient(112deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.1) 100%),
+        linear-gradient(to right, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(0,0,0,0.2) 100%),
+        var(--body);
+      box-shadow:
+        0 14px 20px -10px rgba(0,0,0,0.35),
+        inset 0 -3px 0 rgba(0,0,0,0.16);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+    .mini-pouch .mp-cap {
+      height: 12px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(0,0,0,0.2)), var(--cap);
+      flex-shrink: 0;
+    }
+    .mini-pouch .mp-band {
+      margin: auto 0 10px;
+      padding: 4px 3px;
+      background: var(--bandc);
+      color: var(--band-text);
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 8.5px;
+      letter-spacing: 0.3px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       CHAPTER 5 — THE PLANT (full-bleed brown, stats woven in prose)
+       ============================================================ */
+    .plant {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 130px 0 120px;
+    }
+    .plant-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+    .plant-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      margin: 0 0 40px;
+    }
+    .plant-kicker::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: rgba(244, 239, 231, 0.35);
+    }
+    /* short serif triplet — three beats, no prose */
+    .plant-statement {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(32px, 4vw, 62px);
+      line-height: 1.14;
+      letter-spacing: -0.015em;
+      margin: 0 0 18px;
+      max-width: 20ch;
+    }
+    .plant-statement em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .plant-note {
+      font-size: 15.5px;
+      line-height: 1.6;
+      color: var(--cream-soft);
+      max-width: 520px;
+      margin: 0 0 72px;
+    }
+
+    /* the line — five machines, photos lead */
+    .line-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+    .machine {
+      display: flex;
+      flex-direction: column;
+    }
+    .machine-photo {
+      aspect-ratio: 5 / 3.4;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      background: rgba(244, 239, 231, 0.06);
+    }
+    .machine-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      /* warm grade so the studio shots sit in the palette */
+      filter: sepia(0.16) saturate(1.06) contrast(1.02) brightness(0.98);
+      transition: transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .machine:hover .machine-photo img { transform: scale(1.04); }
+    /* placeholder tile — until the plant photo arrives */
+    .photo-soon {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px dashed rgba(244, 239, 231, 0.3);
+      border-radius: 8px;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(244, 239, 231, 0.03) 0 14px,
+        rgba(244, 239, 231, 0.06) 14px 28px
+      );
+      color: var(--cream-soft);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 12px;
+    }
+    .photo-soon .ps-mark {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 26px;
+      color: var(--gold);
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .machine-no {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--gold);
+      margin: 0 0 6px;
+    }
+    .machine h4 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin: 0 0 6px;
+    }
+    .machine p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--cream-soft);
+      margin: 0;
+    }
+
+    /* ============================================================
+       CHAPTER 5b — THE LAB (warm cream band — quality gets its own room)
+       ============================================================ */
+    .lab {
+      background: var(--cream-2);
+      padding: 110px 0 110px;
+    }
+    .lab-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+    .lab-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 90px;
+      align-items: start;
+      margin-top: 56px;
+    }
+    .test-sheet {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--ink-line);
+    }
+    .test-row {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 20px;
+      align-items: baseline;
+      padding: 17px 6px;
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .test-no {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--accent);
+    }
+    .test-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      letter-spacing: -0.01em;
+    }
+    .test-proof {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+    .lab-side .quality-quote {
+      font-family: var(--serif);
+      font-size: clamp(22px, 2vw, 28px);
+      font-style: italic;
+      line-height: 1.35;
+      margin: 0 0 12px;
+      max-width: 420px;
+    }
+    .lab-side .quality-quote em { color: var(--accent); }
+    .lab-side .quality-src {
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 36px;
+    }
+    .lab-photos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .lab-photo {
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 4 / 4.6;
+      position: relative;
+    }
+    .lab-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: sepia(0.16) saturate(1.06) contrast(1.02);
+    }
+    .lab-photo figcaption {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 20px 10px 8px;
+      background: linear-gradient(to top, rgba(59,42,32,0.72), rgba(59,42,32,0));
+      color: var(--cream);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .cert-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .cert-chip {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 16px;
+      border: 1px solid rgba(59, 42, 32, 0.3);
+      border-radius: 999px;
+      color: var(--ink);
+    }
+
+    /* ============================================================
+       CHAPTER 6 — PROCESS TIMELINE (one rule, five moments)
+       ============================================================ */
+    .process {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 130px 56px 40px;
+    }
+    /* vertical spine — one line, five nodes, fills as you scroll */
+    .spine {
+      position: relative;
+      margin-top: 72px;
+      padding-left: 44px;
+    }
+    .spine-rule {
+      position: absolute;
+      left: 5px;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background: var(--ink-line);
+    }
+    .spine-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 0%;
+      background: var(--accent);
+    }
+    .moment {
+      position: relative;
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1.4fr) auto;
+      gap: 36px;
+      align-items: baseline;
+      padding: 34px 0;
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .moment:last-child { border-bottom: none; }
+    /* node on the rule */
+    .moment::before {
+      content: "";
+      position: absolute;
+      left: -44px;
+      top: 50px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2px solid var(--ink-line);
+      transform: translateX(-4px);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .moment.is-past::before {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .moment-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(40px, 3.4vw, 58px);
+      line-height: 1;
+      color: var(--accent);
+    }
+    .moment h4 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(22px, 2vw, 28px);
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+    .moment p {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin: 0;
+      max-width: 520px;
+    }
+    .moment-when {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+      justify-self: end;
+    }
+
+    /* terms — a single spec footnote line, not boxes */
+    .terms-line {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 48px 56px 130px;
+      /* block, not flex — flex items swallow the whitespace between words */
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(19px, 2vw, 26px);
+      line-height: 1.9;
+      color: var(--ink);
+      border-top: none;
+    }
+    .terms-line em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .terms-dot {
+      padding: 0 20px;
+      color: rgba(59, 42, 32, 0.3);
+      font-family: var(--sans);
+      font-size: 15px;
+    }
+
+    /* ============================================================
+       CHAPTER 7 — FINALE (full-bleed burnt orange)
+       ============================================================ */
+    .finale {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 55%),
+        var(--burnt);
+      color: var(--cream);
+      padding: 140px 0 150px;
+      text-align: left;
+    }
+    .finale-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+    .finale-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(52px, 7vw, 110px);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin: 0 0 36px;
+      max-width: 14ch;
+    }
+    .finale-title em {
+      font-style: italic;
+      color: #f7e2b8;
+    }
+    .finale-sub {
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 520px;
+      color: rgba(244, 239, 231, 0.85);
+      margin: 0 0 48px;
+    }
+    .finale-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px 36px;
+    }
+    .finale-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 30px;
+      background: var(--cream);
+      color: var(--ink);
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 500;
+      transition: transform 0.2s ease;
+    }
+    .finale-cta:hover { transform: translateY(-2px); }
+    .finale-mail {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.4vw, 30px);
+      font-style: italic;
+      position: relative;
+      padding-bottom: 4px;
+    }
+    .finale-mail::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: rgba(244, 239, 231, 0.6);
+      transform: scaleX(0.4);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .finale-mail:hover::after { transform: scaleX(1); }
+    .finale-meta {
+      margin-top: 64px;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 231, 0.66);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 32px;
+    }
+
+    /* ---------- FOOTER (brown, compact) ---------- */
+    .site-footer {
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 80px 56px 60px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+      gap: 56px;
+    }
+    .footer-brand img {
+      height: 46px;
+      width: auto;
+      filter: brightness(0) invert(1) opacity(0.92);
+      margin-bottom: 18px;
+    }
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--cream-soft);
+      margin: 0;
+      max-width: 300px;
+    }
+    .footer-col h5 {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      margin: 0 0 18px;
+    }
+    .footer-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14.5px;
+    }
+    .footer-col a { opacity: 0.9; transition: opacity 0.2s ease; }
+    .footer-col a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+    .footer-col address {
+      font-style: normal;
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--cream-soft);
+    }
+    .footer-col address a { color: var(--cream); }
+    .footer-bottom {
+      border-top: 1px solid var(--cream-line);
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 26px 56px 36px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12.5px;
+      color: var(--cream-soft);
+    }
+
+    .option-badge {
+      position: fixed;
+      bottom: 18px;
+      left: 18px;
+      z-index: 40;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 8px 14px;
+      border-radius: 999px;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1100px) {
+      .line-strip { grid-template-columns: repeat(3, 1fr); gap: 24px 18px; }
+      .lab-grid { grid-template-columns: 1fr; gap: 56px; }
+      /* single column: visual becomes a compact sticky banner below the nav,
+         steps scroll under it — the layer animation stays visible on phones */
+      .anatomy-grid { display: block; }
+      .anatomy-sticky {
+        position: sticky;
+        top: 89px;
+        z-index: 6;
+        height: 230px;
+        padding: 10px 0 0;
+        background: var(--cream-2);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+      /* soft fade below the banner so text slides out, not snaps */
+      .anatomy-sticky::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        height: 26px;
+        background: linear-gradient(to bottom, var(--cream-2), rgba(234, 224, 205, 0));
+        pointer-events: none;
+      }
+      .film-stack {
+        width: 300px;
+        height: 210px;
+        transform: scale(0.46);
+        transform-origin: top center;
+      }
+      .stack-caption { display: none; }
+      .a-step { min-height: 0; padding: 40px 0; opacity: 0.45; }
+      .a-step.is-active { opacity: 1; }
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --tile-h: 200px;
+        --tile-gap: 12px;
+      }
+      .nav-inner { grid-template-columns: auto auto; padding: 14px 20px; gap: 16px; }
+      .nav-links { display: none; }
+      .hero { padding: 32px 0 24px; }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 0 20px;
+        min-height: auto;
+      }
+      .hero-title { font-size: 44px; max-width: none; }
+      .hero-sub { max-width: none; }
+      .v-marquee { height: 440px; gap: 12px; }
+      .v-col::before, .v-col::after { height: 50px; }
+      .pouch { width: 108px; height: 148px; }
+      .cap { height: 18px; }
+      .band { font-size: 11px; padding: 7px 4px; margin-bottom: 12px; }
+      .meta {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px 20px 40px;
+      }
+      .meta strong { font-size: 18px; }
+
+      .ticker-item { font-size: 19px; }
+
+      .chapter-head {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 72px 20px 40px;
+      }
+      .chapter-side { padding-bottom: 0; }
+
+      .rail { padding: 8px 20px 28px 20px; gap: 14px; }
+      .panel { width: 300px; height: 440px; padding: 22px 24px; }
+      .panel .pouch { width: 122px; height: 168px; }
+      .panel-ghost { font-size: 150px; top: -22px; }
+      .panel-name { font-size: 24px; }
+      .rail-nav { padding: 0 20px; }
+
+      .anatomy { margin-top: 72px; }
+      .anatomy-grid { padding: 0 20px 40px; }
+      /* phone nav is shorter; banner tucks right beneath it */
+      .anatomy-sticky { top: 79px; height: 200px; }
+      .film-stack {
+        width: 250px;
+        height: 190px;
+        transform: scale(0.42);
+      }
+      .sheet-label { display: none; }
+      .anatomy-steps { padding: 0 0 40px; }
+      .a-step { padding: 34px 0; }
+      .a-step:first-child { padding-top: 16px; }
+
+      .sectors { padding: 0 20px 40px; }
+      /* shelf stacks into horizontal bands on mobile */
+      .shelf { flex-direction: column; height: auto; gap: 10px; }
+      .shelf-panel { min-height: 74px; }
+      .shelf-panel::before { height: 100%; width: 5px; position: absolute; left: 0; top: 0; }
+      .sp-closed {
+        position: relative;
+        inset: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 20px 20px 26px;
+      }
+      .sp-closed .sp-name-v {
+        writing-mode: horizontal-tb;
+        transform: none;
+        flex: 1;
+        font-size: 22px;
+      }
+      .sp-closed .mini-pouch { --pw: 40px; --ph: 54px; }
+      .shelf-panel.is-open { flex: 1; }
+      .shelf-panel.is-open .sp-closed { opacity: 1; pointer-events: auto; }
+      .sp-open {
+        position: relative;
+        inset: auto;
+        min-width: 0;
+        grid-template-columns: 1fr;
+        padding: 0 20px 24px 26px;
+        display: none;
+      }
+      .shelf-panel.is-open .sp-open { display: grid; }
+      .sp-open h3, .sp-open .sp-num { display: none; }
+      .sp-open .mini-pouch { display: none; }
+
+      .plant { padding: 80px 0 76px; }
+      .plant-inner { padding: 0 20px; }
+      .plant-note { margin-bottom: 48px; }
+      .line-strip { grid-template-columns: repeat(2, 1fr); gap: 24px 14px; }
+
+      .lab { padding: 72px 0; }
+      .lab-inner { padding: 0 20px; }
+      .test-row { grid-template-columns: 34px minmax(0, 1fr); gap: 12px; }
+      .test-proof { grid-column: 2; }
+
+      .process { padding: 84px 20px 20px; }
+      .spine { margin-top: 44px; padding-left: 30px; }
+      .moment { grid-template-columns: 48px 1fr; gap: 16px; padding: 26px 0; }
+      .moment::before { left: -30px; top: 42px; }
+      .moment-when { grid-column: 2; justify-self: start; margin-top: 10px; }
+      .terms-line { padding: 32px 20px 84px; font-size: 18px; }
+      .terms-dot { padding: 0 12px; }
+
+      .finale { padding: 88px 0 96px; }
+      .finale-inner { padding: 0 20px; }
+      .finale-meta { margin-top: 44px; }
+
+      .footer-inner { grid-template-columns: 1fr; gap: 36px; padding: 56px 20px 40px; }
+      .footer-bottom { padding: 20px 20px 28px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="G Flexipack, home">
+        <img src="logo.png" alt="G Flexipack" />
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#formats">What we make</a>
+        <a href="#anatomy">Inside the film</a>
+        <a href="#sectors">Sectors</a>
+        <a href="#plant">The plant</a>
+        <a href="#process">Process</a>
+      </nav>
+      <a class="nav-cta" href="#quote">
+        Get a quote <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ============ HERO — unchanged ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Flexible packaging · Est. 2016</p>
+        <h1 class="hero-title">Packaging built for <em>shelf impact.</em></h1>
+        <p class="hero-sub">
+          Custom-printed pouches for food, beverage, and lifestyle brands.
+          Thirteen formats, sharp rotogravure print, export-ready.
+        </p>
+        <div class="hero-ctas">
+          <button class="cta cta-primary">Get a quote <span class="arrow" aria-hidden="true">→</span></button>
+          <button class="cta cta-ghost">See our work <span class="arrow" aria-hidden="true">→</span></button>
+        </div>
+      </div>
+
+      <div class="v-marquee" aria-label="Formats we print and sectors we pack for">
+        <!-- Column A — FORMATS — scrolling DOWN -->
+        <div class="v-col">
+          <div class="v-track v-down">
+            <article class="tile" style="--bg:#b25c2e; --body:#eae0cd; --cap:#cfc4b0; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Zipper</div></div>
+            </article>
+            <article class="tile" style="--bg:#7a6e3f; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Stand-Up</div></div>
+            </article>
+            <article class="tile" style="--bg:#3b2a20; --body:#b25c2e; --cap:#8f4623; --band:#eae0cd; --band-text:#b25c2e;">
+              <div class="pouch"><div class="cap"></div><div class="band">Gusseted</div></div>
+            </article>
+            <article class="tile" style="--bg:#eae0cd; --body:#7a6e3f; --cap:#5a512d; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">3-Side Seal</div></div>
+            </article>
+            <article class="tile" style="--bg:#c89a3a; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Spout</div></div>
+            </article>
+            <article class="tile" style="--bg:#d9c893; --body:#3b2a20; --cap:#241812; --band:#b25c2e; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Retort</div></div>
+            </article>
+
+            <article class="tile" style="--bg:#b25c2e; --body:#eae0cd; --cap:#cfc4b0; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Zipper</div></div>
+            </article>
+            <article class="tile" style="--bg:#7a6e3f; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Stand-Up</div></div>
+            </article>
+            <article class="tile" style="--bg:#3b2a20; --body:#b25c2e; --cap:#8f4623; --band:#eae0cd; --band-text:#b25c2e;">
+              <div class="pouch"><div class="cap"></div><div class="band">Gusseted</div></div>
+            </article>
+            <article class="tile" style="--bg:#eae0cd; --body:#7a6e3f; --cap:#5a512d; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">3-Side Seal</div></div>
+            </article>
+            <article class="tile" style="--bg:#c89a3a; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Spout</div></div>
+            </article>
+            <article class="tile" style="--bg:#d9c893; --body:#3b2a20; --cap:#241812; --band:#b25c2e; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Retort</div></div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Column B — SECTORS — scrolling UP -->
+        <div class="v-col">
+          <div class="v-track v-up">
+            <article class="tile" style="--bg:#7a8a6c; --body:#eae0cd; --cap:#c9bda6; --band:#7a6e3f; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Food</div></div>
+            </article>
+            <article class="tile" style="--bg:#b25c2e; --body:#3b2a20; --cap:#241812; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Beverages</div></div>
+            </article>
+            <article class="tile" style="--bg:#eae0cd; --body:#3b2a20; --cap:#241812; --band:#7a6e3f; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Agriculture</div></div>
+            </article>
+            <article class="tile" style="--bg:#7a6e3f; --body:#c89a3a; --cap:#a67d2f; --band:#3b2a20; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Healthcare</div></div>
+            </article>
+            <article class="tile" style="--bg:#3b2a20; --body:#eae0cd; --cap:#c9bda6; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Industrial</div></div>
+            </article>
+            <article class="tile" style="--bg:#d9c893; --body:#7a6e3f; --cap:#5a512d; --band:#eae0cd; --band-text:#7a6e3f;">
+              <div class="pouch"><div class="cap"></div><div class="band">Liquids</div></div>
+            </article>
+
+            <article class="tile" style="--bg:#7a8a6c; --body:#eae0cd; --cap:#c9bda6; --band:#7a6e3f; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Food</div></div>
+            </article>
+            <article class="tile" style="--bg:#b25c2e; --body:#3b2a20; --cap:#241812; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Beverages</div></div>
+            </article>
+            <article class="tile" style="--bg:#eae0cd; --body:#3b2a20; --cap:#241812; --band:#7a6e3f; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Agriculture</div></div>
+            </article>
+            <article class="tile" style="--bg:#7a6e3f; --body:#c89a3a; --cap:#a67d2f; --band:#3b2a20; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Healthcare</div></div>
+            </article>
+            <article class="tile" style="--bg:#3b2a20; --body:#eae0cd; --cap:#c9bda6; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Industrial</div></div>
+            </article>
+            <article class="tile" style="--bg:#d9c893; --body:#7a6e3f; --cap:#5a512d; --band:#eae0cd; --band-text:#7a6e3f;">
+              <div class="pouch"><div class="cap"></div><div class="band">Liquids</div></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="meta" aria-label="At a glance">
+    <div>
+      <strong>Thirteen <em>formats</em>.</strong>
+      Stand-up to spout, sachets to film rolls — every format printed to spec.
+    </div>
+    <div>
+      <strong>300+ <em>MT a month</em>.</strong>
+      Medium to large runs, 8-colour rotogravure, laminated and pouched under one roof.
+    </div>
+    <div>
+      <strong>Quote in <em>24 hours</em>.</strong>
+      Send artwork, size, quantity, target ship-by date. We come back the next business day.
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 1 — TICKER ============ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-set">
+        <span class="ticker-item">8-colour <em>rotogravure</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">Food-grade <em>barrier films</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">ISO <em>9001:2015</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">300+ MT <em>a month</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">Solvent-less <em>lamination</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">100% recyclable <em>options</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">FOB <em>Mundra</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">Est. 2016 · <em>Bharuch, Gujarat</em></span><span class="ticker-star">✳</span>
+      </div>
+      <div class="ticker-set">
+        <span class="ticker-item">8-colour <em>rotogravure</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">Food-grade <em>barrier films</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">ISO <em>9001:2015</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">300+ MT <em>a month</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">Solvent-less <em>lamination</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">100% recyclable <em>options</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">FOB <em>Mundra</em></span><span class="ticker-star">✳</span>
+        <span class="ticker-item">Est. 2016 · <em>Bharuch, Gujarat</em></span><span class="ticker-star">✳</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CHAPTER 2 — FORMATS RAIL ============ -->
+  <section id="formats">
+    <div class="chapter-head">
+      <div data-reveal>
+        <p class="chapter-kicker">What we make</p>
+        <h2 class="chapter-title">Thirteen formats,<br /><em>one plant.</em></h2>
+      </div>
+      <p class="chapter-side" data-reveal>
+        Every format is printed, laminated, slit and converted in-house in Bharuch —
+        custom dimensions, barrier structures and finishes for each one.
+      </p>
+    </div>
+
+    <div class="rail-wrap">
+      <div class="rail" id="formatRail" tabindex="0" aria-label="Pouch formats — scroll horizontally">
+        <article class="panel" style="--bg:#b25c2e;">
+          <span class="panel-ghost" aria-hidden="true">01</span>
+          <span class="panel-idx">01 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#eae0cd; --cap:#cfc4b0; --band:#c89a3a; --band-text:#3b2a20;"><div class="cap"></div><div class="band">Stand-Up</div></div>
+          </div>
+          <h3 class="panel-name">Stand-Up Pouches</h3>
+          <p class="panel-use">Snacks, coffee, tea, spices, pet food, nuts.</p>
+          <span class="panel-spec">Flat / oval bottom · degassing valve · zipper</span>
+        </article>
+
+        <article class="panel" style="--bg:#7a6e3f;">
+          <span class="panel-ghost" aria-hidden="true">02</span>
+          <span class="panel-idx">02 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;"><div class="cap"></div><div class="band">Zipper</div></div>
+          </div>
+          <h3 class="panel-name">Zipper Pouches</h3>
+          <p class="panel-use">Resealable snacks, cosmetics, hardware, dry ingredients.</p>
+          <span class="panel-spec">Press-to-close · slider · window option</span>
+        </article>
+
+        <article class="panel" style="--bg:#3b2a20;">
+          <span class="panel-ghost" aria-hidden="true">03</span>
+          <span class="panel-idx">03 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#b25c2e; --cap:#8f4623; --band:#eae0cd; --band-text:#b25c2e;"><div class="cap"></div><div class="band">Gusseted</div></div>
+          </div>
+          <h3 class="panel-name">Gusseted Pouches</h3>
+          <p class="panel-use">Bulk grains, fertilizers, seeds, large retail packs.</p>
+          <span class="panel-spec">Side / bottom gusset · heavy-duty laminate</span>
+        </article>
+
+        <article class="panel" style="--bg:#c89a3a; --panel-text:#3b2a20;">
+          <span class="panel-ghost" aria-hidden="true">04</span>
+          <span class="panel-idx">04 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#eae0cd; --cap:#cfc4b0; --band:#3b2a20; --band-text:#eae0cd;"><div class="cap"></div><div class="band">Centre Seal</div></div>
+          </div>
+          <h3 class="panel-name">Centre Seal Pouches</h3>
+          <p class="panel-use">Chips, namkeen, powders — the classic pillow pack.</p>
+          <span class="panel-spec">Centre back seal · high-speed FFS lines</span>
+        </article>
+
+        <article class="panel" style="--bg:#7a8a6c;">
+          <span class="panel-ghost" aria-hidden="true">05</span>
+          <span class="panel-idx">05 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#eae0cd; --cap:#c9bda6; --band:#7a6e3f; --band-text:#eae0cd;"><div class="cap"></div><div class="band">Vacuum</div></div>
+          </div>
+          <h3 class="panel-name">Vacuum Pouches</h3>
+          <p class="panel-use">Meat, cheese, seafood, medical devices, parts.</p>
+          <span class="panel-spec">Puncture-resistant · PA/PE or PET/PE</span>
+        </article>
+
+        <article class="panel" style="--bg:#d9c893; --panel-text:#3b2a20;">
+          <span class="panel-ghost" aria-hidden="true">06</span>
+          <span class="panel-idx">06 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#7a6e3f; --cap:#5a512d; --band:#eae0cd; --band-text:#7a6e3f;"><div class="cap"></div><div class="band">Re-usable</div></div>
+          </div>
+          <h3 class="panel-name">Re-usable Pouches</h3>
+          <p class="panel-use">Zip-lock storage, retail multi-use, refill packs.</p>
+          <span class="panel-spec">Wash-safe · press-to-close · heavy gauge</span>
+        </article>
+
+        <article class="panel" style="--bg:#eae0cd; --panel-text:#3b2a20;">
+          <span class="panel-ghost" aria-hidden="true">07</span>
+          <span class="panel-idx">07 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#7a6e3f; --cap:#5a512d; --band:#c89a3a; --band-text:#3b2a20;"><div class="cap"></div><div class="band">3-Side Seal</div></div>
+          </div>
+          <h3 class="panel-name">3-Side Seal Pouches</h3>
+          <p class="panel-use">Single-serve sachets, condiments, pharma, spices.</p>
+          <span class="panel-spec">Precise dosing · tear notch · foil / PET / BOPP</span>
+        </article>
+
+        <article class="panel" style="--bg:#b25c2e;">
+          <span class="panel-ghost" aria-hidden="true">08</span>
+          <span class="panel-idx">08 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#3b2a20; --cap:#241812; --band:#c89a3a; --band-text:#3b2a20;"><div class="cap"></div><div class="band">4-Side Seal</div></div>
+          </div>
+          <h3 class="panel-name">4-Side Seal Bags</h3>
+          <p class="panel-use">Wet wipes, face masks, pharma, flat sachets.</p>
+          <span class="panel-spec">Four sealed edges · uniform dosing</span>
+        </article>
+
+        <article class="panel" style="--bg:#7a6e3f;">
+          <span class="panel-ghost" aria-hidden="true">09</span>
+          <span class="panel-idx">09 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#d9c893; --cap:#bfae7e; --band:#3b2a20; --band-text:#eae0cd;"><div class="cap"></div><div class="band">Patch Handle</div></div>
+          </div>
+          <h3 class="panel-name">Patch Handle Bags</h3>
+          <p class="panel-use">Retail carry bags for rice, flour, pet food.</p>
+          <span class="panel-spec">Die-cut handle · heavy-duty laminate</span>
+        </article>
+
+        <article class="panel" style="--bg:#c89a3a; --panel-text:#3b2a20;">
+          <span class="panel-ghost" aria-hidden="true">10</span>
+          <span class="panel-idx">10 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;"><div class="cap"></div><div class="band">Spout</div></div>
+          </div>
+          <h3 class="panel-name">Spout Pouches</h3>
+          <p class="panel-use">Liquids, sauces, baby food, juices, personal care.</p>
+          <span class="panel-spec">Screw / flip-top cap · high-barrier foil</span>
+        </article>
+
+        <article class="panel" style="--bg:#3b2a20;">
+          <span class="panel-ghost" aria-hidden="true">11</span>
+          <span class="panel-idx">11 / 13</span>
+          <div class="panel-stage">
+            <div class="roll">
+              <div class="roll-body" style="--body:#eae0cd;"></div>
+              <div class="roll-top" style="--body:#d8cfc0; --cap:#3b2a20;"></div>
+              <div class="band" style="--band:#b25c2e; --band-text:#eae0cd;">Film Roll</div>
+            </div>
+          </div>
+          <h3 class="panel-name">Poly Film Rolls</h3>
+          <p class="panel-use">Printed or plain laminate for your FFS lines.</p>
+          <span class="panel-spec">Custom width · precision slit · bulk supply</span>
+        </article>
+
+        <article class="panel" style="--bg:#d9c893; --panel-text:#3b2a20;">
+          <span class="panel-ghost" aria-hidden="true">12</span>
+          <span class="panel-idx">12 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#3b2a20; --cap:#241812; --band:#b25c2e; --band-text:#eae0cd;"><div class="cap"></div><div class="band">Retort</div></div>
+          </div>
+          <h3 class="panel-name">Retort Pouches</h3>
+          <p class="panel-use">Ready-to-eat meals, pet food, shelf-stable products.</p>
+          <span class="panel-spec">121°C tolerance · PET/AL/CPP · NY/AL/CPP</span>
+        </article>
+
+        <article class="panel" style="--bg:#7a8a6c;">
+          <span class="panel-ghost" aria-hidden="true">13</span>
+          <span class="panel-idx">13 / 13</span>
+          <div class="panel-stage">
+            <div class="pouch" style="--body:#f4efe7; --cap:#d8cfc0; --band:#7a6e3f; --band-text:#eae0cd;"><div class="cap"></div><div class="band">Breathing</div></div>
+          </div>
+          <h3 class="panel-name">Breathing Pouches</h3>
+          <p class="panel-use">Fresh produce and bakery — contents that respire.</p>
+          <span class="panel-spec">Micro-perforated · fresh-keep films</span>
+        </article>
+      </div>
+
+      <div class="rail-nav">
+        <span class="rail-hint">Drag or scroll</span>
+        <div class="rail-progress" aria-hidden="true">
+          <div class="rail-track"><div class="rail-fill" id="railFill"></div></div>
+          <span class="rail-count"><em id="railCurrent">01</em>&thinsp;—&thinsp;13</span>
+        </div>
+        <div class="rail-btns">
+          <button class="rail-btn" id="railPrev" aria-label="Previous format">←</button>
+          <button class="rail-btn" id="railNext" aria-label="Next format">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 3 — INSIDE THE FILM (scrollytelling) ============ -->
+  <section class="anatomy" id="anatomy">
+    <div class="chapter-head">
+      <div data-reveal>
+        <p class="chapter-kicker">Inside the film</p>
+        <h2 class="chapter-title">A pouch is <em>three decisions,</em><br />laminated together.</h2>
+      </div>
+      <p class="chapter-side" data-reveal>
+        What keeps chips crisp for nine months isn't the print — it's the structure
+        behind it. Scroll through the layers we bond for every job.
+      </p>
+    </div>
+
+    <div class="anatomy-grid">
+      <div class="anatomy-sticky">
+        <div class="film-stack" id="filmStack" data-step="1" aria-hidden="true">
+          <div class="sheet sheet-print"><span class="sheet-label">Print · BOPP / PET</span></div>
+          <div class="sheet sheet-barrier"><span class="sheet-label">Barrier · MET-PET / AL</span></div>
+          <div class="sheet sheet-seal"><span class="sheet-label">Seal · LLDPE / CPP</span></div>
+          <p class="stack-caption">One film. <em>Your structure.</em></p>
+        </div>
+      </div>
+
+      <div class="anatomy-steps">
+        <div class="a-step" data-step="1">
+          <p class="a-step-num">01</p>
+          <h3>The print carrier</h3>
+          <p>
+            Your artwork is reverse-printed in up to eight colours on rotogravure —
+            so the ink sits <b>inside</b> the laminate. It can't scuff, scratch or
+            fade on shelf, no matter how rough the supply chain is.
+          </p>
+        </div>
+
+        <div class="a-step" data-step="2">
+          <p class="a-step-num">02</p>
+          <h3>The barrier core</h3>
+          <p>
+            Metallised PET or aluminium foil blocks oxygen, moisture and light.
+            This layer is why roasted, fried and dried products stay fresh for
+            months — and it's specified per product, not per catalogue.
+          </p>
+        </div>
+
+        <div class="a-step" data-step="3">
+          <p class="a-step-num">03</p>
+          <h3>The food-contact seal</h3>
+          <p>
+            LLDPE or CPP on the inside — food-grade, heat-sealable, and strong
+            enough to run on high-speed filling lines without splitting a single seam.
+          </p>
+        </div>
+
+        <div class="a-step" data-step="4">
+          <p class="a-step-num">04</p>
+          <h3>Bonded into one film</h3>
+          <p>
+            Solvent-less lamination fuses the layers into a single web — then it's
+            slit, pouched and batch-tested in our own QC lab before dispatch.
+            Common structures we run:
+          </p>
+          <div class="laminate-chips">
+            <span class="laminate-chip">BOPP / MET-PET / PE</span>
+            <span class="laminate-chip">PET / AL / LLDPE</span>
+            <span class="laminate-chip is-reel">Mono LLDPE — recyclable</span>
+            <span class="laminate-chip">CPP / AL / PET</span>
+            <span class="laminate-chip">PET / PE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 4 — SECTORS INDEX ============ -->
+  <section id="sectors">
+    <div class="chapter-head">
+      <div data-reveal>
+        <p class="chapter-kicker">Who we pack for</p>
+        <h2 class="chapter-title">Six sectors, <em>one standard.</em></h2>
+      </div>
+      <p class="chapter-side" data-reveal>
+        From snack brands to sterile pharma sachets — the hygiene, barrier and
+        documentation adapt to the sector. The print quality doesn't.
+      </p>
+    </div>
+
+    <div class="sectors">
+      <div class="shelf" id="sectorShelf">
+
+        <article class="shelf-panel is-open" style="--sc:#b25c2e;" data-panel="0">
+          <div class="sp-closed">
+            <span class="sp-num">01</span>
+            <span class="sp-name-v">Food &amp; Grocery</span>
+            <div class="mini-pouch" style="--body:#eae0cd; --cap:#cfc4b0;"><div class="mp-cap"></div></div>
+          </div>
+          <div class="sp-open">
+            <div class="sp-open-top">
+              <span class="sp-num">01</span>
+              <h3>Food &amp; Grocery</h3>
+              <ul class="sp-apps">
+                <li>Snacks</li><li>Coffee &amp; tea</li><li>Spices</li>
+                <li>Frozen &amp; ready meals</li><li>Baby food</li><li>Bakery</li>
+              </ul>
+              <p class="sp-build"><b>Typical build:</b> high-barrier metallised film, food-safe inner seal.</p>
+            </div>
+            <div class="mini-pouch" style="--body:#b25c2e; --cap:#8f4623; --bandc:#eae0cd; --band-text:#b25c2e;">
+              <div class="mp-cap"></div><div class="mp-band">Roasted</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="shelf-panel" style="--sc:#c89a3a;" data-panel="1">
+          <div class="sp-closed">
+            <span class="sp-num">02</span>
+            <span class="sp-name-v">Beverages</span>
+            <div class="mini-pouch" style="--body:#3b2a20; --cap:#241812;"><div class="mp-cap"></div></div>
+          </div>
+          <div class="sp-open">
+            <div class="sp-open-top">
+              <span class="sp-num">02</span>
+              <h3>Beverages</h3>
+              <ul class="sp-apps">
+                <li>Juice spout pouches</li><li>Sauce sachets</li>
+                <li>Energy gels</li><li>Bag-in-box liners</li>
+              </ul>
+              <p class="sp-build"><b>Typical build:</b> leak-proof spout welds, burst-strength tested.</p>
+            </div>
+            <div class="mini-pouch" style="--body:#c89a3a; --cap:#a67d2f; --bandc:#3b2a20; --band-text:#eae0cd;">
+              <div class="mp-cap"></div><div class="mp-band">Cold-Pressed</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="shelf-panel" style="--sc:#7a8a6c;" data-panel="2">
+          <div class="sp-closed">
+            <span class="sp-num">03</span>
+            <span class="sp-name-v">Pharmaceutical</span>
+            <div class="mini-pouch" style="--body:#f4efe7; --cap:#d8cfc0;"><div class="mp-cap"></div></div>
+          </div>
+          <div class="sp-open">
+            <div class="sp-open-top">
+              <span class="sp-num">03</span>
+              <h3>Pharmaceutical</h3>
+              <ul class="sp-apps">
+                <li>Dosing sachets</li><li>Blister foil</li>
+                <li>Desiccant pouches</li><li>Sterile formats</li>
+              </ul>
+              <p class="sp-build"><b>Typical build:</b> pharma-grade hygiene, full batch documentation.</p>
+            </div>
+            <div class="mini-pouch" style="--body:#7a8a6c; --cap:#5f6d54; --bandc:#f4efe7; --band-text:#7a8a6c;">
+              <div class="mp-cap"></div><div class="mp-band">5g Dose</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="shelf-panel" style="--sc:#7a6e3f;" data-panel="3">
+          <div class="sp-closed">
+            <span class="sp-num">04</span>
+            <span class="sp-name-v">Agriculture</span>
+            <div class="mini-pouch" style="--body:#7a6e3f; --cap:#5a512d;"><div class="mp-cap"></div></div>
+          </div>
+          <div class="sp-open">
+            <div class="sp-open-top">
+              <span class="sp-num">04</span>
+              <h3>Agriculture</h3>
+              <ul class="sp-apps">
+                <li>Seed pouches</li><li>Fertilizer packs</li>
+                <li>Pesticide &amp; herbicide</li><li>Insecticide sachets</li>
+              </ul>
+              <p class="sp-build"><b>Typical build:</b> UV + moisture protection laminated in.</p>
+            </div>
+            <div class="mini-pouch" style="--body:#7a6e3f; --cap:#5a512d; --bandc:#c89a3a; --band-text:#3b2a20;">
+              <div class="mp-cap"></div><div class="mp-band">Hybrid Seed</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="shelf-panel" style="--sc:#d9c893;" data-panel="4">
+          <div class="sp-closed">
+            <span class="sp-num">05</span>
+            <span class="sp-name-v">Home &amp; Personal Care</span>
+            <div class="mini-pouch" style="--body:#eae0cd; --cap:#cfc4b0;"><div class="mp-cap"></div></div>
+          </div>
+          <div class="sp-open">
+            <div class="sp-open-top">
+              <span class="sp-num">05</span>
+              <h3>Home &amp; Personal Care</h3>
+              <ul class="sp-apps">
+                <li>Shampoo sachets</li><li>Cream &amp; serum</li>
+                <li>Detergent</li><li>Face masks</li><li>Refills</li>
+              </ul>
+              <p class="sp-build"><b>Typical build:</b> chemical-resistant seal layers.</p>
+            </div>
+            <div class="mini-pouch" style="--body:#d9c893; --cap:#bfae7e; --bandc:#3b2a20; --band-text:#eae0cd;">
+              <div class="mp-cap"></div><div class="mp-band">Argan Repair</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="shelf-panel" style="--sc:#3b2a20;" data-panel="5">
+          <div class="sp-closed">
+            <span class="sp-num">06</span>
+            <span class="sp-name-v">Industrial</span>
+            <div class="mini-pouch" style="--body:#3b2a20; --cap:#241812;"><div class="mp-cap"></div></div>
+          </div>
+          <div class="sp-open">
+            <div class="sp-open-top">
+              <span class="sp-num">06</span>
+              <h3>Industrial</h3>
+              <ul class="sp-apps">
+                <li>Lubricant pouches</li><li>Chemical packs</li>
+                <li>Poly film rolls</li><li>Heavy-duty laminates</li>
+              </ul>
+              <p class="sp-build"><b>Typical build:</b> puncture + tear strength tested to ASTM.</p>
+            </div>
+            <div class="mini-pouch" style="--body:#3b2a20; --cap:#241812; --bandc:#b25c2e; --band-text:#eae0cd;">
+              <div class="mp-cap"></div><div class="mp-band">Grade 40</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <p class="shelf-hint"><span class="hint-desktop">Hover or tap a sector</span><span class="hint-mobile">Tap a sector</span></p>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 5 — THE PLANT ============ -->
+  <section class="plant" id="plant">
+    <div class="plant-inner">
+      <p class="plant-kicker">The line</p>
+      <h2 class="plant-statement" data-reveal>
+        <em>8,000 sq ft.</em> 300+ MT a month.<br />Bharuch, <em>Gujarat.</em>
+      </h2>
+      <p class="plant-note" data-reveal>
+        Climate-controlled and dust-free, under the Gangamani group's 20+ years of
+        manufacturing — 350 km from Mumbai, exporting through Mundra Port.
+      </p>
+
+      <div class="line-strip" data-reveal>
+        <div class="machine">
+          <div class="machine-photo">
+            <div class="photo-soon">
+              <span class="ps-mark">i</span>
+              Press photo · from the plant
+            </div>
+          </div>
+          <p class="machine-no">i</p>
+          <h4>8-Colour Rotogravure Press</h4>
+          <p>Auto registration, web guiding.</p>
+        </div>
+        <div class="machine">
+          <div class="machine-photo">
+            <img src="images/lami.png" alt="Solvent-less lamination machine" />
+          </div>
+          <p class="machine-no">ii</p>
+          <h4>Solvent-Less Lamination</h4>
+          <p>Food-safe multi-layer bonding.</p>
+        </div>
+        <div class="machine">
+          <div class="machine-photo">
+            <div class="photo-soon">
+              <span class="ps-mark">iii</span>
+              Line photo · from the plant
+            </div>
+          </div>
+          <p class="machine-no">iii</p>
+          <h4>Solvent-Based Lamination</h4>
+          <p>Specialised barrier structures.</p>
+        </div>
+        <div class="machine">
+          <div class="machine-photo">
+            <img src="images/slitting-machine.png" alt="Slitting machine with film rolls" />
+          </div>
+          <p class="machine-no">iv</p>
+          <h4>Slitting Machine</h4>
+          <p>Precision tension winding.</p>
+        </div>
+        <div class="machine">
+          <div class="machine-photo">
+            <img src="images/pouch.png" alt="Pouching line" />
+          </div>
+          <p class="machine-no">v</p>
+          <h4>Pouching Machines</h4>
+          <p>Centre seal and side seal lines.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 5b — THE LAB ============ -->
+  <section class="lab" id="quality">
+    <div class="lab-inner">
+      <div class="chapter-head" style="padding: 0; max-width: none;">
+        <div data-reveal>
+          <p class="chapter-kicker">The lab</p>
+          <h2 class="chapter-title">Eight tests. <em>Every batch.</em></h2>
+        </div>
+        <p class="chapter-side" data-reveal>
+          Raw material inspected on arrival, colour verified before print,
+          tested in-line at every stage, documented at dispatch.
+        </p>
+      </div>
+
+      <div class="lab-grid">
+        <ol class="test-sheet" data-reveal>
+          <li class="test-row"><span class="test-no">01</span><span class="test-name">GSM</span><span class="test-proof">film weight is consistent, roll to roll</span></li>
+          <li class="test-row"><span class="test-no">02</span><span class="test-name">COF</span><span class="test-proof">runs smoothly on high-speed filling lines</span></li>
+          <li class="test-row"><span class="test-no">03</span><span class="test-name">Bond strength</span><span class="test-proof">laminate layers never separate</span></li>
+          <li class="test-row"><span class="test-no">04</span><span class="test-name">Puncture resistance</span><span class="test-proof">survives transit, stacking and handling</span></li>
+          <li class="test-row"><span class="test-no">05</span><span class="test-name">Burst strength</span><span class="test-proof">seals hold under internal pressure</span></li>
+          <li class="test-row"><span class="test-no">06</span><span class="test-name">Scrub test</span><span class="test-proof">print doesn't rub off in the supply chain</span></li>
+          <li class="test-row"><span class="test-no">07</span><span class="test-name">Heat seal strength</span><span class="test-proof">every seam holds, every time</span></li>
+          <li class="test-row"><span class="test-no">08</span><span class="test-name">Tear strength</span><span class="test-proof">opens where it should — nowhere else</span></li>
+        </ol>
+
+        <div class="lab-side" data-reveal>
+          <blockquote class="quality-quote">&ldquo;Quality <em>without</em> compromise.&rdquo;</blockquote>
+          <p class="quality-src">Quality policy · tested to ASTM standards</p>
+          <div class="lab-photos">
+            <figure class="lab-photo" style="margin:0;">
+              <img src="images/heat.png" alt="Heat seal tester" />
+              <figcaption>Heat seal tester</figcaption>
+            </figure>
+            <figure class="lab-photo" style="margin:0;">
+              <img src="images/punture.png" alt="Puncture and tensile tester" />
+              <figcaption>Puncture tester</figcaption>
+            </figure>
+            <figure class="lab-photo" style="margin:0;">
+              <img src="images/cutter.png" alt="Sample cutter" />
+              <figcaption>Sample cutter</figcaption>
+            </figure>
+          </div>
+          <div class="cert-line">
+            <span class="cert-chip">ISO 9001:2015</span>
+            <span class="cert-chip">ASTM Standard QC</span>
+            <span class="cert-chip">100% Recyclable Options</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 6 — PROCESS TIMELINE ============ -->
+  <section class="process" id="process">
+    <div class="chapter-head" style="padding: 0 0 0; max-width: none;">
+      <div data-reveal>
+        <p class="chapter-kicker">How it works</p>
+        <h2 class="chapter-title">Enquiry to <em>export,</em><br />in five moves.</h2>
+      </div>
+      <p class="chapter-side" data-reveal>
+        One conversation starts it. Structure recommended in 24 hours, quote in two
+        business days, freight out of Mundra Port.
+      </p>
+    </div>
+
+    <div class="spine" id="processSpine">
+      <div class="spine-rule"><div class="spine-fill" id="spineFill"></div></div>
+      <div class="moment">
+        <span class="moment-num">1</span>
+        <div>
+          <h4>Share requirements</h4>
+          <p>Product, format, dimensions, quantity, barrier needs, artwork.</p>
+        </div>
+        <span class="moment-when">Structure in 24 hrs</span>
+      </div>
+      <div class="moment">
+        <span class="moment-num">2</span>
+        <div>
+          <h4>Detailed quote</h4>
+          <p>Unit price FOB Mundra, MOQ, lead time, payment terms, Incoterms.</p>
+        </div>
+        <span class="moment-when">1–2 business days</span>
+      </div>
+      <div class="moment">
+        <span class="moment-num">3</span>
+        <div>
+          <h4>Artwork &amp; samples</h4>
+          <p>Digital proof to sign off. Physical samples couriered on request.</p>
+        </div>
+        <span class="moment-when">On approval</span>
+      </div>
+      <div class="moment">
+        <span class="moment-num">4</span>
+        <div>
+          <h4>Production &amp; QC</h4>
+          <p>In-line inspection at every stage, full batch documentation.</p>
+        </div>
+        <span class="moment-when">3–5 weeks</span>
+      </div>
+      <div class="moment">
+        <span class="moment-num">5</span>
+        <div>
+          <h4>Shipment</h4>
+          <p>Sea freight LCL / FCL from Mundra Port, export documentation handled.</p>
+        </div>
+        <span class="moment-when">FOB / CIF</span>
+      </div>
+    </div>
+
+    <p class="terms-line" data-reveal>
+      MOQ <em>5,000 units</em><span class="terms-dot">●</span>
+      payment <em>30 / 70</em><span class="terms-dot">●</span>
+      lead time <em>3–5 weeks</em><span class="terms-dot">●</span>
+      trial orders <em>welcome</em>
+    </p>
+  </section>
+
+  <!-- ============ CHAPTER 7 — FINALE ============ -->
+  <section class="finale" id="quote">
+    <div class="finale-inner">
+      <h2 class="finale-title" data-reveal>Have a pouch<br /><em>in mind?</em></h2>
+      <p class="finale-sub" data-reveal>
+        Send artwork, size, quantity and a target ship-by date — we'll come back
+        with a structure recommendation within 24 hours.
+      </p>
+      <div class="finale-actions" data-reveal>
+        <a class="finale-cta" href="mailto:info@gflexipack.com">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="finale-mail" href="mailto:info@gflexipack.com">info@gflexipack.com</a>
+      </div>
+      <div class="finale-meta" data-reveal>
+        <span>+91 98240 32765</span>
+        <span>Mon–Sat · 9am–6pm IST</span>
+        <span>Bharuch · Gujarat · India</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo.png" alt="G Flexipack" />
+        <p>Flexible packaging, made in Bharuch, Gujarat. ISO 9001:2015 certified, exporting worldwide from Mundra Port since 2016.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Make</h5>
+        <ul>
+          <li><a href="#formats">Stand-Up · Zipper</a></li>
+          <li><a href="#formats">Gusseted · 3-Side Seal</a></li>
+          <li><a href="#formats">Spout · Retort · Vacuum</a></li>
+          <li><a href="#anatomy">Films &amp; laminates</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#sectors">Sectors</a></li>
+          <li><a href="#plant">The plant</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#quote">Get a quote</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <address>
+          Plot 43, GIDC Phase-1<br />
+          Narmada Nagar, Bharuch<br />
+          Gujarat 392015, India<br /><br />
+          <a href="mailto:info@gflexipack.com">info@gflexipack.com</a><br />
+          <a href="tel:+919824032765">+91 98240 32765</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 G Flexipack. All rights reserved.</p>
+      <p>ISO 9001:2015 · ASTM Standard QC · 100% Recyclable Options</p>
+    </div>
+  </footer>
+
+  <div class="option-badge" aria-hidden="true">Option C · Editorial Flow</div>
+
+  <script>
+    // ---------- scroll reveal ----------
+    const revealIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-in");
+          revealIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll("[data-reveal]").forEach((el) => revealIO.observe(el));
+
+    // ---------- formats rail: arrows + drag ----------
+    const rail = document.getElementById("formatRail");
+    const prevBtn = document.getElementById("railPrev");
+    const nextBtn = document.getElementById("railNext");
+    const panelStep = () => {
+      const panel = rail.querySelector(".panel");
+      return panel ? panel.getBoundingClientRect().width + 22 : 420;
+    };
+    prevBtn.addEventListener("click", () => rail.scrollBy({ left: -panelStep(), behavior: "smooth" }));
+    nextBtn.addEventListener("click", () => rail.scrollBy({ left: panelStep(), behavior: "smooth" }));
+
+    const railFill = document.getElementById("railFill");
+    const railCurrent = document.getElementById("railCurrent");
+    const PANEL_COUNT = rail.querySelectorAll(".panel").length;
+    const syncRailBtns = () => {
+      prevBtn.disabled = rail.scrollLeft <= 4;
+      nextBtn.disabled = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 4;
+      // scrubber fill + live counter
+      const max = rail.scrollWidth - rail.clientWidth;
+      const t = max > 0 ? rail.scrollLeft / max : 0;
+      railFill.style.width = (8 + t * 92) + "%";
+      const current = Math.min(PANEL_COUNT, 1 + Math.round(t * (PANEL_COUNT - 1)));
+      railCurrent.textContent = String(current).padStart(2, "0");
+    };
+    rail.addEventListener("scroll", syncRailBtns, { passive: true });
+    window.addEventListener("resize", syncRailBtns);
+    syncRailBtns();
+
+    // pointer drag-to-scroll
+    let dragStartX = 0, dragScrollLeft = 0, dragging = false;
+    rail.addEventListener("pointerdown", (e) => {
+      dragging = true;
+      dragStartX = e.clientX;
+      dragScrollLeft = rail.scrollLeft;
+      rail.classList.add("is-dragging");
+    });
+    window.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      rail.scrollLeft = dragScrollLeft - (e.clientX - dragStartX);
+    });
+    window.addEventListener("pointerup", () => {
+      dragging = false;
+      rail.classList.remove("is-dragging");
+    });
+
+    // ---------- anatomy scrollytelling ----------
+    const stack = document.getElementById("filmStack");
+    const steps = document.querySelectorAll(".a-step");
+    const stepIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          steps.forEach((s) => s.classList.remove("is-active"));
+          e.target.classList.add("is-active");
+          stack.setAttribute("data-step", e.target.dataset.step);
+        }
+      });
+    }, { rootMargin: "-40% 0px -40% 0px" });
+    steps.forEach((s) => stepIO.observe(s));
+
+    // ---------- sectors shelf — hover opens on desktop, tap everywhere ----------
+    const shelfPanels = document.querySelectorAll(".shelf-panel");
+    const openShelfPanel = (target) => {
+      shelfPanels.forEach((p) => p.classList.toggle("is-open", p === target));
+    };
+    const isDesktop = () => window.matchMedia("(min-width: 901px)").matches;
+    shelfPanels.forEach((p) => {
+      p.addEventListener("mouseenter", () => { if (isDesktop()) openShelfPanel(p); });
+      p.addEventListener("click", () => openShelfPanel(p));
+    });
+
+    // ---------- process spine — fills as you scroll past steps ----------
+    const spine = document.getElementById("processSpine");
+    const spineFill = document.getElementById("spineFill");
+    const moments = spine.querySelectorAll(".moment");
+    const syncSpine = () => {
+      const r = spine.getBoundingClientRect();
+      const focus = window.innerHeight * 0.62; // fill line chases this point
+      const t = Math.min(1, Math.max(0, (focus - r.top) / r.height));
+      spineFill.style.height = (t * 100) + "%";
+      moments.forEach((m) => {
+        const mr = m.getBoundingClientRect();
+        m.classList.toggle("is-past", mr.top + mr.height * 0.5 < focus);
+      });
+    };
+    window.addEventListener("scroll", syncSpine, { passive: true });
+    window.addEventListener("resize", syncSpine);
+    syncSpine();
+  </script>
+</body>
+</html>

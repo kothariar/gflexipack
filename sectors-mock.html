@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sectors — sticky showroom mockup</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --cream: #f4efe7;
+      --cream-2: #eae0cd;
+      --ink: #3b2a20;
+      --ink-soft: rgba(59, 42, 32, 0.68);
+      --ink-line: rgba(59, 42, 32, 0.14);
+      --burnt: #b25c2e;
+      --olive: #7a6e3f;
+      --sage: #7a8a6c;
+      --gold: #c89a3a;
+      --pale-gold: #d9c893;
+      --accent: #b25c2e;
+      --serif: "DM Serif Display", Georgia, serif;
+      --sans: "Space Grotesk", system-ui, sans-serif;
+    }
+    * , *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* mock context spacers so you can feel the scroll-in / scroll-out */
+    .mock-spacer {
+      height: 46vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    /* ---------- chapter head (same language as option-c) ---------- */
+    .chapter-head {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 60px 56px 64px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: end;
+    }
+    .chapter-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 24px;
+    }
+    .chapter-kicker::before {
+      content: "";
+      width: 28px; height: 1px;
+      background: rgba(59, 42, 32, 0.32);
+    }
+    .chapter-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(38px, 4.6vw, 68px);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .chapter-title em { font-style: italic; color: var(--accent); }
+    .chapter-side {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 420px;
+      padding-bottom: 8px;
+    }
+
+    /* ============================================================
+       STICKY SHOWROOM
+       left: scrolling sector entries · right: sticky repainting stage
+       ============================================================ */
+    .showroom {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px 120px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 90px;
+    }
+
+    /* ---------- left: sector entries ---------- */
+    .sector-flow { padding-bottom: 10vh; }
+    .s-entry {
+      min-height: 40vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-top: 1px solid var(--ink-line);
+      padding: 30px 0;
+      opacity: 0.62; /* always fully legible — dim is a focus cue, not a curtain */
+      transition: opacity 0.45s ease;
+    }
+    .s-entry:first-child { border-top: none; }
+    .s-entry.is-active { opacity: 1; }
+    .s-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 20px;
+      color: var(--accent);
+      margin: 0 0 12px;
+    }
+    .s-name {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(34px, 3.4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      margin: 0 0 22px;
+      transition: transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1);
+      transform-origin: left center;
+    }
+    .s-entry.is-active .s-name { transform: translateX(10px); }
+    .s-apps {
+      list-style: none;
+      margin: 0 0 22px;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      max-width: 480px;
+    }
+    .s-apps li {
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 8px 15px;
+      border: 1px solid rgba(59, 42, 32, 0.26);
+      border-radius: 999px;
+      background: transparent;
+    }
+    .s-barrier {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 420px;
+      margin: 0;
+    }
+    .s-barrier b { color: var(--ink); font-weight: 500; }
+
+    /* ---------- right: sticky stage + index rail ---------- */
+    .stage-wrap {
+      position: sticky;
+      top: 90px;
+      height: calc(100vh - 180px);
+      max-height: 640px;
+      align-self: start;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 56px;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    /* index rail — jump straight to your sector */
+    .stage-rail {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+    }
+    .rail-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: none;
+      padding: 8px 0;
+      cursor: pointer;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--ink);
+      opacity: 0.4;
+      transition: opacity 0.3s ease;
+    }
+    .rail-item:hover { opacity: 0.8; }
+    .rail-item.is-current { opacity: 1; }
+    .rail-item::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ink-line);
+      transition: background 0.3s ease, transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .rail-item.is-current::before {
+      background: var(--accent);
+      transform: scale(1.25);
+    }
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 24%, rgba(255,255,255,0.07) 0%, rgba(0,0,0,0) 62%),
+        var(--stage-bg, var(--burnt));
+      transition: background-color 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+      background-color: var(--stage-bg, var(--burnt));
+    }
+    /* soft floor shadow */
+    .stage::after {
+      content: "";
+      position: absolute;
+      left: 26%; right: 26%; bottom: 74px;
+      height: 20px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(4px);
+    }
+    .stage-index {
+      position: absolute;
+      top: 26px; left: 30px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 19px;
+      color: rgba(244, 239, 231, 0.85);
+      z-index: 3;
+    }
+    .stage-index.on-light { color: rgba(59, 42, 32, 0.75); }
+    .stage-ghost {
+      position: absolute;
+      top: -40px; right: 6px;
+      font-family: var(--serif);
+      font-size: 240px;
+      line-height: 1;
+      color: rgba(0,0,0,0.09);
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+      transition: opacity 0.5s ease;
+    }
+    .stage-tag {
+      position: absolute;
+      left: 30px; bottom: 26px;
+      z-index: 3;
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 231, 0.9);
+      max-width: 320px;
+      line-height: 1.7;
+    }
+    .stage-tag.on-light { color: rgba(59, 42, 32, 0.8); }
+
+    /* figures — one per sector, crossfade + rise */
+    .figure {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 40px;
+      opacity: 0;
+      transform: translateY(26px) scale(0.96);
+      transition:
+        opacity 0.55s cubic-bezier(0.2, 0.6, 0.2, 1),
+        transform 0.65s cubic-bezier(0.2, 0.6, 0.2, 1);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .figure.is-on {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ---------- pouch variants (all CSS, same family as hero tiles) ---------- */
+    .p-body {
+      position: relative;
+      background:
+        linear-gradient(112deg,
+          rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.02) 32%,
+          rgba(255,255,255,0) 55%, rgba(255,255,255,0.06) 82%,
+          rgba(255,255,255,0.12) 100%),
+        linear-gradient(to right,
+          rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 10%,
+          rgba(0,0,0,0) 90%, rgba(0,0,0,0.24) 100%),
+        var(--body);
+      box-shadow:
+        0 30px 44px -16px rgba(0, 0, 0, 0.45),
+        0 2px 4px -1px rgba(0, 0, 0, 0.15),
+        inset 0 -5px 0 rgba(0, 0, 0, 0.18);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .p-cap {
+      height: 26px;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.25) 100%),
+        var(--cap);
+      position: relative;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.25);
+      flex-shrink: 0;
+    }
+    .p-cap::before {
+      content: "";
+      position: absolute;
+      left: 12px; right: 12px; bottom: 6px;
+      height: 3px; border-radius: 2px;
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(255,255,255,0.28) 0px, rgba(255,255,255,0.28) 2px,
+          transparent 2px, transparent 4px),
+        rgba(0,0,0,0.35);
+    }
+    .p-band {
+      margin: auto 0 20px;
+      padding: 10px 6px;
+      background: var(--bandc);
+      color: var(--band-text);
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1;
+      letter-spacing: 0.4px;
+      box-shadow:
+        inset 0 1px 2px rgba(0,0,0,0.18),
+        inset 0 -1px 0 rgba(255,255,255,0.08);
+    }
+
+    /* stand-up (Food) */
+    .p-standup { width: 190px; height: 258px; border-radius: 22px 22px 9px 9px; }
+
+    /* spout (Beverages) — cap sits on a neck */
+    .p-spoutwrap { display: flex; flex-direction: column; align-items: center; }
+    .p-spout-neck {
+      width: 40px; height: 20px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(0,0,0,0.15)), var(--capc);
+      border-radius: 4px 4px 0 0;
+    }
+    .p-spout-cap {
+      width: 56px; height: 24px;
+      background:
+        repeating-linear-gradient(90deg, rgba(0,0,0,0.14) 0 4px, transparent 4px 8px),
+        linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(0,0,0,0.2)),
+        var(--capc);
+      border-radius: 6px;
+      margin-bottom: -2px;
+      z-index: 2;
+    }
+    .p-spout {
+      width: 172px; height: 236px;
+      border-radius: 34px 34px 10px 10px;
+      clip-path: polygon(0 12%, 26% 0, 74% 0, 100% 12%, 100% 100%, 0 100%);
+    }
+    .p-spout .p-band { margin-bottom: 24px; }
+
+    /* sachet (Pharma) — flat, serrated top, no cap */
+    .p-sachet {
+      width: 210px; height: 150px;
+      border-radius: 8px;
+      --mask: radial-gradient(circle at 6px -2px, transparent 5px, black 5.5px);
+    }
+    .p-sachet::before {
+      content: "";
+      height: 16px;
+      border-bottom: 1.5px dashed rgba(0,0,0,0.28);
+      flex-shrink: 0;
+    }
+    .p-sachet .p-band { margin: auto 0 18px; font-size: 13.5px; }
+
+    /* gusseted (Agriculture) — wide, flared base */
+    .p-gusset {
+      width: 210px; height: 250px;
+      border-radius: 14px 14px 8px 8px;
+      clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%);
+    }
+    .p-gusset::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0; height: 26px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%);
+      border-top: 1px solid rgba(0,0,0,0.15);
+    }
+
+    /* tall slim (Personal care) */
+    .p-slim { width: 128px; height: 268px; border-radius: 16px 16px 7px 7px; }
+    .p-slim .p-cap { height: 20px; }
+    .p-slim .p-band { font-size: 12.5px; }
+
+    /* heavy industrial — big square shoulders */
+    .p-heavy { width: 224px; height: 252px; border-radius: 10px; }
+    .p-heavy::before {
+      content: "";
+      height: 22px;
+      background: rgba(0,0,0,0.16);
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+      flex-shrink: 0;
+    }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 1000px) {
+      .chapter-head { grid-template-columns: 1fr; gap: 20px; padding: 40px 20px; }
+      .showroom {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 0 20px 70px;
+      }
+      /* on mobile the stage becomes a slim sticky banner on top */
+      .stage-wrap {
+        order: -1;
+        top: 70px;
+        height: 300px;
+        z-index: 5;
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .stage-rail { display: none; }
+      .figure { transform: translateY(14px) scale(0.62); }
+      .figure.is-on { transform: translateY(0) scale(0.66); }
+      .stage-ghost { font-size: 150px; top: -26px; }
+      .s-entry { min-height: 0; padding: 36px 0; opacity: 1; }
+      .s-entry .s-name { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mock-spacer">▲ &nbsp; page above (anatomy chapter ends here) — scroll down</div>
+
+  <div class="chapter-head">
+    <div>
+      <p class="chapter-kicker">Who we pack for</p>
+      <h2 class="chapter-title">Six sectors, <em>one standard.</em></h2>
+    </div>
+    <p class="chapter-side">
+      The hygiene, barrier and documentation adapt to the sector.
+      The print quality doesn't. Keep scrolling — the stage repaints.
+    </p>
+  </div>
+
+  <div class="showroom">
+    <!-- ============ LEFT — scrolling sector entries ============ -->
+    <div class="sector-flow" id="sectorFlow">
+
+      <article class="s-entry" data-sector="0">
+        <p class="s-num">01</p>
+        <h3 class="s-name">Food &amp; Grocery</h3>
+        <ul class="s-apps">
+          <li>Snacks</li><li>Coffee &amp; tea</li><li>Spices</li>
+          <li>Frozen &amp; ready meals</li><li>Baby food</li><li>Bakery</li>
+        </ul>
+        <p class="s-barrier"><b>Typical build:</b> high-barrier metallised films with food-safe inner seal — keeps fried and roasted products crisp for months.</p>
+      </article>
+
+      <article class="s-entry" data-sector="1">
+        <p class="s-num">02</p>
+        <h3 class="s-name">Beverages</h3>
+        <ul class="s-apps">
+          <li>Juice spout pouches</li><li>Sauce sachets</li>
+          <li>Energy gels</li><li>Bag-in-box liners</li>
+        </ul>
+        <p class="s-barrier"><b>Typical build:</b> leak-proof spout welds and high-barrier foil, burst-strength tested on every batch.</p>
+      </article>
+
+      <article class="s-entry" data-sector="2">
+        <p class="s-num">03</p>
+        <h3 class="s-name">Pharmaceutical</h3>
+        <ul class="s-apps">
+          <li>Dosing sachets</li><li>Blister foil</li>
+          <li>Desiccant pouches</li><li>Sterile formats</li>
+        </ul>
+        <p class="s-barrier"><b>Typical build:</b> pharma-grade hygiene, precise dosing seals, full batch documentation on every run.</p>
+      </article>
+
+      <article class="s-entry" data-sector="3">
+        <p class="s-num">04</p>
+        <h3 class="s-name">Agriculture</h3>
+        <ul class="s-apps">
+          <li>Seed pouches</li><li>Fertilizer packs</li>
+          <li>Pesticide &amp; herbicide</li><li>Insecticide sachets</li>
+        </ul>
+        <p class="s-barrier"><b>Typical build:</b> UV and moisture protection laminated in — contents stay viable through monsoon warehousing.</p>
+      </article>
+
+      <article class="s-entry" data-sector="4">
+        <p class="s-num">05</p>
+        <h3 class="s-name">Home &amp; Personal Care</h3>
+        <ul class="s-apps">
+          <li>Shampoo sachets</li><li>Cream &amp; serum</li>
+          <li>Detergent</li><li>Face masks</li><li>Refills</li>
+        </ul>
+        <p class="s-barrier"><b>Typical build:</b> chemical-resistant seal layers that hold surfactants and actives without delaminating.</p>
+      </article>
+
+      <article class="s-entry" data-sector="5">
+        <p class="s-num">06</p>
+        <h3 class="s-name">Industrial</h3>
+        <ul class="s-apps">
+          <li>Lubricant pouches</li><li>Chemical packs</li>
+          <li>Poly film rolls</li><li>Heavy-duty laminates</li>
+        </ul>
+        <p class="s-barrier"><b>Typical build:</b> puncture and tear strength tested to ASTM — built for weight, edges and rough handling.</p>
+      </article>
+
+    </div>
+
+    <!-- ============ RIGHT — sticky stage ============ -->
+    <div class="stage-wrap">
+      <div class="stage" id="stage" style="--stage-bg:#b25c2e;">
+        <span class="stage-index" id="stageIndex">01 / 06</span>
+        <span class="stage-ghost" id="stageGhost">01</span>
+
+        <!-- Food — stand-up -->
+        <div class="figure is-on" data-fig="0">
+          <div class="p-body p-standup" style="--body:#eae0cd; --cap:#cfc4b0; --bandc:#c89a3a; --band-text:#3b2a20;">
+            <div class="p-cap"></div>
+            <div class="p-band">Roasted &amp; Salted</div>
+          </div>
+        </div>
+
+        <!-- Beverages — spout -->
+        <div class="figure" data-fig="1">
+          <div class="p-spoutwrap">
+            <div class="p-spout-cap" style="--capc:#3b2a20;"></div>
+            <div class="p-spout-neck" style="--capc:#3b2a20;"></div>
+            <div class="p-body p-spout" style="--body:#3b2a20; --bandc:#eae0cd; --band-text:#3b2a20;">
+              <div class="p-band">Cold-Pressed</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pharma — sachet -->
+        <div class="figure" data-fig="2">
+          <div class="p-body p-sachet" style="--body:#f4efe7; --bandc:#7a6e3f; --band-text:#eae0cd;">
+            <div class="p-band">Single Dose · 5g</div>
+          </div>
+        </div>
+
+        <!-- Agriculture — gusseted -->
+        <div class="figure" data-fig="3">
+          <div class="p-body p-gusset" style="--body:#3b2a20; --cap:#241812; --bandc:#c89a3a; --band-text:#3b2a20;">
+            <div class="p-cap"></div>
+            <div class="p-band">Hybrid Seed · 5kg</div>
+          </div>
+        </div>
+
+        <!-- Personal care — slim -->
+        <div class="figure" data-fig="4">
+          <div class="p-body p-slim" style="--body:#7a6e3f; --cap:#5a512d; --bandc:#eae0cd; --band-text:#7a6e3f;">
+            <div class="p-cap"></div>
+            <div class="p-band">Argan Repair</div>
+          </div>
+        </div>
+
+        <!-- Industrial — heavy -->
+        <div class="figure" data-fig="5">
+          <div class="p-body p-heavy" style="--body:#b25c2e; --bandc:#3b2a20; --band-text:#eae0cd;">
+            <div class="p-band">Grade 40 · 10L</div>
+          </div>
+        </div>
+
+        <span class="stage-tag" id="stageTag">High-barrier metallised film · food-safe seal</span>
+      </div>
+
+      <nav class="stage-rail" id="stageRail" aria-label="Jump to sector">
+        <button class="rail-item is-current" data-jump="0">01</button>
+        <button class="rail-item" data-jump="1">02</button>
+        <button class="rail-item" data-jump="2">03</button>
+        <button class="rail-item" data-jump="3">04</button>
+        <button class="rail-item" data-jump="4">05</button>
+        <button class="rail-item" data-jump="5">06</button>
+      </nav>
+    </div>
+  </div>
+
+  <div class="mock-spacer">▼ &nbsp; page below (the line / plant chapter starts here)</div>
+
+  <script>
+    const SECTORS = [
+      { bg: "#b25c2e", ghost: "01", idx: "01 / 06", tag: "High-barrier metallised film · food-safe seal", light: false },
+      { bg: "#c89a3a", ghost: "02", idx: "02 / 06", tag: "Leak-proof spout weld · burst tested", light: true  },
+      { bg: "#7a8a6c", ghost: "03", idx: "03 / 06", tag: "Pharma-grade hygiene · batch documented", light: false },
+      { bg: "#7a6e3f", ghost: "04", idx: "04 / 06", tag: "UV + moisture protection laminated in", light: false },
+      { bg: "#d9c893", ghost: "05", idx: "05 / 06", tag: "Chemical-resistant seal layers", light: true  },
+      { bg: "#3b2a20", ghost: "06", idx: "06 / 06", tag: "Puncture + tear tested to ASTM", light: false },
+    ];
+
+    const stage = document.getElementById("stage");
+    const stageIndex = document.getElementById("stageIndex");
+    const stageGhost = document.getElementById("stageGhost");
+    const stageTag = document.getElementById("stageTag");
+    const entries = document.querySelectorAll(".s-entry");
+    const figures = document.querySelectorAll(".figure");
+    const railItems = document.querySelectorAll(".rail-item");
+
+    function activate(i) {
+      const s = SECTORS[i];
+      stage.style.setProperty("--stage-bg", s.bg);
+      stage.style.backgroundColor = s.bg;
+      stageGhost.textContent = s.ghost;
+      stageIndex.textContent = s.idx;
+      stageTag.textContent = s.tag;
+      stageIndex.classList.toggle("on-light", s.light);
+      stageTag.classList.toggle("on-light", s.light);
+      figures.forEach((f) => f.classList.toggle("is-on", +f.dataset.fig === i));
+      entries.forEach((e) => e.classList.toggle("is-active", +e.dataset.sector === i));
+      railItems.forEach((r) => r.classList.toggle("is-current", +r.dataset.jump === i));
+    }
+
+    // index rail — click to jump straight to a sector
+    railItems.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = document.querySelector(`.s-entry[data-sector="${btn.dataset.jump}"]`);
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    });
+
+    const io = new IntersectionObserver((obs) => {
+      obs.forEach((e) => {
+        if (e.isIntersecting) activate(+e.target.dataset.sector);
+      });
+    }, { rootMargin: "-42% 0px -42% 0px" });
+    entries.forEach((e) => io.observe(e));
+  </script>
+</body>
+</html>

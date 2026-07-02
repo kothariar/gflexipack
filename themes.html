@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>G Flexipack — 6 theme options</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Serif+Display&family=Fraunces:opsz,wght@9..144,400..800&family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --base-bg: #f4efe7;
+      --base-ink: #3b2a20;
+      --base-line: rgba(59, 42, 32, 0.14);
+      --sans: "Inter", system-ui, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--base-bg);
+      color: var(--base-ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ---------- INTRO ---------- */
+    .intro {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 80px 48px 40px;
+    }
+    .intro-kicker {
+      font-size: 12px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin: 0 0 24px;
+    }
+    .intro h1 {
+      font-family: "Fraunces", serif;
+      font-weight: 400;
+      font-size: clamp(40px, 5vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin: 0 0 24px;
+      max-width: 900px;
+    }
+    .intro p {
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 640px;
+      opacity: 0.75;
+      margin: 0;
+    }
+
+    /* ---------- THEME CARD (shared frame) ---------- */
+    .theme {
+      max-width: 1360px;
+      margin: 40px auto;
+      padding: 0 48px;
+    }
+    .theme-inner {
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px -30px rgba(0, 0, 0, 0.35);
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      min-height: 620px;
+    }
+
+    /* Left rail — meta about the theme, always in the base cream/brown */
+    .theme-meta {
+      background: #fafaf6;
+      padding: 36px 32px;
+      border-right: 1px solid rgba(59, 42, 32, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      font-family: var(--sans);
+      color: var(--base-ink);
+    }
+    .theme-num {
+      font-family: "Fraunces", serif;
+      font-size: 14px;
+      letter-spacing: 0.24em;
+      opacity: 0.5;
+    }
+    .theme-name {
+      font-family: "Fraunces", serif;
+      font-size: 30px;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin: 0;
+      font-weight: 500;
+    }
+    .theme-tag {
+      font-size: 14px;
+      line-height: 1.5;
+      opacity: 0.72;
+      margin: -12px 0 0;
+    }
+    .theme-block h4 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin: 0 0 10px;
+    }
+    .theme-desc {
+      font-size: 14px;
+      line-height: 1.55;
+      opacity: 0.8;
+      margin: 0;
+    }
+    .swatches {
+      display: flex;
+      gap: 8px;
+    }
+    .swatch {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .fonts {
+      font-size: 14px;
+      line-height: 1.45;
+      opacity: 0.85;
+    }
+    .fonts span {
+      display: block;
+      opacity: 0.6;
+      font-size: 12px;
+    }
+    .refs {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+    }
+    .refs a {
+      opacity: 0.75;
+      border-bottom: 1px solid rgba(59, 42, 32, 0.25);
+      padding-bottom: 2px;
+    }
+
+    /* Right side — the theme actually rendered, its own palette & fonts */
+    .theme-preview {
+      padding: 48px 56px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+      min-height: 620px;
+    }
+    .preview-kicker {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+    .preview-title {
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .preview-sub {
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 460px;
+      opacity: 0.75;
+    }
+    .preview-ctas {
+      display: flex;
+      gap: 16px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--sans);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    /* Small pouch mock — reused inside every theme, colored by the theme */
+    .pouch {
+      position: absolute;
+      right: 56px;
+      bottom: 48px;
+      width: 180px;
+      height: 240px;
+      border-radius: 8px 8px 4px 4px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 40px -20px rgba(0, 0, 0, 0.4);
+    }
+    .pouch-cap { height: 30px; background: rgba(0, 0, 0, 0.15); }
+    .pouch-band {
+      margin: auto 0;
+      padding: 14px 0;
+      text-align: center;
+      font-family: "Fraunces", serif;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    /* ============ THEME 1 — PACKHELP WARM ============ */
+    .t1 .theme-preview {
+      background: #b8a7d9;   /* lavender */
+      color: #2a1e40;
+      font-family: "Inter", sans-serif;
+    }
+    .t1 .preview-kicker { color: #2a1e40; }
+    .t1 .preview-title {
+      font-family: "Instrument Serif", serif;
+      font-size: 56px;
+      font-style: italic;
+    }
+    .t1 .btn.primary { background: #2a1e40; color: #f4efe7; }
+    .t1 .btn.ghost { color: #2a1e40; border-color: #2a1e40; }
+    .t1 .pouch { background: #f4efe7; }
+    .t1 .pouch-cap { background: #dcd0f2; }
+    .t1 .pouch-band { background: #c89a3a; color: #3b2a20; }
+
+    /* ============ THEME 2 — CHOCOLATIER PREMIUM ============ */
+    .t2 .theme-preview {
+      background: #1e1310;
+      color: #ede0c7;
+      font-family: "Inter", sans-serif;
+    }
+    .t2 .preview-kicker { color: #c89a3a; }
+    .t2 .preview-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 62px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .t2 .preview-title em { color: #c89a3a; font-style: italic; }
+    .t2 .btn.primary { background: #c89a3a; color: #1e1310; }
+    .t2 .btn.ghost { color: #ede0c7; border-color: #ede0c7; }
+    .t2 .pouch { background: #3b2a20; color: #ede0c7; }
+    .t2 .pouch-cap { background: #241812; }
+    .t2 .pouch-band { background: #c89a3a; color: #1e1310; }
+
+    /* ============ THEME 3 — CONTEMPORARY PRINT SHOP ============ */
+    .t3 .theme-preview {
+      background: #d84d3a;
+      color: #f4efe7;
+      font-family: "Inter", sans-serif;
+    }
+    .t3 .preview-kicker { color: #f4efe7; }
+    .t3 .preview-title {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: 78px;
+      line-height: 0.92;
+      letter-spacing: -0.035em;
+      text-transform: none;
+    }
+    .t3 .preview-title em {
+      font-style: normal;
+      background: #f4efe7;
+      color: #d84d3a;
+      padding: 0 12px 4px;
+    }
+    .t3 .btn.primary { background: #3b2a20; color: #f4efe7; }
+    .t3 .btn.ghost { color: #f4efe7; border-color: #f4efe7; }
+    .t3 .pouch { background: #2f5d3e; color: #f4efe7; }
+    .t3 .pouch-cap { background: #234a30; }
+    .t3 .pouch-band { background: #c89a3a; color: #2f5d3e; }
+
+    /* ============ THEME 4 — RETRO-MODERN NOSTALGIA ============ */
+    .t4 .theme-preview {
+      background: #eae0cd;
+      color: #3b2a20;
+      font-family: "Space Grotesk", sans-serif;
+    }
+    .t4 .preview-kicker { color: #b25c2e; }
+    .t4 .preview-title {
+      font-family: "DM Serif Display", serif;
+      font-size: 66px;
+      font-weight: 400;
+      line-height: 1.02;
+    }
+    .t4 .preview-title em { color: #b25c2e; font-style: italic; }
+    .t4 .btn.primary { background: #b25c2e; color: #eae0cd; }
+    .t4 .btn.ghost { color: #3b2a20; border-color: #3b2a20; }
+    .t4 .pouch { background: #b25c2e; color: #eae0cd; }
+    .t4 .pouch-cap { background: #8f4623; }
+    .t4 .pouch-band { background: #c89a3a; color: #3b2a20; }
+
+    /* ============ THEME 5 — EDITORIAL FOOD MAGAZINE ============ */
+    .t5 .theme-preview {
+      background: #f4efe7;
+      color: #3b2a20;
+      font-family: "Inter", sans-serif;
+    }
+    .t5 .preview-kicker { color: #a65846; }
+    .t5 .preview-title {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 72px;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+    .t5 .preview-title em {
+      font-family: "Fraunces", serif;
+      font-style: italic;
+      font-weight: 300;
+      color: #a65846;
+    }
+    .t5 .btn.primary { background: #3b2a20; color: #f4efe7; }
+    .t5 .btn.ghost { color: #3b2a20; border-color: #3b2a20; }
+    .t5 .pouch { background: #a65846; color: #f4efe7; }
+    .t5 .pouch-cap { background: #7d4335; }
+    .t5 .pouch-band { background: #eae0cd; color: #3b2a20; }
+
+    /* ============ THEME 6 — CRAFT FACTORY ============ */
+    .t6 .theme-preview {
+      background: #1f2e3a;
+      color: #e8ece6;
+      font-family: "Inter", sans-serif;
+    }
+    .t6 .preview-kicker { color: #c89a3a; }
+    .t6 .preview-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 500;
+      font-size: 62px;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+    .t6 .preview-title em {
+      font-style: normal;
+      color: #c89a3a;
+    }
+    .t6 .btn.primary { background: #c89a3a; color: #1f2e3a; }
+    .t6 .btn.ghost { color: #e8ece6; border-color: #e8ece6; }
+    .t6 .pouch { background: #3b2a20; color: #e8ece6; }
+    .t6 .pouch-cap { background: #24211a; }
+    .t6 .pouch-band { background: #b8b0a6; color: #1f2e3a; }
+
+    /* ---------- OUTRO ---------- */
+    .outro {
+      max-width: 1360px;
+      margin: 60px auto 120px;
+      padding: 0 48px;
+    }
+    .outro-card {
+      background: #ffffff;
+      border: 1px solid var(--base-line);
+      border-radius: 6px;
+      padding: 40px;
+    }
+    .outro h2 {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 28px;
+      margin: 0 0 12px;
+    }
+    .outro p {
+      font-size: 16px;
+      line-height: 1.55;
+      margin: 0 0 8px;
+      opacity: 0.8;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .intro, .theme, .outro { padding-left: 24px; padding-right: 24px; }
+      .theme-inner { grid-template-columns: 1fr; }
+      .theme-meta { border-right: 0; border-bottom: 1px solid rgba(59,42,32,0.08); }
+      .theme-preview { padding: 40px 32px 240px; min-height: auto; }
+      .pouch { right: 32px; bottom: 32px; width: 140px; height: 190px; }
+      .t1 .preview-title, .t3 .preview-title { font-size: 44px !important; }
+      .t2 .preview-title, .t4 .preview-title, .t5 .preview-title, .t6 .preview-title { font-size: 42px !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="intro">
+    <p class="intro-kicker">G Flexipack — visual direction options</p>
+    <h1>Six themes that all fit the logo. Point at the one that feels right.</h1>
+    <p>
+      Each panel below is a different creative universe your existing G Flexipack logo can
+      live inside — same brown-and-gold mark, six very different sites. Palette, fonts, and
+      hero mockup are rendered in the actual style so you can react to real pixels, not descriptions.
+    </p>
+  </section>
+
+  <!-- ==== THEME 1 ==== -->
+  <section class="theme t1">
+    <div class="theme-inner">
+      <aside class="theme-meta">
+        <div>
+          <p class="theme-num">01</p>
+          <h2 class="theme-name">Packhelp Warm</h2>
+          <p class="theme-tag">Playful energy. Solid pastel backgrounds. Human hands.</p>
+        </div>
+        <div class="theme-block">
+          <h4>What it feels like</h4>
+          <p class="theme-desc">
+            The one you reacted to — Packhelp's carousel of hands holding printed products
+            on lavender, sage, peach. Warm, creator-friendly, alive. Rotating hero of real
+            pouches on saturated color panels.
+          </p>
+        </div>
+        <div class="theme-block">
+          <h4>Palette</h4>
+          <div class="swatches">
+            <div class="swatch" style="background:#b8a7d9" title="Lavender"></div>
+            <div class="swatch" style="background:#dfa994" title="Peach"></div>
+            <div class="swatch" style="background:#7a8a6c" title="Sage"></div>
+            <div class="swatch" style="background:#c89a3a" title="Gold (logo)"></div>
+            <div class="swatch" style="background:#3b2a20" title="Brown (logo)"></div>
+            <div class="swatch" style="background:#f4efe7" title="Cream"></div>
+          </div>
+        </div>
+        <div class="theme-block">
+          <h4>Fonts</h4>
+          <p class="fonts">Instrument Serif <span>italic display accents</span></p>
+          <p class="fonts">Inter <span>everything else</span></p>
+        </div>
+        <div class="theme-block">
+          <h4>Reference sites</h4>
+          <ul class="refs">
+            <li><a href="https://packhelp.com" target="_blank">packhelp.com</a></li>
+            <li><a href="https://noissue.co" target="_blank">noissue.co</a></li>
+            <li><a href="https://sticker-mule.com" target="_blank">stickermule.com</a></li>
+          </ul>
+        </div>
+      </aside>
+      <div class="theme-preview">
+        <p class="preview-kicker">— Flexible packaging</p>
+        <h3 class="preview-title">Pouches, <em>printed</em> for the brands you love.</h3>
+        <p class="preview-sub">Custom digital print. Low MOQs. Turnaround in days, not months.</p>
+        <div class="preview-ctas">
+          <button class="btn primary">Get a quote →</button>
+          <button class="btn ghost">See our work</button>
+        </div>
+        <div class="pouch">
+          <div class="pouch-cap"></div>
+          <div class="pouch-band">G Flexipack</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== THEME 2 ==== -->
+  <section class="theme t2">
+    <div class="theme-inner">
+      <aside class="theme-meta">
+        <div>
+          <p class="theme-num">02</p>
+          <h2 class="theme-name">Chocolatier Premium</h2>
+          <p class="theme-tag">Deep, appetite-driven, gold-foil rich.</p>
+        </div>
+        <div class="theme-block">
+          <h4>What it feels like</h4>
+          <p class="theme-desc">
+            Leans into the logo's chocolate-brown DNA. Dark backgrounds, spotlit pouches
+            shot like premium confectionery, gold used as legitimate foil-accent. Signals
+            "we make packaging for products people spend money on."
+          </p>
+        </div>
+        <div class="theme-block">
+          <h4>Palette</h4>
+          <div class="swatches">
+            <div class="swatch" style="background:#1e1310" title="Espresso"></div>
+            <div class="swatch" style="background:#3b2a20" title="Brown (logo)"></div>
+            <div class="swatch" style="background:#c89a3a" title="Gold (logo)"></div>
+            <div class="swatch" style="background:#ede0c7" title="Ivory"></div>
+          </div>
+        </div>
+        <div class="theme-block">
+          <h4>Fonts</h4>
+          <p class="fonts">Cormorant Garamond <span>elegant serif display</span></p>
+          <p class="fonts">Inter <span>tight sans body</span></p>
+        </div>
+        <div class="theme-block">
+          <h4>Reference sites</h4>
+          <ul class="refs">
+            <li><a href="https://hu.com" target="_blank">hu.com (chocolate)</a></li>
+            <li><a href="https://godiva.com" target="_blank">godiva.com</a></li>
+            <li><a href="https://mastbrothers.com" target="_blank">mastbrothers.com</a></li>
+          </ul>
+        </div>
+      </aside>
+      <div class="theme-preview">
+        <p class="preview-kicker">— Flexible packaging, considered</p>
+        <h3 class="preview-title">The pouch that <em>earns</em> its shelf.</h3>
+        <p class="preview-sub">Custom-printed barrier pouches for premium food and confectionery brands.</p>
+        <div class="preview-ctas">
+          <button class="btn primary">Get a quote →</button>
+          <button class="btn ghost">See our work</button>
+        </div>
+        <div class="pouch">
+          <div class="pouch-cap"></div>
+          <div class="pouch-band">G Flexipack</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== THEME 3 ==== -->
+  <section class="theme t3">
+    <div class="theme-inner">
+      <aside class="theme-meta">
+        <div>
+          <p class="theme-num">03</p>
+          <h2 class="theme-name">Contemporary Print Shop</h2>
+          <p class="theme-tag">Poster-loud. Color-blocked. Confident.</p>
+        </div>
+        <div class="theme-block">
+          <h4>What it feels like</h4>
+          <p class="theme-desc">
+            Treats every pouch like a screen-printed poster. Huge blocky type, saturated
+            color panels, one product hero at a time. The most graphically confident
+            option — differentiates hardest from every other packaging site.
+          </p>
+        </div>
+        <div class="theme-block">
+          <h4>Palette</h4>
+          <div class="swatches">
+            <div class="swatch" style="background:#d84d3a" title="Tomato"></div>
+            <div class="swatch" style="background:#2f5d3e" title="Forest"></div>
+            <div class="swatch" style="background:#2e4a8b" title="Cobalt"></div>
+            <div class="swatch" style="background:#c89a3a" title="Gold (logo)"></div>
+            <div class="swatch" style="background:#3b2a20" title="Brown (logo)"></div>
+            <div class="swatch" style="background:#f4efe7" title="Cream"></div>
+          </div>
+        </div>
+        <div class="theme-block">
+          <h4>Fonts</h4>
+          <p class="fonts">Bricolage Grotesque Extra Bold <span>chunky display</span></p>
+          <p class="fonts">Inter <span>body</span></p>
+        </div>
+        <div class="theme-block">
+          <h4>Reference sites</h4>
+          <ul class="refs">
+            <li><a href="https://aesop.com" target="_blank">aesop.com (campaigns)</a></li>
+            <li><a href="https://liquiddeath.com" target="_blank">liquiddeath.com</a></li>
+            <li><a href="https://pentagram.com" target="_blank">pentagram.com</a></li>
+          </ul>
+        </div>
+      </aside>
+      <div class="theme-preview">
+        <p class="preview-kicker">— Custom-printed pouches</p>
+        <h3 class="preview-title">Made to hold.<br /><em>Printed</em> to sell.</h3>
+        <p class="preview-sub">Digital print on food-grade barrier film. From 1,000 units.</p>
+        <div class="preview-ctas">
+          <button class="btn primary">Get a quote →</button>
+          <button class="btn ghost">See our work</button>
+        </div>
+        <div class="pouch">
+          <div class="pouch-cap"></div>
+          <div class="pouch-band">G Flexipack</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== THEME 4 ==== -->
+  <section class="theme t4">
+    <div class="theme-inner">
+      <aside class="theme-meta">
+        <div>
+          <p class="theme-num">04</p>
+          <h2 class="theme-name">Retro-Modern Nostalgia</h2>
+          <p class="theme-tag">70s palette. Modern grid. Intentional vintage.</p>
+        </div>
+        <div class="theme-block">
+          <h4>What it feels like</h4>
+          <p class="theme-desc">
+            Leans into the fact that your logo is period-piece — instead of hiding its age,
+            treats it as an asset. Burnt orange, olive, mustard, cream. Think Poppi, Olipop,
+            new-wave functional-food brands. Signals heritage without dust.
+          </p>
+        </div>
+        <div class="theme-block">
+          <h4>Palette</h4>
+          <div class="swatches">
+            <div class="swatch" style="background:#eae0cd" title="Warm cream"></div>
+            <div class="swatch" style="background:#b25c2e" title="Burnt orange"></div>
+            <div class="swatch" style="background:#7a6e3f" title="Olive"></div>
+            <div class="swatch" style="background:#c89a3a" title="Gold (logo)"></div>
+            <div class="swatch" style="background:#3b2a20" title="Brown (logo)"></div>
+          </div>
+        </div>
+        <div class="theme-block">
+          <h4>Fonts</h4>
+          <p class="fonts">DM Serif Display <span>retro-styled display</span></p>
+          <p class="fonts">Space Grotesk <span>modern body</span></p>
+        </div>
+        <div class="theme-block">
+          <h4>Reference sites</h4>
+          <ul class="refs">
+            <li><a href="https://drinkpoppi.com" target="_blank">drinkpoppi.com</a></li>
+            <li><a href="https://drinkolipop.com" target="_blank">drinkolipop.com</a></li>
+            <li><a href="https://graza.co" target="_blank">graza.co</a></li>
+          </ul>
+        </div>
+      </aside>
+      <div class="theme-preview">
+        <p class="preview-kicker">— Since [year], packaging that stays</p>
+        <h3 class="preview-title">Flexible packaging, <em>properly</em> made.</h3>
+        <p class="preview-sub">Custom pouches for food brands who care how it lands.</p>
+        <div class="preview-ctas">
+          <button class="btn primary">Get a quote →</button>
+          <button class="btn ghost">See our work</button>
+        </div>
+        <div class="pouch">
+          <div class="pouch-cap"></div>
+          <div class="pouch-band">G Flexipack</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== THEME 5 ==== -->
+  <section class="theme t5">
+    <div class="theme-inner">
+      <aside class="theme-meta">
+        <div>
+          <p class="theme-num">05</p>
+          <h2 class="theme-name">Editorial Food Magazine</h2>
+          <p class="theme-tag">Big serifs. One accent. Kinfolk-adjacent.</p>
+        </div>
+        <div class="theme-block">
+          <h4>What it feels like</h4>
+          <p class="theme-desc">
+            Like a modern food magazine's website — big Fraunces headlines, one accent color
+            drawn from natural pigments, a single hero photo per section. Warmer and softer
+            than the first cream/brown attempt because the accent is now terracotta
+            (edible, alive), not a subtle gold underline.
+          </p>
+        </div>
+        <div class="theme-block">
+          <h4>Palette</h4>
+          <div class="swatches">
+            <div class="swatch" style="background:#f4efe7" title="Cream"></div>
+            <div class="swatch" style="background:#a65846" title="Terracotta"></div>
+            <div class="swatch" style="background:#c89a3a" title="Gold (logo)"></div>
+            <div class="swatch" style="background:#3b2a20" title="Brown (logo)"></div>
+          </div>
+        </div>
+        <div class="theme-block">
+          <h4>Fonts</h4>
+          <p class="fonts">Fraunces <span>editorial serif display</span></p>
+          <p class="fonts">Inter <span>body</span></p>
+        </div>
+        <div class="theme-block">
+          <h4>Reference sites</h4>
+          <ul class="refs">
+            <li><a href="https://kinfolk.com" target="_blank">kinfolk.com</a></li>
+            <li><a href="https://cherrybombe.com" target="_blank">cherrybombe.com</a></li>
+            <li><a href="https://us.bigknight.com" target="_blank">bigknight.com</a></li>
+          </ul>
+        </div>
+      </aside>
+      <div class="theme-preview">
+        <p class="preview-kicker">— Flexible packaging, since [year]</p>
+        <h3 class="preview-title">Packaging <em>for the food</em> you're proud of.</h3>
+        <p class="preview-sub">Custom-printed pouches. Sharp print. Honest lead times.</p>
+        <div class="preview-ctas">
+          <button class="btn primary">Get a quote →</button>
+          <button class="btn ghost">See our work</button>
+        </div>
+        <div class="pouch">
+          <div class="pouch-cap"></div>
+          <div class="pouch-band">G Flexipack</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== THEME 6 ==== -->
+  <section class="theme t6">
+    <div class="theme-inner">
+      <aside class="theme-meta">
+        <div>
+          <p class="theme-num">06</p>
+          <h2 class="theme-name">Craft Factory</h2>
+          <p class="theme-tag">Cream + navy + metallic. Factory pride, on show.</p>
+        </div>
+        <div class="theme-block">
+          <h4>What it feels like</h4>
+          <p class="theme-desc">
+            Balances warmth (logo, cream) with technical seriousness (deep navy, metallic
+            grays, spec-forward layout). Puts the factory floor front and center — printing
+            plates, film rolls, machines. Uses the infra photos you said you'd provide.
+            Best of both if you want to win bigger industrial buyers without losing brand founders.
+          </p>
+        </div>
+        <div class="theme-block">
+          <h4>Palette</h4>
+          <div class="swatches">
+            <div class="swatch" style="background:#f4efe7" title="Cream"></div>
+            <div class="swatch" style="background:#1f2e3a" title="Ink navy"></div>
+            <div class="swatch" style="background:#b8b0a6" title="Metallic"></div>
+            <div class="swatch" style="background:#c89a3a" title="Gold (logo)"></div>
+            <div class="swatch" style="background:#3b2a20" title="Brown (logo)"></div>
+          </div>
+        </div>
+        <div class="theme-block">
+          <h4>Fonts</h4>
+          <p class="fonts">Space Grotesk <span>technical grotesk display</span></p>
+          <p class="fonts">Inter <span>body</span></p>
+        </div>
+        <div class="theme-block">
+          <h4>Reference sites</h4>
+          <ul class="refs">
+            <li><a href="https://bluebottlecoffee.com" target="_blank">bluebottlecoffee.com</a></li>
+            <li><a href="https://lumi.com" target="_blank">lumi.com</a></li>
+            <li><a href="https://epacflexibles.com" target="_blank">epacflexibles.com</a></li>
+          </ul>
+        </div>
+      </aside>
+      <div class="theme-preview">
+        <p class="preview-kicker">— Flexible packaging manufacturer</p>
+        <h3 class="preview-title">Custom pouches. <em>Sharp print.</em> Small runs welcome.</h3>
+        <p class="preview-sub">Digital printing on food-grade barrier film. In-house, from spec to delivery.</p>
+        <div class="preview-ctas">
+          <button class="btn primary">Get a quote →</button>
+          <button class="btn ghost">See the factory</button>
+        </div>
+        <div class="pouch">
+          <div class="pouch-cap"></div>
+          <div class="pouch-band">G Flexipack</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="outro">
+    <div class="outro-card">
+      <h2>Point at one (or two).</h2>
+      <p>Which theme should we build the real hero in? You can also mix — e.g. "the palette from #1 with the layout of #6," or "#3 but calmer."</p>
+      <p style="opacity:0.6; font-size:14px; margin-top:16px;">
+        Each preview shows the theme's palette + fonts applied to a mocked hero. Product
+        pouch on the right is a coloured placeholder for where real photography would sit.
+      </p>
+    </div>
+  </section>
+</body>
+</html>

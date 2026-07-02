@@ -1,0 +1,1399 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>G Flexipack — Option A · Lean Editorial</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --cream: #f4efe7;
+      --cream-2: #eae0cd;
+      --ink: #3b2a20;
+      --ink-soft: rgba(59, 42, 32, 0.68);
+      --ink-line: rgba(59, 42, 32, 0.14);
+      --burnt: #b25c2e;
+      --olive: #7a6e3f;
+      --sage: #7a8a6c;
+      --gold: #c89a3a;
+      --pale-gold: #d9c893;
+      --accent: #b25c2e; /* chrome accent — theme 4 burnt orange */
+
+      --serif: "DM Serif Display", Georgia, serif;
+      --sans: "Space Grotesk", system-ui, sans-serif;
+
+      /* marquee sizing — 3 tiles visible per column, denser wall-of-product feel */
+      --tile-w: 200px;
+      --tile-h: 200px;
+      --tile-gap: 14px;
+    }
+
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    /* leave space under the sticky nav when jumping to a section */
+    section[id] { scroll-margin-top: 88px; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(244, 239, 231, 0.86);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 18px 48px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 48px;
+    }
+    .brand { display: inline-flex; align-items: center; }
+    .brand img {
+      height: 52px;
+      width: auto;
+      mix-blend-mode: multiply;
+      filter: contrast(1.02);
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .nav-links a {
+      position: relative;
+      padding: 6px 0;
+      opacity: 0.82;
+      transition: opacity 0.2s ease;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .nav-cta:hover { background: var(--ink); color: var(--cream); }
+
+    /* ---------- HERO SHELL — text left, vertical marquee right ---------- */
+    .hero {
+      padding: 40px 0 32px;
+    }
+    .hero-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 80px;
+      align-items: center;
+      min-height: 620px;
+    }
+    .hero-text {
+      /* padding/max-width live on .hero-inner grid now */
+      text-align: left;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 32px;
+    }
+    /* single leading tick — muted ink, not burnt (drops the second accent) */
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: rgba(59, 42, 32, 0.32);
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(44px, 6vw, 86px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin: 0 0 28px;
+      max-width: 12ch;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 480px;
+      margin: 0 0 36px;
+    }
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .cta-primary {
+      padding: 14px 26px;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 999px;
+    }
+    .cta-primary:hover { transform: translateY(-1px); background: #2a1e17; }
+    /* ghost CTA is now text-only — differentiates hard from the primary pill */
+    .cta-ghost {
+      padding: 14px 4px;
+      color: var(--ink);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      position: relative;
+    }
+    .cta-ghost::after {
+      content: "";
+      position: absolute;
+      left: 4px; right: 4px;
+      bottom: 8px;
+      height: 1px;
+      background: var(--ink);
+      transform: scaleX(0.35);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .cta-ghost:hover { background: transparent; color: var(--ink); }
+    .cta-ghost:hover::after { transform: scaleX(1); }
+    .arrow { display: inline-block; transition: transform 0.25s ease; }
+    .cta:hover .arrow { transform: translateX(4px); }
+
+    /* ---------- VERTICAL MARQUEE — two columns, opposite directions ---------- */
+    .v-marquee {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      height: 660px;
+      position: relative;
+    }
+    .v-col {
+      overflow: hidden;
+      position: relative;
+      border-radius: 8px;
+    }
+    /* cream fades top + bottom so tiles blend in and out at column edges */
+    .v-col::before,
+    .v-col::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      height: 60px;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .v-col::before {
+      top: 0;
+      background: linear-gradient(to bottom, var(--cream), rgba(244,239,231,0));
+    }
+    .v-col::after {
+      bottom: 0;
+      background: linear-gradient(to top, var(--cream), rgba(244,239,231,0));
+    }
+    .v-track {
+      display: flex;
+      flex-direction: column;
+      gap: var(--tile-gap);
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    .v-track.v-down {
+      animation-name: scroll-down;
+      animation-duration: 50s;
+    }
+    .v-track.v-up {
+      animation-name: scroll-up;
+      animation-duration: 55s;
+    }
+    @keyframes scroll-down {
+      from { transform: translateY(calc((var(--tile-h) + var(--tile-gap)) * -6)); }
+      to   { transform: translateY(0); }
+    }
+    @keyframes scroll-up {
+      from { transform: translateY(0); }
+      to   { transform: translateY(calc((var(--tile-h) + var(--tile-gap)) * -6)); }
+    }
+    .v-marquee:hover .v-track { animation-play-state: paused; }
+    @media (prefers-reduced-motion: reduce) {
+      .v-track { animation: none !important; }
+    }
+    /* tiles fill their column horizontally in vertical mode */
+    .v-col .tile {
+      width: 100%;
+    }
+
+    /* ---------- TILE (colour panel + pouch) ---------- */
+    .tile {
+      width: var(--tile-w);
+      height: var(--tile-h);
+      flex-shrink: 0;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 60%),
+        var(--bg);
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 28px 30px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* soft ambient floor shadow */
+    .tile::before {
+      content: "";
+      position: absolute;
+      left: 18%;
+      right: 18%;
+      bottom: 26px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(2px);
+      z-index: 0;
+    }
+
+    .pouch {
+      width: 115px;
+      height: 155px;
+      /* three stacked gradients on top of the body colour:
+         (1) diagonal shine that reads as film catching light
+         (2) side-edge darkening as if the material curls toward the seals
+         (3) top-to-bottom subtle darkening
+         + the base --body colour underneath */
+      background:
+        linear-gradient(112deg,
+          rgba(255,255,255,0.14) 0%,
+          rgba(255,255,255,0.02) 32%,
+          rgba(255,255,255,0) 55%,
+          rgba(255,255,255,0.06) 82%,
+          rgba(255,255,255,0.12) 100%),
+        linear-gradient(to right,
+          rgba(0,0,0,0.22) 0%,
+          rgba(0,0,0,0) 10%,
+          rgba(0,0,0,0) 90%,
+          rgba(0,0,0,0.24) 100%),
+        linear-gradient(to bottom,
+          rgba(255,255,255,0.04) 0%,
+          rgba(0,0,0,0) 40%,
+          rgba(0,0,0,0.08) 100%),
+        var(--body);
+      border-radius: 16px 16px 6px 6px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      box-shadow:
+        0 22px 34px -14px rgba(0, 0, 0, 0.45),
+        0 2px 4px -1px rgba(0, 0, 0, 0.15),
+        inset 0 -4px 0 rgba(0, 0, 0, 0.18);
+    }
+    /* subtle vertical crease on the pouch centre — reads as film fold */
+    .pouch::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 34px;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom,
+        rgba(255,255,255,0.05) 0%,
+        rgba(255,255,255,0.02) 60%,
+        rgba(0,0,0,0.06) 100%);
+      pointer-events: none;
+    }
+
+    .cap {
+      height: 20px;
+      background:
+        linear-gradient(to bottom,
+          rgba(255,255,255,0.06) 0%,
+          rgba(0,0,0,0) 40%,
+          rgba(0,0,0,0.25) 100%),
+        var(--cap);
+      position: relative;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.25);
+    }
+    /* proper zipper bead */
+    .cap::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 5px;
+      height: 2.5px;
+      border-radius: 1.5px;
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(255,255,255,0.28) 0px,
+          rgba(255,255,255,0.28) 1.5px,
+          transparent 1.5px,
+          transparent 3px),
+        rgba(0,0,0,0.35);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+    }
+    /* tear notch on right side of cap */
+    .cap::after {
+      content: "";
+      position: absolute;
+      right: 16px;
+      top: 3px;
+      width: 5px;
+      height: 5px;
+      background: rgba(0,0,0,0.3);
+      transform: rotate(45deg);
+      border-radius: 1px;
+    }
+
+    .band {
+      margin: auto 0 14px;
+      padding: 8px 5px;
+      background: var(--band);
+      color: var(--band-text);
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 12px;
+      white-space: nowrap;
+      line-height: 1;
+      letter-spacing: 0.4px;
+      position: relative;
+      /* subtle indent / emboss */
+      box-shadow:
+        inset 0 1px 2px rgba(0,0,0,0.18),
+        inset 0 -1px 0 rgba(255,255,255,0.08),
+        0 1px 0 rgba(255,255,255,0.06);
+      z-index: 2;
+    }
+
+    /* ---------- META STRIP — now sits between hero copy and marquee ---------- */
+    .meta {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 56px 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .meta > div {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .meta strong {
+      display: block;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .meta em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    /* ==================== STATS BAND ==================== */
+    .stats-band {
+      background: var(--cream-2);
+      border-top: 1px solid var(--ink-line);
+      border-bottom: 1px solid var(--ink-line);
+      padding: 44px 0;
+    }
+    .stats-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      align-items: end;
+    }
+    .stat { display: flex; flex-direction: column; gap: 6px; }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: clamp(44px, 5.2vw, 72px);
+      line-height: 1;
+      color: var(--ink);
+    }
+    .stat-num em { color: var(--accent); font-style: italic; }
+    .stat-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    /* ==================== GENERIC SECTION ==================== */
+    .section { padding: 112px 0; }
+    .section-alt { background: var(--cream-2); }
+    .section-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+    .section-eyebrow {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: rgba(59, 42, 32, 0.32);
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(38px, 4.6vw, 68px);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      margin: 0 0 28px;
+      color: var(--ink);
+      max-width: 18ch;
+    }
+    .section-title em { color: var(--accent); font-style: italic; }
+    .section-lead {
+      font-family: var(--sans);
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 620px;
+      margin: 0 0 56px;
+    }
+    .section-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 40px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--ink);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ==================== ABOUT — Vision · Mission · Values ==================== */
+    .vmv {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.2fr;
+      gap: 56px;
+      padding: 44px 0;
+      border-top: 1px solid var(--ink-line);
+      border-bottom: 1px solid var(--ink-line);
+      margin: 8px 0 40px;
+    }
+    .vmv-block { display: flex; flex-direction: column; gap: 16px; }
+    .vmv-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .vmv-statement {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.3;
+      color: var(--ink);
+      margin: 0;
+      letter-spacing: -0.005em;
+      max-width: 24ch;
+    }
+    .vmv-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .vmv-list li {
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--ink);
+      padding-left: 20px;
+      position: relative;
+    }
+    .vmv-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 10px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .chip {
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      padding: 8px 16px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      color: var(--ink);
+      background: transparent;
+    }
+
+    /* ==================== PRODUCTS ==================== */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .product {
+      background: var(--cream);
+      border-radius: 6px;
+      padding: 20px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .section-alt .product { background: #fff; }
+    .product:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px -20px rgba(0,0,0,0.25);
+    }
+    .product-visual {
+      aspect-ratio: 4 / 3;
+      background: var(--bg);
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-visual .pouch { width: 105px; height: 140px; }
+    .product-visual .cap { height: 18px; }
+    .product-visual .band { font-size: 11px; padding: 7px 4px; margin-bottom: 10px; }
+    .product-name {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.15;
+      margin: 0 0 6px;
+      color: var(--ink);
+    }
+    .product-desc {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+      margin: 0 0 14px;
+    }
+    .product-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+    .tag {
+      font-family: var(--sans);
+      font-size: 11px;
+      padding: 4px 10px;
+      background: rgba(59, 42, 32, 0.06);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      white-space: nowrap;
+    }
+
+    /* ==================== SERVICES ==================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px 48px;
+    }
+    .service { display: flex; flex-direction: column; gap: 10px; }
+    .service-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 20px;
+      color: var(--accent);
+    }
+    .service-name {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1.15;
+      margin: 0;
+      color: var(--ink);
+    }
+    .service-desc {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    /* ==================== QUALITY ==================== */
+    .qc-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .qc-chip {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 18px;
+      background: #fff;
+      border: 1px solid var(--ink-line);
+      border-radius: 4px;
+      color: var(--ink);
+    }
+    .section .qc-chip { background: var(--cream-2); }
+    .qc-caption {
+      font-family: var(--sans);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    /* ==================== INFRASTRUCTURE ==================== */
+    .infra-numbers {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 44px;
+      padding-top: 16px;
+      border-top: 1px solid var(--ink-line);
+    }
+    .infra-num { display: flex; flex-direction: column; gap: 6px; padding-top: 24px; }
+    .infra-num .stat-num { font-size: clamp(32px, 3.6vw, 52px); }
+    .infra-machines {
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin: 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--ink-line);
+      max-width: 780px;
+    }
+    .infra-eyebrow {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    /* ==================== ORDER + FORM ==================== */
+    .order-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .step:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 32px;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .step h4 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 20px;
+      margin: 0 0 6px;
+      color: var(--ink);
+    }
+    .step p {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+    .quote-side {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 100px;
+    }
+    .terms {
+      background: #fff;
+      border: 1px solid var(--ink-line);
+      border-radius: 6px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .section-alt .terms { background: var(--cream); }
+    .terms > div {
+      padding: 16px 20px;
+      border-right: 1px solid var(--ink-line);
+      border-bottom: 1px solid var(--ink-line);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .terms > div:nth-child(2n) { border-right: none; }
+    .terms > div:nth-child(3), .terms > div:nth-child(4) { border-bottom: none; }
+    .term-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      font-family: var(--sans);
+    }
+    .term-val {
+      font-family: var(--serif);
+      font-size: 22px;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .term-note {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--ink-soft);
+    }
+    .quote-form {
+      background: #fff;
+      border-radius: 6px;
+      padding: 28px 26px 24px;
+      border: 1px solid var(--ink-line);
+    }
+    .section-alt .quote-form { background: var(--cream); }
+    .quote-form h4 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 22px;
+      margin: 0 0 20px;
+      color: var(--ink);
+    }
+    .fg {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .fg label {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+    .fg input, .fg select, .fg textarea {
+      font-family: var(--sans);
+      font-size: 14px;
+      padding: 11px 14px;
+      border: 1px solid var(--ink-line);
+      border-radius: 4px;
+      background: var(--cream);
+      color: var(--ink);
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .section-alt .fg input, .section-alt .fg select, .section-alt .fg textarea { background: #fff; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--accent); }
+    .fg textarea { min-height: 88px; resize: vertical; }
+
+    /* ==================== FOOTER ==================== */
+    .site-footer {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 72px 0 0;
+    }
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px 56px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      gap: 48px;
+    }
+    .footer-brand p {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(244, 239, 231, 0.62);
+      margin: 20px 0 0;
+      max-width: 240px;
+    }
+    .footer-logo {
+      height: 44px;
+      width: auto;
+      filter: brightness(1.05) contrast(1.05);
+      mix-blend-mode: screen;
+    }
+    .footer-col h5 {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 231, 0.48);
+      margin: 0 0 18px;
+      font-weight: 500;
+    }
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-col a {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: rgba(244, 239, 231, 0.72);
+      transition: color 0.2s ease;
+    }
+    .footer-col a:hover { color: var(--cream); }
+    .footer-col address {
+      font-family: var(--sans);
+      font-style: normal;
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(244, 239, 231, 0.72);
+    }
+    .footer-bottom {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 56px;
+      border-top: 1px solid rgba(244, 239, 231, 0.12);
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-family: var(--sans);
+      font-size: 12px;
+      color: rgba(244, 239, 231, 0.45);
+    }
+    .footer-bottom p { margin: 0; }
+
+    /* ==================== OPTION BADGE ==================== */
+    .option-badge {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--ink);
+      color: var(--cream);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      z-index: 100;
+      box-shadow: 0 12px 28px -10px rgba(0,0,0,0.35);
+      pointer-events: none;
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 900px) {
+      :root {
+        --tile-h: 200px;
+        --tile-gap: 12px;
+      }
+      .nav-inner { grid-template-columns: auto auto; padding: 14px 20px; gap: 16px; }
+      .nav-links { display: none; }
+      .hero { padding: 32px 0 24px; }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 0 20px;
+        min-height: auto;
+      }
+      .hero-title { font-size: 44px; max-width: none; }
+      .hero-sub { max-width: none; }
+      .v-marquee { height: 440px; gap: 12px; }
+      .v-col::before, .v-col::after { height: 50px; }
+      .pouch { width: 108px; height: 148px; }
+      .cap { height: 18px; }
+      .band { font-size: 11px; padding: 7px 4px; margin-bottom: 12px; }
+      .stats-inner, .infra-numbers { grid-template-columns: 1fr; gap: 20px; }
+      .section { padding: 72px 0; }
+      .section-inner { padding: 0 20px; }
+      .section-title { font-size: 36px; max-width: none; }
+      .services-grid { grid-template-columns: 1fr; gap: 28px; }
+      .vmv { grid-template-columns: 1fr; gap: 32px; padding: 28px 0; }
+      .order-grid { grid-template-columns: 1fr; gap: 48px; }
+      .quote-side { position: static; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; padding: 0 20px 40px; }
+      .footer-bottom { flex-direction: column; padding: 20px; }
+      .products-grid { grid-template-columns: 1fr; }
+      .product-visual .pouch { width: 120px; height: 165px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/" aria-label="G Flexipack, home">
+        <img src="logo.png" alt="G Flexipack" />
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#services">Services</a>
+        <a href="#quality">Quality</a>
+        <a href="#infrastructure">Infrastructure</a>
+      </nav>
+      <a class="nav-cta" href="#order">
+        Get a quote <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Flexible packaging · Est. [year]</p>
+        <h1 class="hero-title">Packaging built for <em>shelf impact.</em></h1>
+        <p class="hero-sub">
+          Custom-printed pouches for food, beverage, and lifestyle brands.
+          Seven formats, sharp digital print, low MOQs.
+        </p>
+        <div class="hero-ctas">
+          <a href="#order" class="cta cta-primary">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#products" class="cta cta-ghost">See our work <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div class="v-marquee" aria-label="Formats we print and sectors we pack for">
+        <!-- Column A — FORMATS — scrolling DOWN -->
+        <div class="v-col">
+          <div class="v-track v-down">
+            <!-- 6 unique + 6 duplicates for seamless loop -->
+            <article class="tile" style="--bg:#b25c2e; --body:#eae0cd; --cap:#cfc4b0; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Zipper</div></div>
+            </article>
+            <article class="tile" style="--bg:#7a6e3f; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Stand-Up</div></div>
+            </article>
+            <article class="tile" style="--bg:#3b2a20; --body:#b25c2e; --cap:#8f4623; --band:#eae0cd; --band-text:#b25c2e;">
+              <div class="pouch"><div class="cap"></div><div class="band">Gusseted</div></div>
+            </article>
+            <article class="tile" style="--bg:#eae0cd; --body:#7a6e3f; --cap:#5a512d; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">3-Side Seal</div></div>
+            </article>
+            <article class="tile" style="--bg:#c89a3a; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Spout</div></div>
+            </article>
+            <article class="tile" style="--bg:#d9c893; --body:#3b2a20; --cap:#241812; --band:#b25c2e; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Retort</div></div>
+            </article>
+
+            <article class="tile" style="--bg:#b25c2e; --body:#eae0cd; --cap:#cfc4b0; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Zipper</div></div>
+            </article>
+            <article class="tile" style="--bg:#7a6e3f; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Stand-Up</div></div>
+            </article>
+            <article class="tile" style="--bg:#3b2a20; --body:#b25c2e; --cap:#8f4623; --band:#eae0cd; --band-text:#b25c2e;">
+              <div class="pouch"><div class="cap"></div><div class="band">Gusseted</div></div>
+            </article>
+            <article class="tile" style="--bg:#eae0cd; --body:#7a6e3f; --cap:#5a512d; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">3-Side Seal</div></div>
+            </article>
+            <article class="tile" style="--bg:#c89a3a; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Spout</div></div>
+            </article>
+            <article class="tile" style="--bg:#d9c893; --body:#3b2a20; --cap:#241812; --band:#b25c2e; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Retort</div></div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Column B — SECTORS — scrolling UP -->
+        <div class="v-col">
+          <div class="v-track v-up">
+            <article class="tile" style="--bg:#7a8a6c; --body:#eae0cd; --cap:#c9bda6; --band:#7a6e3f; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Food</div></div>
+            </article>
+            <article class="tile" style="--bg:#b25c2e; --body:#3b2a20; --cap:#241812; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Beverages</div></div>
+            </article>
+            <article class="tile" style="--bg:#eae0cd; --body:#3b2a20; --cap:#241812; --band:#7a6e3f; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Agriculture</div></div>
+            </article>
+            <article class="tile" style="--bg:#7a6e3f; --body:#c89a3a; --cap:#a67d2f; --band:#3b2a20; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Healthcare</div></div>
+            </article>
+            <article class="tile" style="--bg:#3b2a20; --body:#eae0cd; --cap:#c9bda6; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Industrial</div></div>
+            </article>
+            <article class="tile" style="--bg:#d9c893; --body:#7a6e3f; --cap:#5a512d; --band:#eae0cd; --band-text:#7a6e3f;">
+              <div class="pouch"><div class="cap"></div><div class="band">Liquids</div></div>
+            </article>
+
+            <article class="tile" style="--bg:#7a8a6c; --body:#eae0cd; --cap:#c9bda6; --band:#7a6e3f; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Food</div></div>
+            </article>
+            <article class="tile" style="--bg:#b25c2e; --body:#3b2a20; --cap:#241812; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Beverages</div></div>
+            </article>
+            <article class="tile" style="--bg:#eae0cd; --body:#3b2a20; --cap:#241812; --band:#7a6e3f; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Agriculture</div></div>
+            </article>
+            <article class="tile" style="--bg:#7a6e3f; --body:#c89a3a; --cap:#a67d2f; --band:#3b2a20; --band-text:#eae0cd;">
+              <div class="pouch"><div class="cap"></div><div class="band">Healthcare</div></div>
+            </article>
+            <article class="tile" style="--bg:#3b2a20; --body:#eae0cd; --cap:#c9bda6; --band:#c89a3a; --band-text:#3b2a20;">
+              <div class="pouch"><div class="cap"></div><div class="band">Industrial</div></div>
+            </article>
+            <article class="tile" style="--bg:#d9c893; --body:#7a6e3f; --cap:#5a512d; --band:#eae0cd; --band-text:#7a6e3f;">
+              <div class="pouch"><div class="cap"></div><div class="band">Liquids</div></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-band" aria-label="At a glance">
+    <div class="stats-inner">
+      <div class="stat"><span class="stat-num"><em>15+</em></span><span class="stat-label">Years</span></div>
+      <div class="stat"><span class="stat-num"><em>250+</em></span><span class="stat-label">Brands packed</span></div>
+      <div class="stat"><span class="stat-num"><em>1,200+</em></span><span class="stat-label">Projects delivered</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-inner">
+      <p class="section-eyebrow">About</p>
+      <h2 class="section-title">Quality packaging, <em>since 2016.</em></h2>
+      <p class="section-lead">A family-run flexible packaging manufacturer in Bharuch, Gujarat &mdash; under the Gangamani group's 20+ years of industrial heritage.</p>
+
+      <div class="vmv">
+        <div class="vmv-block">
+          <span class="vmv-label">Vision</span>
+          <p class="vmv-statement">To be the flexible packaging partner of choice for brands that care how their product lands on shelf.</p>
+        </div>
+        <div class="vmv-block">
+          <span class="vmv-label">Mission</span>
+          <p class="vmv-statement">Design and print custom pouches that protect the product and represent the brand.</p>
+        </div>
+        <div class="vmv-block">
+          <span class="vmv-label">Values</span>
+          <ul class="vmv-list">
+            <li>Quality without compromise</li>
+            <li>Honest partnerships</li>
+            <li>Continuous R&amp;D</li>
+            <li>Environmental responsibility</li>
+            <li>Customer-first thinking</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="chip-row">
+        <span class="chip">ISO 9001:2015</span>
+        <span class="chip">ASTM Standard QC</span>
+        <span class="chip">100% Recyclable Options</span>
+        <span class="chip">FOB Mundra</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="products">
+    <div class="section-inner">
+      <p class="section-eyebrow">Products</p>
+      <h2 class="section-title">Seven pouches, <em>printed to spec.</em></h2>
+      <p class="section-lead">Custom dimensions, laminate structures, barrier levels, and full-colour print, all produced in-house.</p>
+      <div class="products-grid">
+        <article class="product">
+          <div class="product-visual" style="--bg:#b25c2e; --body:#eae0cd; --cap:#cfc4b0; --band:#c89a3a; --band-text:#3b2a20;"><div class="pouch"><div class="cap"></div><div class="band">Stand-Up</div></div></div>
+          <h3 class="product-name">Stand-Up Pouches</h3>
+          <p class="product-desc">Snacks, coffee, tea, spices, pet food, nuts.</p>
+          <div class="product-tags"><span class="tag">Flat / oval bottom</span><span class="tag">Degassing valve</span><span class="tag">Zipper option</span></div>
+        </article>
+        <article class="product">
+          <div class="product-visual" style="--bg:#7a6e3f; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;"><div class="pouch"><div class="cap"></div><div class="band">Zipper</div></div></div>
+          <h3 class="product-name">Zipper Pouches</h3>
+          <p class="product-desc">Resealable snacks, cosmetics, hardware, dry ingredients.</p>
+          <div class="product-tags"><span class="tag">Press-to-close</span><span class="tag">Slider zipper</span><span class="tag">Window</span></div>
+        </article>
+        <article class="product">
+          <div class="product-visual" style="--bg:#3b2a20; --body:#b25c2e; --cap:#8f4623; --band:#eae0cd; --band-text:#b25c2e;"><div class="pouch"><div class="cap"></div><div class="band">Gusseted</div></div></div>
+          <h3 class="product-name">Gusseted Pouches</h3>
+          <p class="product-desc">Bulk grains, fertilizers, seeds, large retail packs.</p>
+          <div class="product-tags"><span class="tag">Side gusset</span><span class="tag">Bottom gusset</span><span class="tag">Heavy laminate</span></div>
+        </article>
+        <article class="product">
+          <div class="product-visual" style="--bg:#c89a3a; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;"><div class="pouch"><div class="cap"></div><div class="band">Spout</div></div></div>
+          <h3 class="product-name">Spout Pouches</h3>
+          <p class="product-desc">Liquids, sauces, baby food, juices, personal care.</p>
+          <div class="product-tags"><span class="tag">Screw / flip-top</span><span class="tag">High-barrier foil</span><span class="tag">Standing / flat</span></div>
+        </article>
+        <article class="product">
+          <div class="product-visual" style="--bg:#d9c893; --body:#3b2a20; --cap:#241812; --band:#b25c2e; --band-text:#eae0cd;"><div class="pouch"><div class="cap"></div><div class="band">Retort</div></div></div>
+          <h3 class="product-name">Retort Pouches</h3>
+          <p class="product-desc">Ready-to-eat meals, pet food, shelf-stable products.</p>
+          <div class="product-tags"><span class="tag">121&deg;C tolerance</span><span class="tag">PET / AL / CPP</span><span class="tag">NY / AL / CPP</span></div>
+        </article>
+        <article class="product">
+          <div class="product-visual" style="--bg:#eae0cd; --body:#7a6e3f; --cap:#5a512d; --band:#c89a3a; --band-text:#3b2a20;"><div class="pouch"><div class="cap"></div><div class="band">3-Side Seal</div></div></div>
+          <h3 class="product-name">3-Side Seal Pouches</h3>
+          <p class="product-desc">Single-serve sachets, condiments, pharma, spices, sugar.</p>
+          <div class="product-tags"><span class="tag">Precise dosing</span><span class="tag">Tear notch</span><span class="tag">Foil / PET / BOPP</span></div>
+        </article>
+        <article class="product">
+          <div class="product-visual" style="--bg:#7a8a6c; --body:#eae0cd; --cap:#c9bda6; --band:#7a6e3f; --band-text:#eae0cd;"><div class="pouch"><div class="cap"></div><div class="band">Vacuum</div></div></div>
+          <h3 class="product-name">Vacuum Pouches</h3>
+          <p class="product-desc">Meat, cheese, seafood, medical devices, industrial parts.</p>
+          <div class="product-tags"><span class="tag">Puncture-resistant</span><span class="tag">PA / PE or PET / PE</span><span class="tag">Clear / printed</span></div>
+        </article>
+      </div>
+      <a href="#" class="section-link">See all formats <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="section-inner">
+      <p class="section-eyebrow">Services</p>
+      <h2 class="section-title">Six sectors <em>we pack for.</em></h2>
+      <p class="section-lead">From food and beverage brands to pharmaceutical, agriculture, personal care, and industrial supply.</p>
+      <div class="services-grid">
+        <div class="service"><span class="service-num">01</span><h4 class="service-name">Food &amp; Grocery</h4><p class="service-desc">Snacks, coffee, spices, frozen meals, baby food, bakery.</p></div>
+        <div class="service"><span class="service-num">02</span><h4 class="service-name">Beverages</h4><p class="service-desc">Juice spout pouches, sauces, energy gels, bag-in-box liners.</p></div>
+        <div class="service"><span class="service-num">03</span><h4 class="service-name">Pharmaceutical</h4><p class="service-desc">Sachets, blister foil, desiccant, sterile packaging.</p></div>
+        <div class="service"><span class="service-num">04</span><h4 class="service-name">Agriculture</h4><p class="service-desc">Seed pouches, fertilizer, pesticide, UV / moisture protection.</p></div>
+        <div class="service"><span class="service-num">05</span><h4 class="service-name">Home &amp; Personal Care</h4><p class="service-desc">Shampoo, cream, detergent, refills and travel formats.</p></div>
+        <div class="service"><span class="service-num">06</span><h4 class="service-name">Industrial</h4><p class="service-desc">Lubricants, chemicals, bulk poly film, heavy-duty laminates.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="quality">
+    <div class="section-inner">
+      <p class="section-eyebrow">Quality</p>
+      <h2 class="section-title">Quality without <em>compromise.</em></h2>
+      <p class="section-lead">Every batch is inspected in-house against ASTM standards, from raw material procurement through pre-print colour verification to final dispatch documentation.</p>
+      <div class="qc-chips">
+        <span class="qc-chip">GSM Tester</span>
+        <span class="qc-chip">COF Tester</span>
+        <span class="qc-chip">Bond Strength</span>
+        <span class="qc-chip">Puncture Resistance</span>
+        <span class="qc-chip">Burst Strength</span>
+        <span class="qc-chip">Scrub Testing</span>
+        <span class="qc-chip">Heat Seal Strength</span>
+        <span class="qc-chip">Tear Strength</span>
+      </div>
+      <p class="qc-caption">Eight ASTM-standard tests, applied at every stage of production.</p>
+    </div>
+  </section>
+
+  <section class="section" id="infrastructure">
+    <div class="section-inner">
+      <p class="section-eyebrow">Infrastructure</p>
+      <h2 class="section-title">8,000 sq ft, <em>Bharuch, Gujarat.</em></h2>
+      <p class="section-lead">A climate-controlled, dust-free plant designed to international hygiene standards, in India's GIDC industrial corridor about 350 km from Mumbai.</p>
+      <div class="infra-numbers">
+        <div class="infra-num"><span class="stat-num"><em>8,000</em></span><span class="stat-label">Sq ft plant</span></div>
+        <div class="infra-num"><span class="stat-num"><em>300+</em></span><span class="stat-label">MT / month</span></div>
+        <div class="infra-num"><span class="stat-num"><em>8</em></span><span class="stat-label">Colour print</span></div>
+        <div class="infra-num"><span class="stat-num"><em>~350</em></span><span class="stat-label">Km from Mumbai</span></div>
+      </div>
+      <p class="infra-machines"><span class="infra-eyebrow">Equipment</span> 8-Colour Rotogravure Printing &middot; Solvent-Less Lamination &middot; Solvent-Based Lamination &middot; Slitting &middot; Centre / Side Seal Pouching.</p>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="order">
+    <div class="section-inner">
+      <p class="section-eyebrow">How to order</p>
+      <h2 class="section-title">From enquiry <em>to delivery.</em></h2>
+      <p class="section-lead">Five clear steps, from your artwork brief to sea freight out of Mundra Port.</p>
+      <div class="order-grid">
+        <ol class="steps">
+          <li class="step"><span class="step-num">1</span><div><h4>Share requirements</h4><p>Product type, format, dimensions, quantity, barrier, artwork. Recommendation within 24 hrs.</p></div></li>
+          <li class="step"><span class="step-num">2</span><div><h4>Detailed quote</h4><p>Unit price (FOB Mundra), MOQ, lead time, Incoterms, within 1&ndash;2 business days.</p></div></li>
+          <li class="step"><span class="step-num">3</span><div><h4>Artwork &amp; samples</h4><p>Digital proof to approve. Physical samples couriered on request.</p></div></li>
+          <li class="step"><span class="step-num">4</span><div><h4>Production &amp; QC</h4><p>3&ndash;5 week lead time. In-line inspection, full batch documentation.</p></div></li>
+          <li class="step"><span class="step-num">5</span><div><h4>Shipment</h4><p>Sea freight LCL / FCL from Mundra Port. Full export documentation handled.</p></div></li>
+        </ol>
+        <aside class="quote-side">
+          <div class="terms">
+            <div><span class="term-label">Min. order</span><span class="term-val">5,000</span><span class="term-note">units</span></div>
+            <div><span class="term-label">Payment</span><span class="term-val">30 / 70</span><span class="term-note">advance / shipment</span></div>
+            <div><span class="term-label">Lead time</span><span class="term-val">3&ndash;5 wk</span><span class="term-note">after artwork &amp; advance</span></div>
+            <div><span class="term-label">Incoterms</span><span class="term-val">FOB</span><span class="term-note">Mundra / CIF available</span></div>
+          </div>
+          <form class="quote-form" onsubmit="return false">
+            <h4>Request a quote</h4>
+            <div class="fg"><label>Name</label><input type="text" placeholder="Jane Smith" /></div>
+            <div class="fg"><label>Business email</label><input type="email" placeholder="jane@yourbrand.com" /></div>
+            <div class="fg"><label>Product type</label>
+              <select>
+                <option>Select format&hellip;</option>
+                <option>Stand-Up Pouches</option>
+                <option>Zipper Pouches</option>
+                <option>Gusseted Pouches</option>
+                <option>Spout Pouches</option>
+                <option>Retort Pouches</option>
+                <option>3-Side Seal Pouches</option>
+                <option>Vacuum Pouches</option>
+                <option>Other / Multiple</option>
+              </select>
+            </div>
+            <div class="fg"><label>Requirements</label><textarea placeholder="Quantity, size, barrier, ship-by date&hellip;"></textarea></div>
+            <button class="cta cta-primary" style="width:100%;justify-content:center">Send enquiry <span class="arrow">&rarr;</span></button>
+          </form>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo.png" alt="G Flexipack" class="footer-logo" />
+        <p>Flexible packaging, made in Bharuch, Gujarat.<br />ISO 9001:2015 certified since 2016.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="#products">Stand-Up &middot; Zipper</a></li>
+          <li><a href="#products">Gusseted &middot; 3-Side Seal</a></li>
+          <li><a href="#products">Spout &middot; Retort &middot; Vacuum</a></li>
+          <li><a href="#products">See all formats &rarr;</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Sectors</a></li>
+          <li><a href="#quality">Quality</a></li>
+          <li><a href="#infrastructure">Infrastructure</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <address>
+          Plot 43, GIDC Phase-1<br />
+          Narmada Nagar, Bharuch<br />
+          Gujarat 392015, India<br /><br />
+          <a href="mailto:info@gflexipack.com">info@gflexipack.com</a><br />
+          <a href="tel:+919824032765">+91 9824032765</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 G Flexipack. All rights reserved.</p>
+      <p>ISO 9001:2015 &middot; ASTM Standard QC &middot; 100% Recyclable Options</p>
+    </div>
+  </footer>
+
+  <div class="option-badge" aria-hidden="true">Option A &middot; Lean Editorial</div>
+</body>
+</html>

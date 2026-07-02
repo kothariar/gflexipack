@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sectors — Shelf vs Mosaic (quiet versions)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --cream: #f4efe7;
+      --cream-2: #eae0cd;
+      --ink: #3b2a20;
+      --ink-soft: rgba(59, 42, 32, 0.68);
+      --ink-line: rgba(59, 42, 32, 0.14);
+      --burnt: #b25c2e;
+      --olive: #7a6e3f;
+      --sage: #7a8a6c;
+      --gold: #c89a3a;
+      --pale-gold: #d9c893;
+      --accent: #b25c2e;
+      --serif: "DM Serif Display", Georgia, serif;
+      --sans: "Space Grotesk", system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .compare-label {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 70px 56px 0;
+    }
+    .compare-label .tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--ink);
+      border-radius: 999px;
+      padding: 8px 16px;
+      margin-bottom: 14px;
+    }
+    .compare-label p {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      max-width: 560px;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ---------- shared chapter head ---------- */
+    .chapter-head {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 44px 56px 52px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: end;
+    }
+    .chapter-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 24px;
+    }
+    .chapter-kicker::before {
+      content: "";
+      width: 28px; height: 1px;
+      background: rgba(59, 42, 32, 0.32);
+    }
+    .chapter-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(38px, 4.6vw, 68px);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .chapter-title em { font-style: italic; color: var(--accent); }
+    .chapter-side {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 420px;
+      padding-bottom: 8px;
+    }
+
+    .divider {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      background: var(--cream-2);
+      margin-top: 110px;
+    }
+
+    /* small pouch glyph used by both options */
+    .mini-pouch {
+      width: var(--pw, 64px);
+      height: var(--ph, 88px);
+      border-radius: 10px 10px 4px 4px;
+      background:
+        linear-gradient(112deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.1) 100%),
+        linear-gradient(to right, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, rgba(0,0,0,0.2) 100%),
+        var(--body);
+      box-shadow:
+        0 14px 20px -10px rgba(0,0,0,0.35),
+        inset 0 -3px 0 rgba(0,0,0,0.16);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+    .mini-pouch .mp-cap {
+      height: 12px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(0,0,0,0.2)), var(--cap);
+      flex-shrink: 0;
+    }
+    .mini-pouch .mp-band {
+      margin: auto 0 10px;
+      padding: 4px 3px;
+      background: var(--bandc);
+      color: var(--band-text);
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 8.5px;
+      letter-spacing: 0.3px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       OPTION A — THE SHELF (quiet: cream panels, colour as accent)
+       ============================================================ */
+    .shelf-wrap {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+    .shelf {
+      display: flex;
+      gap: 14px;
+      height: 540px;
+    }
+    .shelf-panel {
+      flex: 1;
+      min-width: 0;
+      background: var(--cream);
+      border: 1px solid var(--ink-line);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition:
+        flex 0.65s cubic-bezier(0.25, 0.7, 0.2, 1),
+        background-color 0.5s ease,
+        border-color 0.5s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    /* the only always-on colour: a thin ribbon on top */
+    .shelf-panel::before {
+      content: "";
+      height: 5px;
+      background: var(--sc);
+      flex-shrink: 0;
+    }
+    .shelf-panel.is-open {
+      flex: 3.1;
+      background: color-mix(in srgb, var(--sc) 7%, var(--cream));
+      border-color: color-mix(in srgb, var(--sc) 36%, transparent);
+    }
+
+    /* collapsed face — number top, vertical name, pouch bottom */
+    .sp-closed {
+      position: absolute;
+      inset: 5px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 22px 10px 26px;
+      opacity: 1;
+      transition: opacity 0.3s ease 0.15s;
+    }
+    .shelf-panel.is-open .sp-closed { opacity: 0; transition-delay: 0s; pointer-events: none; }
+    .sp-closed .sp-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--accent);
+    }
+    .sp-closed .sp-name-v {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: var(--serif);
+      font-size: clamp(20px, 1.9vw, 27px);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    .sp-closed .mini-pouch { --pw: 54px; --ph: 74px; }
+    .sp-closed .mini-pouch .mp-band { display: none; }
+
+    /* expanded face */
+    .sp-open {
+      position: absolute;
+      inset: 5px 0 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      padding: 30px 32px 32px;
+      opacity: 0;
+      transition: opacity 0.35s ease 0.2s;
+      pointer-events: none;
+      min-width: 360px; /* keeps layout stable while flex animates */
+    }
+    .shelf-panel.is-open .sp-open { opacity: 1; pointer-events: auto; }
+    .sp-open .sp-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--accent);
+      display: block;
+      margin: 0 0 8px;
+    }
+    .sp-open h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(26px, 2.4vw, 36px);
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      margin: 0 0 18px;
+    }
+    .sp-open-top {
+      align-self: start;
+    }
+    .sp-apps {
+      list-style: none;
+      margin: 0 0 18px;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-width: 400px;
+    }
+    .sp-apps li {
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 7px 13px;
+      border: 1px solid rgba(59, 42, 32, 0.24);
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .sp-build {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0;
+      max-width: 380px;
+    }
+    .sp-build b { color: var(--ink); font-weight: 500; }
+    .sp-open .mini-pouch { --pw: 88px; --ph: 122px; }
+    .sp-open .mini-pouch .mp-band { font-size: 10px; padding: 5px 3px; }
+
+    .shelf-hint {
+      max-width: 1440px;
+      margin: 18px auto 0;
+      padding: 0 56px;
+      font-size: 12.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    /* ============================================================
+       OPTION B — THE MOSAIC WALL (quiet: 1-in-4 tiles tinted)
+       ============================================================ */
+    .mosaic-wrap {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-auto-rows: 128px;
+      gap: 12px;
+    }
+    .m-tile {
+      border-radius: 8px;
+      padding: 16px 18px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .m-tile:hover { transform: translateY(-4px); }
+
+    /* header tile — starts each sector, ink on cream, spans 2 cols */
+    .m-head {
+      grid-column: span 2;
+      background: var(--cream);
+      border: 1px solid var(--ink-line);
+      justify-content: space-between;
+    }
+    .m-head .mh-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--accent);
+    }
+    .m-head h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(19px, 1.7vw, 25px);
+      line-height: 1.06;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    /* thin colour tick under the sector name — the header's only colour */
+    .m-head h3::after {
+      content: "";
+      display: block;
+      width: 34px;
+      height: 3px;
+      margin-top: 10px;
+      background: var(--sc);
+    }
+
+    /* app tile — quiet warm cream, text only */
+    .m-app {
+      background: var(--cream-2);
+      font-size: 13.5px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .m-app small {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--ink-soft);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    /* accent tile — ONE per sector carries the colour + pouch */
+    .m-accent {
+      background:
+        radial-gradient(ellipse at 50% 20%, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 60%),
+        var(--sc);
+      color: var(--cream);
+      align-items: center;
+      justify-content: center;
+      grid-row: span 2;
+    }
+    .m-accent.on-light { color: var(--ink); }
+    .m-accent .mini-pouch { --pw: 74px; --ph: 104px; margin-bottom: 12px; }
+    .m-accent .ma-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 1100px) {
+      .mosaic { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 118px; }
+    }
+    @media (max-width: 900px) {
+      .compare-label { padding: 44px 20px 0; }
+      .chapter-head { grid-template-columns: 1fr; gap: 18px; padding: 32px 20px 36px; }
+      .shelf-wrap, .mosaic-wrap { padding: 0 20px; }
+      /* shelf stacks into horizontal bands on mobile */
+      .shelf { flex-direction: column; height: auto; gap: 10px; }
+      .shelf-panel { min-height: 74px; }
+      .shelf-panel::before { height: 100%; width: 5px; position: absolute; left: 0; top: 0; }
+      .sp-closed {
+        position: relative;
+        inset: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        padding: 20px 20px 20px 26px;
+      }
+      .sp-closed .sp-name-v {
+        writing-mode: horizontal-tb;
+        transform: none;
+        flex: 1;
+        font-size: 22px;
+      }
+      .sp-closed .mini-pouch { --pw: 40px; --ph: 54px; }
+      .shelf-panel.is-open { flex: 1; }
+      .shelf-panel.is-open .sp-closed { opacity: 1; pointer-events: auto; }
+      .sp-open {
+        position: relative;
+        inset: auto;
+        min-width: 0;
+        grid-template-columns: 1fr;
+        padding: 0 20px 24px 26px;
+        display: none;
+      }
+      .shelf-panel.is-open .sp-open { display: grid; }
+      .sp-open h3, .sp-open .sp-num { display: none; }
+      .sp-open .mini-pouch { display: none; }
+      .shelf-hint { padding: 0 20px; }
+      .mosaic { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 110px; }
+      .m-head { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= OPTION A ================= -->
+  <div class="compare-label">
+    <span class="tag">A — The Shelf</span>
+    <p>All six sectors visible in one screen, no scrolling. Colour is a 5px ribbon
+    until you hover / click a panel — then it widens and tints softly. Walk your
+    cursor across it left to right.</p>
+  </div>
+
+  <div class="chapter-head">
+    <div>
+      <p class="chapter-kicker">Who we pack for</p>
+      <h2 class="chapter-title">Six sectors, <em>one standard.</em></h2>
+    </div>
+    <p class="chapter-side">
+      The hygiene, barrier and documentation adapt to the sector.
+      The print quality doesn't.
+    </p>
+  </div>
+
+  <div class="shelf-wrap">
+    <div class="shelf" id="shelf">
+
+      <article class="shelf-panel is-open" style="--sc:#b25c2e;" data-panel="0">
+        <div class="sp-closed">
+          <span class="sp-num">01</span>
+          <span class="sp-name-v">Food &amp; Grocery</span>
+          <div class="mini-pouch" style="--body:#eae0cd; --cap:#cfc4b0;"><div class="mp-cap"></div></div>
+        </div>
+        <div class="sp-open">
+          <div class="sp-open-top">
+            <span class="sp-num">01</span>
+            <h3>Food &amp; Grocery</h3>
+            <ul class="sp-apps">
+              <li>Snacks</li><li>Coffee &amp; tea</li><li>Spices</li>
+              <li>Frozen &amp; ready meals</li><li>Baby food</li><li>Bakery</li>
+            </ul>
+            <p class="sp-build"><b>Typical build:</b> high-barrier metallised film, food-safe inner seal.</p>
+          </div>
+          <div class="mini-pouch" style="--body:#b25c2e; --cap:#8f4623; --bandc:#eae0cd; --band-text:#b25c2e;">
+            <div class="mp-cap"></div><div class="mp-band">Roasted</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shelf-panel" style="--sc:#c89a3a;" data-panel="1">
+        <div class="sp-closed">
+          <span class="sp-num">02</span>
+          <span class="sp-name-v">Beverages</span>
+          <div class="mini-pouch" style="--body:#3b2a20; --cap:#241812;"><div class="mp-cap"></div></div>
+        </div>
+        <div class="sp-open">
+          <div class="sp-open-top">
+            <span class="sp-num">02</span>
+            <h3>Beverages</h3>
+            <ul class="sp-apps">
+              <li>Juice spout pouches</li><li>Sauce sachets</li>
+              <li>Energy gels</li><li>Bag-in-box liners</li>
+            </ul>
+            <p class="sp-build"><b>Typical build:</b> leak-proof spout welds, burst-strength tested.</p>
+          </div>
+          <div class="mini-pouch" style="--body:#c89a3a; --cap:#a67d2f; --bandc:#3b2a20; --band-text:#eae0cd;">
+            <div class="mp-cap"></div><div class="mp-band">Cold-Pressed</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shelf-panel" style="--sc:#7a8a6c;" data-panel="2">
+        <div class="sp-closed">
+          <span class="sp-num">03</span>
+          <span class="sp-name-v">Pharmaceutical</span>
+          <div class="mini-pouch" style="--body:#f4efe7; --cap:#d8cfc0;"><div class="mp-cap"></div></div>
+        </div>
+        <div class="sp-open">
+          <div class="sp-open-top">
+            <span class="sp-num">03</span>
+            <h3>Pharmaceutical</h3>
+            <ul class="sp-apps">
+              <li>Dosing sachets</li><li>Blister foil</li>
+              <li>Desiccant pouches</li><li>Sterile formats</li>
+            </ul>
+            <p class="sp-build"><b>Typical build:</b> pharma-grade hygiene, full batch documentation.</p>
+          </div>
+          <div class="mini-pouch" style="--body:#7a8a6c; --cap:#5f6d54; --bandc:#f4efe7; --band-text:#7a8a6c;">
+            <div class="mp-cap"></div><div class="mp-band">5g Dose</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shelf-panel" style="--sc:#7a6e3f;" data-panel="3">
+        <div class="sp-closed">
+          <span class="sp-num">04</span>
+          <span class="sp-name-v">Agriculture</span>
+          <div class="mini-pouch" style="--body:#7a6e3f; --cap:#5a512d;"><div class="mp-cap"></div></div>
+        </div>
+        <div class="sp-open">
+          <div class="sp-open-top">
+            <span class="sp-num">04</span>
+            <h3>Agriculture</h3>
+            <ul class="sp-apps">
+              <li>Seed pouches</li><li>Fertilizer packs</li>
+              <li>Pesticide &amp; herbicide</li><li>Insecticide sachets</li>
+            </ul>
+            <p class="sp-build"><b>Typical build:</b> UV + moisture protection laminated in.</p>
+          </div>
+          <div class="mini-pouch" style="--body:#7a6e3f; --cap:#5a512d; --bandc:#c89a3a; --band-text:#3b2a20;">
+            <div class="mp-cap"></div><div class="mp-band">Hybrid Seed</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shelf-panel" style="--sc:#d9c893;" data-panel="4">
+        <div class="sp-closed">
+          <span class="sp-num">05</span>
+          <span class="sp-name-v">Home &amp; Personal Care</span>
+          <div class="mini-pouch" style="--body:#eae0cd; --cap:#cfc4b0;"><div class="mp-cap"></div></div>
+        </div>
+        <div class="sp-open">
+          <div class="sp-open-top">
+            <span class="sp-num">05</span>
+            <h3>Home &amp; Personal Care</h3>
+            <ul class="sp-apps">
+              <li>Shampoo sachets</li><li>Cream &amp; serum</li>
+              <li>Detergent</li><li>Face masks</li><li>Refills</li>
+            </ul>
+            <p class="sp-build"><b>Typical build:</b> chemical-resistant seal layers.</p>
+          </div>
+          <div class="mini-pouch" style="--body:#d9c893; --cap:#bfae7e; --bandc:#3b2a20; --band-text:#eae0cd;">
+            <div class="mp-cap"></div><div class="mp-band">Argan Repair</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="shelf-panel" style="--sc:#3b2a20;" data-panel="5">
+        <div class="sp-closed">
+          <span class="sp-num">06</span>
+          <span class="sp-name-v">Industrial</span>
+          <div class="mini-pouch" style="--body:#3b2a20; --cap:#241812;"><div class="mp-cap"></div></div>
+        </div>
+        <div class="sp-open">
+          <div class="sp-open-top">
+            <span class="sp-num">06</span>
+            <h3>Industrial</h3>
+            <ul class="sp-apps">
+              <li>Lubricant pouches</li><li>Chemical packs</li>
+              <li>Poly film rolls</li><li>Heavy-duty laminates</li>
+            </ul>
+            <p class="sp-build"><b>Typical build:</b> puncture + tear strength tested to ASTM.</p>
+          </div>
+          <div class="mini-pouch" style="--body:#3b2a20; --cap:#241812; --bandc:#b25c2e; --band-text:#eae0cd;">
+            <div class="mp-cap"></div><div class="mp-band">Grade 40</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <p class="shelf-hint">Hover or tap a sector</p>
+  </div>
+
+  <!-- ================= DIVIDER ================= -->
+  <div class="divider">— scroll for option B —</div>
+
+  <!-- ================= OPTION B ================= -->
+  <div class="compare-label">
+    <span class="tag">B — The Mosaic Wall</span>
+    <p>Applications lead, categories follow. Mostly quiet cream tiles — exactly one
+    tile per sector carries colour and a pouch. No interaction needed at all;
+    hover is just a nudge.</p>
+  </div>
+
+  <div class="chapter-head">
+    <div>
+      <p class="chapter-kicker">Who we pack for</p>
+      <h2 class="chapter-title">If it ships in a pouch,<br /><em>we've packed it.</em></h2>
+    </div>
+    <p class="chapter-side">
+      Six sectors, one standard — the hygiene, barrier and documentation
+      adapt; the print quality doesn't.
+    </p>
+  </div>
+
+  <div class="mosaic-wrap">
+    <div class="mosaic">
+
+      <!-- 01 Food -->
+      <div class="m-tile m-head" style="--sc:#b25c2e;">
+        <span class="mh-num">01</span>
+        <h3>Food &amp; Grocery</h3>
+      </div>
+      <div class="m-tile m-app">Snacks &amp; chips<small>high-barrier metallised</small></div>
+      <div class="m-tile m-app">Coffee &amp; tea<small>degassing valve</small></div>
+      <div class="m-tile m-accent" style="--sc:#b25c2e;">
+        <div class="mini-pouch" style="--body:#eae0cd; --cap:#cfc4b0; --bandc:#c89a3a; --band-text:#3b2a20;">
+          <div class="mp-cap"></div><div class="mp-band">Roasted</div>
+        </div>
+        <span class="ma-label">Stand-up · zipper</span>
+      </div>
+      <div class="m-tile m-app">Spices<small>aroma barrier</small></div>
+      <div class="m-tile m-app">Baby food<small>retort-grade</small></div>
+      <div class="m-tile m-app">Frozen &amp; ready meals<small>121°C tolerant</small></div>
+
+      <!-- 02 Beverages -->
+      <div class="m-tile m-head" style="--sc:#c89a3a;">
+        <span class="mh-num">02</span>
+        <h3>Beverages</h3>
+      </div>
+      <div class="m-tile m-app">Juice pouches<small>spout + cap</small></div>
+      <div class="m-tile m-accent on-light" style="--sc:#d9c893;">
+        <div class="mini-pouch" style="--body:#3b2a20; --cap:#241812; --bandc:#eae0cd; --band-text:#3b2a20;">
+          <div class="mp-cap"></div><div class="mp-band">Cold-Pressed</div>
+        </div>
+        <span class="ma-label">Spout pouch</span>
+      </div>
+      <div class="m-tile m-app">Energy gels<small>precise dosing</small></div>
+      <div class="m-tile m-app">Sauce sachets<small>leak-proof weld</small></div>
+      <div class="m-tile m-app">Bag-in-box liners<small>LCL / FCL bulk</small></div>
+
+      <!-- 03 Pharma -->
+      <div class="m-tile m-head" style="--sc:#7a8a6c;">
+        <span class="mh-num">03</span>
+        <h3>Pharmaceutical</h3>
+      </div>
+      <div class="m-tile m-app">Dosing sachets<small>batch documented</small></div>
+      <div class="m-tile m-app">Blister foil<small>pharma-grade</small></div>
+      <div class="m-tile m-app">Sterile formats<small>hygiene certified</small></div>
+
+      <!-- 04 Agriculture -->
+      <div class="m-tile m-head" style="--sc:#7a6e3f;">
+        <span class="mh-num">04</span>
+        <h3>Agriculture</h3>
+      </div>
+      <div class="m-tile m-accent" style="--sc:#7a6e3f;">
+        <div class="mini-pouch" style="--body:#c89a3a; --cap:#a67d2f; --bandc:#3b2a20; --band-text:#eae0cd;">
+          <div class="mp-cap"></div><div class="mp-band">Hybrid Seed</div>
+        </div>
+        <span class="ma-label">Gusseted · 5kg</span>
+      </div>
+      <div class="m-tile m-app">Seed pouches<small>UV protection</small></div>
+      <div class="m-tile m-app">Fertilizer packs<small>heavy-duty laminate</small></div>
+      <div class="m-tile m-app">Pesticide &amp; herbicide<small>chemical barrier</small></div>
+
+      <!-- 05 Personal care -->
+      <div class="m-tile m-head" style="--sc:#d9c893;">
+        <span class="mh-num">05</span>
+        <h3>Home &amp; Personal Care</h3>
+      </div>
+      <div class="m-tile m-app">Shampoo sachets<small>surfactant-safe seal</small></div>
+      <div class="m-tile m-app">Cream &amp; serum<small>airless formats</small></div>
+      <div class="m-tile m-app">Refill packs<small>mono-material option</small></div>
+
+      <!-- 06 Industrial -->
+      <div class="m-tile m-head" style="--sc:#3b2a20;">
+        <span class="mh-num">06</span>
+        <h3>Industrial</h3>
+      </div>
+      <div class="m-tile m-accent" style="--sc:#3b2a20;">
+        <div class="mini-pouch" style="--body:#b25c2e; --cap:#8f4623; --bandc:#eae0cd; --band-text:#b25c2e;">
+          <div class="mp-cap"></div><div class="mp-band">Grade 40</div>
+        </div>
+        <span class="ma-label">Heavy-duty</span>
+      </div>
+      <div class="m-tile m-app">Lubricant pouches<small>puncture tested</small></div>
+      <div class="m-tile m-app">Chemical packs<small>ASTM tear strength</small></div>
+      <div class="m-tile m-app">Poly film rolls<small>bulk supply</small></div>
+
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top: 90px;">— end of comparison —</div>
+
+  <script>
+    // shelf — hover opens on desktop, click/tap toggles everywhere
+    const panels = document.querySelectorAll(".shelf-panel");
+    const openPanel = (target) => {
+      panels.forEach((p) => p.classList.toggle("is-open", p === target));
+    };
+    const isDesktop = () => window.matchMedia("(min-width: 901px)").matches;
+    panels.forEach((p) => {
+      p.addEventListener("mouseenter", () => { if (isDesktop()) openPanel(p); });
+      p.addEventListener("click", () => openPanel(p));
+    });
+  </script>
+</body>
+</html>
