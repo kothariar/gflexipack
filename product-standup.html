@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stand-Up Pouches Manufacturer | G Flexipack · Bharuch, India</title>
+  <meta name="description" content="Custom-printed stand-up pouches with bottom gusset, zipper options and matte, gloss or metallic finishes. 9 laminate structures including recyclable MDOPE/PE. MOQ 5,000 units, made in Bharuch, Gujarat." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --cream: #f4efe7;
+      --cream-2: #eae0cd;
+      --ink: #3b2a20;
+      --ink-soft: rgba(59, 42, 32, 0.68);
+      --ink-line: rgba(59, 42, 32, 0.14);
+      --cream-soft: rgba(244, 239, 231, 0.72);
+      --cream-line: rgba(244, 239, 231, 0.18);
+      --burnt: #b25c2e;
+      --olive: #7a6e3f;
+      --sage: #7a8a6c;
+      --gold: #c89a3a;
+      --pale-gold: #d9c893;
+      --accent: #b25c2e;
+      --serif: "DM Serif Display", Georgia, serif;
+      --sans: "Space Grotesk", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal] { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(244, 239, 231, 0.86);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 18px 48px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 48px;
+    }
+    .brand { display: inline-flex; align-items: center; }
+    .brand img { height: 52px; width: auto; mix-blend-mode: multiply; filter: contrast(1.02); }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 34px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-links a { position: relative; padding: 6px 0; opacity: 0.82; transition: opacity 0.2s ease; }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .nav-cta:hover { background: var(--ink); color: var(--cream); }
+    .arrow { display: inline-block; transition: transform 0.25s ease; }
+    a:hover .arrow { transform: translateX(4px); }
+
+    /* ---------- PRODUCT HERO ---------- */
+    .p-hero {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 44px 56px 72px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 72px;
+      align-items: center;
+    }
+    .crumbs {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      margin: 0 0 26px;
+    }
+    .crumbs a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(59,42,32,0.3); }
+    .crumbs a:hover { color: var(--ink); }
+    .crumbs span { padding: 0 8px; opacity: 0.5; }
+    .p-hero h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(40px, 4.8vw, 68px);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      margin: 0 0 22px;
+    }
+    .p-hero h1 em { font-style: italic; color: var(--accent); }
+    .p-hero .intro {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 540px;
+      margin: 0 0 32px;
+    }
+    .p-hero-ctas { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .cta-primary {
+      padding: 14px 26px;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 999px;
+    }
+    .cta-primary:hover { transform: translateY(-1px); background: #2a1e17; }
+    .cta-ghost {
+      padding: 14px 4px;
+      color: var(--ink);
+      background: transparent;
+      border: none;
+      position: relative;
+    }
+    .cta-ghost::after {
+      content: "";
+      position: absolute;
+      left: 4px; right: 4px; bottom: 8px;
+      height: 1px;
+      background: var(--ink);
+      transform: scaleX(0.35);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .cta-ghost:hover::after { transform: scaleX(1); }
+
+    .p-hero-stage {
+      background:
+        radial-gradient(ellipse at 50% 24%, rgba(255,255,255,0.07) 0%, rgba(0,0,0,0) 62%),
+        var(--burnt);
+      border-radius: 12px;
+      height: 480px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 54px;
+      position: relative;
+      overflow: hidden;
+    }
+    .p-hero-stage::before {
+      content: "";
+      position: absolute;
+      left: 26%; right: 26%; bottom: 40px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(4px);
+    }
+    .p-hero-ghost {
+      position: absolute;
+      top: -36px; right: 8px;
+      font-family: var(--serif);
+      font-size: 200px;
+      line-height: 1;
+      color: rgba(0,0,0,0.08);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .pouch {
+      width: 210px;
+      height: 285px;
+      background:
+        linear-gradient(112deg,
+          rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.02) 32%,
+          rgba(255,255,255,0) 55%, rgba(255,255,255,0.06) 82%,
+          rgba(255,255,255,0.12) 100%),
+        linear-gradient(to right,
+          rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 10%,
+          rgba(0,0,0,0) 90%, rgba(0,0,0,0.24) 100%),
+        var(--body);
+      border-radius: 24px 24px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      box-shadow:
+        0 30px 44px -16px rgba(0, 0, 0, 0.45),
+        0 2px 4px -1px rgba(0, 0, 0, 0.15),
+        inset 0 -5px 0 rgba(0, 0, 0, 0.18);
+    }
+    .cap {
+      height: 26px;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.25) 100%),
+        var(--cap);
+      position: relative;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.25);
+      flex-shrink: 0;
+    }
+    .cap::before {
+      content: "";
+      position: absolute;
+      left: 12px; right: 12px; bottom: 6px;
+      height: 3px;
+      border-radius: 2px;
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(255,255,255,0.28) 0px, rgba(255,255,255,0.28) 2px,
+          transparent 2px, transparent 4px),
+        rgba(0,0,0,0.35);
+    }
+    .band {
+      margin: auto 0 20px;
+      padding: 10px 6px;
+      background: var(--bandc);
+      color: var(--band-text);
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1;
+      letter-spacing: 0.4px;
+      box-shadow:
+        inset 0 1px 2px rgba(0,0,0,0.18),
+        inset 0 -1px 0 rgba(255,255,255,0.08);
+      z-index: 2;
+    }
+
+    /* ---------- SHARED SECTION CHROME ---------- */
+    .sec {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 84px 56px 90px;
+    }
+    .sec-head {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 52px;
+    }
+    .sec-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 20px;
+    }
+    .sec-eyebrow::before,
+    .sec-eyebrow::after { content: ""; width: 28px; height: 1px; background: rgba(59, 42, 32, 0.32); }
+    .sec-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(30px, 3.2vw, 46px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin: 0 0 16px;
+    }
+    .sec-title em { font-style: italic; color: var(--accent); }
+    .sec-lead {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    /* ---------- AT A GLANCE — decision facts in five seconds ---------- */
+    .glance {
+      border-top: 1px solid var(--ink-line);
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .glance-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 18px 40px;
+      flex-wrap: wrap;
+    }
+    .glance-item { display: flex; flex-direction: column; gap: 4px; }
+    .g-k {
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .g-v {
+      font-family: var(--serif);
+      font-size: 21px;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .g-v i { font-style: italic; color: var(--accent); }
+
+    /* ---------- KEY FEATURES — compact mini grid ---------- */
+    .feature-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 28px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .fm b {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 19px;
+      letter-spacing: -0.01em;
+      margin-bottom: 7px;
+    }
+    .fm span {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+    .struct-cta { text-align: center; margin-top: 32px; }
+
+    /* ---------- STRUCTURE OPTIONS — chips on brown ---------- */
+    .structures {
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .structures .sec { padding: 80px 56px; }
+    .structures .sec-eyebrow { color: var(--cream-soft); }
+    .structures .sec-eyebrow::before,
+    .structures .sec-eyebrow::after { background: rgba(244, 239, 231, 0.35); }
+    .structures .sec-title em { color: var(--gold); }
+    .structures .sec-lead { color: var(--cream-soft); }
+    .struct-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .struct-chip {
+      font-size: 14.5px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 12px 20px;
+      border: 1px solid rgba(244, 239, 231, 0.32);
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .struct-chip.is-recyclable {
+      border-color: var(--pale-gold);
+      color: var(--pale-gold);
+    }
+    .struct-note {
+      text-align: center;
+      font-size: 13px;
+      color: var(--cream-soft);
+      margin: 28px 0 0;
+    }
+    .struct-note em { font-style: italic; color: var(--gold); }
+
+    /* ---------- PRODUCT MARKET — compact scannable lines ---------- */
+    .markets { background: var(--cream-2); }
+    .market-lines {
+      max-width: 1020px;
+      margin: 0 auto;
+      border-top: 1px solid var(--ink-line);
+    }
+    .market-line {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 26px;
+      align-items: baseline;
+      padding: 18px 6px;
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .ml-k {
+      font-family: var(--serif);
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      position: relative;
+      padding-left: 18px;
+    }
+    .ml-k::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--mc, var(--burnt));
+    }
+    .ml-chips {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- ADDITIONAL FEATURES — 3 grouped columns ---------- */
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .addon-col {
+      border: 1px solid var(--ink-line);
+      border-radius: 12px;
+      background: var(--cream);
+      padding: 32px 30px 26px;
+    }
+    .addon-col h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px;
+    }
+    .addon-col .addon-sub {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ac, var(--burnt));
+      display: block;
+      margin-bottom: 18px;
+    }
+    .addon-rows { list-style: none; margin: 0; padding: 0; }
+    .addon-rows li {
+      padding: 12px 0;
+      border-top: 1px solid var(--ink-line);
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+    .addon-rows b {
+      display: block;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    /* ---------- CTA BAND ---------- */
+    .cta-band {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 55%),
+        var(--burnt);
+      color: var(--cream);
+    }
+    .cta-band .sec { padding: 92px 56px 100px; text-align: center; }
+    .cta-band h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(36px, 4.4vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin: 0 0 20px;
+    }
+    .cta-band h2 em { font-style: italic; color: #f7e2b8; }
+    .cta-band p {
+      font-size: 16.5px;
+      line-height: 1.6;
+      color: rgba(244, 239, 231, 0.85);
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+    .cta-light {
+      padding: 16px 30px;
+      background: var(--cream);
+      color: var(--ink);
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+    }
+    .cta-light:hover { transform: translateY(-2px); }
+    .terms-line {
+      font-family: var(--serif);
+      font-size: clamp(17px, 1.8vw, 22px);
+      margin: 44px 0 0;
+      color: rgba(244, 239, 231, 0.9);
+    }
+    .terms-line em { font-style: italic; color: #f7e2b8; }
+    .terms-dot { padding: 0 16px; opacity: 0.5; font-family: var(--sans); font-size: 13px; }
+
+    /* ---------- FOOTER ---------- */
+    .site-footer { background: var(--ink); color: var(--cream); }
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 74px 56px 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+      gap: 56px;
+    }
+    .footer-brand img {
+      height: 46px;
+      width: auto;
+      filter: brightness(0) invert(1) opacity(0.92);
+      margin-bottom: 18px;
+    }
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--cream-soft);
+      margin: 0;
+      max-width: 300px;
+    }
+    .footer-col h5 {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      margin: 0 0 18px;
+    }
+    .footer-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14.5px;
+    }
+    .footer-col a { opacity: 0.9; transition: opacity 0.2s ease; }
+    .footer-col a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+    .footer-col address {
+      font-style: normal;
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--cream-soft);
+    }
+    .footer-col address a { color: var(--cream); }
+    .footer-bottom {
+      border-top: 1px solid var(--cream-line);
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 26px 56px 36px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12.5px;
+      color: var(--cream-soft);
+    }
+
+    .option-badge {
+      position: fixed;
+      bottom: 18px;
+      left: 18px;
+      z-index: 40;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 8px 14px;
+      border-radius: 999px;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 1100px) {
+      .p-hero { grid-template-columns: 1fr; gap: 40px; }
+      .p-hero-stage { height: 380px; }
+      .addons-grid { grid-template-columns: 1fr; }
+      .market-line { grid-template-columns: 220px 1fr; }
+    }
+    @media (max-width: 900px) {
+      .nav-inner { grid-template-columns: auto auto; padding: 14px 20px; gap: 16px; }
+      .nav-links { display: none; }
+
+      .p-hero { padding: 28px 20px 52px; }
+      .p-hero h1 { font-size: 40px; }
+      .p-hero-stage { height: 320px; padding-bottom: 40px; }
+      .pouch { width: 160px; height: 218px; }
+      .cap { height: 20px; }
+      .band { font-size: 12px; padding: 8px 4px; margin-bottom: 15px; }
+      .p-hero-ghost { font-size: 130px; top: -22px; }
+
+      .sec { padding: 58px 20px 62px; }
+      .sec-head { margin-bottom: 34px; }
+
+      .glance-inner {
+        padding: 18px 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px 20px;
+      }
+      .g-v { font-size: 18px; white-space: normal; }
+
+      .feature-mini-grid { grid-template-columns: 1fr 1fr; gap: 22px 18px; }
+      .fm b { font-size: 17px; }
+
+      .structures .sec { padding: 56px 20px; }
+      .struct-chip { font-size: 13px; padding: 10px 15px; }
+
+      .market-line { grid-template-columns: 1fr; gap: 6px; padding: 16px 4px; }
+
+      .cta-band .sec { padding: 64px 20px 72px; }
+      .terms-line { line-height: 2; }
+      .terms-dot { padding: 0 10px; }
+
+      .footer-inner { grid-template-columns: 1fr; gap: 36px; padding: 56px 20px 40px; }
+      .footer-bottom { padding: 20px 20px 28px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="option-d.html" aria-label="G Flexipack, home">
+        <img src="logo.png" alt="G Flexipack" />
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="option-d.html#about">About</a>
+        <a href="option-d.html#products">Products</a>
+        <a href="option-d.html#industries">Industries</a>
+        <a href="option-d.html#infrastructure">Infrastructure</a>
+        <a href="option-d.html#certifications">Certifications</a>
+      </nav>
+      <a class="nav-cta" href="option-d.html#inquiry">
+        Get a quote <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ============ PRODUCT HERO ============ -->
+  <section class="p-hero">
+    <div>
+      <p class="crumbs">
+        <a href="option-d.html">Home</a><span>/</span><a href="option-d.html#products">Products</a><span>/</span>Stand-Up Pouches
+      </p>
+      <h1>Stand-Up <em>Pouches.</em></h1>
+      <p class="intro">
+        A stand-up pouch is a versatile packaging solution designed to remain upright on
+        flat surfaces thanks to its bottom gusset. Sealed sides protect the product and
+        prevent leakage, an optional zipper adds reusability, and a choice of finishes
+        and thicknesses tailors the pouch to your product and your shelf.
+      </p>
+      <div class="p-hero-ctas">
+        <a class="cta cta-primary" href="option-d.html#inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="cta cta-ghost" href="option-d.html#products">All formats <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="p-hero-stage" data-reveal>
+      <span class="p-hero-ghost" aria-hidden="true">01</span>
+      <div class="pouch" style="--body:#eae0cd; --cap:#cfc4b0; --bandc:#c89a3a; --band-text:#3b2a20;">
+        <div class="cap"></div>
+        <div class="band">Roasted &amp; Salted</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AT A GLANCE — decision facts first ============ -->
+  <section class="glance" aria-label="At a glance">
+    <div class="glance-inner">
+      <div class="glance-item"><span class="g-k">Min. order</span><span class="g-v">5,000 <i>units</i></span></div>
+      <div class="glance-item"><span class="g-k">Lead time</span><span class="g-v">3–5 <i>weeks</i></span></div>
+      <div class="glance-item"><span class="g-k">Structures</span><span class="g-v">9 <i>laminates</i></span></div>
+      <div class="glance-item"><span class="g-k">Closure</span><span class="g-v">Zipper <i>optional</i></span></div>
+      <div class="glance-item"><span class="g-k">Finishes</span><span class="g-v">Matte · Gloss · Metallic</span></div>
+      <div class="glance-item"><span class="g-k">Shipping</span><span class="g-v">FOB <i>Mundra</i> / CIF</span></div>
+    </div>
+  </section>
+
+  <!-- ============ STRUCTURE OPTIONS — the "can you make mine?" answer ============ -->
+  <section class="structures" id="structures">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Structure options</p>
+        <h2 class="sec-title">Nine laminate structures, <em>engineered per product.</em></h2>
+        <p class="sec-lead">Barrier, stiffness and seal strength are chosen for what you pack — not off a shelf.</p>
+      </div>
+      <div class="struct-chips" data-reveal>
+        <span class="struct-chip">PET / METPET / PE</span>
+        <span class="struct-chip">MATTE BOPP / METPET / PE</span>
+        <span class="struct-chip">PET / PE</span>
+        <span class="struct-chip">BOPA / PE</span>
+        <span class="struct-chip">PET / Alu / PE</span>
+        <span class="struct-chip">PET / Alu / BOPA / PE</span>
+        <span class="struct-chip">PE / PE</span>
+        <span class="struct-chip">Alox PET / PE</span>
+        <span class="struct-chip is-recyclable">MDOPE / PE — Recyclable</span>
+      </div>
+      <p class="struct-note" data-reveal>Not sure which structure fits? Send your product — we recommend a build <em>within 24 hours.</em></p>
+      <div class="struct-cta" data-reveal>
+        <a class="cta cta-light" href="option-d.html#inquiry">Get a structure recommendation <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ADDITIONAL FEATURES ============ -->
+  <section class="sec" id="addons">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Additional features</p>
+      <h2 class="sec-title">Customised for function, <em>finish and brand.</em></h2>
+    </div>
+    <div class="addons-grid">
+      <div class="addon-col" style="--ac:#b25c2e;" data-reveal>
+        <h3>Functional</h3>
+        <span class="addon-sub">Enhancements</span>
+        <ul class="addon-rows">
+          <li><b>Coffee valve</b>Allows gases to escape while keeping oxygen out — preserves coffee freshness.</li>
+          <li><b>Tear notch</b>Easy opening without scissors, improving user experience.</li>
+          <li><b>Die-cut handles</b>Adds portability for larger pouches.</li>
+          <li><b>Hang holes — round or Euro</b>Enables display on retail hooks for better shelf visibility.</li>
+        </ul>
+      </div>
+      <div class="addon-col" style="--ac:#7a6e3f;" data-reveal>
+        <h3>Design &amp; Safety</h3>
+        <span class="addon-sub">Features</span>
+        <ul class="addon-rows">
+          <li><b>Round corners</b>Prevents sharp edges, making handling safer.</li>
+          <li><b>Doyen seal</b>Rounded bottom seal for stability.</li>
+          <li><b>K seal</b>Strong triangular seal at the base for heavy products.</li>
+          <li><b>Folded bottom</b>Extra reinforcement for bulky items.</li>
+        </ul>
+      </div>
+      <div class="addon-col" style="--ac:#c89a3a;" data-reveal>
+        <h3>Branding &amp; Aesthetic</h3>
+        <span class="addon-sub">Options</span>
+        <ul class="addon-rows">
+          <li><b>Registered window cut-out</b>Transparent section in the metallic layer to showcase the product.</li>
+          <li><b>Surface matte coating</b>Premium look with a soft-touch finish.</li>
+          <li><b>Spot gloss</b>Highlights logos or graphics with selective shine.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ============ KEY FEATURES — compact ============ -->
+  <section class="sec features" id="features">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Key features</p>
+      <h2 class="sec-title">Built to stand, <em>sealed to protect.</em></h2>
+    </div>
+    <div class="feature-mini-grid" data-reveal>
+      <div class="fm"><b>Upright design</b><span>The bottom gusset expands when filled — stands securely on any shelf.</span></div>
+      <div class="fm"><b>Sealed sides</b><span>Product protection, no leakage through filling and transit.</span></div>
+      <div class="fm"><b>Zipper option</b><span>Press-to-close reusability, consumer-friendly for multiple uses.</span></div>
+      <div class="fm"><b>Variety of finishes</b><span>Matte, glossy or metallic — matched in 8-colour rotogravure.</span></div>
+      <div class="fm"><b>Thickness choices</b><span>Durability matched to each product type and weight.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCT MARKET — compact scannable lines ============ -->
+  <section class="markets" id="markets">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Product market</p>
+        <h2 class="sec-title">One format, <em>every aisle.</em></h2>
+        <p class="sec-lead">Adaptability, durability and consumer convenience — commonly packed products:</p>
+      </div>
+      <div class="market-lines" data-reveal>
+        <div class="market-line" style="--mc:#b25c2e;">
+          <span class="ml-k">Food &amp; Beverage</span>
+          <span class="ml-chips">Rice &amp; pulses · cereals &amp; snacks · dry fruits &amp; confectionery · tea &amp; coffee (aroma-retentive films) · frozen meat &amp; seafood</span>
+        </div>
+        <div class="market-line" style="--mc:#7a6e3f;">
+          <span class="ml-k">Pet &amp; Agricultural</span>
+          <span class="ml-chips">Large-format pet food with resealable zippers · seeds · fertilizers · feed with UV &amp; moisture protection</span>
+        </div>
+        <div class="market-line" style="--mc:#7a8a6c;">
+          <span class="ml-k">Personal Care &amp; Pharma</span>
+          <span class="ml-chips">Creams, powders &amp; masks · tamper-evident packaging for tablets and powders</span>
+        </div>
+        <div class="market-line" style="--mc:#c89a3a;">
+          <span class="ml-k">Household &amp; Industrial</span>
+          <span class="ml-chips">Detergents, cleaners &amp; refills · chemicals, lubricants &amp; powders in durable multilayer films</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA BAND ============ -->
+  <section class="cta-band" id="quote">
+    <div class="sec">
+      <h2 data-reveal>Spec your <em>stand-up pouch.</em></h2>
+      <p data-reveal>Send dimensions, quantity, barrier needs and artwork status — structure recommendation within 24 hours.</p>
+      <a class="cta cta-light" href="option-d.html#inquiry" data-reveal>Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+      <p class="terms-line" data-reveal>
+        MOQ <em>5,000 units</em><span class="terms-dot">●</span>
+        payment <em>30 / 70</em><span class="terms-dot">●</span>
+        lead time <em>3–5 weeks</em><span class="terms-dot">●</span>
+        <em>FOB Mundra</em> / CIF
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo.png" alt="G Flexipack" />
+        <p>Flexible packaging, made in Bharuch, Gujarat. ISO 9001:2015 certified, exporting worldwide from Mundra Port since 2016.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="product-standup.html">Stand-Up Pouches</a></li>
+          <li><a href="option-d.html#products">Zipper · Gusseted · Spout</a></li>
+          <li><a href="option-d.html#products">Retort · Vacuum · Sachets</a></li>
+          <li><a href="option-d.html#products">All 13 formats →</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="option-d.html#about">About us</a></li>
+          <li><a href="option-d.html#industries">Industries</a></li>
+          <li><a href="option-d.html#infrastructure">Infrastructure</a></li>
+          <li><a href="option-d.html#certifications">Certifications</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <address>
+          Plot 43, GIDC Phase-1<br />
+          Narmada Nagar, Bharuch<br />
+          Gujarat 392015, India<br /><br />
+          <a href="mailto:info@gflexipack.com">info@gflexipack.com</a><br />
+          <a href="tel:+919824032765">+91 98240 32765</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 G Flexipack. All rights reserved.</p>
+      <p>ISO 9001:2015 · ASTM Standard QC · 100% Recyclable Options</p>
+    </div>
+  </footer>
+
+  <div class="option-badge" aria-hidden="true">Product page · Stand-Up</div>
+
+  <script>
+    const revealIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-in");
+          revealIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll("[data-reveal]").forEach((el) => revealIO.observe(el));
+  </script>
+</body>
+</html>

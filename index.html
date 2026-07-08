@@ -33,7 +33,7 @@
       --sans: "Space Grotesk", system-ui, sans-serif;
 
       --tile-w: 200px;
-      --tile-h: 200px;
+      --tile-h: 300px; /* portrait tiles so the full pouch shows (photos are ~0.81 ratio) */
       --tile-gap: 14px;
     }
 
@@ -271,27 +271,42 @@
       animation-timing-function: linear;
       animation-iteration-count: infinite;
     }
+    /* --n = number of tiles in one (pre-duplicate) set, so the loop offset
+       matches each column's length: left cycles 13 formats, right cycles 6 sectors */
     .v-track.v-down {
       animation-name: scroll-down;
-      animation-duration: 50s;
+      animation-duration: 96s;
+      --n: 13;
     }
     .v-track.v-up {
       animation-name: scroll-up;
       animation-duration: 55s;
+      --n: 6;
     }
     @keyframes scroll-down {
-      from { transform: translateY(calc((var(--tile-h) + var(--tile-gap)) * -6)); }
+      from { transform: translateY(calc((var(--tile-h) + var(--tile-gap)) * var(--n) * -1)); }
       to   { transform: translateY(0); }
     }
     @keyframes scroll-up {
       from { transform: translateY(0); }
-      to   { transform: translateY(calc((var(--tile-h) + var(--tile-gap)) * -6)); }
+      to   { transform: translateY(calc((var(--tile-h) + var(--tile-gap)) * var(--n) * -1)); }
     }
     .v-marquee:hover .v-track { animation-play-state: paused; }
     @media (prefers-reduced-motion: reduce) {
       .v-track { animation: none !important; }
     }
     .v-col .tile { width: 100%; }
+    /* real product photos in the hero marquee (replaces the CSS-pouch placeholders) */
+    .tile.tile-photo { padding: 0; align-items: stretch; }
+    .tile.tile-photo::before { display: none; }
+    .tile.tile-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .tile.tile-photo .tile-tag {
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+      padding: 24px 12px 9px; text-align: center;
+      font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--cream);
+      background: linear-gradient(to top, rgba(38, 26, 18, 0.82), rgba(38, 26, 18, 0));
+    }
 
     /* ---------- TILE (colour panel + pouch) ---------- */
     .tile {
@@ -1126,6 +1141,40 @@
     .sp-open .mini-pouch { --pw: 88px; --ph: 122px; }
     .sp-open .mini-pouch .mp-band { font-size: 10px; padding: 5px 3px; }
 
+    /* real sector photo backs the panel once it opens */
+    .sp-closed, .sp-open { z-index: 1; }
+    .sp-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .sp-photo-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      background: linear-gradient(to top,
+        rgba(28, 19, 13, 0.94) 0%,
+        rgba(28, 19, 13, 0.62) 30%,
+        rgba(28, 19, 13, 0.2) 62%,
+        rgba(28, 19, 13, 0.05) 100%);
+    }
+    .shelf-panel.is-open .sp-photo,
+    .shelf-panel.is-open .sp-photo-scrim { opacity: 1; }
+    /* light text + hide the CSS mini-pouch when a real photo is behind */
+    .shelf-panel.is-open .sp-open .sp-num { color: var(--pale-gold); }
+    .shelf-panel.is-open .sp-open h3 { color: var(--cream); }
+    .shelf-panel.is-open .sp-open .sp-apps li { color: var(--cream); border-color: rgba(244, 239, 231, 0.4); }
+    .shelf-panel.is-open .sp-open .sp-build { color: rgba(244, 239, 231, 0.86); }
+    .shelf-panel.is-open .sp-open .sp-build b { color: var(--cream); }
+    .shelf-panel.is-open .sp-open .mini-pouch { display: none; }
+
     .shelf-hint {
       margin: 18px 0 0;
       font-size: 12.5px;
@@ -1735,7 +1784,7 @@
       }
       .hero-title { font-size: 44px; max-width: none; }
       .hero-sub { max-width: none; }
-      .v-marquee { height: 440px; gap: 12px; }
+      .v-marquee { height: 440px; gap: 12px; --tile-h: 230px; }
       .v-col::before, .v-col::after { height: 50px; }
       .pouch { width: 108px; height: 148px; }
       .cap { height: 18px; }
@@ -1810,6 +1859,7 @@
       .shelf-panel.is-open .sp-open { display: grid; }
       .sp-open h3, .sp-open .sp-num { display: none; }
       .sp-open .mini-pouch { display: none; }
+      .sp-photo, .sp-photo-scrim { display: none; }
 
       .plant { padding: 80px 0 76px; }
       .plant-inner { padding: 0 20px; }
@@ -1878,86 +1928,52 @@
         <!-- Column A — FORMATS — scrolling DOWN -->
         <div class="v-col">
           <div class="v-track v-down">
-            <article class="tile" style="--bg:#b25c2e; --body:#eae0cd; --cap:#cfc4b0; --band:#c89a3a; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">Zipper</div></div>
-            </article>
-            <article class="tile" style="--bg:#7a6e3f; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">Stand-Up</div></div>
-            </article>
-            <article class="tile" style="--bg:#3b2a20; --body:#b25c2e; --cap:#8f4623; --band:#eae0cd; --band-text:#b25c2e;">
-              <div class="pouch"><div class="cap"></div><div class="band">Gusseted</div></div>
-            </article>
-            <article class="tile" style="--bg:#eae0cd; --body:#7a6e3f; --cap:#5a512d; --band:#c89a3a; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">3-Side Seal</div></div>
-            </article>
-            <article class="tile" style="--bg:#c89a3a; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">Spout</div></div>
-            </article>
-            <article class="tile" style="--bg:#d9c893; --body:#3b2a20; --cap:#241812; --band:#b25c2e; --band-text:#eae0cd;">
-              <div class="pouch"><div class="cap"></div><div class="band">Retort</div></div>
-            </article>
+            <article class="tile tile-photo"><img src="images/standup.png" alt="Stand-Up pouch" loading="lazy" /><span class="tile-tag">Stand-Up</span></article>
+            <article class="tile tile-photo"><img src="images/zipper.png" alt="Zipper pouch" loading="lazy" /><span class="tile-tag">Zipper</span></article>
+            <article class="tile tile-photo"><img src="images/gusseted.png" alt="Gusseted pouch" loading="lazy" /><span class="tile-tag">Gusseted</span></article>
+            <article class="tile tile-photo"><img src="images/centre-seal.png" alt="Centre Seal pouch" loading="lazy" /><span class="tile-tag">Centre Seal</span></article>
+            <article class="tile tile-photo"><img src="images/vacuum.png" alt="Vacuum pouch" loading="lazy" /><span class="tile-tag">Vacuum</span></article>
+            <article class="tile tile-photo"><img src="images/reusable.png" alt="Re-usable pouch" loading="lazy" /><span class="tile-tag">Re-usable</span></article>
+            <article class="tile tile-photo"><img src="images/seal3.png" alt="3-Side Seal sachet" loading="lazy" /><span class="tile-tag">3-Side Seal</span></article>
+            <article class="tile tile-photo"><img src="images/seal4.png" alt="4-Side Seal bag" loading="lazy" /><span class="tile-tag">4-Side Seal</span></article>
+            <article class="tile tile-photo"><img src="images/patch-handle.png" alt="Patch Handle bag" loading="lazy" /><span class="tile-tag">Patch Handle</span></article>
+            <article class="tile tile-photo"><img src="images/spout.png" alt="Spout pouch" loading="lazy" /><span class="tile-tag">Spout</span></article>
+            <article class="tile tile-photo"><img src="images/filmroll.png" alt="Poly film roll" loading="lazy" /><span class="tile-tag">Poly Film Roll</span></article>
+            <article class="tile tile-photo"><img src="images/retort.png" alt="Retort pouch" loading="lazy" /><span class="tile-tag">Retort</span></article>
+            <article class="tile tile-photo"><img src="images/breathing.png" alt="Breathing pouch" loading="lazy" /><span class="tile-tag">Breathing</span></article>
 
-            <article class="tile" style="--bg:#b25c2e; --body:#eae0cd; --cap:#cfc4b0; --band:#c89a3a; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">Zipper</div></div>
-            </article>
-            <article class="tile" style="--bg:#7a6e3f; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">Stand-Up</div></div>
-            </article>
-            <article class="tile" style="--bg:#3b2a20; --body:#b25c2e; --cap:#8f4623; --band:#eae0cd; --band-text:#b25c2e;">
-              <div class="pouch"><div class="cap"></div><div class="band">Gusseted</div></div>
-            </article>
-            <article class="tile" style="--bg:#eae0cd; --body:#7a6e3f; --cap:#5a512d; --band:#c89a3a; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">3-Side Seal</div></div>
-            </article>
-            <article class="tile" style="--bg:#c89a3a; --body:#3b2a20; --cap:#241812; --band:#eae0cd; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">Spout</div></div>
-            </article>
-            <article class="tile" style="--bg:#d9c893; --body:#3b2a20; --cap:#241812; --band:#b25c2e; --band-text:#eae0cd;">
-              <div class="pouch"><div class="cap"></div><div class="band">Retort</div></div>
-            </article>
+            <article class="tile tile-photo"><img src="images/standup.png" alt="Stand-Up pouch" loading="lazy" /><span class="tile-tag">Stand-Up</span></article>
+            <article class="tile tile-photo"><img src="images/zipper.png" alt="Zipper pouch" loading="lazy" /><span class="tile-tag">Zipper</span></article>
+            <article class="tile tile-photo"><img src="images/gusseted.png" alt="Gusseted pouch" loading="lazy" /><span class="tile-tag">Gusseted</span></article>
+            <article class="tile tile-photo"><img src="images/centre-seal.png" alt="Centre Seal pouch" loading="lazy" /><span class="tile-tag">Centre Seal</span></article>
+            <article class="tile tile-photo"><img src="images/vacuum.png" alt="Vacuum pouch" loading="lazy" /><span class="tile-tag">Vacuum</span></article>
+            <article class="tile tile-photo"><img src="images/reusable.png" alt="Re-usable pouch" loading="lazy" /><span class="tile-tag">Re-usable</span></article>
+            <article class="tile tile-photo"><img src="images/seal3.png" alt="3-Side Seal sachet" loading="lazy" /><span class="tile-tag">3-Side Seal</span></article>
+            <article class="tile tile-photo"><img src="images/seal4.png" alt="4-Side Seal bag" loading="lazy" /><span class="tile-tag">4-Side Seal</span></article>
+            <article class="tile tile-photo"><img src="images/patch-handle.png" alt="Patch Handle bag" loading="lazy" /><span class="tile-tag">Patch Handle</span></article>
+            <article class="tile tile-photo"><img src="images/spout.png" alt="Spout pouch" loading="lazy" /><span class="tile-tag">Spout</span></article>
+            <article class="tile tile-photo"><img src="images/filmroll.png" alt="Poly film roll" loading="lazy" /><span class="tile-tag">Poly Film Roll</span></article>
+            <article class="tile tile-photo"><img src="images/retort.png" alt="Retort pouch" loading="lazy" /><span class="tile-tag">Retort</span></article>
+            <article class="tile tile-photo"><img src="images/breathing.png" alt="Breathing pouch" loading="lazy" /><span class="tile-tag">Breathing</span></article>
           </div>
         </div>
 
         <!-- Column B — SECTORS — scrolling UP -->
         <div class="v-col">
           <div class="v-track v-up">
-            <article class="tile" style="--bg:#7a8a6c; --body:#eae0cd; --cap:#c9bda6; --band:#7a6e3f; --band-text:#eae0cd;">
-              <div class="pouch"><div class="cap"></div><div class="band">Food</div></div>
-            </article>
-            <article class="tile" style="--bg:#b25c2e; --body:#3b2a20; --cap:#241812; --band:#c89a3a; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">Beverages</div></div>
-            </article>
-            <article class="tile" style="--bg:#eae0cd; --body:#3b2a20; --cap:#241812; --band:#7a6e3f; --band-text:#eae0cd;">
-              <div class="pouch"><div class="cap"></div><div class="band">Agriculture</div></div>
-            </article>
-            <article class="tile" style="--bg:#7a6e3f; --body:#c89a3a; --cap:#a67d2f; --band:#3b2a20; --band-text:#eae0cd;">
-              <div class="pouch"><div class="cap"></div><div class="band">Healthcare</div></div>
-            </article>
-            <article class="tile" style="--bg:#3b2a20; --body:#eae0cd; --cap:#c9bda6; --band:#c89a3a; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">Industrial</div></div>
-            </article>
-            <article class="tile" style="--bg:#d9c893; --body:#7a6e3f; --cap:#5a512d; --band:#eae0cd; --band-text:#7a6e3f;">
-              <div class="pouch"><div class="cap"></div><div class="band">Liquids</div></div>
-            </article>
+            <article class="tile tile-photo"><img src="images/sector-food.png" alt="Dark Roast Coffee pouch" loading="lazy" /><span class="tile-tag">Food</span></article>
+            <article class="tile tile-photo"><img src="images/sector-beverages.png" alt="Cold-Pressed Orange spout pouch" loading="lazy" /><span class="tile-tag">Beverages</span></article>
+            <article class="tile tile-photo"><img src="images/sector-pharma.png" alt="ORS Electrolyte sachets" loading="lazy" /><span class="tile-tag">Pharma</span></article>
+            <article class="tile tile-photo"><img src="images/sector-agro.png" alt="Hybrid Seeds bag" loading="lazy" /><span class="tile-tag">Agriculture</span></article>
+            <article class="tile tile-photo"><img src="images/sector-personal-care.png" alt="Argan Serum pouch" loading="lazy" /><span class="tile-tag">Personal Care</span></article>
+            <article class="tile tile-photo"><img src="images/sector-industrial.png" alt="Lubricant Grade 40 pouch" loading="lazy" /><span class="tile-tag">Industrial</span></article>
 
-            <article class="tile" style="--bg:#7a8a6c; --body:#eae0cd; --cap:#c9bda6; --band:#7a6e3f; --band-text:#eae0cd;">
-              <div class="pouch"><div class="cap"></div><div class="band">Food</div></div>
-            </article>
-            <article class="tile" style="--bg:#b25c2e; --body:#3b2a20; --cap:#241812; --band:#c89a3a; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">Beverages</div></div>
-            </article>
-            <article class="tile" style="--bg:#eae0cd; --body:#3b2a20; --cap:#241812; --band:#7a6e3f; --band-text:#eae0cd;">
-              <div class="pouch"><div class="cap"></div><div class="band">Agriculture</div></div>
-            </article>
-            <article class="tile" style="--bg:#7a6e3f; --body:#c89a3a; --cap:#a67d2f; --band:#3b2a20; --band-text:#eae0cd;">
-              <div class="pouch"><div class="cap"></div><div class="band">Healthcare</div></div>
-            </article>
-            <article class="tile" style="--bg:#3b2a20; --body:#eae0cd; --cap:#c9bda6; --band:#c89a3a; --band-text:#3b2a20;">
-              <div class="pouch"><div class="cap"></div><div class="band">Industrial</div></div>
-            </article>
-            <article class="tile" style="--bg:#d9c893; --body:#7a6e3f; --cap:#5a512d; --band:#eae0cd; --band-text:#7a6e3f;">
-              <div class="pouch"><div class="cap"></div><div class="band">Liquids</div></div>
-            </article>
+            <article class="tile tile-photo"><img src="images/sector-food.png" alt="Dark Roast Coffee pouch" loading="lazy" /><span class="tile-tag">Food</span></article>
+            <article class="tile tile-photo"><img src="images/sector-beverages.png" alt="Cold-Pressed Orange spout pouch" loading="lazy" /><span class="tile-tag">Beverages</span></article>
+            <article class="tile tile-photo"><img src="images/sector-pharma.png" alt="ORS Electrolyte sachets" loading="lazy" /><span class="tile-tag">Pharma</span></article>
+            <article class="tile tile-photo"><img src="images/sector-agro.png" alt="Hybrid Seeds bag" loading="lazy" /><span class="tile-tag">Agriculture</span></article>
+            <article class="tile tile-photo"><img src="images/sector-personal-care.png" alt="Argan Serum pouch" loading="lazy" /><span class="tile-tag">Personal Care</span></article>
+            <article class="tile tile-photo"><img src="images/sector-industrial.png" alt="Lubricant Grade 40 pouch" loading="lazy" /><span class="tile-tag">Industrial</span></article>
           </div>
         </div>
       </div>
@@ -2268,10 +2284,11 @@
       <div class="shelf" id="sectorShelf">
 
         <article class="shelf-panel is-open" style="--sc:#b25c2e;" data-panel="0">
+          <img class="sp-photo" src="images/sector-food.png" alt="Dark Roast Coffee pouch — food &amp; grocery" loading="lazy" />
+          <div class="sp-photo-scrim"></div>
           <div class="sp-closed">
             <span class="sp-num">01</span>
             <span class="sp-name-v">Food &amp; Grocery</span>
-            <div class="mini-pouch" style="--body:#eae0cd; --cap:#cfc4b0;"><div class="mp-cap"></div></div>
           </div>
           <div class="sp-open">
             <div class="sp-open-top">
@@ -2290,10 +2307,11 @@
         </article>
 
         <article class="shelf-panel" style="--sc:#c89a3a;" data-panel="1">
+          <img class="sp-photo" src="images/sector-beverages.png" alt="Cold-Pressed Orange spout pouch — beverages" loading="lazy" />
+          <div class="sp-photo-scrim"></div>
           <div class="sp-closed">
             <span class="sp-num">02</span>
             <span class="sp-name-v">Beverages</span>
-            <div class="mini-pouch" style="--body:#3b2a20; --cap:#241812;"><div class="mp-cap"></div></div>
           </div>
           <div class="sp-open">
             <div class="sp-open-top">
@@ -2312,10 +2330,11 @@
         </article>
 
         <article class="shelf-panel" style="--sc:#7a8a6c;" data-panel="2">
+          <img class="sp-photo" src="images/sector-pharma.png" alt="ORS Electrolyte sachets — pharmaceutical" loading="lazy" />
+          <div class="sp-photo-scrim"></div>
           <div class="sp-closed">
             <span class="sp-num">03</span>
             <span class="sp-name-v">Pharmaceutical</span>
-            <div class="mini-pouch" style="--body:#f4efe7; --cap:#d8cfc0;"><div class="mp-cap"></div></div>
           </div>
           <div class="sp-open">
             <div class="sp-open-top">
@@ -2334,10 +2353,11 @@
         </article>
 
         <article class="shelf-panel" style="--sc:#7a6e3f;" data-panel="3">
+          <img class="sp-photo" src="images/sector-agro.png" alt="Hybrid Seeds bag — agriculture" loading="lazy" />
+          <div class="sp-photo-scrim"></div>
           <div class="sp-closed">
             <span class="sp-num">04</span>
             <span class="sp-name-v">Agriculture</span>
-            <div class="mini-pouch" style="--body:#7a6e3f; --cap:#5a512d;"><div class="mp-cap"></div></div>
           </div>
           <div class="sp-open">
             <div class="sp-open-top">
@@ -2356,10 +2376,11 @@
         </article>
 
         <article class="shelf-panel" style="--sc:#d9c893;" data-panel="4">
+          <img class="sp-photo" src="images/sector-personal-care.png" alt="Argan Serum pouch — home &amp; personal care" loading="lazy" />
+          <div class="sp-photo-scrim"></div>
           <div class="sp-closed">
             <span class="sp-num">05</span>
             <span class="sp-name-v">Home &amp; Personal Care</span>
-            <div class="mini-pouch" style="--body:#eae0cd; --cap:#cfc4b0;"><div class="mp-cap"></div></div>
           </div>
           <div class="sp-open">
             <div class="sp-open-top">
@@ -2378,10 +2399,11 @@
         </article>
 
         <article class="shelf-panel" style="--sc:#3b2a20;" data-panel="5">
+          <img class="sp-photo" src="images/sector-industrial.png" alt="Lubricant Grade 40 pouch — industrial" loading="lazy" />
+          <div class="sp-photo-scrim"></div>
           <div class="sp-closed">
             <span class="sp-num">06</span>
             <span class="sp-name-v">Industrial</span>
-            <div class="mini-pouch" style="--body:#3b2a20; --cap:#241812;"><div class="mp-cap"></div></div>
           </div>
           <div class="sp-open">
             <div class="sp-open-top">

@@ -1,0 +1,1818 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>G Flexipack — Flexible Packaging Manufacturer · Bharuch, India</title>
+  <meta name="description" content="Custom-printed flexible packaging from Bharuch, Gujarat. Thirteen pouch formats, 8-colour rotogravure print, ISO 9001:2015, 300+ MT/month capacity." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --cream: #f4efe7;
+      --cream-2: #eae0cd;
+      --ink: #3b2a20;
+      --ink-soft: rgba(59, 42, 32, 0.68);
+      --ink-line: rgba(59, 42, 32, 0.14);
+      --cream-soft: rgba(244, 239, 231, 0.72);
+      --cream-line: rgba(244, 239, 231, 0.18);
+      --burnt: #b25c2e;
+      --olive: #7a6e3f;
+      --sage: #7a8a6c;
+      --gold: #c89a3a;
+      --pale-gold: #d9c893;
+      --accent: #b25c2e;
+      --serif: "DM Serif Display", Georgia, serif;
+      --sans: "Space Grotesk", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal] { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(244, 239, 231, 0.86);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 18px 48px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 48px;
+    }
+    .brand { display: inline-flex; align-items: center; }
+    .brand img { height: 52px; width: auto; mix-blend-mode: multiply; filter: contrast(1.02); }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 34px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-links a { position: relative; padding: 6px 0; opacity: 0.82; transition: opacity 0.2s ease; }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .nav-cta:hover { background: var(--ink); color: var(--cream); }
+    .arrow { display: inline-block; transition: transform 0.25s ease; }
+    a:hover .arrow, button:hover .arrow { transform: translateX(4px); }
+
+    /* ---------- CTA buttons ---------- */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .cta-primary {
+      padding: 14px 26px;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 999px;
+    }
+    .cta-primary:hover { transform: translateY(-1px); background: #2a1e17; }
+    .cta-light {
+      padding: 14px 26px;
+      background: var(--cream);
+      color: var(--ink);
+      border: none;
+      border-radius: 999px;
+    }
+    .cta-light:hover { transform: translateY(-1px); }
+
+    /* ============================================================
+       1 · BANNER SLIDER — 5 rotating slides, corporate mechanic
+       ============================================================ */
+    .slider {
+      position: relative;
+      height: 580px;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.85s ease;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(ellipse at 50% 20%, rgba(255,255,255,0.07) 0%, rgba(0,0,0,0) 60%),
+        var(--sbg);
+      color: var(--stx, var(--cream));
+    }
+    .slide.is-on { opacity: 1; pointer-events: auto; z-index: 1; }
+    .slide-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 60px;
+      align-items: center;
+    }
+    .slide-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin: 0 0 24px;
+    }
+    .slide-eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; opacity: 0.5; }
+    .slide h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(38px, 4.8vw, 72px);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      margin: 0 0 22px;
+      max-width: 15ch;
+    }
+    .slide h2 em { font-style: italic; color: var(--sem, var(--gold)); }
+    .slide p {
+      font-size: 17px;
+      line-height: 1.6;
+      max-width: 460px;
+      opacity: 0.85;
+      margin: 0 0 32px;
+    }
+    .slide-stage {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      position: relative;
+      height: 380px;
+    }
+    .slide-stage::before {
+      content: "";
+      position: absolute;
+      left: 26%; right: 26%; bottom: 6px;
+      height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(3px);
+    }
+
+    /* CSS pouch (shared component) */
+    .pouch {
+      width: 190px;
+      height: 258px;
+      background:
+        linear-gradient(112deg,
+          rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.02) 32%,
+          rgba(255,255,255,0) 55%, rgba(255,255,255,0.06) 82%,
+          rgba(255,255,255,0.12) 100%),
+        linear-gradient(to right,
+          rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 10%,
+          rgba(0,0,0,0) 90%, rgba(0,0,0,0.24) 100%),
+        var(--body);
+      border-radius: 22px 22px 9px 9px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      box-shadow:
+        0 26px 40px -16px rgba(0, 0, 0, 0.45),
+        0 2px 4px -1px rgba(0, 0, 0, 0.15),
+        inset 0 -5px 0 rgba(0, 0, 0, 0.18);
+    }
+    .cap {
+      height: 24px;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.25) 100%),
+        var(--cap);
+      position: relative;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.25);
+      flex-shrink: 0;
+    }
+    .cap::before {
+      content: "";
+      position: absolute;
+      left: 12px; right: 12px; bottom: 6px;
+      height: 3px;
+      border-radius: 2px;
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(255,255,255,0.28) 0px, rgba(255,255,255,0.28) 2px,
+          transparent 2px, transparent 4px),
+        rgba(0,0,0,0.35);
+    }
+    .band {
+      margin: auto 0 18px;
+      padding: 9px 6px;
+      background: var(--bandc);
+      color: var(--band-text);
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: 0.4px;
+      box-shadow:
+        inset 0 1px 2px rgba(0,0,0,0.18),
+        inset 0 -1px 0 rgba(255,255,255,0.08);
+      z-index: 2;
+    }
+
+    /* slider controls */
+    .slider-controls {
+      position: absolute;
+      left: 0; right: 0; bottom: 26px;
+      z-index: 5;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .dots { display: flex; gap: 10px; }
+    .dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      border: none;
+      background: currentColor;
+      opacity: 0.32;
+      cursor: pointer;
+      padding: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      color: inherit;
+    }
+    .dot.is-on { opacity: 1; transform: scale(1.3); }
+    .slider-arrows { display: flex; gap: 10px; }
+    .s-arrow {
+      width: 44px; height: 44px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      background: transparent;
+      color: inherit;
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0.75;
+      transition: opacity 0.2s ease;
+    }
+    .s-arrow:hover { opacity: 1; }
+    /* controls inherit slide text colour via JS class */
+    .slider-controls.on-dark { color: var(--cream); }
+    .slider-controls.on-light { color: var(--ink); }
+
+    /* ============================================================
+       SHARED SECTION CHROME — centered corporate headers
+       ============================================================ */
+    .sec {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 96px 56px 100px;
+    }
+    .sec-head {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 56px;
+    }
+    .sec-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 20px;
+    }
+    .sec-eyebrow::before,
+    .sec-eyebrow::after {
+      content: "";
+      width: 28px; height: 1px;
+      background: rgba(59, 42, 32, 0.32);
+    }
+    .sec-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(32px, 3.6vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin: 0 0 18px;
+    }
+    .sec-title em { font-style: italic; color: var(--accent); }
+    .sec-lead {
+      font-size: 16.5px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    /* ============================================================
+       2 · WELCOME
+       ============================================================ */
+    .welcome { padding-bottom: 40px; }
+    .welcome .sec-head { margin-bottom: 0; max-width: 860px; }
+    .welcome .sec-lead { font-size: 18px; }
+
+    /* ============================================================
+       3 · VISION & MISSION — two symmetric panels
+       ============================================================ */
+    .vm { padding-top: 56px; }
+    .vm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .vm-panel {
+      border: 1px solid var(--ink-line);
+      border-radius: 12px;
+      background: var(--cream);
+      padding: 48px 46px 44px;
+      text-align: center;
+      position: relative;
+    }
+    .vm-panel::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 56px; height: 4px;
+      background: var(--vc, var(--burnt));
+      border-radius: 0 0 4px 4px;
+    }
+    .vm-label {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: block;
+      margin-bottom: 18px;
+    }
+    .vm-quote {
+      font-family: var(--serif);
+      font-size: clamp(20px, 1.9vw, 26px);
+      line-height: 1.4;
+      margin: 0;
+    }
+    .vm-quote em { font-style: italic; color: var(--vc, var(--burnt)); }
+
+    /* ============================================================
+       4 · EXCELLENCE — stat counters on brown (GLS pattern)
+       ============================================================ */
+    .excellence {
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .excellence .sec { padding: 90px 56px; }
+    .excellence .sec-head { margin-bottom: 48px; }
+    .excellence .sec-eyebrow { color: var(--cream-soft); }
+    .excellence .sec-eyebrow::before,
+    .excellence .sec-eyebrow::after { background: rgba(244, 239, 231, 0.35); }
+    .excellence .sec-title em { color: var(--gold); }
+    .counters {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 22px;
+      text-align: center;
+    }
+    .counter { padding: 10px 6px; }
+    .counter-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(38px, 3.6vw, 58px);
+      line-height: 1;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 12px;
+      white-space: nowrap;
+    }
+    .counter-label {
+      font-size: 13.5px;
+      letter-spacing: 0.06em;
+      color: var(--cream-soft);
+      line-height: 1.45;
+    }
+
+    /* ============================================================
+       5 · OUR PRODUCTS — grid of 13
+       ============================================================ */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+    .prod-tile {
+      border: 1px solid var(--ink-line);
+      border-radius: 10px;
+      background: var(--cream);
+      padding: 24px 16px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1), border-color 0.3s ease, background 0.3s ease;
+    }
+    .prod-tile:hover {
+      transform: translateY(-5px);
+      border-color: rgba(178, 92, 46, 0.45);
+      background: #fbf8f2;
+    }
+    .prod-tile .p-fig {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 8px;
+      background:
+        radial-gradient(ellipse at 50% 26%, rgba(255,255,255,0.07) 0%, rgba(0,0,0,0) 62%),
+        var(--tbg);
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .prod-tile .p-fig::before {
+      content: "";
+      position: absolute;
+      left: 26%; right: 26%; bottom: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(2px);
+    }
+    .prod-tile .pouch {
+      width: 74px;
+      height: 102px;
+      border-radius: 10px 10px 4px 4px;
+      box-shadow: 0 12px 18px -9px rgba(0,0,0,0.4), inset 0 -3px 0 rgba(0,0,0,0.16);
+    }
+    .prod-tile .cap { height: 13px; }
+    .prod-tile .cap::before { left: 7px; right: 7px; bottom: 3px; height: 2px; }
+    .prod-tile .band { font-size: 9px; padding: 5px 3px; margin-bottom: 10px; }
+    /* real product photo fills the figure box (images ship with their own solid bg) */
+    .prod-tile .p-fig img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      transition: transform 0.45s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .prod-tile:hover .p-fig img { transform: scale(1.05); }
+    .prod-name {
+      font-family: var(--serif);
+      font-size: 17.5px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .prod-link {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: auto;
+    }
+    /* roll figure for poly film rolls */
+    .p-roll {
+      position: relative;
+      width: 66px;
+      height: 98px;
+      z-index: 1;
+    }
+    .p-roll-body {
+      position: absolute;
+      inset: 7px 0 0;
+      border-radius: 8px;
+      background:
+        linear-gradient(to right,
+          rgba(0,0,0,0.3) 0%, rgba(255,255,255,0.16) 12%,
+          rgba(255,255,255,0.02) 45%, rgba(0,0,0,0.12) 78%,
+          rgba(0,0,0,0.34) 100%),
+        #eae0cd;
+      box-shadow: 0 12px 18px -9px rgba(0,0,0,0.4);
+    }
+    .p-roll-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 15px;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 50% 50%, #3b2a20 0%, #3b2a20 24%, transparent 25%),
+        linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(0,0,0,0.08)),
+        #d8cfc0;
+      z-index: 2;
+    }
+
+    /* ============================================================
+       6 · INDUSTRIES — 7 centered cards
+       ============================================================ */
+    .industries { background: var(--cream-2); }
+    .ind-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 14px;
+    }
+    .ind-card {
+      position: relative;
+      border: 1px solid var(--ink-line);
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 3 / 4.4;
+      display: block;
+      transition: transform 0.4s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .ind-card:hover { transform: translateY(-5px); }
+    .ind-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .ind-card:hover .ind-photo { transform: scale(1.06); }
+    .ind-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to top,
+        rgba(28, 19, 13, 0.94) 0%,
+        rgba(28, 19, 13, 0.62) 26%,
+        rgba(28, 19, 13, 0.1) 58%,
+        rgba(28, 19, 13, 0) 80%);
+    }
+    .ind-tick { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--ic); z-index: 2; }
+    .ind-body {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      z-index: 2;
+      padding: 0 13px 18px;
+      text-align: center;
+      color: var(--cream);
+    }
+    .ind-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--pale-gold);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .ind-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--cream);
+    }
+    .ind-apps {
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: rgba(244, 239, 231, 0.82);
+    }
+
+    /* ============================================================
+       7 · INFRASTRUCTURE
+       ============================================================ */
+    .infra-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 64px;
+      align-items: start;
+    }
+    .infra-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .infra-photo {
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 5 / 3.4;
+      position: relative;
+      background: var(--cream-2);
+    }
+    .infra-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: sepia(0.16) saturate(1.06) contrast(1.02);
+    }
+    .infra-photo figcaption {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 22px 12px 9px;
+      background: linear-gradient(to top, rgba(59,42,32,0.72), rgba(59,42,32,0));
+      color: var(--cream);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .photo-soon {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px dashed rgba(59, 42, 32, 0.28);
+      border-radius: 10px;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(59, 42, 32, 0.02) 0 14px,
+        rgba(59, 42, 32, 0.05) 14px 28px
+      );
+      color: var(--ink-soft);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 12px;
+    }
+    .infra-list {
+      list-style: none;
+      margin: 26px 0 0;
+      padding: 0;
+      border-top: 1px solid var(--ink-line);
+    }
+    .infra-row {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 18px;
+      align-items: baseline;
+      padding: 17px 4px;
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .infra-no {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--accent);
+    }
+    .infra-row h4 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 19px;
+      margin: 0 0 4px;
+    }
+    .infra-row p {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+    .infra-side h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(24px, 2.2vw, 32px);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin: 0 0 16px;
+    }
+    .infra-side h3 em { font-style: italic; color: var(--accent); }
+    .infra-side > p {
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin: 0 0 26px;
+    }
+    .plant-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 26px;
+      border-top: 1px solid var(--ink-line);
+    }
+    .plant-fact {
+      padding: 15px 2px;
+      border-bottom: 1px solid var(--ink-line);
+      font-size: 13.5px;
+      color: var(--ink-soft);
+    }
+    .plant-fact b {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 19px;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    /* ============================================================
+       8 · CLIENTELE — running marquee (anonymous badges for now)
+       ============================================================ */
+    .clientele { background: var(--cream-2); }
+    .clientele .sec { padding: 84px 56px; }
+    .client-marquee {
+      overflow: hidden;
+      position: relative;
+      padding: 6px 0;
+    }
+    .client-marquee::before,
+    .client-marquee::after {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 90px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .client-marquee::before { left: 0; background: linear-gradient(to right, var(--cream-2), rgba(234,224,205,0)); }
+    .client-marquee::after { right: 0; background: linear-gradient(to left, var(--cream-2), rgba(234,224,205,0)); }
+    .client-track {
+      display: flex;
+      width: max-content;
+      animation: clients-scroll 38s linear infinite;
+    }
+    .client-marquee:hover .client-track { animation-play-state: paused; }
+    @keyframes clients-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .client-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+    }
+    .client-set { display: flex; align-items: center; flex-shrink: 0; }
+    /* PLACEHOLDER: anonymous sector badges — replace with real client logos
+       (grayscale img tiles) once written permission is cleared with clients */
+    .client-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      margin: 0 18px;
+      padding: 18px 28px;
+      background: var(--cream);
+      border: 1px solid var(--ink-line);
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+    .client-badge b {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+    .client-badge span {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .client-note {
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin: 26px 0 0;
+    }
+
+    /* ============================================================
+       9 · WHY US — 6 value cards
+       ============================================================ */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .why-card {
+      border: 1px solid var(--ink-line);
+      border-radius: 12px;
+      background: var(--cream);
+      padding: 34px 30px 30px;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .why-card:hover { transform: translateY(-4px); }
+    .why-glyph {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid var(--wc, var(--burnt));
+      color: var(--wc, var(--burnt));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 19px;
+      margin-bottom: 18px;
+    }
+    .why-card h4 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+    .why-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    /* ============================================================
+       10 · INQUIRY — corporate form + contact side
+       ============================================================ */
+    .inquiry { background: var(--ink); color: var(--cream); }
+    .inquiry .sec { padding: 96px 56px; }
+    .inquiry .sec-eyebrow { color: var(--cream-soft); }
+    .inquiry .sec-eyebrow::before,
+    .inquiry .sec-eyebrow::after { background: rgba(244, 239, 231, 0.35); }
+    .inquiry .sec-title em { color: var(--gold); }
+    .inquiry .sec-lead { color: var(--cream-soft); }
+    .inq-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 70px;
+      align-items: start;
+    }
+    .inq-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 16px;
+    }
+    .fg { display: flex; flex-direction: column; gap: 7px; }
+    .fg-full { grid-column: 1 / -1; }
+    .fg label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+    }
+    .fg input, .fg select, .fg textarea {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--cream);
+      background: rgba(244, 239, 231, 0.07);
+      border: 1px solid rgba(244, 239, 231, 0.24);
+      border-radius: 8px;
+      padding: 13px 14px;
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .fg input::placeholder, .fg textarea::placeholder { color: rgba(244, 239, 231, 0.4); }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--gold);
+      background: rgba(244, 239, 231, 0.1);
+    }
+    .fg select { appearance: none; }
+    .fg select option { color: var(--ink); background: var(--cream); }
+    .fg textarea { min-height: 110px; resize: vertical; }
+    .inq-submit { grid-column: 1 / -1; }
+    .inq-side h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(22px, 2vw, 28px);
+      line-height: 1.2;
+      margin: 0 0 22px;
+    }
+    .inq-side h3 em { font-style: italic; color: var(--gold); }
+    .inq-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--cream-line); }
+    .inq-rows li {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 16px;
+      padding: 15px 2px;
+      border-bottom: 1px solid var(--cream-line);
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+    .inq-rows .k {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      padding-top: 2px;
+    }
+    .inq-rows a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(244,239,231,0.4); }
+
+    /* ============================================================
+       11 · CERTIFICATION — emblem row
+       ============================================================ */
+    .certs .sec { padding: 84px 56px 96px; }
+    .cert-row {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+    .cert-emblem {
+      width: 250px;
+      border: 1px solid var(--ink-line);
+      border-radius: 12px;
+      background: var(--cream);
+      padding: 32px 26px 28px;
+      text-align: center;
+      position: relative;
+    }
+    .cert-emblem::before {
+      content: "";
+      position: absolute;
+      top: 14px; left: 14px; right: 14px; bottom: 14px;
+      border: 1px solid rgba(200, 154, 58, 0.4);
+      border-radius: 7px;
+      pointer-events: none;
+    }
+    .cert-mark {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 26px;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .cert-emblem h4 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px;
+    }
+    .cert-emblem p {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .site-footer { background: var(--ink); color: var(--cream); }
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 74px 56px 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+      gap: 56px;
+    }
+    .footer-brand img {
+      height: 46px;
+      width: auto;
+      filter: brightness(0) invert(1) opacity(0.92);
+      margin-bottom: 18px;
+    }
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--cream-soft);
+      margin: 0;
+      max-width: 300px;
+    }
+    .footer-col h5 {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      margin: 0 0 18px;
+    }
+    .footer-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14.5px;
+    }
+    .footer-col a { opacity: 0.9; transition: opacity 0.2s ease; }
+    .footer-col a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+    .footer-col address {
+      font-style: normal;
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--cream-soft);
+    }
+    .footer-col address a { color: var(--cream); }
+    .footer-bottom {
+      border-top: 1px solid var(--cream-line);
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 26px 56px 36px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12.5px;
+      color: var(--cream-soft);
+    }
+
+    .option-badge {
+      position: fixed;
+      bottom: 18px;
+      left: 18px;
+      z-index: 40;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 8px 14px;
+      border-radius: 999px;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1180px) {
+      .products-grid { grid-template-columns: repeat(4, 1fr); }
+      .ind-grid { grid-template-columns: repeat(4, 1fr); }
+      .counters { grid-template-columns: repeat(3, 1fr); gap: 34px 22px; }
+      .infra-grid { grid-template-columns: 1fr; gap: 44px; }
+      .inq-grid { grid-template-columns: 1fr; gap: 54px; }
+    }
+    @media (max-width: 900px) {
+      .nav-inner { grid-template-columns: auto auto; padding: 14px 20px; gap: 16px; }
+      .nav-links { display: none; }
+
+      .slider { height: 640px; }
+      .slide-inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 0 20px;
+        align-content: center;
+      }
+      .slide h2 { font-size: 38px; }
+      .slide p { font-size: 15.5px; margin-bottom: 24px; }
+      .slide-stage { height: 210px; order: -1; margin-top: 8px; }
+      .slide .pouch { width: 128px; height: 172px; }
+      .slide .cap { height: 17px; }
+      .slide .band { font-size: 11px; padding: 7px 4px; margin-bottom: 12px; }
+      .slider-controls { padding: 0 20px; bottom: 18px; }
+
+      .sec { padding: 64px 20px 68px; }
+      .sec-head { margin-bottom: 36px; }
+
+      .vm-grid { grid-template-columns: 1fr; }
+      .vm-panel { padding: 38px 26px 34px; }
+
+      .excellence .sec { padding: 60px 20px; }
+      .counters { grid-template-columns: repeat(2, 1fr); gap: 30px 14px; }
+
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .ind-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .infra-photos { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+      .clientele .sec { padding: 56px 20px; }
+      .client-badge { padding: 14px 20px; margin: 0 10px; }
+
+      .why-grid { grid-template-columns: 1fr; }
+
+      .inquiry .sec { padding: 64px 20px; }
+      .inq-form { grid-template-columns: 1fr; }
+
+      .cert-row { gap: 14px; }
+      .cert-emblem { width: 100%; max-width: 340px; }
+
+      .footer-inner { grid-template-columns: 1fr; gap: 36px; padding: 56px 20px 40px; }
+      .footer-bottom { padding: 20px 20px 28px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="G Flexipack, home">
+        <img src="logo.png" alt="G Flexipack" />
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#industries">Industries</a>
+        <a href="#infrastructure">Infrastructure</a>
+        <a href="#why-us">Why us</a>
+        <a href="#certifications">Certifications</a>
+      </nav>
+      <a class="nav-cta" href="#inquiry">
+        Get a quote <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ============ 1 · BANNER SLIDER ============ -->
+  <section class="slider" id="top" aria-label="Highlights">
+
+    <div class="slide is-on" style="--sbg:#f4efe7; --stx:#3b2a20; --sem:#b25c2e;">
+      <div class="slide-inner">
+        <div>
+          <p class="slide-eyebrow">Flexible packaging · Est. 2016</p>
+          <h2>Packaging built for <em>shelf impact.</em></h2>
+          <p>Custom-printed pouches for food, beverage, and lifestyle brands — thirteen formats, printed, laminated and converted under one roof in Bharuch, Gujarat.</p>
+          <a class="cta cta-primary" href="#inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="slide-stage">
+          <div class="pouch" style="--body:#b25c2e; --cap:#8f4623; --bandc:#eae0cd; --band-text:#b25c2e;"><div class="cap"></div><div class="band">Roasted &amp; Salted</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" style="--sbg:#3b2a20; --sem:#c89a3a;">
+      <div class="slide-inner">
+        <div>
+          <p class="slide-eyebrow">Capacity &amp; quality</p>
+          <h2><em>300+ MT</em> a month, ISO 9001:2015.</h2>
+          <p>An 8,000 sq ft climate-controlled plant running 8-colour rotogravure, solvent-less lamination, and an in-house ASTM testing lab on every batch.</p>
+          <a class="cta cta-light" href="#infrastructure">See the plant <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="slide-stage">
+          <div class="pouch" style="--body:#eae0cd; --cap:#cfc4b0; --bandc:#c89a3a; --band-text:#3b2a20;"><div class="cap"></div><div class="band">Batch Tested</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" style="--sbg:#b25c2e; --sem:#f7e2b8;">
+      <div class="slide-inner">
+        <div>
+          <p class="slide-eyebrow">Accessible gravure</p>
+          <h2>From <em>5,000 units.</em></h2>
+          <p>One of the lowest rotogravure MOQs in the market — trial orders welcome, structure recommendation within 24 hours of your enquiry.</p>
+          <a class="cta cta-light" href="#inquiry">Start an enquiry <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="slide-stage">
+          <div class="pouch" style="--body:#3b2a20; --cap:#241812; --bandc:#eae0cd; --band-text:#3b2a20;"><div class="cap"></div><div class="band">Trial Run</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" style="--sbg:#7a6e3f; --sem:#d9c893;">
+      <div class="slide-inner">
+        <div>
+          <p class="slide-eyebrow">Sustainability</p>
+          <h2><em>100% recyclable</em> options.</h2>
+          <p>Mono-material LLDPE structures for EPR-compliant, sustainability-first brands — without giving up barrier performance or print quality.</p>
+          <a class="cta cta-light" href="#products">Explore materials <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="slide-stage">
+          <div class="pouch" style="--body:#d9c893; --cap:#bfae7e; --bandc:#3b2a20; --band-text:#eae0cd;"><div class="cap"></div><div class="band">Mono-LLDPE</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" style="--sbg:#d9c893; --stx:#3b2a20; --sem:#b25c2e;">
+      <div class="slide-inner">
+        <div>
+          <p class="slide-eyebrow">Export ready</p>
+          <h2>Shipping worldwide via <em>Mundra Port.</em></h2>
+          <p>FOB Mundra or CIF, LCL and FCL sea freight with full export documentation — from Gujarat's industrial corridor to your warehouse.</p>
+          <a class="cta cta-primary" href="#inquiry">Plan a shipment <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="slide-stage">
+          <div class="pouch" style="--body:#3b2a20; --cap:#241812; --bandc:#b25c2e; --band-text:#eae0cd;"><div class="cap"></div><div class="band">FOB Mundra</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slider-controls on-light" id="sliderControls">
+      <div class="dots" id="sliderDots" role="tablist" aria-label="Slides"></div>
+      <div class="slider-arrows">
+        <button class="s-arrow" id="slidePrev" aria-label="Previous slide">←</button>
+        <button class="s-arrow" id="slideNext" aria-label="Next slide">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2 · WELCOME ============ -->
+  <section class="sec welcome" id="about">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Welcome to our company</p>
+      <h2 class="sec-title">Quality packaging, <em>since 2016.</em></h2>
+      <p class="sec-lead">
+        G Flexipack is a flexible packaging manufacturer in Bharuch, Gujarat, built on the
+        Gangamani group's 20+ years of manufacturing heritage. We print, laminate, slit and
+        convert custom pouches for brands across food, pharma, personal care and industry —
+        in a climate-controlled, dust-free plant designed to international hygiene standards.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 3 · VISION & MISSION ============ -->
+  <section class="sec vm" aria-label="Vision and mission">
+    <div class="vm-grid">
+      <div class="vm-panel" style="--vc:#b25c2e;" data-reveal>
+        <span class="vm-label">Our Vision</span>
+        <p class="vm-quote">To be the flexible packaging <em>partner of choice</em> for brands that care how their product lands on shelf.</p>
+      </div>
+      <div class="vm-panel" style="--vc:#7a6e3f;" data-reveal>
+        <span class="vm-label">Our Mission</span>
+        <p class="vm-quote">Design and print custom pouches that <em>protect the product</em> and represent the brand.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4 · EXCELLENCE — STAT COUNTERS ============ -->
+  <section class="excellence" aria-label="Excellence that sets us apart">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Excellence that sets us apart</p>
+        <h2 class="sec-title">The numbers behind <em>every pouch.</em></h2>
+      </div>
+      <div class="counters" id="counters" data-reveal>
+        <div class="counter">
+          <span class="counter-num" data-count="15" data-suffix="+">0</span>
+          <span class="counter-label">Years of group manufacturing legacy</span>
+        </div>
+        <div class="counter">
+          <span class="counter-num" data-count="8000" data-comma="1">0</span>
+          <span class="counter-label">Sq ft climate-controlled plant</span>
+        </div>
+        <div class="counter">
+          <span class="counter-num" data-count="300" data-suffix="+">0</span>
+          <span class="counter-label">MT production capacity per month</span>
+        </div>
+        <div class="counter">
+          <span class="counter-num" data-count="13">0</span>
+          <span class="counter-label">Pouch &amp; film formats in-house</span>
+        </div>
+        <div class="counter">
+          <span class="counter-num" data-count="250" data-suffix="+">0</span>
+          <span class="counter-label">Brands packed and shipped</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5 · OUR PRODUCTS ============ -->
+  <section class="sec" id="products">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Our products</p>
+      <h2 class="sec-title">Thirteen formats, <em>printed to spec.</em></h2>
+      <p class="sec-lead">Custom dimensions, laminate structures, barrier levels and full-colour rotogravure print — all produced in-house.</p>
+    </div>
+    <div class="products-grid" data-reveal>
+
+      <a class="prod-tile" href="product-standup.html">
+        <span class="p-fig" style="--tbg:#b96a41;"><img class="p-photo" src="images/standup.png" alt="Stand-Up pouch" loading="lazy" /></span>
+        <span class="prod-name">Stand-Up Pouches</span>
+        <span class="prod-link">View details →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#e0b333;"><img class="p-photo" src="images/zipper.png" alt="Zipper pouch" loading="lazy" /></span>
+        <span class="prod-name">Zipper Pouches</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#46583f;"><img class="p-photo" src="images/gusseted.png" alt="Gusseted pouch" loading="lazy" /></span>
+        <span class="prod-name">Gusseted Pouches</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#c39089;"><img class="p-photo" src="images/centre-seal.png" alt="Centre Seal pouch" loading="lazy" /></span>
+        <span class="prod-name">Centre Seal Pouches</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#4fa0a0;"><img class="p-photo" src="images/vacuum.png" alt="Vacuum pouch" loading="lazy" /></span>
+        <span class="prod-name">Vacuum Pouches</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#7c8347;"><img class="p-photo" src="images/reusable.png" alt="Re-usable pouch" loading="lazy" /></span>
+        <span class="prod-name">Re-usable Pouches</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#6a788d;"><img class="p-photo" src="images/seal3.png" alt="3-Side Seal sachet" loading="lazy" /></span>
+        <span class="prod-name">3-Side Seal Pouches</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#d69a3c;"><img class="p-photo" src="images/seal4.png" alt="4-Side Seal bag" loading="lazy" /></span>
+        <span class="prod-name">4-Side Seal Bags</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#74405b;"><img class="p-photo" src="images/patch-handle.png" alt="Patch Handle bag" loading="lazy" /></span>
+        <span class="prod-name">Patch Handle Bags</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#c17d5a;"><img class="p-photo" src="images/spout.png" alt="Spout pouch" loading="lazy" /></span>
+        <span class="prod-name">Spout Pouches</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#4a4e55;"><img class="p-photo" src="images/filmroll.png" alt="Poly film roll" loading="lazy" /></span>
+        <span class="prod-name">Poly Film Rolls</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#6d2b3d;"><img class="p-photo" src="images/retort.png" alt="Retort pouch" loading="lazy" /></span>
+        <span class="prod-name">Retort Pouches</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+
+      <a class="prod-tile" href="#inquiry">
+        <span class="p-fig" style="--tbg:#a3bd54;"><img class="p-photo" src="images/breathing.png" alt="Breathing pouch" loading="lazy" /></span>
+        <span class="prod-name">Breathing Pouches</span>
+        <span class="prod-link">Enquire →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ 6 · INDUSTRIES WE SERVE ============ -->
+  <section class="industries" id="industries">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Industries we serve</p>
+        <h2 class="sec-title">Seven sectors, <em>one standard.</em></h2>
+        <p class="sec-lead">The hygiene, barrier and documentation adapt to the sector. The print quality doesn't.</p>
+      </div>
+      <div class="ind-grid" data-reveal>
+        <div class="ind-card" style="--ic:#b25c2e;">
+          <img class="ind-photo" src="images/sector-food.png" alt="Dark Roast Coffee pouch — food sector" loading="lazy" />
+          <div class="ind-scrim"></div>
+          <div class="ind-tick"></div>
+          <div class="ind-body">
+            <span class="ind-num">01</span>
+            <span class="ind-name">Food</span>
+            <span class="ind-apps">Snacks · coffee &amp; tea · spices · frozen · bakery</span>
+          </div>
+        </div>
+        <div class="ind-card" style="--ic:#c89a3a;">
+          <img class="ind-photo" src="images/sector-beverages.png" alt="Cold-Pressed Orange spout pouch — beverages sector" loading="lazy" />
+          <div class="ind-scrim"></div>
+          <div class="ind-tick"></div>
+          <div class="ind-body">
+            <span class="ind-num">02</span>
+            <span class="ind-name">Beverages</span>
+            <span class="ind-apps">Juice spout pouches · sauces · energy gels · liners</span>
+          </div>
+        </div>
+        <div class="ind-card" style="--ic:#7a8a6c;">
+          <img class="ind-photo" src="images/sector-pharma.png" alt="ORS Electrolyte sachets — pharmaceutical sector" loading="lazy" />
+          <div class="ind-scrim"></div>
+          <div class="ind-tick"></div>
+          <div class="ind-body">
+            <span class="ind-num">03</span>
+            <span class="ind-name">Pharma&shy;ceuticals</span>
+            <span class="ind-apps">Dosing sachets · blister foil · sterile formats</span>
+          </div>
+        </div>
+        <div class="ind-card" style="--ic:#d9c893;">
+          <img class="ind-photo" src="images/sector-personal-care.png" alt="Argan Serum pouch — personal care sector" loading="lazy" />
+          <div class="ind-scrim"></div>
+          <div class="ind-tick"></div>
+          <div class="ind-body">
+            <span class="ind-num">04</span>
+            <span class="ind-name">Personal Care</span>
+            <span class="ind-apps">Shampoo sachets · creams &amp; serums · face masks</span>
+          </div>
+        </div>
+        <div class="ind-card" style="--ic:#7a6e3f;">
+          <img class="ind-photo" src="images/sector-agro.png" alt="Hybrid Seeds bag — agrochemical sector" loading="lazy" />
+          <div class="ind-scrim"></div>
+          <div class="ind-tick"></div>
+          <div class="ind-body">
+            <span class="ind-num">05</span>
+            <span class="ind-name">Agro&shy;chemical</span>
+            <span class="ind-apps">Seeds · fertilizer · pesticide · UV protection</span>
+          </div>
+        </div>
+        <div class="ind-card" style="--ic:#b25c2e;">
+          <img class="ind-photo" src="images/sector-household.png" alt="Laundry Detergent Refill pouch — household sector" loading="lazy" />
+          <div class="ind-scrim"></div>
+          <div class="ind-tick"></div>
+          <div class="ind-body">
+            <span class="ind-num">06</span>
+            <span class="ind-name">Household Essentials</span>
+            <span class="ind-apps">Detergents · cleaners · refill formats</span>
+          </div>
+        </div>
+        <div class="ind-card" style="--ic:#3b2a20;">
+          <img class="ind-photo" src="images/sector-industrial.png" alt="Lubricant Grade 40 pouch — industrial sector" loading="lazy" />
+          <div class="ind-scrim"></div>
+          <div class="ind-tick"></div>
+          <div class="ind-body">
+            <span class="ind-num">07</span>
+            <span class="ind-name">Industrial</span>
+            <span class="ind-apps">Lubricants · chemicals · poly film rolls</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7 · INFRASTRUCTURE ============ -->
+  <section class="sec" id="infrastructure">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Infrastructure</p>
+      <h2 class="sec-title">8,000 sq ft in <em>Bharuch, Gujarat.</em></h2>
+    </div>
+    <div class="infra-grid">
+      <div data-reveal>
+        <div class="infra-photos">
+          <figure class="infra-photo" style="margin:0;">
+            <img src="images/lami.png" alt="Solvent-less lamination machine" />
+            <figcaption>Solvent-less lamination</figcaption>
+          </figure>
+          <figure class="infra-photo" style="margin:0;">
+            <img src="images/slitting-machine.png" alt="Slitting machine" />
+            <figcaption>Slitting line</figcaption>
+          </figure>
+          <figure class="infra-photo" style="margin:0;">
+            <img src="images/pouch.png" alt="Pouching line" />
+            <figcaption>Pouching machines</figcaption>
+          </figure>
+          <figure class="infra-photo" style="margin:0;">
+            <div class="photo-soon">8-colour rotogravure press<br />photo from the plant</div>
+          </figure>
+        </div>
+        <ol class="infra-list">
+          <li class="infra-row"><span class="infra-no">i</span><div><h4>8-Colour Rotogravure Press</h4><p>Auto registration and web guiding for precise multi-colour print.</p></div></li>
+          <li class="infra-row"><span class="infra-no">ii</span><div><h4>Solvent-Less &amp; Solvent-Based Lamination</h4><p>Food-safe multi-layer bonding and specialised barrier structures.</p></div></li>
+          <li class="infra-row"><span class="infra-no">iii</span><div><h4>Slitting &amp; Pouching Lines</h4><p>Precision tension winding, centre-seal and side-seal pouching in-house.</p></div></li>
+        </ol>
+      </div>
+      <div class="infra-side" data-reveal>
+        <h3>Built to international <em>hygiene standards.</em></h3>
+        <p>
+          Climate-controlled and dust-free, in the GIDC Phase-1 industrial corridor —
+          about 350 km from Mumbai with direct access to Mundra Port for exports.
+          Every batch passes eight ASTM tests in our own QC lab before dispatch.
+        </p>
+        <div class="plant-facts">
+          <div class="plant-fact"><b>300+ MT</b> monthly capacity</div>
+          <div class="plant-fact"><b>8 colours</b> rotogravure print</div>
+          <div class="plant-fact"><b>8 tests</b> ASTM QC, every batch</div>
+          <div class="plant-fact"><b>Mundra</b> export port access</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8 · OUR CLIENTELE — running marquee ============ -->
+  <section class="clientele" aria-label="Our clientele">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Our clientele</p>
+        <h2 class="sec-title">Trusted across sectors <em>and borders.</em></h2>
+      </div>
+      <!-- PLACEHOLDER MARQUEE: anonymous sector badges.
+           Swap .client-badge elements for grayscale client logo <img> tiles
+           once written permission from clients is confirmed. -->
+      <div class="client-marquee" data-reveal>
+        <div class="client-track">
+          <div class="client-set">
+            <span class="client-badge"><b>Leading snack brand</b><span>Gujarat · India</span></span>
+            <span class="client-badge"><b>Tea exporter</b><span>United Kingdom</span></span>
+            <span class="client-badge"><b>Pharma packer</b><span>Maharashtra · India</span></span>
+            <span class="client-badge"><b>Spice house</b><span>UAE</span></span>
+            <span class="client-badge"><b>Agro seeds brand</b><span>Madhya Pradesh</span></span>
+            <span class="client-badge"><b>FMCG group</b><span>East Africa</span></span>
+            <span class="client-badge"><b>Dry fruits brand</b><span>Rajasthan · India</span></span>
+            <span class="client-badge"><b>Personal care label</b><span>Gujarat · India</span></span>
+          </div>
+          <div class="client-set" aria-hidden="true">
+            <span class="client-badge"><b>Leading snack brand</b><span>Gujarat · India</span></span>
+            <span class="client-badge"><b>Tea exporter</b><span>United Kingdom</span></span>
+            <span class="client-badge"><b>Pharma packer</b><span>Maharashtra · India</span></span>
+            <span class="client-badge"><b>Spice house</b><span>UAE</span></span>
+            <span class="client-badge"><b>Agro seeds brand</b><span>Madhya Pradesh</span></span>
+            <span class="client-badge"><b>FMCG group</b><span>East Africa</span></span>
+            <span class="client-badge"><b>Dry fruits brand</b><span>Rajasthan · India</span></span>
+            <span class="client-badge"><b>Personal care label</b><span>Gujarat · India</span></span>
+          </div>
+        </div>
+      </div>
+      <p class="client-note">Client identities protected under supply agreements — references available on request.</p>
+    </div>
+  </section>
+
+  <!-- ============ 9 · WHY US ============ -->
+  <section class="sec" id="why-us">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Why us</p>
+      <h2 class="sec-title">What sets us <em>apart.</em></h2>
+    </div>
+    <div class="why-grid" data-reveal>
+      <div class="why-card" style="--wc:#b25c2e;">
+        <span class="why-glyph">i</span>
+        <h4>Assured Quality</h4>
+        <p>ISO 9001:2015 systems and an in-house ASTM lab — eight tests on every batch, full documentation at dispatch.</p>
+      </div>
+      <div class="why-card" style="--wc:#c89a3a;">
+        <span class="why-glyph">ii</span>
+        <h4>On-Time Delivery</h4>
+        <p>3–5 week production lead times, honestly quoted and tracked — with sea freight coordinated from Mundra Port.</p>
+      </div>
+      <div class="why-card" style="--wc:#7a6e3f;">
+        <span class="why-glyph">iii</span>
+        <h4>Customized Solutions</h4>
+        <p>Structure, size, barrier and finish engineered per product — recommendation within 24 hours of your brief.</p>
+      </div>
+      <div class="why-card" style="--wc:#7a8a6c;">
+        <span class="why-glyph">iv</span>
+        <h4>Advanced Machinery</h4>
+        <p>8-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p>
+      </div>
+      <div class="why-card" style="--wc:#3b2a20;">
+        <span class="why-glyph">v</span>
+        <h4>Skilled Workforce</h4>
+        <p>An experienced production and QC team under the Gangamani group's 20+ years of manufacturing discipline.</p>
+      </div>
+      <div class="why-card" style="--wc:#b25c2e;">
+        <span class="why-glyph">vi</span>
+        <h4>100% Recyclable Options</h4>
+        <p>Mono-material LLDPE structures for EPR-compliant brands — sustainability without sacrificing shelf appeal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10 · INQUIRY ============ -->
+  <section class="inquiry" id="inquiry">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Inquiry</p>
+        <h2 class="sec-title">Tell us what <em>you pack.</em></h2>
+        <p class="sec-lead">Share your requirements — we come back with a structure recommendation within 24 hours and a detailed quote within two business days.</p>
+      </div>
+      <div class="inq-grid">
+        <!-- Wire to Formspree (or backend) before go-live; static demo for now -->
+        <form class="inq-form" onsubmit="return false" data-reveal>
+          <div class="fg"><label for="q-name">Name</label><input id="q-name" type="text" placeholder="Jane Smith" /></div>
+          <div class="fg"><label for="q-company">Company</label><input id="q-company" type="text" placeholder="Your brand" /></div>
+          <div class="fg"><label for="q-email">Business email</label><input id="q-email" type="email" placeholder="jane@yourbrand.com" /></div>
+          <div class="fg"><label for="q-phone">Phone / WhatsApp</label><input id="q-phone" type="tel" placeholder="+91 …" /></div>
+          <div class="fg"><label for="q-product">Product type</label>
+            <select id="q-product">
+              <option>Select format…</option>
+              <option>Stand-Up Pouches</option>
+              <option>Zipper Pouches</option>
+              <option>Gusseted Pouches</option>
+              <option>Centre Seal Pouches</option>
+              <option>Vacuum Pouches</option>
+              <option>Re-usable Pouches</option>
+              <option>3-Side Seal Pouches</option>
+              <option>4-Side Seal Bags</option>
+              <option>Patch Handle Bags</option>
+              <option>Spout Pouches</option>
+              <option>Poly Film Rolls</option>
+              <option>Retort Pouches</option>
+              <option>Breathing Pouches</option>
+              <option>Other / Multiple</option>
+            </select>
+          </div>
+          <div class="fg"><label for="q-qty">Quantity</label><input id="q-qty" type="text" placeholder="e.g. 25,000 units" /></div>
+          <div class="fg fg-full"><label for="q-msg">Requirements</label><textarea id="q-msg" placeholder="Size, barrier needs, artwork status, target ship-by date…"></textarea></div>
+          <button class="cta cta-light inq-submit" style="justify-content:center">Send enquiry <span class="arrow" aria-hidden="true">→</span></button>
+        </form>
+        <div class="inq-side" data-reveal>
+          <h3>Prefer to talk <em>directly?</em></h3>
+          <ul class="inq-rows">
+            <li><span class="k">Email</span><span><a href="mailto:info@gflexipack.com">info@gflexipack.com</a></span></li>
+            <li><span class="k">Phone</span><span><a href="tel:+919824032765">+91 98240 32765</a><br /><a href="tel:+917046199980">+91 70461 99980</a></span></li>
+            <li><span class="k">Hours</span><span>Monday–Saturday · 9am–6pm IST</span></li>
+            <li><span class="k">Plant</span><span>Plot 43, GIDC Phase-1, Narmada Nagar,<br />Bharuch, Gujarat 392015, India</span></li>
+            <li><span class="k">Terms</span><span>MOQ 5,000 units · 30/70 payment · 3–5 week lead · FOB Mundra / CIF</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 11 · CERTIFICATION ============ -->
+  <section class="certs" id="certifications">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Certification</p>
+        <h2 class="sec-title">Audited, tested, <em>documented.</em></h2>
+      </div>
+      <div class="cert-row" data-reveal>
+        <div class="cert-emblem">
+          <span class="cert-mark">✦</span>
+          <h4>ISO 9001:2015</h4>
+          <p>Certified quality management system across procurement, production and dispatch.</p>
+        </div>
+        <div class="cert-emblem">
+          <span class="cert-mark">✦</span>
+          <h4>ASTM Standard QC</h4>
+          <p>Eight-test laboratory verification on every batch — GSM to heat-seal strength.</p>
+        </div>
+        <div class="cert-emblem">
+          <span class="cert-mark">✦</span>
+          <h4>100% Recyclable Options</h4>
+          <p>Mono-material structures available for EPR-compliant, sustainability-first brands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo.png" alt="G Flexipack" />
+        <p>Flexible packaging, made in Bharuch, Gujarat. ISO 9001:2015 certified, exporting worldwide from Mundra Port since 2016.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="product-standup.html">Stand-Up Pouches</a></li>
+          <li><a href="#products">Zipper · Gusseted · Spout</a></li>
+          <li><a href="#products">Retort · Vacuum · Sachets</a></li>
+          <li><a href="#products">All 13 formats →</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#infrastructure">Infrastructure</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <address>
+          Plot 43, GIDC Phase-1<br />
+          Narmada Nagar, Bharuch<br />
+          Gujarat 392015, India<br /><br />
+          <a href="mailto:info@gflexipack.com">info@gflexipack.com</a><br />
+          <a href="tel:+919824032765">+91 98240 32765</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 G Flexipack. All rights reserved.</p>
+      <p>ISO 9001:2015 · ASTM Standard QC · 100% Recyclable Options</p>
+    </div>
+  </footer>
+
+  <div class="option-badge" aria-hidden="true">Option D · Boardroom Editorial</div>
+
+  <script>
+    // ---------- scroll reveal ----------
+    const revealIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-in");
+          revealIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll("[data-reveal]").forEach((el) => revealIO.observe(el));
+
+    // ---------- banner slider ----------
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const controls = document.getElementById("sliderControls");
+    const dotsWrap = document.getElementById("sliderDots");
+    // slides with light backgrounds need dark controls
+    const LIGHT_SLIDES = [0, 4];
+    let current = 0;
+    let timer = null;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.className = "dot" + (i === 0 ? " is-on" : "");
+      dot.setAttribute("aria-label", "Go to slide " + (i + 1));
+      dot.addEventListener("click", () => { goTo(i); restart(); });
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function goTo(i) {
+      current = (i + slides.length) % slides.length;
+      slides.forEach((s, k) => s.classList.toggle("is-on", k === current));
+      dots.forEach((d, k) => d.classList.toggle("is-on", k === current));
+      controls.classList.toggle("on-light", LIGHT_SLIDES.includes(current));
+      controls.classList.toggle("on-dark", !LIGHT_SLIDES.includes(current));
+    }
+    function next() { goTo(current + 1); }
+    function restart() {
+      if (reduceMotion) return;
+      clearInterval(timer);
+      timer = setInterval(next, 6000);
+    }
+    document.getElementById("slideNext").addEventListener("click", () => { next(); restart(); });
+    document.getElementById("slidePrev").addEventListener("click", () => { goTo(current - 1); restart(); });
+
+    const sliderEl = document.querySelector(".slider");
+    sliderEl.addEventListener("mouseenter", () => clearInterval(timer));
+    sliderEl.addEventListener("mouseleave", restart);
+    restart();
+
+    // swipe on touch
+    let touchX = null;
+    sliderEl.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+    sliderEl.addEventListener("touchend", (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 48) { dx < 0 ? next() : goTo(current - 1); restart(); }
+      touchX = null;
+    }, { passive: true });
+
+    // ---------- stat counters (count up when visible) ----------
+    const counterEls = document.querySelectorAll(".counter-num");
+    const fmt = (n, comma) => comma ? n.toLocaleString("en-IN") : String(n);
+    const counterIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        counterIO.unobserve(e.target);
+        const el = e.target;
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || "";
+        const comma = !!el.dataset.comma;
+        if (reduceMotion) { el.textContent = fmt(target, comma) + suffix; return; }
+        const t0 = performance.now();
+        const DURATION = 1300;
+        const tick = (t) => {
+          const p = Math.min(1, (t - t0) / DURATION);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(Math.round(target * eased), comma) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.4 });
+    counterEls.forEach((el) => counterIO.observe(el));
+  </script>
+</body>
+</html>
