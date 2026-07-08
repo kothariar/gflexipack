@@ -1,0 +1,2496 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>G Flexipack — Flexible Packaging Manufacturer · Bharuch, India</title>
+  <meta name="description" content="Custom-printed flexible packaging from Bharuch, Gujarat. Thirteen pouch formats, 8-colour rotogravure print, ISO 9001:2015, 300+ MT/month capacity." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --cream: #f4efe7;
+      --cream-2: #eae0cd;
+      --ink: #3b2a20;
+      --ink-soft: rgba(59, 42, 32, 0.68);
+      --ink-line: rgba(59, 42, 32, 0.14);
+      --cream-soft: rgba(244, 239, 231, 0.72);
+      --cream-line: rgba(244, 239, 231, 0.18);
+      --burnt: #b25c2e;
+      --olive: #7a6e3f;
+      --sage: #7a8a6c;
+      --gold: #c89a3a;
+      --pale-gold: #d9c893;
+      --accent: #b25c2e;
+      --serif: "DM Serif Display", Georgia, serif;
+      --sans: "Space Grotesk", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal] { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(244, 239, 231, 0.86);
+      backdrop-filter: saturate(140%) blur(10px);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 18px 48px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 48px;
+    }
+    .brand { display: inline-flex; align-items: center; }
+    .brand img { height: 52px; width: auto; mix-blend-mode: multiply; filter: contrast(1.02); }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 34px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-links a { position: relative; padding: 6px 0; opacity: 0.82; transition: opacity 0.2s ease; }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .nav-cta:hover { background: var(--ink); color: var(--cream); }
+    .arrow { display: inline-block; transition: transform 0.25s ease; }
+    a:hover .arrow, button:hover .arrow { transform: translateX(4px); }
+
+    /* ---------- CTA buttons ---------- */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .cta-primary {
+      padding: 14px 26px;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 999px;
+    }
+    .cta-primary:hover { transform: translateY(-1px); background: #2a1e17; }
+    .cta-light {
+      padding: 14px 26px;
+      background: var(--cream);
+      color: var(--ink);
+      border: none;
+      border-radius: 999px;
+    }
+    .cta-light:hover { transform: translateY(-1px); }
+
+    /* ============================================================
+       1 · BANNER SLIDER — 5 rotating slides, corporate mechanic
+       ============================================================ */
+    .slider {
+      position: relative;
+      height: 580px;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.85s ease;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(ellipse at 50% 20%, rgba(255,255,255,0.07) 0%, rgba(0,0,0,0) 60%),
+        var(--sbg);
+      color: var(--stx, var(--cream));
+    }
+    .slide.is-on { opacity: 1; pointer-events: auto; z-index: 1; }
+    .slide-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 60px;
+      align-items: center;
+    }
+    .slide-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin: 0 0 24px;
+    }
+    .slide-eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; opacity: 0.5; }
+    .slide h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(38px, 4.8vw, 72px);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      margin: 0 0 22px;
+      max-width: 15ch;
+    }
+    .slide h2 em { font-style: italic; color: var(--sem, var(--gold)); }
+    .slide p {
+      font-size: 17px;
+      line-height: 1.6;
+      max-width: 460px;
+      opacity: 0.85;
+      margin: 0 0 32px;
+    }
+    .slide-stage {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      position: relative;
+      height: 380px;
+    }
+    .slide-stage::before {
+      content: "";
+      position: absolute;
+      left: 26%; right: 26%; bottom: 6px;
+      height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(3px);
+    }
+
+    /* CSS pouch (shared component) */
+    .pouch {
+      width: 190px;
+      height: 258px;
+      background:
+        linear-gradient(112deg,
+          rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.02) 32%,
+          rgba(255,255,255,0) 55%, rgba(255,255,255,0.06) 82%,
+          rgba(255,255,255,0.12) 100%),
+        linear-gradient(to right,
+          rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 10%,
+          rgba(0,0,0,0) 90%, rgba(0,0,0,0.24) 100%),
+        var(--body);
+      border-radius: 22px 22px 9px 9px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      box-shadow:
+        0 26px 40px -16px rgba(0, 0, 0, 0.45),
+        0 2px 4px -1px rgba(0, 0, 0, 0.15),
+        inset 0 -5px 0 rgba(0, 0, 0, 0.18);
+    }
+    .cap {
+      height: 24px;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.25) 100%),
+        var(--cap);
+      position: relative;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.25);
+      flex-shrink: 0;
+    }
+    .cap::before {
+      content: "";
+      position: absolute;
+      left: 12px; right: 12px; bottom: 6px;
+      height: 3px;
+      border-radius: 2px;
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(255,255,255,0.28) 0px, rgba(255,255,255,0.28) 2px,
+          transparent 2px, transparent 4px),
+        rgba(0,0,0,0.35);
+    }
+    .band {
+      margin: auto 0 18px;
+      padding: 9px 6px;
+      background: var(--bandc);
+      color: var(--band-text);
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: 0.4px;
+      box-shadow:
+        inset 0 1px 2px rgba(0,0,0,0.18),
+        inset 0 -1px 0 rgba(255,255,255,0.08);
+      z-index: 2;
+    }
+
+    /* slider controls */
+    .slider-controls {
+      position: absolute;
+      left: 0; right: 0; bottom: 26px;
+      z-index: 5;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .dots { display: flex; gap: 10px; }
+    .dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      border: none;
+      background: currentColor;
+      opacity: 0.32;
+      cursor: pointer;
+      padding: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      color: inherit;
+    }
+    .dot.is-on { opacity: 1; transform: scale(1.3); }
+    .slider-arrows { display: flex; gap: 10px; }
+    .s-arrow {
+      width: 44px; height: 44px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      background: transparent;
+      color: inherit;
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0.75;
+      transition: opacity 0.2s ease;
+    }
+    .s-arrow:hover { opacity: 1; }
+    /* controls inherit slide text colour via JS class */
+    .slider-controls.on-dark { color: var(--cream); }
+    .slider-controls.on-light { color: var(--ink); }
+
+    /* ============================================================
+       SHARED SECTION CHROME — centered corporate headers
+       ============================================================ */
+    .sec {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 96px 56px 100px;
+    }
+    .sec-head {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 56px;
+    }
+    .sec-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 20px;
+    }
+    .sec-eyebrow::before,
+    .sec-eyebrow::after {
+      content: "";
+      width: 28px; height: 1px;
+      background: rgba(59, 42, 32, 0.32);
+    }
+    .sec-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(32px, 3.6vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin: 0 0 18px;
+    }
+    .sec-title em { font-style: italic; color: var(--accent); }
+    .sec-lead {
+      font-size: 16.5px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    /* ============================================================
+       2 · WELCOME
+       ============================================================ */
+    .welcome { padding-bottom: 40px; }
+    .welcome .sec-head { margin-bottom: 0; max-width: 860px; }
+    .welcome .sec-lead { font-size: 18px; }
+
+    /* ============================================================
+       3 · VISION & MISSION — two symmetric panels
+       ============================================================ */
+    .vm { padding-top: 56px; }
+    .vm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .vm-panel {
+      border: 1px solid var(--ink-line);
+      border-radius: 12px;
+      background: var(--cream);
+      padding: 48px 46px 44px;
+      text-align: center;
+      position: relative;
+    }
+    .vm-panel::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 56px; height: 4px;
+      background: var(--vc, var(--burnt));
+      border-radius: 0 0 4px 4px;
+    }
+    .vm-label {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: block;
+      margin-bottom: 18px;
+    }
+    .vm-quote {
+      font-family: var(--serif);
+      font-size: clamp(20px, 1.9vw, 26px);
+      line-height: 1.4;
+      margin: 0;
+    }
+    .vm-quote em { font-style: italic; color: var(--vc, var(--burnt)); }
+
+    /* ============================================================
+       4 · EXCELLENCE — stat counters on brown (GLS pattern)
+       ============================================================ */
+    .excellence {
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .excellence .sec { padding: 90px 56px; }
+    .excellence .sec-head { margin-bottom: 48px; }
+    .excellence .sec-eyebrow { color: var(--cream-soft); }
+    .excellence .sec-eyebrow::before,
+    .excellence .sec-eyebrow::after { background: rgba(244, 239, 231, 0.35); }
+    .excellence .sec-title em { color: var(--gold); }
+    .counters {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 22px;
+      text-align: center;
+    }
+    .counter { padding: 10px 6px; }
+    .counter-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(38px, 3.6vw, 58px);
+      line-height: 1;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 12px;
+      white-space: nowrap;
+    }
+    .counter-label {
+      font-size: 13.5px;
+      letter-spacing: 0.06em;
+      color: var(--cream-soft);
+      line-height: 1.45;
+    }
+
+    /* ============================================================
+       5 · OUR PRODUCTS — grid of 13
+       ============================================================ */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+    .prod-tile {
+      border: 1px solid var(--ink-line);
+      border-radius: 10px;
+      background: var(--cream);
+      padding: 24px 16px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1), border-color 0.3s ease, background 0.3s ease;
+    }
+    .prod-tile:hover {
+      transform: translateY(-5px);
+      border-color: rgba(178, 92, 46, 0.45);
+      background: #fbf8f2;
+    }
+    .prod-tile .p-fig {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 8px;
+      background:
+        radial-gradient(ellipse at 50% 26%, rgba(255,255,255,0.07) 0%, rgba(0,0,0,0) 62%),
+        var(--tbg);
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .prod-tile .p-fig::before {
+      content: "";
+      position: absolute;
+      left: 26%; right: 26%; bottom: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(2px);
+    }
+    .prod-tile .pouch {
+      width: 74px;
+      height: 102px;
+      border-radius: 10px 10px 4px 4px;
+      box-shadow: 0 12px 18px -9px rgba(0,0,0,0.4), inset 0 -3px 0 rgba(0,0,0,0.16);
+    }
+    .prod-tile .cap { height: 13px; }
+    .prod-tile .cap::before { left: 7px; right: 7px; bottom: 3px; height: 2px; }
+    .prod-tile .band { font-size: 9px; padding: 5px 3px; margin-bottom: 10px; }
+    /* real product photo fills the figure box (images ship with their own solid bg) */
+    .prod-tile .p-fig img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      transition: transform 0.45s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .prod-tile:hover .p-fig img { transform: scale(1.05); }
+    .prod-name {
+      font-family: var(--serif);
+      font-size: 17.5px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .prod-link {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: auto;
+    }
+    /* roll figure for poly film rolls */
+    .p-roll {
+      position: relative;
+      width: 66px;
+      height: 98px;
+      z-index: 1;
+    }
+    .p-roll-body {
+      position: absolute;
+      inset: 7px 0 0;
+      border-radius: 8px;
+      background:
+        linear-gradient(to right,
+          rgba(0,0,0,0.3) 0%, rgba(255,255,255,0.16) 12%,
+          rgba(255,255,255,0.02) 45%, rgba(0,0,0,0.12) 78%,
+          rgba(0,0,0,0.34) 100%),
+        #eae0cd;
+      box-shadow: 0 12px 18px -9px rgba(0,0,0,0.4);
+    }
+    .p-roll-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 15px;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 50% 50%, #3b2a20 0%, #3b2a20 24%, transparent 25%),
+        linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(0,0,0,0.08)),
+        #d8cfc0;
+      z-index: 2;
+    }
+
+    /* ============================================================
+       6 · INDUSTRIES — 7 centered cards
+       ============================================================ */
+    .industries { background: var(--cream-2); }
+    .ind-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 14px;
+    }
+    .ind-card {
+      background: var(--cream);
+      border: 1px solid var(--ink-line);
+      border-radius: 10px;
+      padding: 0 14px 24px;
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .ind-card:hover { transform: translateY(-4px); }
+    .ind-tick { height: 5px; background: var(--ic); margin: 0 -14px 20px; }
+    .ind-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 8px;
+    }
+    .ind-name {
+      font-family: var(--serif);
+      font-size: 18.5px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .ind-apps {
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    /* ============================================================
+       7 · INFRASTRUCTURE
+       ============================================================ */
+    .infra-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 64px;
+      align-items: start;
+    }
+    .infra-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .infra-photo {
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 5 / 3.4;
+      position: relative;
+      background: var(--cream-2);
+    }
+    .infra-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: sepia(0.16) saturate(1.06) contrast(1.02);
+    }
+    .infra-photo figcaption {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 22px 12px 9px;
+      background: linear-gradient(to top, rgba(59,42,32,0.72), rgba(59,42,32,0));
+      color: var(--cream);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .photo-soon {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px dashed rgba(59, 42, 32, 0.28);
+      border-radius: 10px;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(59, 42, 32, 0.02) 0 14px,
+        rgba(59, 42, 32, 0.05) 14px 28px
+      );
+      color: var(--ink-soft);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 12px;
+    }
+    .infra-list {
+      list-style: none;
+      margin: 26px 0 0;
+      padding: 0;
+      border-top: 1px solid var(--ink-line);
+    }
+    .infra-row {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 18px;
+      align-items: baseline;
+      padding: 17px 4px;
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .infra-no {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--accent);
+    }
+    .infra-row h4 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 19px;
+      margin: 0 0 4px;
+    }
+    .infra-row p {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+    .infra-side h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(24px, 2.2vw, 32px);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin: 0 0 16px;
+    }
+    .infra-side h3 em { font-style: italic; color: var(--accent); }
+    .infra-side > p {
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      margin: 0 0 26px;
+    }
+    .plant-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 26px;
+      border-top: 1px solid var(--ink-line);
+    }
+    .plant-fact {
+      padding: 15px 2px;
+      border-bottom: 1px solid var(--ink-line);
+      font-size: 13.5px;
+      color: var(--ink-soft);
+    }
+    .plant-fact b {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 19px;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    /* ============================================================
+       8 · CLIENTELE — running marquee (anonymous badges for now)
+       ============================================================ */
+    .clientele { background: var(--cream-2); }
+    .clientele .sec { padding: 84px 56px; }
+    .client-marquee {
+      overflow: hidden;
+      position: relative;
+      padding: 6px 0;
+    }
+    .client-marquee::before,
+    .client-marquee::after {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 90px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .client-marquee::before { left: 0; background: linear-gradient(to right, var(--cream-2), rgba(234,224,205,0)); }
+    .client-marquee::after { right: 0; background: linear-gradient(to left, var(--cream-2), rgba(234,224,205,0)); }
+    .client-track {
+      display: flex;
+      width: max-content;
+      animation: clients-scroll 38s linear infinite;
+    }
+    .client-marquee:hover .client-track { animation-play-state: paused; }
+    @keyframes clients-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .client-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+    }
+    .client-set { display: flex; align-items: center; flex-shrink: 0; }
+    /* PLACEHOLDER: anonymous sector badges — replace with real client logos
+       (grayscale img tiles) once written permission is cleared with clients */
+    .client-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      margin: 0 18px;
+      padding: 18px 28px;
+      background: var(--cream);
+      border: 1px solid var(--ink-line);
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+    .client-badge b {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+    .client-badge span {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .client-note {
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin: 26px 0 0;
+    }
+
+    /* ============================================================
+       9 · WHY US — 6 value cards
+       ============================================================ */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .why-card {
+      border: 1px solid var(--ink-line);
+      border-radius: 12px;
+      background: var(--cream);
+      padding: 34px 30px 30px;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .why-card:hover { transform: translateY(-4px); }
+    .why-glyph {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid var(--wc, var(--burnt));
+      color: var(--wc, var(--burnt));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 19px;
+      margin-bottom: 18px;
+    }
+    .why-card h4 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+    .why-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    /* ============================================================
+       10 · INQUIRY — corporate form + contact side
+       ============================================================ */
+    .inquiry { background: var(--ink); color: var(--cream); }
+    .inquiry .sec { padding: 96px 56px; }
+    .inquiry .sec-eyebrow { color: var(--cream-soft); }
+    .inquiry .sec-eyebrow::before,
+    .inquiry .sec-eyebrow::after { background: rgba(244, 239, 231, 0.35); }
+    .inquiry .sec-title em { color: var(--gold); }
+    .inquiry .sec-lead { color: var(--cream-soft); }
+    .inq-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 70px;
+      align-items: start;
+    }
+    .inq-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 16px;
+    }
+    .fg { display: flex; flex-direction: column; gap: 7px; }
+    .fg-full { grid-column: 1 / -1; }
+    .fg label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+    }
+    .fg input, .fg select, .fg textarea {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--cream);
+      background: rgba(244, 239, 231, 0.07);
+      border: 1px solid rgba(244, 239, 231, 0.24);
+      border-radius: 8px;
+      padding: 13px 14px;
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .fg input::placeholder, .fg textarea::placeholder { color: rgba(244, 239, 231, 0.4); }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--gold);
+      background: rgba(244, 239, 231, 0.1);
+    }
+    .fg select { appearance: none; }
+    .fg select option { color: var(--ink); background: var(--cream); }
+    .fg textarea { min-height: 110px; resize: vertical; }
+    .inq-submit { grid-column: 1 / -1; }
+    .inq-side h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(22px, 2vw, 28px);
+      line-height: 1.2;
+      margin: 0 0 22px;
+    }
+    .inq-side h3 em { font-style: italic; color: var(--gold); }
+    .inq-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--cream-line); }
+    .inq-rows li {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 16px;
+      padding: 15px 2px;
+      border-bottom: 1px solid var(--cream-line);
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+    .inq-rows .k {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      padding-top: 2px;
+    }
+    .inq-rows a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(244,239,231,0.4); }
+
+    /* ============================================================
+       11 · CERTIFICATION — emblem row
+       ============================================================ */
+    .certs .sec { padding: 84px 56px 96px; }
+    .cert-row {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+    .cert-emblem {
+      width: 250px;
+      border: 1px solid var(--ink-line);
+      border-radius: 12px;
+      background: var(--cream);
+      padding: 32px 26px 28px;
+      text-align: center;
+      position: relative;
+    }
+    .cert-emblem::before {
+      content: "";
+      position: absolute;
+      top: 14px; left: 14px; right: 14px; bottom: 14px;
+      border: 1px solid rgba(200, 154, 58, 0.4);
+      border-radius: 7px;
+      pointer-events: none;
+    }
+    .cert-mark {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 26px;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .cert-emblem h4 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px;
+    }
+    .cert-emblem p {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .site-footer { background: var(--ink); color: var(--cream); }
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 74px 56px 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+      gap: 56px;
+    }
+    .footer-brand img {
+      height: 46px;
+      width: auto;
+      filter: brightness(0) invert(1) opacity(0.92);
+      margin-bottom: 18px;
+    }
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--cream-soft);
+      margin: 0;
+      max-width: 300px;
+    }
+    .footer-col h5 {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      margin: 0 0 18px;
+    }
+    .footer-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14.5px;
+    }
+    .footer-col a { opacity: 0.9; transition: opacity 0.2s ease; }
+    .footer-col a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+    .footer-col address {
+      font-style: normal;
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--cream-soft);
+    }
+    .footer-col address a { color: var(--cream); }
+    .footer-bottom {
+      border-top: 1px solid var(--cream-line);
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 26px 56px 36px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12.5px;
+      color: var(--cream-soft);
+    }
+
+    .option-badge {
+      position: fixed;
+      bottom: 18px;
+      left: 18px;
+      z-index: 40;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 8px 14px;
+      border-radius: 999px;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1180px) {
+      .products-grid { grid-template-columns: repeat(4, 1fr); }
+      .ind-grid { grid-template-columns: repeat(4, 1fr); }
+      .counters { grid-template-columns: repeat(3, 1fr); gap: 34px 22px; }
+      .infra-grid { grid-template-columns: 1fr; gap: 44px; }
+      .inq-grid { grid-template-columns: 1fr; gap: 54px; }
+    }
+    @media (max-width: 900px) {
+      .nav-inner { grid-template-columns: auto auto; padding: 14px 20px; gap: 16px; }
+      .nav-links { display: none; }
+
+      .slider { height: 640px; }
+      .slide-inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 0 20px;
+        align-content: center;
+      }
+      .slide h2 { font-size: 38px; }
+      .slide p { font-size: 15.5px; margin-bottom: 24px; }
+      .slide-stage { height: 210px; order: -1; margin-top: 8px; }
+      .slide .pouch { width: 128px; height: 172px; }
+      .slide .cap { height: 17px; }
+      .slide .band { font-size: 11px; padding: 7px 4px; margin-bottom: 12px; }
+      .slider-controls { padding: 0 20px; bottom: 18px; }
+
+      .sec { padding: 64px 20px 68px; }
+      .sec-head { margin-bottom: 36px; }
+
+      .vm-grid { grid-template-columns: 1fr; }
+      .vm-panel { padding: 38px 26px 34px; }
+
+      .excellence .sec { padding: 60px 20px; }
+      .counters { grid-template-columns: repeat(2, 1fr); gap: 30px 14px; }
+
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .ind-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .infra-photos { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+      .clientele .sec { padding: 56px 20px; }
+      .client-badge { padding: 14px 20px; margin: 0 10px; }
+
+      .why-grid { grid-template-columns: 1fr; }
+
+      .inquiry .sec { padding: 64px 20px; }
+      .inq-form { grid-template-columns: 1fr; }
+
+      .cert-row { gap: 14px; }
+      .cert-emblem { width: 100%; max-width: 340px; }
+
+      .footer-inner { grid-template-columns: 1fr; gap: 36px; padding: 56px 20px 40px; }
+      .footer-bottom { padding: 20px 20px 28px; }
+    }
+    /* ============================================================
+       ADDED MOTION LAYER — ported from the editorial index build,
+       mobile-tuned (lean). Grouped here to keep base styles intact.
+       ============================================================ */
+
+    /* nav scroll-progress bar */
+    .nav-progress {
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      height: 2px;
+      width: 0%;
+      background: var(--accent);
+      z-index: 31;
+      transition: width 0.1s linear;
+    }
+
+    /* staggered reveal — children cascade in when parent enters */
+    [data-reveal].stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    [data-reveal].stagger.is-in > * { opacity: 1; transform: none; }
+    [data-reveal].stagger.is-in > *:nth-child(1) { transition-delay: 0.04s; }
+    [data-reveal].stagger.is-in > *:nth-child(2) { transition-delay: 0.09s; }
+    [data-reveal].stagger.is-in > *:nth-child(3) { transition-delay: 0.14s; }
+    [data-reveal].stagger.is-in > *:nth-child(4) { transition-delay: 0.19s; }
+    [data-reveal].stagger.is-in > *:nth-child(5) { transition-delay: 0.24s; }
+    [data-reveal].stagger.is-in > *:nth-child(6) { transition-delay: 0.29s; }
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal].stagger > * { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ---------- TICKER BAND (slim brown strip on cream) ---------- */
+    .ticker {
+      background: var(--ink);
+      color: var(--cream);
+      overflow: hidden;
+      padding: 26px 0;
+      margin: 44px 0;
+      position: relative;
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker-scroll 46s linear infinite;
+    }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+    .ticker-set { display: flex; align-items: center; flex-shrink: 0; }
+    .ticker-item {
+      font-family: var(--serif);
+      font-size: 23px;
+      white-space: nowrap;
+      padding: 0 14px;
+    }
+    .ticker-item em { font-style: italic; color: var(--gold); }
+    .ticker-star { color: var(--burnt); font-size: 17px; padding: 0 16px; }
+
+    /* ---------- FORMATS RAIL (drag-scroll, scrubber, counter) ---------- */
+    .rail-wrap { position: relative; }
+    .rail {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 8px 56px 30px calc(max((100vw - 1440px) / 2, 0px) + 56px);
+      scrollbar-width: none;
+      cursor: grab;
+    }
+    .rail::-webkit-scrollbar { display: none; }
+    .rail.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+    .r-card {
+      scroll-snap-align: start;
+      flex: 0 0 auto;
+      width: 300px;
+      border: 1px solid var(--ink-line);
+      border-radius: 12px;
+      background: var(--cream);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1), border-color 0.3s ease;
+    }
+    .r-card:hover { transform: translateY(-6px); border-color: rgba(178, 92, 46, 0.45); }
+    .r-fig {
+      aspect-ratio: 4 / 5;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 26%, rgba(255,255,255,0.07) 0%, rgba(0,0,0,0) 62%),
+        var(--tbg);
+    }
+    .r-fig img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .r-card:hover .r-fig img { transform: scale(1.06); }
+    .r-body {
+      padding: 18px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .r-name { font-family: var(--serif); font-size: 22px; letter-spacing: -0.01em; line-height: 1.15; }
+    .r-link {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 6px;
+    }
+    .rail-nav {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .rail-hint {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .rail-progress { flex: 1; display: flex; align-items: center; gap: 18px; max-width: 420px; }
+    .rail-track {
+      flex: 1;
+      height: 2px;
+      background: var(--ink-line);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .rail-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 8%;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.15s linear;
+    }
+    .rail-count {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 18px;
+      white-space: nowrap;
+      min-width: 74px;
+      text-align: right;
+    }
+    .rail-count em { color: var(--accent); font-style: italic; }
+    .rail-btn {
+      position: absolute;
+      top: 44%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 52px; height: 52px;
+      border-radius: 999px;
+      border: none;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+      transition: background 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+    }
+    .rail-btn svg { width: 22px; height: 22px; display: block; }
+    .rail-btn:hover { background: #e5e5e5; }
+    .rail-btn:disabled { opacity: 0; visibility: hidden; cursor: default; }
+    #railPrev { left: 28px; }
+    #railNext { right: 28px; }
+
+    /* ---------- ACCORDION SHELF (industries) ---------- */
+    .acc { display: flex; gap: 12px; height: 440px; }
+    .acc-panel {
+      flex: 1;
+      min-width: 0;
+      background: var(--cream);
+      border: 1px solid var(--ink-line);
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: flex 0.6s cubic-bezier(0.25, 0.7, 0.2, 1), background-color 0.5s ease, border-color 0.5s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .acc-panel::before { content: ""; height: 5px; background: var(--ic); flex-shrink: 0; }
+    .acc-panel.is-open {
+      flex: 3.1;
+      background: color-mix(in srgb, var(--ic) 7%, var(--cream));
+      border-color: color-mix(in srgb, var(--ic) 36%, transparent);
+    }
+    .acc-closed {
+      position: absolute;
+      inset: 5px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 22px 10px 26px;
+      opacity: 1;
+      transition: opacity 0.3s ease 0.15s;
+    }
+    .acc-panel.is-open .acc-closed { opacity: 0; transition-delay: 0s; pointer-events: none; }
+    .acc-closed .acc-num { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--accent); }
+    .acc-closed .acc-name-v {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-family: var(--serif);
+      font-size: clamp(19px, 1.8vw, 26px);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .acc-open {
+      position: absolute;
+      inset: 5px 0 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 30px 32px 34px;
+      opacity: 0;
+      transition: opacity 0.35s ease 0.2s;
+      pointer-events: none;
+      min-width: 300px;
+    }
+    .acc-panel.is-open .acc-open { opacity: 1; pointer-events: auto; }
+    .acc-open .acc-num { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--accent); margin-bottom: 8px; }
+    .acc-open h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(26px, 2.4vw, 36px);
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      margin: 0 0 14px;
+    }
+    .acc-open p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); margin: 0; max-width: 340px; }
+    /* sector photo backs the panel once it opens */
+    .acc-closed, .acc-open { z-index: 1; }
+    .acc-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .acc-photo-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      background: linear-gradient(to top,
+        rgba(28, 19, 13, 0.94) 0%,
+        rgba(28, 19, 13, 0.6) 34%,
+        rgba(28, 19, 13, 0.18) 68%,
+        rgba(28, 19, 13, 0.05) 100%);
+    }
+    .acc-panel.is-open .acc-photo,
+    .acc-panel.is-open .acc-photo-scrim { opacity: 1; }
+    .acc-panel.is-open .acc-open .acc-num { color: var(--pale-gold); }
+    .acc-panel.is-open .acc-open h3 { color: var(--cream); }
+    .acc-panel.is-open .acc-open p { color: rgba(244, 239, 231, 0.86); }
+    .shelf-hint {
+      margin: 20px 0 0;
+      font-size: 12.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- SCROLLYTELLING (infrastructure) ---------- */
+    .scrolly {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 80px;
+    }
+    .scrolly-sticky {
+      position: sticky;
+      top: 120px;
+      height: 68vh;
+      max-height: 580px;
+      align-self: start;
+    }
+    .sc-stage { position: relative; width: 100%; height: 100%; border-radius: 12px; overflow: hidden; background: var(--cream-2); }
+    .sc-shot {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: scale(1.03);
+      transition: opacity 0.6s ease, transform 0.9s ease;
+    }
+    .sc-shot.is-active { opacity: 1; transform: none; }
+    .sc-shot img { width: 100%; height: 100%; object-fit: cover; display: block; filter: sepia(0.16) saturate(1.06) contrast(1.02); }
+    .sc-shot figcaption {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 30px 16px 14px;
+      background: linear-gradient(to top, rgba(59,42,32,0.78), rgba(59,42,32,0));
+      color: var(--cream);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .scrolly-steps { padding: 10px 0 30px; }
+    .sc-step {
+      min-height: 58vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0.28;
+      transition: opacity 0.45s ease;
+    }
+    .sc-step.is-active { opacity: 1; }
+    .sc-num { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--accent); margin: 0 0 8px; }
+    .sc-step h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(24px, 2.4vw, 36px);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin: 0 0 14px;
+    }
+    .sc-step > p { font-size: 15.5px; line-height: 1.65; color: var(--ink-soft); max-width: 440px; margin: 0; }
+    .sc-inline { display: none; border-radius: 10px; overflow: hidden; aspect-ratio: 5 / 3.4; margin-bottom: 18px; }
+    .sc-inline img { width: 100%; height: 100%; object-fit: cover; display: block; filter: sepia(0.16) saturate(1.06) contrast(1.02); }
+    .sc-inline .photo-soon { border-radius: 10px; }
+
+    .hint-mobile { display: none; }
+
+    /* ---------- MOBILE-TUNED OVERRIDES for the motion layer ---------- */
+    @media (max-width: 900px) {
+      .hint-desktop { display: none; }
+      .hint-mobile { display: inline; }
+
+      .ticker { padding: 18px 0; }
+      .ticker-item { font-size: 18px; }
+
+      /* rail: native swipe, drop redundant arrows, cards ~ viewport width */
+      .rail { padding: 8px 20px 26px; gap: 14px; }
+      .r-card { width: 78vw; max-width: 320px; }
+      .r-name { font-size: 20px; }
+      .rail-nav { padding: 0 20px; }
+      .rail-btns { display: none; }
+      .rail-progress { max-width: none; }
+
+      /* accordion flips to a vertical tap-stack */
+      .acc { flex-direction: column; height: auto; gap: 10px; }
+      .acc-panel { flex: none !important; }
+      .acc-closed {
+        position: relative;
+        inset: auto;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+        padding: 16px 20px;
+      }
+      .acc-closed .acc-name-v {
+        writing-mode: horizontal-tb;
+        transform: none;
+        flex: 0 1 auto;
+        font-size: 20px;
+      }
+      .acc-open {
+        position: relative;
+        inset: auto;
+        min-width: 0;
+        opacity: 1;
+        pointer-events: auto;
+        overflow: hidden;
+        max-height: 0;
+        padding: 0 20px;
+        transition: max-height 0.4s ease, padding 0.4s ease;
+      }
+      .acc-panel.is-open .acc-open { max-height: 360px; padding: 0 20px 22px; }
+      .acc-panel.is-open .acc-closed { color: var(--cream); }
+      .acc-panel.is-open .acc-closed .acc-num { color: var(--pale-gold); }
+      .acc-panel.is-open .acc-closed .acc-name-v { color: var(--cream); }
+      .acc-open .acc-num { display: none; }
+
+      /* scrollytelling degrades to a plain stacked sequence, no pinning */
+      .scrolly { grid-template-columns: 1fr; gap: 0; }
+      .scrolly-sticky { display: none; }
+      .sc-step { min-height: 0; padding: 8px 0 34px; opacity: 1; }
+      .sc-inline { display: block; }
+    }
+
+    /* ============================================================
+       NEW HERO — text left, vertical marquee right (from hero.html)
+       Everything below is namespaced under "hh-" so it can't collide
+       with .pouch / .cap / .band / .tile / .cta already used by the
+       banner slider, product rail and elsewhere on this page.
+       ============================================================ */
+    .hh-hero { padding: 40px 0 0; }
+    .hh-hero-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 80px;
+      align-items: center;
+      min-height: 620px;
+    }
+    .hh-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 32px;
+    }
+    .hh-eyebrow::before { content: ""; width: 28px; height: 1px; background: rgba(59, 42, 32, 0.32); }
+    .hh-hero-title {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(44px, 6vw, 86px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin: 0 0 28px;
+      max-width: 12ch;
+    }
+    .hh-hero-title em { font-style: italic; color: var(--accent); }
+    .hh-hero-sub {
+      font-family: var(--sans);
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 480px;
+      margin: 0 0 36px;
+    }
+    .hh-hero-ctas { display: flex; align-items: center; gap: 24px; }
+    .hh-cta-ghost {
+      padding: 14px 4px;
+      color: var(--ink);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      position: relative;
+    }
+    .hh-cta-ghost::after {
+      content: "";
+      position: absolute;
+      left: 4px; right: 4px;
+      bottom: 8px;
+      height: 1px;
+      background: var(--ink);
+      transform: scaleX(0.35);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+    }
+    .hh-cta-ghost:hover { background: transparent; color: var(--ink); }
+    .hh-cta-ghost:hover::after { transform: scaleX(1); }
+
+    /* vertical marquee — two columns, opposite directions */
+    .hh-marquee {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      height: 660px;
+      position: relative;
+      --hh-tile-h: 200px;
+      --hh-tile-gap: 14px;
+    }
+    .hh-col { overflow: hidden; position: relative; border-radius: 8px; }
+    .hh-col::before, .hh-col::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      height: 60px;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .hh-col::before { top: 0; background: linear-gradient(to bottom, var(--cream), rgba(244,239,231,0)); }
+    .hh-col::after { bottom: 0; background: linear-gradient(to top, var(--cream), rgba(244,239,231,0)); }
+    .hh-track {
+      display: flex;
+      flex-direction: column;
+      gap: var(--hh-tile-gap);
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    .hh-track.hh-down { animation-name: hh-scroll-down; animation-duration: 50s; }
+    .hh-track.hh-up { animation-name: hh-scroll-up; animation-duration: 55s; }
+    @keyframes hh-scroll-down {
+      from { transform: translateY(calc((var(--hh-tile-h) + var(--hh-tile-gap)) * -6)); }
+      to   { transform: translateY(0); }
+    }
+    @keyframes hh-scroll-up {
+      from { transform: translateY(0); }
+      to   { transform: translateY(calc((var(--hh-tile-h) + var(--hh-tile-gap)) * -6)); }
+    }
+    .hh-marquee:hover .hh-track { animation-play-state: paused; }
+    @media (prefers-reduced-motion: reduce) { .hh-track { animation: none !important; } }
+
+    .hh-tile {
+      width: 100%;
+      height: var(--hh-tile-h);
+      flex-shrink: 0;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 60%),
+        var(--bg);
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 28px 30px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hh-tile::before {
+      content: "";
+      position: absolute;
+      left: 18%; right: 18%; bottom: 26px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 70%);
+      filter: blur(2px);
+      z-index: 0;
+    }
+    .hh-pouch {
+      width: 115px;
+      height: 155px;
+      background:
+        linear-gradient(112deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.02) 32%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.06) 82%, rgba(255,255,255,0.12) 100%),
+        linear-gradient(to right, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, rgba(0,0,0,0.24) 100%),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.08) 100%),
+        var(--body);
+      border-radius: 16px 16px 6px 6px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 22px 34px -14px rgba(0, 0, 0, 0.45), 0 2px 4px -1px rgba(0, 0, 0, 0.15), inset 0 -4px 0 rgba(0, 0, 0, 0.18);
+    }
+    .hh-pouch::after {
+      content: "";
+      position: absolute;
+      left: 50%; top: 34px; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 60%, rgba(0,0,0,0.06) 100%);
+      pointer-events: none;
+    }
+    .hh-cap {
+      height: 20px;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.25) 100%),
+        var(--cap);
+      position: relative;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.25);
+    }
+    .hh-cap::before {
+      content: "";
+      position: absolute;
+      left: 10px; right: 10px; bottom: 5px;
+      height: 2.5px;
+      border-radius: 1.5px;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.28) 0px, rgba(255,255,255,0.28) 1.5px, transparent 1.5px, transparent 3px),
+        rgba(0,0,0,0.35);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .hh-cap::after {
+      content: "";
+      position: absolute;
+      right: 16px; top: 3px; width: 5px; height: 5px;
+      background: rgba(0,0,0,0.3);
+      transform: rotate(45deg);
+      border-radius: 1px;
+    }
+    .hh-band {
+      margin: auto 0 14px;
+      padding: 8px 5px;
+      background: var(--bandc);
+      color: var(--band-text);
+      text-align: center;
+      font-family: var(--serif);
+      font-size: 12px;
+      white-space: nowrap;
+      line-height: 1;
+      letter-spacing: 0.4px;
+      position: relative;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.18), inset 0 -1px 0 rgba(255,255,255,0.08), 0 1px 0 rgba(255,255,255,0.06);
+      z-index: 2;
+    }
+
+    /* meta strip under the hero */
+    .hh-meta {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 56px 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      border-bottom: 1px solid var(--ink-line);
+    }
+    .hh-meta > div { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+    .hh-meta strong {
+      display: block;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .hh-meta em { color: var(--accent); font-style: italic; }
+
+    @media (max-width: 900px) {
+      .hh-hero { padding: 32px 0 0; }
+      .hh-hero-inner { grid-template-columns: 1fr; gap: 32px; padding: 0 20px; min-height: auto; }
+      .hh-hero-title { font-size: 44px; max-width: none; }
+      .hh-hero-sub { max-width: none; }
+      .hh-marquee { height: 440px; gap: 12px; --hh-tile-h: 200px; --hh-tile-gap: 12px; }
+      .hh-col::before, .hh-col::after { height: 50px; }
+      .hh-pouch { width: 108px; height: 148px; }
+      .hh-cap { height: 18px; }
+      .hh-band { font-size: 11px; padding: 7px 4px; margin-bottom: 12px; }
+      .hh-meta { grid-template-columns: 1fr; gap: 20px; padding: 20px 20px 32px; }
+      .hh-meta strong { font-size: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="G Flexipack, home">
+        <img src="logo.png" alt="G Flexipack" />
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#industries">Industries</a>
+        <a href="#infrastructure">Infrastructure</a>
+        <a href="#why-us">Why us</a>
+        <a href="#certifications">Certifications</a>
+      </nav>
+      <a class="nav-cta" href="#inquiry">
+        Get a quote <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+    <div class="nav-progress" id="navProgress" aria-hidden="true"></div>
+  </header>
+
+  <!-- ============ 1 · HERO (headline + vertical marquee) ============ -->
+  <section class="hh-hero" id="top">
+    <div class="hh-hero-inner">
+      <div class="hh-hero-text">
+        <p class="hh-eyebrow">Flexible packaging · Est. 2016</p>
+        <h1 class="hh-hero-title">Packaging built for <em>shelf impact.</em></h1>
+        <p class="hh-hero-sub">
+          Custom-printed pouches for food, beverage, and lifestyle brands — thirteen
+          formats, printed, laminated and converted under one roof in Bharuch, Gujarat.
+        </p>
+        <div class="hh-hero-ctas">
+          <a class="cta cta-primary" href="#inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="cta hh-cta-ghost" href="#infrastructure">See the plant <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div class="hh-marquee" aria-label="Formats we print and sectors we pack for">
+        <!-- Column A — FORMATS — scrolling down -->
+        <div class="hh-col">
+          <div class="hh-track hh-down">
+            <article class="hh-tile" style="--bg:#b25c2e; --body:#eae0cd; --cap:#cfc4b0; --bandc:#c89a3a; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Zipper</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#7a6e3f; --body:#3b2a20; --cap:#241812; --bandc:#eae0cd; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Stand-Up</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#3b2a20; --body:#b25c2e; --cap:#8f4623; --bandc:#eae0cd; --band-text:#b25c2e;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Gusseted</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#eae0cd; --body:#7a6e3f; --cap:#5a512d; --bandc:#c89a3a; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">3-Side Seal</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#c89a3a; --body:#3b2a20; --cap:#241812; --bandc:#eae0cd; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Spout</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#d9c893; --body:#3b2a20; --cap:#241812; --bandc:#b25c2e; --band-text:#eae0cd;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Retort</div></div>
+            </article>
+
+            <article class="hh-tile" style="--bg:#b25c2e; --body:#eae0cd; --cap:#cfc4b0; --bandc:#c89a3a; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Zipper</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#7a6e3f; --body:#3b2a20; --cap:#241812; --bandc:#eae0cd; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Stand-Up</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#3b2a20; --body:#b25c2e; --cap:#8f4623; --bandc:#eae0cd; --band-text:#b25c2e;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Gusseted</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#eae0cd; --body:#7a6e3f; --cap:#5a512d; --bandc:#c89a3a; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">3-Side Seal</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#c89a3a; --body:#3b2a20; --cap:#241812; --bandc:#eae0cd; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Spout</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#d9c893; --body:#3b2a20; --cap:#241812; --bandc:#b25c2e; --band-text:#eae0cd;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Retort</div></div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Column B — SECTORS — scrolling up -->
+        <div class="hh-col">
+          <div class="hh-track hh-up">
+            <article class="hh-tile" style="--bg:#7a8a6c; --body:#eae0cd; --cap:#c9bda6; --bandc:#7a6e3f; --band-text:#eae0cd;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Food</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#b25c2e; --body:#3b2a20; --cap:#241812; --bandc:#c89a3a; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Beverages</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#eae0cd; --body:#3b2a20; --cap:#241812; --bandc:#7a6e3f; --band-text:#eae0cd;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Agrochemical</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#7a6e3f; --body:#c89a3a; --cap:#a67d2f; --bandc:#3b2a20; --band-text:#eae0cd;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Pharma</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#3b2a20; --body:#eae0cd; --cap:#c9bda6; --bandc:#c89a3a; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Industrial</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#d9c893; --body:#7a6e3f; --cap:#5a512d; --bandc:#eae0cd; --band-text:#7a6e3f;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Household</div></div>
+            </article>
+
+            <article class="hh-tile" style="--bg:#7a8a6c; --body:#eae0cd; --cap:#c9bda6; --bandc:#7a6e3f; --band-text:#eae0cd;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Food</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#b25c2e; --body:#3b2a20; --cap:#241812; --bandc:#c89a3a; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Beverages</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#eae0cd; --body:#3b2a20; --cap:#241812; --bandc:#7a6e3f; --band-text:#eae0cd;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Agrochemical</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#7a6e3f; --body:#c89a3a; --cap:#a67d2f; --bandc:#3b2a20; --band-text:#eae0cd;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Pharma</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#3b2a20; --body:#eae0cd; --cap:#c9bda6; --bandc:#c89a3a; --band-text:#3b2a20;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Industrial</div></div>
+            </article>
+            <article class="hh-tile" style="--bg:#d9c893; --body:#7a6e3f; --cap:#5a512d; --bandc:#eae0cd; --band-text:#7a6e3f;">
+              <div class="hh-pouch"><div class="hh-cap"></div><div class="hh-band">Household</div></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hh-meta" aria-label="At a glance">
+    <div>
+      <strong>Thirteen <em>formats</em>.</strong>
+      Stand-up, zipper, gusseted, spout, retort and more — all printed to spec, in-house.
+    </div>
+    <div>
+      <strong>From <em>5,000</em> units.</strong>
+      One of the lowest rotogravure MOQs in the market — trial orders welcome.
+    </div>
+    <div>
+      <strong>Quote in <em>24 hours</em>.</strong>
+      Send artwork, size, quantity and target ship-by date. We come back the next business day.
+    </div>
+  </section>
+
+  <!-- ============ 2 · WELCOME ============ -->
+  <section class="sec welcome" id="about">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Welcome to our company</p>
+      <h2 class="sec-title">Quality packaging, <em>since 2016.</em></h2>
+      <p class="sec-lead">
+        G Flexipack is a flexible packaging manufacturer in Bharuch, Gujarat, built on the
+        Gangamani group's 20+ years of manufacturing heritage. We print, laminate, slit and
+        convert custom pouches for brands across food, pharma, personal care and industry —
+        in a climate-controlled, dust-free plant designed to international hygiene standards.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 3 · VISION & MISSION ============ -->
+  <section class="sec vm" aria-label="Vision and mission">
+    <div class="vm-grid">
+      <div class="vm-panel" style="--vc:#b25c2e;" data-reveal>
+        <span class="vm-label">Our Vision</span>
+        <p class="vm-quote">To be the flexible packaging <em>partner of choice</em> for brands that care how their product lands on shelf.</p>
+      </div>
+      <div class="vm-panel" style="--vc:#7a6e3f;" data-reveal>
+        <span class="vm-label">Our Mission</span>
+        <p class="vm-quote">Design and print custom pouches that <em>protect the product</em> and represent the brand.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TICKER DIVIDER (marquee, sets up the stats) ============ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-set">
+        <span class="ticker-item"><em>8-colour</em> rotogravure</span><span class="ticker-star">✻</span>
+        <span class="ticker-item">Food-grade <em>barrier films</em></span><span class="ticker-star">✻</span>
+        <span class="ticker-item">ISO <em>9001:2015</em></span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>300+ MT</em> a month</span><span class="ticker-star">✻</span>
+        <span class="ticker-item">Solvent-less <em>lamination</em></span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>8,000 sq ft</em> climate-controlled plant</span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>250+</em> brands packed and shipped</span><span class="ticker-star">✻</span>
+      </div>
+      <div class="ticker-set">
+        <span class="ticker-item"><em>8-colour</em> rotogravure</span><span class="ticker-star">✻</span>
+        <span class="ticker-item">Food-grade <em>barrier films</em></span><span class="ticker-star">✻</span>
+        <span class="ticker-item">ISO <em>9001:2015</em></span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>300+ MT</em> a month</span><span class="ticker-star">✻</span>
+        <span class="ticker-item">Solvent-less <em>lamination</em></span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>8,000 sq ft</em> climate-controlled plant</span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>250+</em> brands packed and shipped</span><span class="ticker-star">✻</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 5 · OUR PRODUCTS ============ -->
+  <section id="products">
+    <div class="sec" style="padding-bottom: 30px;">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Our products</p>
+        <h2 class="sec-title">Thirteen formats, <em>printed to spec.</em></h2>
+        <p class="sec-lead">Custom dimensions, laminate structures, barrier levels and full-colour rotogravure print — all produced in-house.</p>
+      </div>
+    </div>
+
+    <div class="rail-wrap">
+      <div class="rail" id="formatRail">
+        <a class="r-card" href="product-standup.html">
+          <span class="r-fig" style="--tbg:#b96a41;"><img src="images/standup.png" alt="Stand-Up pouch" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">Stand-Up Pouches</span><span class="r-link">View details →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#e0b333;"><img src="images/zipper.png" alt="Zipper pouch" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">Zipper Pouches</span><span class="r-link">Enquire →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#46583f;"><img src="images/gusseted.png" alt="Gusseted pouch" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">Gusseted Pouches</span><span class="r-link">Enquire →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#c39089;"><img src="images/centre-seal.png" alt="Centre Seal pouch" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">Centre Seal Pouches</span><span class="r-link">Enquire →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#4fa0a0;"><img src="images/vacuum.png" alt="Vacuum pouch" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">Vacuum Pouches</span><span class="r-link">Enquire →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#7c8347;"><img src="images/reusable.png" alt="Re-usable pouch" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">Re-usable Pouches</span><span class="r-link">Enquire →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#6a788d;"><img src="images/seal3.png" alt="3-Side Seal sachet" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">3-Side Seal Pouches</span><span class="r-link">Enquire →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#d69a3c;"><img src="images/seal4.png" alt="4-Side Seal bag" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">4-Side Seal Bags</span><span class="r-link">Enquire →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#74405b;"><img src="images/patch-handle.png" alt="Patch Handle bag" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">Patch Handle Bags</span><span class="r-link">Enquire →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#c17d5a;"><img src="images/spout.png" alt="Spout pouch" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">Spout Pouches</span><span class="r-link">Enquire →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#4a4e55;"><img src="images/filmroll.png" alt="Poly film roll" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">Poly Film Rolls</span><span class="r-link">Enquire →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#6d2b3d;"><img src="images/retort.png" alt="Retort pouch" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">Retort Pouches</span><span class="r-link">Enquire →</span></span>
+        </a>
+        <a class="r-card" href="#inquiry">
+          <span class="r-fig" style="--tbg:#a3bd54;"><img src="images/breathing.png" alt="Breathing pouch" loading="lazy" /></span>
+          <span class="r-body"><span class="r-name">Breathing Pouches</span><span class="r-link">Enquire →</span></span>
+        </a>
+      </div>
+      <div class="rail-btns">
+        <button class="rail-btn" id="railPrev" aria-label="Previous formats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
+        <button class="rail-btn" id="railNext" aria-label="Next formats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"></polyline></svg></button>
+      </div>
+    </div>
+
+    <div class="rail-nav">
+      <span class="rail-hint hint-desktop">Drag, or use the arrows</span>
+      <span class="rail-hint hint-mobile">Swipe to explore →</span>
+      <div class="rail-progress">
+        <div class="rail-track"><div class="rail-fill" id="railFill"></div></div>
+        <span class="rail-count"><em id="railCurrent">01</em> / 13</span>
+      </div>
+    </div>
+    <div style="height: 40px;"></div>
+  </section>
+
+  <!-- ============ 6 · INDUSTRIES WE SERVE ============ -->
+  <section class="industries" id="industries">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Industries we serve</p>
+        <h2 class="sec-title">Seven sectors, <em>one standard.</em></h2>
+        <p class="sec-lead">The hygiene, barrier and documentation adapt to the sector. The print quality doesn't.</p>
+      </div>
+      <div class="acc" id="indAcc" data-reveal>
+        <div class="acc-panel is-open" style="--ic:#b25c2e;">
+          <img class="acc-photo" src="images/sector-food.png" alt="Dark Roast Coffee pouch — food sector" loading="lazy" />
+          <div class="acc-photo-scrim"></div>
+          <div class="acc-closed"><span class="acc-num">01</span><span class="acc-name-v">Food</span></div>
+          <div class="acc-open"><span class="acc-num">01</span><h3>Food</h3><p>Snacks · coffee &amp; tea · spices · frozen · bakery.</p></div>
+        </div>
+        <div class="acc-panel" style="--ic:#c89a3a;">
+          <img class="acc-photo" src="images/sector-beverages.png" alt="Cold-Pressed Orange spout pouch — beverages sector" loading="lazy" />
+          <div class="acc-photo-scrim"></div>
+          <div class="acc-closed"><span class="acc-num">02</span><span class="acc-name-v">Beverages</span></div>
+          <div class="acc-open"><span class="acc-num">02</span><h3>Beverages</h3><p>Juice spout pouches · sauces · energy gels · liners.</p></div>
+        </div>
+        <div class="acc-panel" style="--ic:#7a8a6c;">
+          <img class="acc-photo" src="images/sector-pharma.png" alt="ORS Electrolyte sachets — pharmaceutical sector" loading="lazy" />
+          <div class="acc-photo-scrim"></div>
+          <div class="acc-closed"><span class="acc-num">03</span><span class="acc-name-v">Pharma&shy;ceuticals</span></div>
+          <div class="acc-open"><span class="acc-num">03</span><h3>Pharmaceuticals</h3><p>Dosing sachets · blister foil · sterile formats.</p></div>
+        </div>
+        <div class="acc-panel" style="--ic:#d9c893;">
+          <img class="acc-photo" src="images/sector-personal-care.png" alt="Argan Serum pouch — personal care sector" loading="lazy" />
+          <div class="acc-photo-scrim"></div>
+          <div class="acc-closed"><span class="acc-num">04</span><span class="acc-name-v">Personal Care</span></div>
+          <div class="acc-open"><span class="acc-num">04</span><h3>Personal Care</h3><p>Shampoo sachets · creams &amp; serums · face masks.</p></div>
+        </div>
+        <div class="acc-panel" style="--ic:#7a6e3f;">
+          <img class="acc-photo" src="images/sector-agro.png" alt="Hybrid Seeds bag — agrochemical sector" loading="lazy" />
+          <div class="acc-photo-scrim"></div>
+          <div class="acc-closed"><span class="acc-num">05</span><span class="acc-name-v">Agro&shy;chemical</span></div>
+          <div class="acc-open"><span class="acc-num">05</span><h3>Agrochemical</h3><p>Seeds · fertilizer · pesticide · UV protection.</p></div>
+        </div>
+        <div class="acc-panel" style="--ic:#b25c2e;">
+          <img class="acc-photo" src="images/sector-household.png" alt="Laundry Detergent Refill pouch — household sector" loading="lazy" />
+          <div class="acc-photo-scrim"></div>
+          <div class="acc-closed"><span class="acc-num">06</span><span class="acc-name-v">Household</span></div>
+          <div class="acc-open"><span class="acc-num">06</span><h3>Household Essentials</h3><p>Detergents · cleaners · refill formats.</p></div>
+        </div>
+        <div class="acc-panel" style="--ic:#3b2a20;">
+          <img class="acc-photo" src="images/sector-industrial.png" alt="Lubricant Grade 40 pouch — industrial sector" loading="lazy" />
+          <div class="acc-photo-scrim"></div>
+          <div class="acc-closed"><span class="acc-num">07</span><span class="acc-name-v">Industrial</span></div>
+          <div class="acc-open"><span class="acc-num">07</span><h3>Industrial</h3><p>Lubricants · chemicals · poly film rolls.</p></div>
+        </div>
+      </div>
+      <p class="shelf-hint hint-desktop">Hover a sector to open it</p>
+      <p class="shelf-hint hint-mobile">Tap a sector to open it</p>
+    </div>
+  </section>
+
+  <!-- ============ 7 · INFRASTRUCTURE ============ -->
+  <section class="sec" id="infrastructure">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Infrastructure</p>
+      <h2 class="sec-title">8,000 sq ft in <em>Bharuch, Gujarat.</em></h2>
+    </div>
+    <!-- Desktop: photo pins on the left, capabilities step on the right.
+         Mobile: sticky stage is hidden, each step carries its own inline photo. -->
+    <div class="scrolly">
+      <div class="scrolly-sticky">
+        <div class="sc-stage" id="scStage">
+          <figure class="sc-shot is-active" data-shot="1" style="margin:0;">
+            <div class="photo-soon" style="width:100%;height:100%;">8-colour rotogravure press<br />photo from the plant</div>
+            <figcaption>8-colour rotogravure</figcaption>
+          </figure>
+          <figure class="sc-shot" data-shot="2" style="margin:0;">
+            <img src="images/lami.png" alt="Solvent-less lamination machine" />
+            <figcaption>Solvent-less lamination</figcaption>
+          </figure>
+          <figure class="sc-shot" data-shot="3" style="margin:0;">
+            <img src="images/slitting-machine.png" alt="Slitting machine" />
+            <figcaption>Slitting line</figcaption>
+          </figure>
+          <figure class="sc-shot" data-shot="4" style="margin:0;">
+            <img src="images/pouch.png" alt="Pouching line" />
+            <figcaption>Pouching machines</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="scrolly-steps">
+        <div class="sc-step is-active" data-step="1">
+          <figure class="sc-inline" style="margin:0;"><div class="photo-soon" style="width:100%;height:100%;">8-colour rotogravure press<br />photo from the plant</div></figure>
+          <p class="sc-num">i</p>
+          <h3>8-Colour Rotogravure Press</h3>
+          <p>Auto registration and web guiding for precise multi-colour print — deep, repeatable colour across long runs.</p>
+        </div>
+        <div class="sc-step" data-step="2">
+          <figure class="sc-inline" style="margin:0;"><img src="images/lami.png" alt="Solvent-less lamination machine" loading="lazy" /></figure>
+          <p class="sc-num">ii</p>
+          <h3>Solvent-Less &amp; Solvent-Based Lamination</h3>
+          <p>Food-safe multi-layer bonding and specialised barrier structures, matched to the product inside.</p>
+        </div>
+        <div class="sc-step" data-step="3">
+          <figure class="sc-inline" style="margin:0;"><img src="images/slitting-machine.png" alt="Slitting machine" loading="lazy" /></figure>
+          <p class="sc-num">iii</p>
+          <h3>Precision Slitting Lines</h3>
+          <p>Tension-controlled winding to exact reel widths, ready for downstream pouching or delivery as film rolls.</p>
+        </div>
+        <div class="sc-step" data-step="4">
+          <figure class="sc-inline" style="margin:0;"><img src="images/pouch.png" alt="Pouching line" loading="lazy" /></figure>
+          <p class="sc-num">iv</p>
+          <h3>Centre- &amp; Side-Seal Pouching</h3>
+          <p>Finished pouches converted in-house — every format from stand-up to spout, sealed and inspected on line.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ 8 · OUR CLIENTELE — running marquee ============ -->
+  <section class="clientele" aria-label="Our clientele">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Our clientele</p>
+        <h2 class="sec-title">Trusted across sectors <em>and borders.</em></h2>
+      </div>
+      <!-- PLACEHOLDER MARQUEE: anonymous sector badges.
+           Swap .client-badge elements for grayscale client logo <img> tiles
+           once written permission from clients is confirmed. -->
+      <div class="client-marquee" data-reveal>
+        <div class="client-track">
+          <div class="client-set">
+            <span class="client-badge"><b>Leading snack brand</b><span>Gujarat · India</span></span>
+            <span class="client-badge"><b>Tea exporter</b><span>United Kingdom</span></span>
+            <span class="client-badge"><b>Pharma packer</b><span>Maharashtra · India</span></span>
+            <span class="client-badge"><b>Spice house</b><span>UAE</span></span>
+            <span class="client-badge"><b>Agro seeds brand</b><span>Madhya Pradesh</span></span>
+            <span class="client-badge"><b>FMCG group</b><span>East Africa</span></span>
+            <span class="client-badge"><b>Dry fruits brand</b><span>Rajasthan · India</span></span>
+            <span class="client-badge"><b>Personal care label</b><span>Gujarat · India</span></span>
+          </div>
+          <div class="client-set" aria-hidden="true">
+            <span class="client-badge"><b>Leading snack brand</b><span>Gujarat · India</span></span>
+            <span class="client-badge"><b>Tea exporter</b><span>United Kingdom</span></span>
+            <span class="client-badge"><b>Pharma packer</b><span>Maharashtra · India</span></span>
+            <span class="client-badge"><b>Spice house</b><span>UAE</span></span>
+            <span class="client-badge"><b>Agro seeds brand</b><span>Madhya Pradesh</span></span>
+            <span class="client-badge"><b>FMCG group</b><span>East Africa</span></span>
+            <span class="client-badge"><b>Dry fruits brand</b><span>Rajasthan · India</span></span>
+            <span class="client-badge"><b>Personal care label</b><span>Gujarat · India</span></span>
+          </div>
+        </div>
+      </div>
+      <p class="client-note">Client identities protected under supply agreements — references available on request.</p>
+    </div>
+  </section>
+
+  <!-- ============ 9 · WHY US ============ -->
+  <section class="sec" id="why-us">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Why us</p>
+      <h2 class="sec-title">What sets us <em>apart.</em></h2>
+    </div>
+    <div class="why-grid stagger" data-reveal>
+      <div class="why-card" style="--wc:#b25c2e;">
+        <span class="why-glyph">i</span>
+        <h4>Assured Quality</h4>
+        <p>ISO 9001:2015 systems and an in-house ASTM lab — eight tests on every batch, full documentation at dispatch.</p>
+      </div>
+      <div class="why-card" style="--wc:#c89a3a;">
+        <span class="why-glyph">ii</span>
+        <h4>On-Time Delivery</h4>
+        <p>3–5 week production lead times, honestly quoted and tracked — with sea freight coordinated from Mundra Port.</p>
+      </div>
+      <div class="why-card" style="--wc:#7a6e3f;">
+        <span class="why-glyph">iii</span>
+        <h4>Customized Solutions</h4>
+        <p>Structure, size, barrier and finish engineered per product — recommendation within 24 hours of your brief.</p>
+      </div>
+      <div class="why-card" style="--wc:#7a8a6c;">
+        <span class="why-glyph">iv</span>
+        <h4>Advanced Machinery</h4>
+        <p>8-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p>
+      </div>
+      <div class="why-card" style="--wc:#3b2a20;">
+        <span class="why-glyph">v</span>
+        <h4>Skilled Workforce</h4>
+        <p>An experienced production and QC team under the Gangamani group's 20+ years of manufacturing discipline.</p>
+      </div>
+      <div class="why-card" style="--wc:#b25c2e;">
+        <span class="why-glyph">vi</span>
+        <h4>100% Recyclable Options</h4>
+        <p>Mono-material LLDPE structures for EPR-compliant brands — sustainability without sacrificing shelf appeal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10 · CERTIFICATION ============ -->
+  <section class="certs" id="certifications">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Certification</p>
+        <h2 class="sec-title">Audited, tested, <em>documented.</em></h2>
+      </div>
+      <div class="cert-row" data-reveal>
+        <div class="cert-emblem">
+          <span class="cert-mark">✦</span>
+          <h4>ISO 9001:2015</h4>
+          <p>Certified quality management system across procurement, production and dispatch.</p>
+        </div>
+        <div class="cert-emblem">
+          <span class="cert-mark">✦</span>
+          <h4>ASTM Standard QC</h4>
+          <p>Eight-test laboratory verification on every batch — GSM to heat-seal strength.</p>
+        </div>
+        <div class="cert-emblem">
+          <span class="cert-mark">✦</span>
+          <h4>100% Recyclable Options</h4>
+          <p>Mono-material structures available for EPR-compliant, sustainability-first brands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 11 · INQUIRY ============ -->
+  <section class="inquiry" id="inquiry">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Inquiry</p>
+        <h2 class="sec-title">Tell us what <em>you pack.</em></h2>
+        <p class="sec-lead">Share your requirements — we come back with a structure recommendation within 24 hours and a detailed quote within two business days.</p>
+      </div>
+      <div class="inq-grid">
+        <!-- Wire to Formspree (or backend) before go-live; static demo for now -->
+        <form class="inq-form" onsubmit="return false" data-reveal>
+          <div class="fg"><label for="q-name">Name</label><input id="q-name" type="text" placeholder="Jane Smith" /></div>
+          <div class="fg"><label for="q-company">Company</label><input id="q-company" type="text" placeholder="Your brand" /></div>
+          <div class="fg"><label for="q-email">Business email</label><input id="q-email" type="email" placeholder="jane@yourbrand.com" /></div>
+          <div class="fg"><label for="q-phone">Phone / WhatsApp</label><input id="q-phone" type="tel" placeholder="+91 …" /></div>
+          <div class="fg"><label for="q-product">Product type</label>
+            <select id="q-product">
+              <option>Select format…</option>
+              <option>Stand-Up Pouches</option>
+              <option>Zipper Pouches</option>
+              <option>Gusseted Pouches</option>
+              <option>Centre Seal Pouches</option>
+              <option>Vacuum Pouches</option>
+              <option>Re-usable Pouches</option>
+              <option>3-Side Seal Pouches</option>
+              <option>4-Side Seal Bags</option>
+              <option>Patch Handle Bags</option>
+              <option>Spout Pouches</option>
+              <option>Poly Film Rolls</option>
+              <option>Retort Pouches</option>
+              <option>Breathing Pouches</option>
+              <option>Other / Multiple</option>
+            </select>
+          </div>
+          <div class="fg"><label for="q-qty">Quantity</label><input id="q-qty" type="text" placeholder="e.g. 25,000 units" /></div>
+          <div class="fg fg-full"><label for="q-msg">Requirements</label><textarea id="q-msg" placeholder="Size, barrier needs, artwork status, target ship-by date…"></textarea></div>
+          <button class="cta cta-light inq-submit" style="justify-content:center">Send enquiry <span class="arrow" aria-hidden="true">→</span></button>
+        </form>
+        <div class="inq-side" data-reveal>
+          <h3>Prefer to talk <em>directly?</em></h3>
+          <ul class="inq-rows">
+            <li><span class="k">Email</span><span><a href="mailto:info@gflexipack.com">info@gflexipack.com</a></span></li>
+            <li><span class="k">Phone</span><span><a href="tel:+919824032765">+91 98240 32765</a><br /><a href="tel:+917046199980">+91 70461 99980</a></span></li>
+            <li><span class="k">Hours</span><span>Monday–Saturday · 9am–6pm IST</span></li>
+            <li><span class="k">Plant</span><span>Plot 43, GIDC Phase-1, Narmada Nagar,<br />Bharuch, Gujarat 392015, India</span></li>
+            <li><span class="k">Terms</span><span>MOQ 5,000 units · 30/70 payment · 3–5 week lead · FOB Mundra / CIF</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logo.png" alt="G Flexipack" />
+        <p>Flexible packaging, made in Bharuch, Gujarat. ISO 9001:2015 certified, exporting worldwide from Mundra Port since 2016.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="product-standup.html">Stand-Up Pouches</a></li>
+          <li><a href="#products">Zipper · Gusseted · Spout</a></li>
+          <li><a href="#products">Retort · Vacuum · Sachets</a></li>
+          <li><a href="#products">All 13 formats →</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#infrastructure">Infrastructure</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <address>
+          Plot 43, GIDC Phase-1<br />
+          Narmada Nagar, Bharuch<br />
+          Gujarat 392015, India<br /><br />
+          <a href="mailto:info@gflexipack.com">info@gflexipack.com</a><br />
+          <a href="tel:+919824032765">+91 98240 32765</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 G Flexipack. All rights reserved.</p>
+      <p>ISO 9001:2015 · ASTM Standard QC · 100% Recyclable Options</p>
+    </div>
+  </footer>
+
+  <div class="option-badge" aria-hidden="true">Option E · Boardroom, in motion</div>
+
+  <script>
+    // ---------- scroll reveal ----------
+    const revealIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("is-in");
+          revealIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll("[data-reveal]").forEach((el) => revealIO.observe(el));
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // ---------- stat counters (count up when visible) ----------
+    const counterEls = document.querySelectorAll(".counter-num");
+    const fmt = (n, comma) => comma ? n.toLocaleString("en-IN") : String(n);
+    const counterIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        counterIO.unobserve(e.target);
+        const el = e.target;
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || "";
+        const comma = !!el.dataset.comma;
+        if (reduceMotion) { el.textContent = fmt(target, comma) + suffix; return; }
+        const t0 = performance.now();
+        const DURATION = 1300;
+        const tick = (t) => {
+          const p = Math.min(1, (t - t0) / DURATION);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(Math.round(target * eased), comma) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.4 });
+    counterEls.forEach((el) => counterIO.observe(el));
+
+    // ---------- nav scroll-progress bar ----------
+    const navProgress = document.getElementById("navProgress");
+    const syncProgress = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const t = max > 0 ? h.scrollTop / max : 0;
+      navProgress.style.width = (t * 100) + "%";
+    };
+    window.addEventListener("scroll", syncProgress, { passive: true });
+    window.addEventListener("resize", syncProgress);
+    syncProgress();
+
+    // ---------- formats rail: arrows, drag, scrubber + counter ----------
+    const rail = document.getElementById("formatRail");
+    if (rail) {
+      const prevBtn = document.getElementById("railPrev");
+      const nextBtn = document.getElementById("railNext");
+      const railFill = document.getElementById("railFill");
+      const railCurrent = document.getElementById("railCurrent");
+      const PANEL_COUNT = rail.querySelectorAll(".r-card").length;
+      const panelStep = () => {
+        const card = rail.querySelector(".r-card");
+        return card ? card.getBoundingClientRect().width + 18 : 320;
+      };
+      prevBtn.addEventListener("click", () => rail.scrollBy({ left: -panelStep(), behavior: "smooth" }));
+      nextBtn.addEventListener("click", () => rail.scrollBy({ left: panelStep(), behavior: "smooth" }));
+
+      const syncRail = () => {
+        const max = rail.scrollWidth - rail.clientWidth;
+        prevBtn.disabled = rail.scrollLeft <= 4;
+        nextBtn.disabled = rail.scrollLeft >= max - 4;
+        const t = max > 0 ? rail.scrollLeft / max : 0;
+        railFill.style.width = (8 + t * 92) + "%";
+        const current = Math.min(PANEL_COUNT, 1 + Math.round(t * (PANEL_COUNT - 1)));
+        railCurrent.textContent = String(current).padStart(2, "0");
+      };
+      rail.addEventListener("scroll", syncRail, { passive: true });
+      window.addEventListener("resize", syncRail);
+      syncRail();
+
+      // pointer drag-to-scroll (desktop); suppress the click if we actually dragged
+      let dragStartX = 0, dragScrollLeft = 0, dragging = false, moved = false;
+      rail.addEventListener("pointerdown", (e) => {
+        dragging = true; moved = false;
+        dragStartX = e.clientX;
+        dragScrollLeft = rail.scrollLeft;
+        rail.classList.add("is-dragging");
+      });
+      window.addEventListener("pointermove", (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - dragStartX;
+        if (Math.abs(dx) > 4) moved = true;
+        rail.scrollLeft = dragScrollLeft - dx;
+      });
+      window.addEventListener("pointerup", () => {
+        dragging = false;
+        rail.classList.remove("is-dragging");
+      });
+      rail.addEventListener("click", (e) => { if (moved) e.preventDefault(); }, true);
+    }
+
+    // ---------- industries accordion — hover opens on desktop, tap everywhere ----------
+    const accPanels = document.querySelectorAll(".acc-panel");
+    const openAcc = (target) => accPanels.forEach((p) => p.classList.toggle("is-open", p === target));
+    const accDesktop = () => window.matchMedia("(min-width: 901px)").matches;
+    accPanels.forEach((p) => {
+      p.addEventListener("mouseenter", () => { if (accDesktop()) openAcc(p); });
+      p.addEventListener("click", () => {
+        // on mobile, tapping the open one collapses it
+        if (!accDesktop() && p.classList.contains("is-open")) { p.classList.remove("is-open"); return; }
+        openAcc(p);
+      });
+    });
+
+    // ---------- infrastructure scrollytelling — active step drives the pinned shot ----------
+    const scStage = document.getElementById("scStage");
+    if (scStage) {
+      const shots = scStage.querySelectorAll(".sc-shot");
+      const scSteps = document.querySelectorAll(".sc-step");
+      const setShot = (n) => {
+        shots.forEach((s) => s.classList.toggle("is-active", s.dataset.shot === n));
+      };
+      const scIO = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            scSteps.forEach((s) => s.classList.remove("is-active"));
+            e.target.classList.add("is-active");
+            setShot(e.target.dataset.step);
+          }
+        });
+      }, { rootMargin: "-45% 0px -45% 0px" });
+      scSteps.forEach((s) => scIO.observe(s));
+    }
+  </script>
+</body>
+</html>
