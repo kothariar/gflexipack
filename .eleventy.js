@@ -1,7 +1,13 @@
 const fs = require("fs");
 const path = require("path");
+const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 
 module.exports = function (eleventyConfig) {
+  // Rewrite root-relative URLs (/assets, /products, …) at build time to include
+  // the pathPrefix, so the site works when served from the /gflexipack/ subpath
+  // on GitHub Pages. Set pathPrefix below to "/" if a custom root domain is added.
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+
   // Inline a project file's raw contents (used to embed CSS/JS into the one-page build)
   eleventyConfig.addFilter("inlineFile", function (p) {
     try {
@@ -44,6 +50,6 @@ module.exports = function (eleventyConfig) {
     templateFormats: ["njk", "md", "html"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
-    pathPrefix: "/",
+    pathPrefix: "/gflexipack/",
   };
 };
