@@ -1,0 +1,35 @@
+---
+layout: layouts/base.njk
+permalink: "/industries/"
+title: "Industries We Serve — Flexible Packaging by Sector | G Flexipack"
+description: "Flexible packaging for food, beverage, pharma, personal care, agrochemical, household and industrial brands. Sector-specific barrier, hygiene and documentation from G Flexipack, Bharuch."
+pageImage: "/assets/images/sector-food.png"
+---
+
+  <section class="pp-hero" style="display:block; text-align:center; padding-bottom:40px;">
+    <p class="pp-crumbs" style="text-align:center;"><a href="/">Home</a><span>/</span>Industries</p>
+    <h1 style="margin:0 auto 20px;">Seven sectors, <em>one standard.</em></h1>
+    <p class="pp-intro" style="margin:0 auto;">The hygiene, barrier and documentation adapt to the sector. The print quality doesn't. Explore how we pack for each industry.</p>
+  </section>
+
+  <section class="sec" style="padding-top:20px;">
+    <div class="pp-grid">
+      {% for s in industries %}<a class="pp-card" href="/industries/{{ s.slug }}/" data-reveal>
+        <span class="pp-card-fig" style="--tbg:{{ s.accent }};"><img src="/assets/images/{{ s.image }}.png" alt="{{ s.name }} packaging" loading="lazy" /></span>
+        <span class="pp-card-body">
+          <h3>{{ s.name }}</h3>
+          <p>{{ s.applications | join(' · ') }}.</p>
+          <span class="pp-card-link">Explore sector →</span>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="pp-band">
+    <div class="sec">
+      <h2 data-reveal>Packaging matched to <em>your sector.</em></h2>
+      <p data-reveal>Tell us what you pack — we recommend the right structure and format within {{ site.quoteTurnaround }}.</p>
+      <a class="cta cta-light" href="/#inquiry" data-reveal>Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>

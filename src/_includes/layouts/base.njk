@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+{% include "partials/head.njk" %}
+{% if jsonld %}
+<script type="application/ld+json">{{ jsonld | safe }}</script>
+{% endif %}
+</head>
+<body id="top">
+  {% include "partials/nav.njk" %}
+  {{ content | safe }}
+  {% include "partials/footer.njk" %}
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

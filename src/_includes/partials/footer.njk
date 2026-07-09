@@ -1,0 +1,40 @@
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/assets/images/logo.png" alt="G Flexipack" />
+        <p>Flexible packaging, made in Bharuch, Gujarat. ISO 9001:2015 certified, exporting worldwide from Mundra Port since {{ site.founded }}.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="/products/stand-up-pouches/">Stand-Up Pouches</a></li>
+          <li><a href="/products/spout-pouches/">Spout &amp; Zipper Pouches</a></li>
+          <li><a href="/products/retort-pouches/">Retort &amp; Vacuum Pouches</a></li>
+          <li><a href="/products/">All 13 formats →</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/industries/">Industries</a></li>
+          <li><a href="/#infrastructure">Infrastructure</a></li>
+          <li><a href="/quality/">Quality &amp; certifications</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <address>
+          {{ site.address.street }}<br />
+          {{ site.address.city }}, {{ site.address.region }} {{ site.address.postalCode }}<br />
+          {{ site.address.country }}<br /><br />
+          <a href="mailto:{{ site.email }}">{{ site.email }}</a><br />
+          <a href="tel:{{ site.phonePrimaryE164 }}">{{ site.phones[0] }}</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {{ '' | year }} G Flexipack. All rights reserved.</p>
+      <p>ISO 9001:2015 · ASTM Standard QC · 100% Recyclable Options</p>
+    </div>
+  </footer>

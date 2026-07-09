@@ -1,0 +1,93 @@
+[
+  {
+    "slug": "food",
+    "name": "Food & Grocery",
+    "short": "Food",
+    "num": "01",
+    "image": "sector-food",
+    "accent": "#b25c2e",
+    "intro": "From snacks and coffee to spices and frozen meals, food brands need packaging that keeps product fresh for months and looks sharp on a crowded shelf. We build high-barrier, food-safe structures and print them in deep, repeatable rotogravure colour.",
+    "metaDescription": "Food-grade flexible packaging for snacks, coffee, tea, spices and frozen foods — high-barrier metallised films, food-safe inner seals, rotogravure print. Made in Bharuch, Gujarat.",
+    "applications": ["Snacks & namkeen", "Coffee & tea", "Spices & masalas", "Frozen & ready meals", "Baby food", "Bakery & confectionery"],
+    "build": "High-barrier metallised film with a food-safe inner seal; degassing valves for coffee.",
+    "formats": ["stand-up-pouches", "gusseted-pouches", "centre-seal-pouches", "breathing-pouches"]
+  },
+  {
+    "slug": "beverages",
+    "name": "Beverages",
+    "short": "Beverages",
+    "num": "02",
+    "image": "sector-beverages",
+    "accent": "#c89a3a",
+    "intro": "Liquid brands are moving from bottles to pouches for lighter freight and a better shelf story. Our welded spout pouches and burst-tested seals carry juices, sauces and energy gels leak-free, ambient or chilled.",
+    "metaDescription": "Flexible packaging for beverages — leak-proof spout pouches for juice, sauces and energy gels, plus bag-in-box liners. Burst-tested seals, rotogravure print. Made in Bharuch, Gujarat.",
+    "applications": ["Juice & fruit drinks", "Sauces & purées", "Energy gels", "Bag-in-box liners", "Liquid concentrates"],
+    "build": "Leak-proof welded spout, burst-strength tested seals, high-barrier liquid structures.",
+    "formats": ["spout-pouches", "stand-up-pouches", "3-side-seal-pouches"]
+  },
+  {
+    "slug": "pharmaceuticals",
+    "name": "Pharmaceuticals",
+    "short": "Pharmaceuticals",
+    "num": "03",
+    "image": "sector-pharma",
+    "accent": "#7a8a6c",
+    "intro": "Pharma packaging is judged on barrier, hygiene and documentation. We run dosing sachets, blister-grade foils and sterile formats in a climate-controlled, dust-free plant, with ASTM-tested batches documented at dispatch.",
+    "metaDescription": "Pharmaceutical flexible packaging — dosing sachets, ORS, blister foil and sterile formats. Climate-controlled plant, ISO 9001:2015, ASTM-tested batches. Made in Bharuch, Gujarat.",
+    "applications": ["Dosing sachets", "ORS & electrolytes", "Blister & strip foil", "Powders & granules", "Sterile single-serve"],
+    "build": "High-barrier foil laminates, tamper-evident seals, full batch documentation.",
+    "formats": ["3-side-seal-pouches", "4-side-seal-bags", "stand-up-pouches"]
+  },
+  {
+    "slug": "personal-care",
+    "name": "Personal Care",
+    "short": "Personal Care",
+    "num": "04",
+    "image": "sector-personal-care",
+    "accent": "#d9c893",
+    "intro": "Beauty and personal-care brands need packaging that reads premium and protects delicate formulations. We print creams, serums, shampoos and masks in matte and metallic finishes with spot-gloss and window options.",
+    "metaDescription": "Personal-care flexible packaging for shampoo sachets, creams, serums and face masks — premium matte and metallic finishes, spot gloss. Made in Bharuch, Gujarat.",
+    "applications": ["Shampoo & conditioner sachets", "Creams & serums", "Sheet & face masks", "Powders & scrubs", "Sample & travel packs"],
+    "build": "Premium finishes — matte, metallic, spot gloss and registered window cut-outs.",
+    "formats": ["4-side-seal-bags", "3-side-seal-pouches", "spout-pouches"]
+  },
+  {
+    "slug": "agrochemical",
+    "name": "Agrochemical",
+    "short": "Agrochemical",
+    "num": "05",
+    "image": "sector-agro",
+    "accent": "#7a6e3f",
+    "intro": "Seeds, fertilizers and crop-protection products need UV protection, moisture barrier and tough seals that survive rough handling in the field. We build durable, high-barrier structures with clear regulatory print.",
+    "metaDescription": "Agrochemical flexible packaging for seeds, fertilizer and pesticides — UV protection, moisture barrier, rugged seals. Rotogravure printed. Made in Bharuch, Gujarat.",
+    "applications": ["Seeds & hybrids", "Fertilizers", "Pesticides & crop protection", "Animal feed", "Micronutrients"],
+    "build": "UV-protective, high-barrier laminates with reinforced seals for field handling.",
+    "formats": ["patch-handle-bags", "gusseted-pouches", "reusable-pouches"]
+  },
+  {
+    "slug": "household",
+    "name": "Household Essentials",
+    "short": "Household",
+    "num": "06",
+    "image": "sector-household",
+    "accent": "#b25c2e",
+    "intro": "Detergents, cleaners and refills are shifting to flexible packs that cut plastic and freight. We build lightweight refill formats and durable resealable pouches that stand up to powders and liquids alike.",
+    "metaDescription": "Household flexible packaging for detergents, cleaners and refill packs — lightweight refill formats, durable resealable pouches. Made in Bharuch, Gujarat.",
+    "applications": ["Detergents & powders", "Liquid cleaners", "Refill packs", "Fabric care", "Dishwash & surface care"],
+    "build": "Durable multilayer films, resealable zippers and leak-proof liquid structures.",
+    "formats": ["reusable-pouches", "spout-pouches", "stand-up-pouches"]
+  },
+  {
+    "slug": "industrial",
+    "name": "Industrial",
+    "short": "Industrial",
+    "num": "07",
+    "image": "sector-industrial",
+    "accent": "#3b2a20",
+    "intro": "Industrial products — lubricants, specialty chemicals and powders — demand rugged films and reliable seals in tough supply chains. We supply durable multilayer pouches and printed film rolls built for the load.",
+    "metaDescription": "Industrial flexible packaging for lubricants, chemicals and powders — rugged multilayer films, reliable seals, printed roll stock. Made in Bharuch, Gujarat.",
+    "applications": ["Lubricants & greases", "Specialty chemicals", "Powders & minerals", "Additives", "B2B bulk packs"],
+    "build": "Rugged multilayer films and printed roll stock engineered for heavy, demanding use.",
+    "formats": ["poly-film-rolls", "patch-handle-bags", "reusable-pouches"]
+  }
+]

@@ -1,0 +1,126 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: products
+  size: 1
+  alias: product
+permalink: "/products/{{ product.slug }}/"
+ogType: "product"
+eleventyComputed:
+  title: "{{ product.name }} Manufacturer | G Flexipack · Bharuch, India"
+  description: "{{ product.metaDescription }}"
+  pageImage: "/assets/images/{{ product.image }}.png"
+---
+{% set defaultStructures = ["PET / METPET / PE", "MATTE BOPP / METPET / PE", "PET / PE", "BOPA / PE", "PET / Alu / PE", "PET / Alu / BOPA / PE", "PE / PE", "Alox PET / PE"] %}
+{% set structures = product.structures or defaultStructures %}
+
+  <!-- HERO -->
+  <section class="pp-hero">
+    <div>
+      <p class="pp-crumbs">
+        <a href="/">Home</a><span>/</span><a href="/products/">Products</a><span>/</span>{{ product.name }}
+      </p>
+      <h1>{{ product.name }}<em>.</em></h1>
+      <p class="pp-intro">{{ product.intro }}</p>
+      <div class="pp-hero-ctas">
+        <a class="cta cta-primary" href="/#inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="cta cta-ghost" href="/products/">All formats <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="pp-photo" data-reveal>
+      <img src="/assets/images/{{ product.image }}.png" alt="{{ product.name }} — custom printed by G Flexipack" />
+    </div>
+  </section>
+
+  <!-- AT A GLANCE -->
+  <section class="pp-glance" aria-label="At a glance">
+    <div class="pp-glance-inner">
+      <div class="pp-g-item"><span class="pp-g-k">Min. order</span><span class="pp-g-v">{{ site.moq }}</span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Lead time</span><span class="pp-g-v">{{ site.leadTime }}</span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Structures</span><span class="pp-g-v">{{ structures | length }} <i>laminates</i></span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Closure</span><span class="pp-g-v">{{ product.closure }}</span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Print</span><span class="pp-g-v">8-colour <i>rotogravure</i></span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Shipping</span><span class="pp-g-v">{{ site.incoterms }}</span></div>
+    </div>
+  </section>
+
+  <!-- KEY FEATURES -->
+  <section class="sec">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Key features</p>
+      <h2 class="sec-title">Why brands choose <em>this format.</em></h2>
+    </div>
+    <div class="pp-features" data-reveal>
+      {% for f in product.features %}<div class="pp-feature"><b>{{ f.t }}</b><span>{{ f.d }}</span></div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- STRUCTURE OPTIONS -->
+  <section class="pp-dark">
+    <div class="sec">
+      <div class="sec-head" data-reveal>
+        <p class="sec-eyebrow">Structure options</p>
+        <h2 class="sec-title">Laminate structures, <em>engineered per product.</em></h2>
+        <p class="sec-lead">Barrier, stiffness and seal strength are chosen for what you pack — not off a shelf.</p>
+      </div>
+      <div class="pp-chips" data-reveal>
+        {% for s in structures %}<span class="pp-chip">{{ s }}</span>
+        {% endfor %}<span class="pp-chip is-rec">MDOPE / PE — Recyclable</span>
+      </div>
+      <p style="text-align:center; margin:28px 0 0; color:var(--cream-soft); font-size:13px;">Not sure which structure fits? Send your product — we recommend a build <em style="color:var(--gold); font-style:italic;">within {{ site.quoteTurnaround }}.</em></p>
+    </div>
+  </section>
+
+  <!-- APPLICATIONS -->
+  <section class="sec">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Product market</p>
+      <h2 class="sec-title">Commonly <em>packed products.</em></h2>
+    </div>
+    <div class="pp-apps" data-reveal>
+      {% for a in product.applications %}<span class="pp-app">{{ a }}</span>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="pp-band" id="quote">
+    <div class="sec">
+      <h2 data-reveal>Spec your <em>{{ product.name | lower }}.</em></h2>
+      <p data-reveal>Send dimensions, quantity, barrier needs and artwork status — structure recommendation within {{ site.quoteTurnaround }}.</p>
+      <a class="cta cta-light" href="/#inquiry" data-reveal>Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+      <p class="pp-terms" data-reveal>
+        MOQ <em>{{ site.moq }}</em><span class="dot">●</span>
+        payment <em>{{ site.payment }}</em><span class="dot">●</span>
+        lead time <em>{{ site.leadTime }}</em><span class="dot">●</span>
+        <em>{{ site.incoterms }}</em>
+      </p>
+    </div>
+  </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Product",
+        "name": "{{ product.name }}",
+        "image": "{{ site.url }}/assets/images/{{ product.image }}.png",
+        "description": "{{ product.metaDescription }}",
+        "category": "Flexible packaging",
+        "url": "{{ site.url }}/products/{{ product.slug }}/",
+        "brand": { "@type": "Brand", "name": "G Flexipack" },
+        "manufacturer": { "@id": "{{ site.url }}/#organization" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+          { "@type": "ListItem", "position": 2, "name": "Products", "item": "{{ site.url }}/products/" },
+          { "@type": "ListItem", "position": 3, "name": "{{ product.name }}", "item": "{{ site.url }}/products/{{ product.slug }}/" }
+        ]
+      }
+    ]
+  }
+  </script>

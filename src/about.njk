@@ -1,0 +1,96 @@
+---
+layout: layouts/base.njk
+permalink: "/about/"
+title: "About G Flexipack — Flexible Packaging Manufacturer, Bharuch"
+description: "G Flexipack is a flexible packaging manufacturer in Bharuch, Gujarat, established 2016 on the Gangamani group's 20+ years of manufacturing heritage. ISO 9001:2015, 8,000 sq ft, 300+ MT/month."
+pageImage: "/assets/images/standup.png"
+---
+
+  <!-- INTRO -->
+  <section class="sec welcome" style="padding-bottom:40px;">
+    <div class="sec-head" data-reveal>
+      <p class="pp-crumbs" style="text-align:center;"><a href="/">Home</a><span>/</span>About</p>
+      <p class="sec-eyebrow">Our company</p>
+      <h2 class="sec-title">Quality packaging, <em>since {{ site.founded }}.</em></h2>
+      <p class="sec-lead">
+        G Flexipack is a flexible packaging manufacturer in {{ site.address.city }}, {{ site.address.region }},
+        established in {{ site.founded }} on the {{ site.group }}'s 20+ years of manufacturing heritage.
+        We print, laminate, slit and convert custom pouches for brands across food, beverage, pharma,
+        personal care and industry — in a climate-controlled, dust-free plant of {{ site.plantSize }},
+        with a capacity of {{ site.capacity }}, exporting worldwide from {{ site.port }}.
+      </p>
+    </div>
+  </section>
+
+  <!-- VISION & MISSION -->
+  <section class="sec vm" aria-label="Vision and mission">
+    <div class="vm-grid">
+      <div class="vm-panel" style="--vc:#b25c2e;" data-reveal>
+        <span class="vm-label">Our Vision</span>
+        <p class="vm-quote">To be the flexible packaging <em>partner of choice</em> for brands that care how their product lands on shelf.</p>
+      </div>
+      <div class="vm-panel" style="--vc:#7a6e3f;" data-reveal>
+        <span class="vm-label">Our Mission</span>
+        <p class="vm-quote">Design and print custom pouches that <em>protect the product</em> and represent the brand.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="sec" id="why-us">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Why us</p>
+      <h2 class="sec-title">What sets us <em>apart.</em></h2>
+    </div>
+    <div class="why-grid stagger" data-reveal>
+      <div class="why-card" style="--wc:#b25c2e;">
+        <span class="why-glyph">i</span>
+        <h4>Assured Quality</h4>
+        <p>ISO 9001:2015 systems and an in-house ASTM lab — eight tests on every batch, full documentation at dispatch.</p>
+      </div>
+      <div class="why-card" style="--wc:#c89a3a;">
+        <span class="why-glyph">ii</span>
+        <h4>On-Time Delivery</h4>
+        <p>3–5 week production lead times, honestly quoted and tracked — with sea freight coordinated from Mundra Port.</p>
+      </div>
+      <div class="why-card" style="--wc:#7a6e3f;">
+        <span class="why-glyph">iii</span>
+        <h4>Customized Solutions</h4>
+        <p>Structure, size, barrier and finish engineered per product — recommendation within 24 hours of your brief.</p>
+      </div>
+      <div class="why-card" style="--wc:#7a8a6c;">
+        <span class="why-glyph">iv</span>
+        <h4>Advanced Machinery</h4>
+        <p>8-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p>
+      </div>
+      <div class="why-card" style="--wc:#3b2a20;">
+        <span class="why-glyph">v</span>
+        <h4>Skilled Workforce</h4>
+        <p>An experienced production and QC team under the Gangamani group's 20+ years of manufacturing discipline.</p>
+      </div>
+      <div class="why-card" style="--wc:#b25c2e;">
+        <span class="why-glyph">vi</span>
+        <h4>100% Recyclable Options</h4>
+        <p>Mono-material LLDPE structures for EPR-compliant brands — sustainability without sacrificing shelf appeal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="pp-band">
+    <div class="sec">
+      <h2 data-reveal>Let's build your <em>next pouch.</em></h2>
+      <p data-reveal>Tell us what you pack — structure recommendation within {{ site.quoteTurnaround }}, detailed quote in two business days.</p>
+      <a class="cta cta-light" href="/#inquiry" data-reveal>Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About G Flexipack",
+    "url": "{{ site.url }}/about/",
+    "mainEntity": { "@id": "{{ site.url }}/#organization" }
+  }
+  </script>

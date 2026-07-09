@@ -1,0 +1,466 @@
+---
+permalink: "/gflexipack-standalone.html"
+eleventyExcludeFromCollections: true
+noindex: true
+---
+{% set ph = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" %}
+{% set defaultStructures = ["PET / METPET / PE", "MATTE BOPP / METPET / PE", "PET / PE", "BOPA / PE", "PET / Alu / PE", "PET / Alu / BOPA / PE", "PE / PE", "Alox PET / PE"] %}
+{% macro img(name, alt, cls) %}<img{% if cls %} class="{{ cls }}"{% endif %} data-img="{{ name }}" src="{{ ph }}" alt="{{ alt }}" loading="lazy" />{% endmacro %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>G Flexipack — Flexible Packaging Manufacturer · Bharuch, India</title>
+  <meta name="description" content="{{ site.description }}" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233b2a20'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23f4efe7' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+{{ "src/assets/css/styles.css" | inlineFile | safe }}
+  </style>
+  <style>
+    /* SPA overrides: views + always-visible reveal (IO won't fire in hidden views) */
+    [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .view { display: none; }
+    .view.is-active { display: block; }
+    .nav-links a.is-current { opacity: 1; }
+    .nav-links a.is-current::after { transform: scaleX(1); }
+  </style>
+</head>
+<body id="top">
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#/" aria-label="G Flexipack, home">{{ img("logo", "G Flexipack") }}</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#/about" data-nav="/about">About</a>
+        <a href="#/products" data-nav="/products">Products</a>
+        <a href="#/industries" data-nav="/industries">Industries</a>
+        <a href="#/quality" data-nav="/quality">Quality</a>
+        <a href="#/#infrastructure" data-nav="/">Infrastructure</a>
+      </nav>
+      <a class="nav-cta" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+    <div class="nav-progress" id="navProgress" aria-hidden="true"></div>
+  </header>
+
+  <!-- ============================================================ HOME ============================================================ -->
+  <main class="view is-active" data-route="/" data-title="G Flexipack — Flexible Packaging Manufacturer · Bharuch, India">
+    <section class="hh-hero" id="hero">
+      <div class="hh-hero-inner">
+        <div class="hh-hero-text">
+          <p class="hh-eyebrow">Flexible packaging · Est. {{ site.founded }}</p>
+          <h1 class="hh-hero-title">Packaging built for <em>shelf impact.</em></h1>
+          <p class="hh-hero-sub">G Flexipack is a flexible packaging manufacturer in Bharuch, Gujarat — custom-printed pouches for food, beverage and lifestyle brands. Thirteen formats, printed, laminated and converted under one roof.</p>
+          <div class="hh-hero-ctas">
+            <a class="cta cta-primary" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="cta hh-cta-ghost" href="#/#infrastructure">See the plant <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <div class="hh-marquee" aria-label="Formats we print and sectors we pack for">
+          <div class="hh-col"><div class="hh-track hh-down">
+            {% for p in products %}<article class="hh-tile" style="--bg:#3b2a20; --bandc:#eae0cd; --band-text:#3b2a20;">{{ img(p.image, p.name, "hh-photo") }}<span class="hh-tag">{{ p.short }}</span></article>
+            {% endfor %}{% for p in products %}<article class="hh-tile" style="--bg:#3b2a20; --bandc:#eae0cd; --band-text:#3b2a20;">{{ img(p.image, p.name, "hh-photo") }}<span class="hh-tag">{{ p.short }}</span></article>
+            {% endfor %}
+          </div></div>
+          <div class="hh-col"><div class="hh-track hh-up">
+            {% for s in industries %}<article class="hh-tile" style="--bg:{{ s.accent }}; --bandc:#3b2a20; --band-text:#eae0cd;">{{ img(s.image, s.short + " sector packaging", "hh-photo") }}<span class="hh-tag">{{ s.short }}</span></article>
+            {% endfor %}{% for s in industries %}<article class="hh-tile" style="--bg:{{ s.accent }}; --bandc:#3b2a20; --band-text:#eae0cd;">{{ img(s.image, s.short + " sector packaging", "hh-photo") }}<span class="hh-tag">{{ s.short }}</span></article>
+            {% endfor %}
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hh-meta" aria-label="At a glance">
+      <div><strong>Thirteen <em>formats</em>.</strong> Stand-up, zipper, gusseted, spout, retort and more — all printed to spec, in-house.</div>
+      <div><strong>From <em>{{ site.moq }}</em>.</strong> One of the lowest rotogravure MOQs in the market — trial orders welcome.</div>
+      <div><strong>Quote in <em>{{ site.quoteTurnaround }}</em>.</strong> Send artwork, size, quantity and target ship-by date. We come back the next business day.</div>
+    </section>
+
+    <section class="sec welcome" id="about-teaser">
+      <div class="sec-head">
+        <p class="sec-eyebrow">Welcome to our company</p>
+        <h2 class="sec-title">Quality packaging, <em>since {{ site.founded }}.</em></h2>
+        <p class="sec-lead">G Flexipack is a flexible packaging manufacturer in Bharuch, Gujarat, built on the {{ site.group }}'s 20+ years of manufacturing heritage. We print, laminate, slit and convert custom pouches for brands across food, pharma, personal care and industry — in a climate-controlled, dust-free plant designed to international hygiene standards.</p>
+        <p style="text-align:center; margin-top:26px;"><a class="cta cta-ghost" href="#/about">More about us <span class="arrow" aria-hidden="true">→</span></a></p>
+      </div>
+    </section>
+
+    <section class="sec vm" aria-label="Vision and mission">
+      <div class="vm-grid">
+        <div class="vm-panel" style="--vc:#b25c2e;"><span class="vm-label">Our Vision</span><p class="vm-quote">To be the flexible packaging <em>partner of choice</em> for brands that care how their product lands on shelf.</p></div>
+        <div class="vm-panel" style="--vc:#7a6e3f;"><span class="vm-label">Our Mission</span><p class="vm-quote">Design and print custom pouches that <em>protect the product</em> and represent the brand.</p></div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true"><div class="ticker-track">
+      {% for i in [1,2] %}<div class="ticker-set">
+        <span class="ticker-item"><em>8-colour</em> rotogravure</span><span class="ticker-star">✻</span>
+        <span class="ticker-item">Food-grade <em>barrier films</em></span><span class="ticker-star">✻</span>
+        <span class="ticker-item">ISO <em>9001:2015</em></span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>300+ MT</em> a month</span><span class="ticker-star">✻</span>
+        <span class="ticker-item">Solvent-less <em>lamination</em></span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>8,000 sq ft</em> climate-controlled plant</span><span class="ticker-star">✻</span>
+        <span class="ticker-item">Exporting from <em>Mundra Port</em></span><span class="ticker-star">✻</span>
+      </div>{% endfor %}
+    </div></div>
+
+    <section id="products-teaser">
+      <div class="sec" style="padding-bottom:30px;">
+        <div class="sec-head">
+          <p class="sec-eyebrow">Our products</p>
+          <h2 class="sec-title">Thirteen formats, <em>printed to spec.</em></h2>
+          <p class="sec-lead">Custom dimensions, laminate structures, barrier levels and full-colour rotogravure print — all produced in-house.</p>
+        </div>
+        <div class="pp-grid">
+          {% for p in products %}<a class="pp-card" href="#/products/{{ p.slug }}">
+            <span class="pp-card-fig" style="--tbg:{{ p.tbg }};">{{ img(p.image, p.name) }}</span>
+            <span class="pp-card-body"><h3>{{ p.name }}</h3><p>{{ p.applications | join(' · ') }}.</p><span class="pp-card-link">View details →</span></span>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="industries" id="industries-teaser">
+      <div class="sec">
+        <div class="sec-head">
+          <p class="sec-eyebrow">Industries we serve</p>
+          <h2 class="sec-title">Seven sectors, <em>one standard.</em></h2>
+          <p class="sec-lead">The hygiene, barrier and documentation adapt to the sector. The print quality doesn't.</p>
+        </div>
+        <div class="acc" id="indAcc">
+          {% for s in industries %}<div class="acc-panel{% if loop.first %} is-open{% endif %}" style="--ic:{{ s.accent }};">
+            {{ img(s.image, s.name + " sector packaging", "acc-photo") }}
+            <div class="acc-photo-scrim"></div>
+            <div class="acc-closed"><span class="acc-num">{{ s.num }}</span><span class="acc-name-v">{{ s.short }}</span></div>
+            <div class="acc-open"><span class="acc-num">{{ s.num }}</span><h3>{{ s.name }}</h3><p>{{ s.applications | join(' · ') }}.</p><a class="r-link" href="#/industries/{{ s.slug }}">Explore sector →</a></div>
+          </div>
+          {% endfor %}
+        </div>
+        <p class="shelf-hint hint-desktop">Hover a sector to open it</p>
+        <p class="shelf-hint hint-mobile">Tap a sector to open it</p>
+      </div>
+    </section>
+
+    <section class="sec" id="infrastructure">
+      <div class="sec-head"><p class="sec-eyebrow">Infrastructure</p><h2 class="sec-title">8,000 sq ft in <em>Bharuch, Gujarat.</em></h2></div>
+      <div class="scrolly">
+        <div class="scrolly-sticky"><div class="sc-stage" id="scStage">
+          <figure class="sc-shot is-active" data-shot="1" style="margin:0;">{{ img("printing-machine", "8-colour rotogravure printing press") }}<figcaption>8-colour rotogravure</figcaption></figure>
+          <figure class="sc-shot" data-shot="2" style="margin:0;">{{ img("lami", "Solvent-less lamination machine") }}<figcaption>Solvent-less lamination</figcaption></figure>
+          <figure class="sc-shot" data-shot="3" style="margin:0;">{{ img("slitting-machine", "Slitting machine") }}<figcaption>Slitting line</figcaption></figure>
+          <figure class="sc-shot" data-shot="4" style="margin:0;">{{ img("pouch", "Pouching line") }}<figcaption>Pouching machines</figcaption></figure>
+        </div></div>
+        <div class="scrolly-steps">
+          <div class="sc-step is-active" data-step="1"><figure class="sc-inline" style="margin:0;">{{ img("printing-machine", "8-colour rotogravure printing press") }}</figure><p class="sc-num">i</p><h3>8-Colour Rotogravure Press</h3><p>Auto registration and web guiding for precise multi-colour print — deep, repeatable colour across long runs.</p></div>
+          <div class="sc-step" data-step="2"><figure class="sc-inline" style="margin:0;">{{ img("lami", "Solvent-less lamination machine") }}</figure><p class="sc-num">ii</p><h3>Solvent-Less &amp; Solvent-Based Lamination</h3><p>Food-safe multi-layer bonding and specialised barrier structures, matched to the product inside.</p></div>
+          <div class="sc-step" data-step="3"><figure class="sc-inline" style="margin:0;">{{ img("slitting-machine", "Slitting machine") }}</figure><p class="sc-num">iii</p><h3>Precision Slitting Lines</h3><p>Tension-controlled winding to exact reel widths, ready for downstream pouching or delivery as film rolls.</p></div>
+          <div class="sc-step" data-step="4"><figure class="sc-inline" style="margin:0;">{{ img("pouch", "Pouching line") }}</figure><p class="sc-num">iv</p><h3>Centre- &amp; Side-Seal Pouching</h3><p>Finished pouches converted in-house — every format from stand-up to spout, sealed and inspected on line.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="why-us">
+      <div class="sec-head"><p class="sec-eyebrow">Why us</p><h2 class="sec-title">What sets us <em>apart.</em></h2></div>
+      <div class="why-grid stagger">
+        <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">i</span><h4>Assured Quality</h4><p>ISO 9001:2015 systems and an in-house ASTM lab — eight tests on every batch, full documentation at dispatch.</p></div>
+        <div class="why-card" style="--wc:#c89a3a;"><span class="why-glyph">ii</span><h4>On-Time Delivery</h4><p>3–5 week production lead times, honestly quoted and tracked — with sea freight coordinated from Mundra Port.</p></div>
+        <div class="why-card" style="--wc:#7a6e3f;"><span class="why-glyph">iii</span><h4>Customized Solutions</h4><p>Structure, size, barrier and finish engineered per product — recommendation within 24 hours of your brief.</p></div>
+        <div class="why-card" style="--wc:#7a8a6c;"><span class="why-glyph">iv</span><h4>Advanced Machinery</h4><p>8-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p></div>
+        <div class="why-card" style="--wc:#3b2a20;"><span class="why-glyph">v</span><h4>Skilled Workforce</h4><p>An experienced production and QC team under the Gangamani group's 20+ years of manufacturing discipline.</p></div>
+        <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">vi</span><h4>100% Recyclable Options</h4><p>Mono-material LLDPE structures for EPR-compliant brands — sustainability without sacrificing shelf appeal.</p></div>
+      </div>
+    </section>
+
+    <section class="clientele" aria-label="Our clientele">
+      <div class="sec">
+        <div class="sec-head"><p class="sec-eyebrow">Our clientele</p><h2 class="sec-title">Trusted across sectors <em>and borders.</em></h2></div>
+        <div class="client-marquee"><div class="client-track">
+          {% for i in [1,2] %}<div class="client-set"{% if i == 2 %} aria-hidden="true"{% endif %}>
+            <span class="client-badge"><b>Leading snack brand</b><span>Gujarat · India</span></span>
+            <span class="client-badge"><b>Tea exporter</b><span>United Kingdom</span></span>
+            <span class="client-badge"><b>Pharma packer</b><span>Maharashtra · India</span></span>
+            <span class="client-badge"><b>Spice house</b><span>UAE</span></span>
+            <span class="client-badge"><b>Agro seeds brand</b><span>Madhya Pradesh</span></span>
+            <span class="client-badge"><b>FMCG group</b><span>East Africa</span></span>
+            <span class="client-badge"><b>Dry fruits brand</b><span>Rajasthan · India</span></span>
+            <span class="client-badge"><b>Personal care label</b><span>Gujarat · India</span></span>
+          </div>{% endfor %}
+        </div></div>
+        <p class="client-note">Client identities protected under supply agreements — references available on request.</p>
+      </div>
+    </section>
+
+    {% include "partials/inquiry-form.njk" %}
+  </main>
+
+  <!-- ============================================================ PRODUCTS INDEX ============================================================ -->
+  <main class="view" data-route="/products" data-title="Flexible Packaging Formats — 13 Pouch Types | G Flexipack">
+    <section class="pp-hero" style="display:block; text-align:center; padding-bottom:40px;">
+      <p class="pp-crumbs" style="text-align:center;"><a href="#/">Home</a><span>/</span>Products</p>
+      <h1 style="margin:0 auto 20px;">Thirteen formats, <em>printed to spec.</em></h1>
+      <p class="pp-intro" style="margin:0 auto;">Every format below is custom-made to your dimensions, laminate structure and barrier level, printed in up to 8-colour rotogravure, and converted in-house in Bharuch, Gujarat — from a low MOQ of {{ site.moq }}.</p>
+    </section>
+    <section class="sec" style="padding-top:20px;">
+      <div class="pp-grid">
+        {% for p in products %}<a class="pp-card" href="#/products/{{ p.slug }}">
+          <span class="pp-card-fig" style="--tbg:{{ p.tbg }};">{{ img(p.image, p.name) }}</span>
+          <span class="pp-card-body"><h3>{{ p.name }}</h3><p>{{ p.applications | join(' · ') }}.</p><span class="pp-card-link">View details →</span></span>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    <section class="pp-band"><div class="sec"><h2>Not sure which format <em>fits your product?</em></h2><p>Send your product, target shelf life and quantity — we recommend a structure within {{ site.quoteTurnaround }}.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
+  </main>
+
+  <!-- ============================================================ PRODUCT PAGES ============================================================ -->
+  {% for p in products %}{% set structures = p.structures or defaultStructures %}
+  <main class="view" data-route="/products/{{ p.slug }}" data-title="{{ p.name }} Manufacturer | G Flexipack">
+    <section class="pp-hero">
+      <div>
+        <p class="pp-crumbs"><a href="#/">Home</a><span>/</span><a href="#/products">Products</a><span>/</span>{{ p.name }}</p>
+        <h1>{{ p.name }}<em>.</em></h1>
+        <p class="pp-intro">{{ p.intro }}</p>
+        <div class="pp-hero-ctas"><a class="cta cta-primary" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a><a class="cta cta-ghost" href="#/products">All formats <span class="arrow" aria-hidden="true">→</span></a></div>
+      </div>
+      <div class="pp-photo">{{ img(p.image, p.name + " — custom printed by G Flexipack") }}</div>
+    </section>
+    <section class="pp-glance" aria-label="At a glance"><div class="pp-glance-inner">
+      <div class="pp-g-item"><span class="pp-g-k">Min. order</span><span class="pp-g-v">{{ site.moq }}</span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Lead time</span><span class="pp-g-v">{{ site.leadTime }}</span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Structures</span><span class="pp-g-v">{{ structures | length }} <i>laminates</i></span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Closure</span><span class="pp-g-v">{{ p.closure }}</span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Print</span><span class="pp-g-v">8-colour <i>rotogravure</i></span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Shipping</span><span class="pp-g-v">{{ site.incoterms }}</span></div>
+    </div></section>
+    <section class="sec">
+      <div class="sec-head"><p class="sec-eyebrow">Key features</p><h2 class="sec-title">Why brands choose <em>this format.</em></h2></div>
+      <div class="pp-features">{% for f in p.features %}<div class="pp-feature"><b>{{ f.t }}</b><span>{{ f.d }}</span></div>
+        {% endfor %}</div>
+    </section>
+    <section class="pp-dark"><div class="sec">
+      <div class="sec-head"><p class="sec-eyebrow">Structure options</p><h2 class="sec-title">Laminate structures, <em>engineered per product.</em></h2><p class="sec-lead">Barrier, stiffness and seal strength are chosen for what you pack — not off a shelf.</p></div>
+      <div class="pp-chips">{% for s in structures %}<span class="pp-chip">{{ s }}</span>
+        {% endfor %}<span class="pp-chip is-rec">MDOPE / PE — Recyclable</span></div>
+    </div></section>
+    <section class="sec">
+      <div class="sec-head"><p class="sec-eyebrow">Product market</p><h2 class="sec-title">Commonly <em>packed products.</em></h2></div>
+      <div class="pp-apps">{% for a in p.applications %}<span class="pp-app">{{ a }}</span>
+        {% endfor %}</div>
+    </section>
+    <section class="pp-band"><div class="sec"><h2>Spec your <em>{{ p.name | lower }}.</em></h2><p>Send dimensions, quantity, barrier needs and artwork status — structure recommendation within {{ site.quoteTurnaround }}.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a><p class="pp-terms">MOQ <em>{{ site.moq }}</em><span class="dot">●</span> payment <em>{{ site.payment }}</em><span class="dot">●</span> lead time <em>{{ site.leadTime }}</em><span class="dot">●</span> <em>{{ site.incoterms }}</em></p></div></section>
+  </main>
+  {% endfor %}
+
+  <!-- ============================================================ INDUSTRIES INDEX ============================================================ -->
+  <main class="view" data-route="/industries" data-title="Industries We Serve | G Flexipack">
+    <section class="pp-hero" style="display:block; text-align:center; padding-bottom:40px;">
+      <p class="pp-crumbs" style="text-align:center;"><a href="#/">Home</a><span>/</span>Industries</p>
+      <h1 style="margin:0 auto 20px;">Seven sectors, <em>one standard.</em></h1>
+      <p class="pp-intro" style="margin:0 auto;">The hygiene, barrier and documentation adapt to the sector. The print quality doesn't. Explore how we pack for each industry.</p>
+    </section>
+    <section class="sec" style="padding-top:20px;">
+      <div class="pp-grid">
+        {% for s in industries %}<a class="pp-card" href="#/industries/{{ s.slug }}">
+          <span class="pp-card-fig" style="--tbg:{{ s.accent }};">{{ img(s.image, s.name + " packaging") }}</span>
+          <span class="pp-card-body"><h3>{{ s.name }}</h3><p>{{ s.applications | join(' · ') }}.</p><span class="pp-card-link">Explore sector →</span></span>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+    <section class="pp-band"><div class="sec"><h2>Packaging matched to <em>your sector.</em></h2><p>Tell us what you pack — we recommend the right structure and format within {{ site.quoteTurnaround }}.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
+  </main>
+
+  <!-- ============================================================ INDUSTRY PAGES ============================================================ -->
+  {% for s in industries %}
+  <main class="view" data-route="/industries/{{ s.slug }}" data-title="{{ s.name }} Packaging | G Flexipack">
+    <section class="pp-hero">
+      <div>
+        <p class="pp-crumbs"><a href="#/">Home</a><span>/</span><a href="#/industries">Industries</a><span>/</span>{{ s.name }}</p>
+        <h1>{{ s.name }} <em>packaging.</em></h1>
+        <p class="pp-intro">{{ s.intro }}</p>
+        <div class="pp-hero-ctas"><a class="cta cta-primary" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a><a class="cta cta-ghost" href="#/industries">All industries <span class="arrow" aria-hidden="true">→</span></a></div>
+      </div>
+      <div class="pp-photo" style="--cream-2:{{ s.accent }};">{{ img(s.image, s.name + " packaging by G Flexipack") }}</div>
+    </section>
+    <section class="sec">
+      <div class="sec-head"><p class="sec-eyebrow">What we pack</p><h2 class="sec-title">Built for the <em>{{ s.short | lower }} shelf.</em></h2></div>
+      <div class="pp-apps">{% for a in s.applications %}<span class="pp-app">{{ a }}</span>
+        {% endfor %}</div>
+      <p style="text-align:center; max-width:640px; margin:34px auto 0; color:var(--ink-soft); font-size:15px; line-height:1.65;"><strong style="color:var(--ink); font-weight:500;">Typical build:</strong> {{ s.build }}</p>
+    </section>
+    <section class="pp-dark"><div class="sec">
+      <div class="sec-head"><p class="sec-eyebrow">Recommended formats</p><h2 class="sec-title">Formats that suit <em>{{ s.short | lower }}.</em></h2></div>
+      <div class="pp-related">{% for slug in s.formats %}{% for p in products %}{% if p.slug == slug %}<a href="#/products/{{ p.slug }}" style="color:var(--cream); border-color:rgba(244,239,231,0.32);">{{ p.name }} →</a>{% endif %}{% endfor %}{% endfor %}</div>
+    </div></section>
+    <section class="pp-band"><div class="sec"><h2>Packaging for your <em>{{ s.short | lower }} brand.</em></h2><p>Share your product, format and quantity — structure recommendation within {{ site.quoteTurnaround }}, quote in two business days.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
+  </main>
+  {% endfor %}
+
+  <!-- ============================================================ ABOUT ============================================================ -->
+  <main class="view" data-route="/about" data-title="About G Flexipack — Bharuch, Gujarat">
+    <section class="sec welcome" style="padding-bottom:40px;">
+      <div class="sec-head">
+        <p class="pp-crumbs" style="text-align:center;"><a href="#/">Home</a><span>/</span>About</p>
+        <p class="sec-eyebrow">Our company</p>
+        <h2 class="sec-title">Quality packaging, <em>since {{ site.founded }}.</em></h2>
+        <p class="sec-lead">G Flexipack is a flexible packaging manufacturer in {{ site.address.city }}, {{ site.address.region }}, established in {{ site.founded }} on the {{ site.group }}'s 20+ years of manufacturing heritage. We print, laminate, slit and convert custom pouches for brands across food, beverage, pharma, personal care and industry — in a climate-controlled, dust-free plant of {{ site.plantSize }}, with a capacity of {{ site.capacity }}, exporting worldwide from {{ site.port }}.</p>
+      </div>
+    </section>
+    <section class="sec vm" aria-label="Vision and mission">
+      <div class="vm-grid">
+        <div class="vm-panel" style="--vc:#b25c2e;"><span class="vm-label">Our Vision</span><p class="vm-quote">To be the flexible packaging <em>partner of choice</em> for brands that care how their product lands on shelf.</p></div>
+        <div class="vm-panel" style="--vc:#7a6e3f;"><span class="vm-label">Our Mission</span><p class="vm-quote">Design and print custom pouches that <em>protect the product</em> and represent the brand.</p></div>
+      </div>
+    </section>
+    <section class="sec">
+      <div class="sec-head"><p class="sec-eyebrow">Why us</p><h2 class="sec-title">What sets us <em>apart.</em></h2></div>
+      <div class="why-grid stagger">
+        <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">i</span><h4>Assured Quality</h4><p>ISO 9001:2015 systems and an in-house ASTM lab — eight tests on every batch, full documentation at dispatch.</p></div>
+        <div class="why-card" style="--wc:#c89a3a;"><span class="why-glyph">ii</span><h4>On-Time Delivery</h4><p>3–5 week production lead times, honestly quoted and tracked — with sea freight coordinated from Mundra Port.</p></div>
+        <div class="why-card" style="--wc:#7a6e3f;"><span class="why-glyph">iii</span><h4>Customized Solutions</h4><p>Structure, size, barrier and finish engineered per product — recommendation within 24 hours of your brief.</p></div>
+        <div class="why-card" style="--wc:#7a8a6c;"><span class="why-glyph">iv</span><h4>Advanced Machinery</h4><p>8-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p></div>
+        <div class="why-card" style="--wc:#3b2a20;"><span class="why-glyph">v</span><h4>Skilled Workforce</h4><p>An experienced production and QC team under the Gangamani group's 20+ years of manufacturing discipline.</p></div>
+        <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">vi</span><h4>100% Recyclable Options</h4><p>Mono-material LLDPE structures for EPR-compliant brands — sustainability without sacrificing shelf appeal.</p></div>
+      </div>
+    </section>
+    <section class="pp-band"><div class="sec"><h2>Let's build your <em>next pouch.</em></h2><p>Tell us what you pack — structure recommendation within {{ site.quoteTurnaround }}, detailed quote in two business days.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
+  </main>
+
+  <!-- ============================================================ QUALITY (certs + lab + anatomy) ============================================================ -->
+  <main class="view" data-route="/quality" data-title="Quality & Certifications — ISO 9001:2015, ASTM Lab | G Flexipack">
+    <section class="sec" style="padding-bottom:40px;">
+      <div class="sec-head">
+        <p class="pp-crumbs" style="text-align:center;"><a href="#/">Home</a><span>/</span>Quality</p>
+        <p class="sec-eyebrow">Quality &amp; certification</p>
+        <h2 class="sec-title">Audited, tested, <em>documented.</em></h2>
+        <p class="sec-lead">We build every pouch to a specification and prove it in our own lab. Here's how the film is engineered — and how each batch is verified before it ships.</p>
+      </div>
+      <div class="cert-row">
+        <div class="cert-emblem"><span class="cert-mark">✦</span><h4>ISO 9001:2015</h4><p>Certified quality management system across procurement, production and dispatch.</p></div>
+        <div class="cert-emblem"><span class="cert-mark">✦</span><h4>ASTM Standard QC</h4><p>Eight-test laboratory verification on every batch — GSM to heat-seal strength.</p></div>
+        <div class="cert-emblem"><span class="cert-mark">✦</span><h4>100% Recyclable Options</h4><p>Mono-material structures available for EPR-compliant, sustainability-first brands.</p></div>
+      </div>
+    </section>
+
+    <section class="lab" id="lab">
+      <div class="sec" style="padding-bottom:0;"><div class="sec-head"><p class="sec-eyebrow">The lab</p><h2 class="sec-title">Eight tests. <em>Every batch.</em></h2><p class="sec-lead">Raw material inspected on arrival, colour verified before print, tested in-line at every stage, documented at dispatch.</p></div></div>
+      <div class="lab-grid">
+        <ol class="test-sheet">
+          <li class="test-row"><span class="test-no">01</span><span class="test-name">GSM</span><span class="test-proof">film weight is consistent, roll to roll</span></li>
+          <li class="test-row"><span class="test-no">02</span><span class="test-name">COF</span><span class="test-proof">runs smoothly on high-speed filling lines</span></li>
+          <li class="test-row"><span class="test-no">03</span><span class="test-name">Bond strength</span><span class="test-proof">laminate layers never separate</span></li>
+          <li class="test-row"><span class="test-no">04</span><span class="test-name">Puncture resistance</span><span class="test-proof">survives transit, stacking and handling</span></li>
+          <li class="test-row"><span class="test-no">05</span><span class="test-name">Burst strength</span><span class="test-proof">seals hold under internal pressure</span></li>
+          <li class="test-row"><span class="test-no">06</span><span class="test-name">Scrub test</span><span class="test-proof">print doesn't rub off in the supply chain</span></li>
+          <li class="test-row"><span class="test-no">07</span><span class="test-name">Heat seal strength</span><span class="test-proof">every seam holds, every time</span></li>
+          <li class="test-row"><span class="test-no">08</span><span class="test-name">Tear strength</span><span class="test-proof">opens where it should — nowhere else</span></li>
+        </ol>
+        <div class="lab-side">
+          <blockquote class="quality-quote">&ldquo;Quality <em>without</em> compromise.&rdquo;</blockquote>
+          <p class="quality-src">Quality policy · tested to ASTM standards</p>
+          <div class="lab-photos">
+            <figure class="lab-photo" style="margin:0;">{{ img("heat", "Heat seal tester") }}<figcaption>Heat seal tester</figcaption></figure>
+            <figure class="lab-photo" style="margin:0;">{{ img("punture", "Puncture and tensile tester") }}<figcaption>Puncture tester</figcaption></figure>
+            <figure class="lab-photo" style="margin:0;">{{ img("cutter", "Sample cutter") }}<figcaption>Sample cutter</figcaption></figure>
+          </div>
+          <div class="cert-line"><span class="cert-chip">ISO 9001:2015</span><span class="cert-chip">ASTM Standard QC</span><span class="cert-chip">100% Recyclable Options</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="anatomy" id="anatomy">
+      <div class="sec-head"><p class="sec-eyebrow">Inside the film</p><h2 class="sec-title">A pouch is <em>three decisions,</em> laminated together.</h2><p class="sec-lead">What keeps chips crisp for nine months isn't the print — it's the structure behind it. Scroll through the layers we bond for every job.</p></div>
+      <div class="anatomy-grid">
+        <div class="anatomy-sticky"><div class="film-stack" id="filmStack" data-step="1" aria-hidden="true">
+          <div class="sheet sheet-print"><span class="sheet-label">Print · BOPP / PET</span></div>
+          <div class="sheet sheet-barrier"><span class="sheet-label">Barrier · MET-PET / AL</span></div>
+          <div class="sheet sheet-seal"><span class="sheet-label">Seal · LLDPE / CPP</span></div>
+          <p class="stack-caption">One film. <em>Your structure.</em></p>
+        </div></div>
+        <div class="anatomy-steps">
+          <div class="a-step" data-step="1"><p class="a-step-num">01</p><h3>The print carrier</h3><p>Your artwork is reverse-printed in up to eight colours on rotogravure — so the ink sits <b>inside</b> the laminate. It can't scuff, scratch or fade on shelf, no matter how rough the supply chain is.</p></div>
+          <div class="a-step" data-step="2"><p class="a-step-num">02</p><h3>The barrier core</h3><p>Metallised PET or aluminium foil blocks oxygen, moisture and light. This layer is why roasted, fried and dried products stay fresh for months — and it's specified per product, not per catalogue.</p></div>
+          <div class="a-step" data-step="3"><p class="a-step-num">03</p><h3>The food-contact seal</h3><p>LLDPE or CPP on the inside — food-grade, heat-sealable, and strong enough to run on high-speed filling lines without splitting a single seam.</p></div>
+          <div class="a-step" data-step="4"><p class="a-step-num">04</p><h3>Bonded into one film</h3><p>Solvent-less lamination fuses the layers into a single web — then it's slit, pouched and batch-tested in our own QC lab before dispatch. Common structures we run:</p>
+            <div class="laminate-chips"><span class="laminate-chip">BOPP / MET-PET / PE</span><span class="laminate-chip">PET / AL / LLDPE</span><span class="laminate-chip is-reel">Mono LLDPE — recyclable</span><span class="laminate-chip">CPP / AL / PET</span><span class="laminate-chip">PET / PE</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="pp-band"><div class="sec"><h2>Packaging you can <em>document and defend.</em></h2><p>Every order ships with test documentation. Send your brief for a structure recommendation within {{ site.quoteTurnaround }}.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">{{ img("logo", "G Flexipack") }}<p>Flexible packaging, made in Bharuch, Gujarat. ISO 9001:2015 certified, exporting worldwide from Mundra Port since {{ site.founded }}.</p></div>
+      <div class="footer-col"><h5>Products</h5><ul>
+        <li><a href="#/products/stand-up-pouches">Stand-Up Pouches</a></li>
+        <li><a href="#/products/spout-pouches">Spout &amp; Zipper Pouches</a></li>
+        <li><a href="#/products/retort-pouches">Retort &amp; Vacuum Pouches</a></li>
+        <li><a href="#/products">All 13 formats →</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Company</h5><ul>
+        <li><a href="#/about">About us</a></li>
+        <li><a href="#/industries">Industries</a></li>
+        <li><a href="#/#infrastructure">Infrastructure</a></li>
+        <li><a href="#/quality">Quality &amp; certifications</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Contact</h5><address>{{ site.address.street }}<br />{{ site.address.city }}, {{ site.address.region }} {{ site.address.postalCode }}<br />{{ site.address.country }}<br /><br /><a href="mailto:{{ site.email }}">{{ site.email }}</a><br /><a href="tel:{{ site.phonePrimaryE164 }}">{{ site.phones[0] }}</a></address></div>
+    </div>
+    <div class="footer-bottom"><p>© {{ '' | year }} G Flexipack. All rights reserved.</p><p>ISO 9001:2015 · ASTM Standard QC · 100% Recyclable Options</p></div>
+  </footer>
+
+  <script>
+{{ "src/assets/js/main.js" | inlineFile | safe }}
+  </script>
+  <script>
+    /* ---- image hydration (base64 WebP embedded) ---- */
+    (function () {
+      var IMAGES = {{ spaimg | dump | safe }};
+      document.querySelectorAll("img[data-img]").forEach(function (el) {
+        var k = el.getAttribute("data-img");
+        if (IMAGES[k]) el.src = IMAGES[k];
+      });
+    })();
+
+    /* ---- hash router: single file behaves like a multi-page site ---- */
+    (function () {
+      var views = Array.prototype.slice.call(document.querySelectorAll("[data-route]"));
+      var navLinks = Array.prototype.slice.call(document.querySelectorAll("[data-nav]"));
+      function norm(h) {
+        h = (h || "").replace(/^#/, "");
+        if (!h || h === "/") return "/";
+        return h.replace(/\/+$/, "");
+      }
+      function apply() {
+        var target = norm(location.hash);
+        var scrollId = null;
+        if (target === "/inquiry") { target = "/"; scrollId = "inquiry"; }
+        if (target === "/#infrastructure") { target = "/"; scrollId = "infrastructure"; }
+        var match = views.filter(function (v) { return v.getAttribute("data-route") === target; })[0];
+        if (!match) { match = views.filter(function (v) { return v.getAttribute("data-route") === "/"; })[0]; target = "/"; }
+        views.forEach(function (v) { v.classList.toggle("is-active", v === match); });
+        if (match && match.getAttribute("data-title")) document.title = match.getAttribute("data-title");
+        navLinks.forEach(function (a) {
+          var nav = a.getAttribute("data-nav");
+          a.classList.toggle("is-current", nav === target || (nav !== "/" && target.indexOf(nav) === 0));
+        });
+        if (scrollId) {
+          var el = document.getElementById(scrollId);
+          if (el) { el.scrollIntoView({ behavior: "smooth" }); return; }
+        }
+        window.scrollTo(0, 0);
+      }
+      window.addEventListener("hashchange", apply);
+      apply();
+    })();
+  </script>
+</body>
+</html>

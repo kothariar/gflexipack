@@ -1,0 +1,84 @@
+---
+layout: layouts/base.njk
+permalink: "/quality/"
+title: "Quality & Certifications — ISO 9001:2015, ASTM Lab | G Flexipack"
+description: "How G Flexipack builds and proves every pouch: ISO 9001:2015 systems, an in-house ASTM lab running eight tests per batch, and the laminate structure behind the print. Bharuch, Gujarat."
+pageImage: "/assets/images/heat.png"
+---
+{% set faqs = [
+  { q: "Are your pouches food-safe?", a: "Yes. We use food-grade inner seal layers (LLDPE or CPP) and food-safe lamination adhesives, and every batch is tested and documented before dispatch under our ISO 9001:2015 system." },
+  { q: "What quality tests do you run?", a: "Eight tests on every batch to ASTM standards — GSM, coefficient of friction (COF), bond strength, puncture resistance, burst strength, scrub resistance, heat-seal strength and tear strength — with full documentation at dispatch." },
+  { q: "Do you offer recyclable packaging?", a: "Yes. We produce 100% recyclable mono-material MDOPE/PE structures for EPR-compliant, sustainability-first brands, without sacrificing barrier or shelf appeal." },
+  { q: "What certifications does G Flexipack hold?", a: "We operate an ISO 9001:2015 certified quality management system across procurement, production and dispatch, and run ASTM-standard QC in an in-house laboratory." },
+  { q: "Is quality documented for each order?", a: "Yes. Raw material is inspected on arrival, colour is verified before print, the product is tested in-line at every stage, and a documentation pack accompanies dispatch." }
+] %}
+
+  <!-- HERO / INTRO -->
+  <section class="sec" style="padding-bottom:40px;">
+    <div class="sec-head" data-reveal>
+      <p class="pp-crumbs" style="text-align:center;"><a href="/">Home</a><span>/</span>Quality</p>
+      <p class="sec-eyebrow">Quality &amp; certification</p>
+      <h2 class="sec-title">Audited, tested, <em>documented.</em></h2>
+      <p class="sec-lead">We build every pouch to a specification and prove it in our own lab. Here's how the film is engineered — and how each batch is verified before it ships.</p>
+    </div>
+    <div class="cert-row" data-reveal>
+      <div class="cert-emblem">
+        <span class="cert-mark">✦</span>
+        <h4>ISO 9001:2015</h4>
+        <p>Certified quality management system across procurement, production and dispatch.</p>
+      </div>
+      <div class="cert-emblem">
+        <span class="cert-mark">✦</span>
+        <h4>ASTM Standard QC</h4>
+        <p>Eight-test laboratory verification on every batch — GSM to heat-seal strength.</p>
+      </div>
+      <div class="cert-emblem">
+        <span class="cert-mark">✦</span>
+        <h4>100% Recyclable Options</h4>
+        <p>Mono-material structures available for EPR-compliant, sustainability-first brands.</p>
+      </div>
+    </div>
+  </section>
+
+  {% include "partials/lab.njk" %}
+
+  {% include "partials/anatomy.njk" %}
+
+  <!-- FAQ -->
+  <section class="sec">
+    <div class="sec-head" data-reveal>
+      <p class="sec-eyebrow">Questions</p>
+      <h2 class="sec-title">Quality, <em>answered.</em></h2>
+    </div>
+    <div class="faq" data-reveal>
+      {% for f in faqs %}<details{% if loop.first %} open{% endif %}>
+        <summary>{{ f.q }}</summary>
+        <p>{{ f.a }}</p>
+      </details>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="pp-band">
+    <div class="sec">
+      <h2 data-reveal>Packaging you can <em>document and defend.</em></h2>
+      <p data-reveal>Every order ships with test documentation. Send your brief for a structure recommendation within {{ site.quoteTurnaround }}.</p>
+      <a class="cta cta-light" href="/#inquiry" data-reveal>Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for f in faqs %}{
+        "@type": "Question",
+        "name": "{{ f.q }}",
+        "acceptedAnswer": { "@type": "Answer", "text": "{{ f.a }}" }
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>

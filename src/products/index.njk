@@ -1,0 +1,35 @@
+---
+layout: layouts/base.njk
+permalink: "/products/"
+title: "Flexible Packaging Formats — 13 Custom Pouch Types | G Flexipack"
+description: "All 13 flexible packaging formats from G Flexipack, Bharuch — stand-up, zipper, gusseted, spout, retort, vacuum pouches and more. Custom rotogravure print, MOQ 5,000."
+pageImage: "/assets/images/standup.png"
+---
+
+  <section class="pp-hero" style="display:block; text-align:center; padding-bottom:40px;">
+    <p class="pp-crumbs" style="text-align:center;"><a href="/">Home</a><span>/</span>Products</p>
+    <h1 style="margin:0 auto 20px;">Thirteen formats, <em>printed to spec.</em></h1>
+    <p class="pp-intro" style="margin:0 auto;">Every format below is custom-made to your dimensions, laminate structure and barrier level, printed in up to 8-colour rotogravure, and converted in-house in Bharuch, Gujarat — from a low MOQ of {{ site.moq }}.</p>
+  </section>
+
+  <section class="sec" style="padding-top:20px;">
+    <div class="pp-grid">
+      {% for p in products %}<a class="pp-card" href="/products/{{ p.slug }}/" data-reveal>
+        <span class="pp-card-fig" style="--tbg:{{ p.tbg }};"><img src="/assets/images/{{ p.image }}.png" alt="{{ p.name }}" loading="lazy" /></span>
+        <span class="pp-card-body">
+          <h3>{{ p.name }}</h3>
+          <p>{{ p.applications | join(' · ') }}.</p>
+          <span class="pp-card-link">View details →</span>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="pp-band">
+    <div class="sec">
+      <h2 data-reveal>Not sure which format <em>fits your product?</em></h2>
+      <p data-reveal>Send your product, target shelf life and quantity — we recommend a structure within {{ site.quoteTurnaround }}.</p>
+      <a class="cta cta-light" href="/#inquiry" data-reveal>Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>

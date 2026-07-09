@@ -1,0 +1,68 @@
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{{ title or site.name }}</title>
+  <meta name="description" content="{{ description or site.description }}" />
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+  <meta name="robots" content="{% if noindex %}noindex, nofollow{% else %}index, follow{% endif %}" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="{{ ogType or 'website' }}" />
+  <meta property="og:site_name" content="{{ site.name }}" />
+  <meta property="og:title" content="{{ title or site.name }}" />
+  <meta property="og:description" content="{{ description or site.description }}" />
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+  <meta property="og:image" content="{{ site.url }}{{ pageImage or site.ogImage }}" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ title or site.name }}" />
+  <meta name="twitter:description" content="{{ description or site.description }}" />
+  <meta name="twitter:image" content="{{ site.url }}{{ pageImage or site.ogImage }}" />
+
+  <!-- Geo -->
+  <meta name="geo.region" content="IN-GJ" />
+  <meta name="geo.placename" content="Bharuch, Gujarat" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+
+  <!-- Organization / LocalBusiness (site-wide) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["Organization", "LocalBusiness"],
+    "@id": "{{ site.url }}/#organization",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}",
+    "logo": "{{ site.url }}/assets/images/logo.png",
+    "image": "{{ site.url }}{{ site.ogImage }}",
+    "description": "{{ site.description }}",
+    "foundingDate": "{{ site.founded }}",
+    "email": "{{ site.email }}",
+    "telephone": "{{ site.phones[0] }}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ site.address.street }}",
+      "addressLocality": "{{ site.address.city }}",
+      "addressRegion": "{{ site.address.region }}",
+      "postalCode": "{{ site.address.postalCode }}",
+      "addressCountry": "{{ site.address.countryCode }}"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "{{ site.geo.lat }}",
+      "longitude": "{{ site.geo.lng }}"
+    },
+    "openingHours": "Mo-Sa 09:00-18:00",
+    "areaServed": "Worldwide",
+    "slogan": "{{ site.tagline }}"
+  }
+  </script>
