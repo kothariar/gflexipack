@@ -20,7 +20,7 @@
               {% endfor %}<option>Other / Multiple</option>
             </select>
           </div>
-          <div class="fg"><label for="q-qty">Quantity</label><input id="q-qty" name="quantity" type="text" placeholder="e.g. 25,000 units" /></div>
+          <div class="fg"><label for="q-qty">Quantity</label><input id="q-qty" name="quantity" type="text" placeholder="e.g. 500kg" /></div>
           <div class="fg fg-full"><label for="q-msg">Requirements</label><textarea id="q-msg" name="requirements" placeholder="Size, barrier needs, artwork status, target ship-by date…"></textarea></div>
           <button class="cta cta-light inq-submit" style="justify-content:center" type="submit">Send enquiry <span class="arrow" aria-hidden="true">→</span></button>
         </form>
@@ -30,8 +30,7 @@
             <li><span class="k">Email</span><span><a href="mailto:{{ site.email }}">{{ site.email }}</a></span></li>
             <li><span class="k">Phone</span><span><a href="tel:{{ site.phonePrimaryE164 }}">{{ site.phones[0] }}</a><br /><a href="tel:{{ site.phoneSecondaryE164 }}">{{ site.phones[1] }}</a></span></li>
             <li><span class="k">Hours</span><span>{{ site.hours }}</span></li>
-            <li><span class="k">Plant</span><span>{{ site.address.street }},<br />{{ site.address.city }}, {{ site.address.region }} {{ site.address.postalCode }}, {{ site.address.country }}</span></li>
-            <li><span class="k">Terms</span><span>MOQ {{ site.moq }} · {{ site.payment }} payment · {{ site.leadTime }} lead · {{ site.incoterms }}</span></li>
+            <li><span class="k">Terms</span><span>MOQ {{ site.moq }} · {{ site.payment }} payment · {{ site.leadTime }} lead</span></li>
           </ul>
           <div class="inq-map">
             <iframe
