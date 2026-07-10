@@ -5,6 +5,7 @@ title: "About G Flexipack — Flexible Packaging Manufacturer, Bharuch"
 description: "G Flexipack is a flexible packaging manufacturer in Bharuch, Gujarat, established 2016 on the Gangamani group's 20+ years of manufacturing heritage. ISO 9001:2015, 60,000+ sq ft, 250+ tons/month."
 pageImage: "/assets/images/standup.png"
 ---
+{% import "partials/icons.njk" as icons %}
 
   <!-- INTRO -->
   <section class="sec welcome" style="padding-bottom:40px;">
@@ -21,11 +22,11 @@ pageImage: "/assets/images/standup.png"
   <section class="sec" style="padding-top:0;">
     <div class="sec-head" data-reveal><h2 class="sec-title">Built for brands that <em>can't afford compromises.</em></h2></div>
     <div class="pp-features" data-reveal>
-      <div class="pp-feature"><b>🏭 One-roof manufacturing</b><span>Print, laminate, convert — every step happens under our supervision. No vendor chains, no quality drift.</span></div>
-      <div class="pp-feature"><b>📏 13 formats, one call</b><span>From stand-up pouches to retort packs to spouted formats — you don't need multiple suppliers.</span></div>
-      <div class="pp-feature"><b>🧪 Compliance-ready films</b><span>Food-grade, pharma-approved, agrochemical-tough. The right barrier for the right shelf.</span></div>
-      <div class="pp-feature"><b>⚡ Growth-friendly MOQs</b><span>Whether you're launching or scaling, we make it work — without dropping standards.</span></div>
-      <div class="pp-feature"><b>🎨 Print that sells</b><span>Rotogravure precision, consistent shade-matching, artwork that survives the supply chain.</span></div>
+      <div class="pp-feature" style="--wc:#b25c2e;"><span class="pp-feat-icon" aria-hidden="true">{{ icons.icon('factory') }}</span><b>One-roof manufacturing</b><span>Print, laminate, convert — every step happens under our supervision. No vendor chains, no quality drift.</span></div>
+      <div class="pp-feature" style="--wc:#c89a3a;"><span class="pp-feat-icon" aria-hidden="true">{{ icons.icon('grid') }}</span><b>13 formats, one call</b><span>From stand-up pouches to retort packs to spouted formats — you don't need multiple suppliers.</span></div>
+      <div class="pp-feature" style="--wc:#7a8a6c;"><span class="pp-feat-icon" aria-hidden="true">{{ icons.icon('flask') }}</span><b>Compliance-ready films</b><span>Food-grade, pharma-approved, agrochemical-tough. The right barrier for the right shelf.</span></div>
+      <div class="pp-feature" style="--wc:#7a6e3f;"><span class="pp-feat-icon" aria-hidden="true">{{ icons.icon('trending-up') }}</span><b>Growth-friendly MOQs</b><span>Whether you're launching or scaling, we make it work — without dropping standards.</span></div>
+      <div class="pp-feature" style="--wc:#3b2a20;"><span class="pp-feat-icon" aria-hidden="true">{{ icons.icon('printer') }}</span><b>Print that sells</b><span>Rotogravure precision, consistent shade-matching, artwork that survives the supply chain.</span></div>
     </div>
   </section>
 
@@ -48,32 +49,32 @@ pageImage: "/assets/images/standup.png"
     </div>
     <div class="why-grid stagger" data-reveal>
       <div class="why-card" style="--wc:#b25c2e;">
-        <span class="why-glyph" aria-hidden="true">🛡️</span>
+        <span class="why-glyph" aria-hidden="true">{{ icons.icon('shield') }}</span>
         <h4>Assured Quality</h4>
         <p>ISO 9001:2015 systems and an in-house ASTM lab — eight tests on every batch, full documentation at dispatch.</p>
       </div>
       <div class="why-card" style="--wc:#c89a3a;">
-        <span class="why-glyph" aria-hidden="true">🚚</span>
+        <span class="why-glyph" aria-hidden="true">{{ icons.icon('truck') }}</span>
         <h4>On-Time Delivery</h4>
         <p>3–5 week production lead times, honestly quoted and tracked — with sea freight coordinated from Mundra Port.</p>
       </div>
       <div class="why-card" style="--wc:#7a6e3f;">
-        <span class="why-glyph" aria-hidden="true">🎯</span>
+        <span class="why-glyph" aria-hidden="true">{{ icons.icon('sliders') }}</span>
         <h4>Customized Solutions</h4>
         <p>Structure, size, barrier and finish engineered per product — recommendation within 24 hours of your brief.</p>
       </div>
       <div class="why-card" style="--wc:#7a8a6c;">
-        <span class="why-glyph" aria-hidden="true">⚙️</span>
+        <span class="why-glyph" aria-hidden="true">{{ icons.icon('gear') }}</span>
         <h4>Advanced Machinery</h4>
         <p>8-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p>
       </div>
       <div class="why-card" style="--wc:#3b2a20;">
-        <span class="why-glyph" aria-hidden="true">🧑‍🏭</span>
+        <span class="why-glyph" aria-hidden="true">{{ icons.icon('users') }}</span>
         <h4>Skilled Workforce</h4>
         <p>An experienced production and QC team under the Gangamani group's 20+ years of manufacturing discipline.</p>
       </div>
       <div class="why-card" style="--wc:#b25c2e;">
-        <span class="why-glyph" aria-hidden="true">♻️</span>
+        <span class="why-glyph" aria-hidden="true">{{ icons.icon('recycle') }}</span>
         <h4>100% Recyclable Options</h4>
         <p>Mono-material LLDPE structures for EPR-compliant brands — sustainability without sacrificing shelf appeal.</p>
       </div>
