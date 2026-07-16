@@ -321,12 +321,10 @@ noindex: true
       <div class="pp-photo">{{ img(p.image, p.name + " — custom printed by G Flexipack") }}</div>
     </section>
     <section class="pp-glance" aria-label="At a glance"><div class="pp-glance-inner">
-      <div class="pp-g-item"><span class="pp-g-k">Min. order</span><span class="pp-g-v">{{ site.moq }}</span></div>
       <div class="pp-g-item"><span class="pp-g-k">Lead time</span><span class="pp-g-v">{{ site.leadTime }}</span></div>
       <div class="pp-g-item"><span class="pp-g-k">Structures</span><span class="pp-g-v">{{ structures | length }} <i>laminates</i></span></div>
       <div class="pp-g-item"><span class="pp-g-k">Closure</span><span class="pp-g-v">{{ p.closure }}</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Print</span><span class="pp-g-v">9-colour <i>rotogravure</i></span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Shipping</span><span class="pp-g-v">{{ site.incoterms }}</span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Print</span><span class="pp-g-v">{{ site.print | replace(" rotogravure", "") }} <i>rotogravure</i></span></div>
     </div></section>
     <section class="sec">
       <div class="sec-head"><p class="sec-eyebrow">Key features</p><h2 class="sec-title">Why brands choose <em>this format.</em></h2></div>
@@ -343,7 +341,7 @@ noindex: true
       <div class="pp-apps">{% for a in p.applications %}<span class="pp-app">{{ a }}</span>
         {% endfor %}</div>
     </section>
-    <section class="pp-band"><div class="sec"><h2>Spec your <em>{{ p.name | lower }}.</em></h2><p>Send dimensions, quantity, barrier needs and artwork status — structure recommendation within {{ site.quoteTurnaround }}.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a><p class="pp-terms">MOQ <em>{{ site.moq }}</em><span class="dot">●</span> payment <em>{{ site.payment }}</em><span class="dot">●</span> lead time <em>{{ site.leadTime }}</em><span class="dot">●</span> <em>{{ site.incoterms }}</em></p></div></section>
+    <section class="pp-band"><div class="sec"><h2>Spec your <em>{{ p.name | lower }}.</em></h2><p>Send dimensions, quantity, barrier needs and artwork status — structure recommendation within {{ site.quoteTurnaround }}.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a><p class="pp-terms">payment <em>{{ site.payment }}</em><span class="dot">●</span> lead time <em>{{ site.leadTime }}</em></p></div></section>
   </main>
   {% endfor %}
 
@@ -503,7 +501,7 @@ noindex: true
       </ul></div>
       <div class="footer-col"><h5>Contact</h5><address>{{ site.address.street }}<br />{{ site.address.city }}, {{ site.address.region }} {{ site.address.postalCode }}<br />{{ site.address.country }}<br /><br /><a href="mailto:{{ site.email }}">{{ site.email }}</a><br /><a href="tel:{{ site.phonePrimaryE164 }}">{{ site.phones[0] }}</a></address></div>
     </div>
-    <div class="footer-bottom"><p>© {{ '' | year }} G Flexipack. All rights reserved.</p><p>ISO 9001:2015 · ASTM Standard QC · 100% Recyclable Options</p></div>
+    <div class="footer-bottom"><p>© {{ '' | year }} G Flexipack. All rights reserved.</p></div>
   </footer>
 
   <script>

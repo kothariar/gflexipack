@@ -30,8 +30,7 @@
             <li><span class="k">Email</span><span><a href="mailto:{{ site.email }}">{{ site.email }}</a></span></li>
             <li><span class="k">Phone</span><span><a href="tel:{{ site.phonePrimaryE164 }}">{{ site.phones[0] }}</a><br /><a href="tel:{{ site.phoneSecondaryE164 }}">{{ site.phones[1] }}</a></span></li>
             <li><span class="k">Hours</span><span>{{ site.hours }}</span></li>
-            <li><span class="k">Plant</span><span>{{ site.address.street }},<br />{{ site.address.city }}, {{ site.address.region }} {{ site.address.postalCode }}, {{ site.address.country }}</span></li>
-            <li><span class="k">Terms</span><span>MOQ {{ site.moq }} · {{ site.payment }} payment · {{ site.leadTime }} lead</span></li>
+            <li><span class="k">Address</span><span>{{ site.address.street }},<br />{{ site.address.city }}, {{ site.address.region }} {{ site.address.postalCode }}, {{ site.address.country }}</span></li>
           </ul>
           <div class="inq-map">
             <iframe
