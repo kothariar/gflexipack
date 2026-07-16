@@ -168,6 +168,7 @@ pageImage: "/assets/images/standup.png"
     <div class="sec-head" data-reveal>
       <p class="sec-eyebrow">Infrastructure</p>
       <h2 class="sec-title">8,000 sq ft in <em>Bharuch, Gujarat.</em></h2>
+      <p class="sec-lead">See full specs — press, lamination, slitting and pouching lines. <a href="/infrastructure/" style="color:var(--accent); text-decoration:underline;">Explore the plant →</a></p>
     </div>
     <div class="scrolly">
       <div class="scrolly-sticky">
@@ -246,18 +247,22 @@ pageImage: "/assets/images/standup.png"
       <div class="client-marquee" data-reveal>
         <div class="client-track">
           {% for i in [1, 2] %}<div class="client-set"{% if i == 2 %} aria-hidden="true"{% endif %}>
-            <span class="client-badge"><b>Leading snack brand</b><span>Gujarat · India</span></span>
-            <span class="client-badge"><b>Tea exporter</b><span>United Kingdom</span></span>
-            <span class="client-badge"><b>Pharma packer</b><span>Maharashtra · India</span></span>
-            <span class="client-badge"><b>Spice house</b><span>UAE</span></span>
-            <span class="client-badge"><b>Agro seeds brand</b><span>Madhya Pradesh</span></span>
-            <span class="client-badge"><b>FMCG group</b><span>East Africa</span></span>
-            <span class="client-badge"><b>Dry fruits brand</b><span>Rajasthan · India</span></span>
-            <span class="client-badge"><b>Personal care label</b><span>Gujarat · India</span></span>
+            {% for c in clients %}{% if c.text %}<span class="client-badge client-badge-text"><b>{{ c.text }}</b></span>{% else %}<span class="client-badge"><img src="/assets/images/clients/{{ c.img }}.webp" alt="{{ c.name }} logo" loading="lazy" /></span>{% endif %}
+            {% endfor %}
           </div>{% endfor %}
         </div>
       </div>
-      <p class="client-note">Client identities protected under supply agreements — references available on request.</p>
+      <p class="client-note">Trusted by 200+ Indian brands across agrochemical, food, pharma and FMCG — a few of the names we pack for.</p>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="sec" aria-label="Testimonials">
+    <div class="sec-head" data-reveal><p class="sec-eyebrow">What clients say</p><h2 class="sec-title">Trusted by brands <em>who don't compromise.</em></h2></div>
+    <div class="testi-grid" data-reveal>
+      <div class="testi-card"><p class="testi-quote">G Flexipack turned our first pouch order around faster than any supplier we'd worked with — and the print quality matched our brand exactly.</p><p class="testi-who"><b>Procurement Lead</b> · Agrochemical brand</p></div>
+      <div class="testi-card"><p class="testi-quote">Their team recommended a barrier structure we hadn't considered, and it solved a shelf-life issue we'd been stuck on for months.</p><p class="testi-who"><b>Operations Head</b> · Food &amp; snacks brand</p></div>
+      <div class="testi-card"><p class="testi-quote">Reliable lead times, clear communication, and documentation on every batch — exactly what we need for a regulated product.</p><p class="testi-who"><b>Quality Manager</b> · Pharma packer</p></div>
     </div>
   </section>
 

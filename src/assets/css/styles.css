@@ -817,6 +817,17 @@
       margin: 26px 0 0;
     }
 
+    /* ------------------------------------------------------------
+       TESTIMONIALS — 3 quote cards
+       ------------------------------------------------------------ */
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1200px; margin: 0 auto; }
+    .testi-card { background: var(--cream); border: 1px solid var(--ink-line); border-radius: 14px; padding: 28px 26px; display: flex; flex-direction: column; gap: 16px; }
+    .testi-quote { font-family: var(--serif); font-size: 17px; line-height: 1.55; color: var(--ink); margin: 0; }
+    .testi-quote::before { content: "\201C"; color: var(--accent); font-size: 28px; line-height: 0; display: inline-block; margin-right: 2px; vertical-align: -6px; }
+    .testi-who { font-size: 13px; letter-spacing: 0.04em; color: var(--ink-soft); margin: 0; }
+    .testi-who b { color: var(--ink); font-weight: 600; }
+    @media (max-width: 760px) { .testi-grid { grid-template-columns: 1fr; } }
+
     /* ============================================================
        9 · WHY US — 6 value cards
        ============================================================ */
