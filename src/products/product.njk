@@ -12,82 +12,103 @@ eleventyComputed:
   pageImage: "/assets/images/{{ product.image }}.png"
 ---
 {% set defaultStructures = ["PET / METPET / PE", "MATTE BOPP / METPET / PE", "PET / PE", "BOPA / PE", "PET / Alu / PE", "PET / Alu / BOPA / PE", "PE / PE", "Alox PET / PE"] %}
-{% set structures = product.structures or defaultStructures %}
+{% set lamTags = {
+  "PET / METPET / PE": "High barrier",
+  "MATTE BOPP / METPET / PE": "High · matte",
+  "PET / PE": "Everyday",
+  "BOPA / PE": "Puncture-resist",
+  "PET / Alu / PE": "Ultra barrier",
+  "PET / Alu / BOPA / PE": "Max barrier",
+  "PE / PE": "Economical",
+  "Alox PET / PE": "Clear barrier",
+  "MDOPE / PE": "Recyclable",
+  "BOPA / PE (nylon-PE)": "Puncture-resist",
+  "High-clarity PA / PE": "High clarity",
+  "PET / Alu / CPP": "Retort-grade",
+  "PET / BOPA / Alu / CPP": "Retort · tough",
+  "PET / Nylon / CPP (transparent retort)": "Transparent"
+} %}
+{% if product.structures %}
+  {% set structures = product.structures %}
+{% else %}
+  {% set structures = defaultStructures.concat(["MDOPE / PE"]) %}
+{% endif %}
+{% set builtins = product.builtin or product.features %}
+{# arc offsets — rows bow away from the product's widest point #}
+{% set arcMid = { "3": [26, 34, 26], "4": [20, 33, 33, 20], "5": [16, 28, 34, 28, 16], "9": [8, 19, 28, 35, 38, 35, 28, 19, 8] } %}
+{% set arcRise = { "3": [10, 20, 28], "4": [8, 15, 22, 27], "5": [8, 16, 22, 26, 28] } %}
+{% set arcFall = { "3": [22, 14, 6], "4": [24, 18, 11, 5], "5": [26, 21, 15, 9, 4] } %}
+{% set nStruct = (structures | length) ~ "" %}
+{% set nPacks = (product.applications | length) ~ "" %}
+{% set nBuilt = (builtins | length) ~ "" %}
+{% set arcL = arcMid[nStruct] or arcRise[nStruct] %}
+{% set arcPacks = arcRise[nPacks] %}
+{% set arcBuilt = arcFall[nBuilt] %}
+{% set girth = product.girth or 1 %}
+{% set scale = product.scale or 1 %}
 
-  <!-- HERO -->
-  <section class="pp-hero">
-    <div>
-      <p class="pp-crumbs">
-        <a href="/">Home</a><span>/</span><a href="/products/">Products</a><span>/</span>{{ product.name }}
-      </p>
-      <h1>{{ product.name }}<em>.</em></h1>
-      <p class="pp-intro">{{ product.intro }}</p>
-      <div class="pp-hero-ctas">
-        <a class="cta cta-primary" href="/#inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
-        <a class="cta cta-ghost" href="/products/">All formats <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
-    </div>
-    <div class="pp-photo" data-reveal>
-      <img src="/assets/images/{{ product.image }}.png" alt="{{ product.name }} — custom printed by G Flexipack" />
-    </div>
-  </section>
+  <!-- SHELF SHEET — everything at a glance -->
+  <section class="pp-sheet">
+    <div class="pp-floor"></div>
+    <div class="pp-wglow" style="--pglow:{{ product.tbg }}"></div>
+    <p class="pp-crumbs pp-crumbs--sheet">
+      <a href="/">Home</a><span>/</span><a href="/products/">Products</a><span>/</span>{{ product.name }}
+    </p>
 
-  <!-- AT A GLANCE -->
-  <section class="pp-glance" aria-label="At a glance">
-    <div class="pp-glance-inner">
-      <div class="pp-g-item"><span class="pp-g-k">Min. order</span><span class="pp-g-v">{{ site.moq }}</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Lead time</span><span class="pp-g-v">{{ site.leadTime }}</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Structures</span><span class="pp-g-v">{{ structures | length }} <i>laminates</i></span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Closure</span><span class="pp-g-v">{{ product.closure }}</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Print</span><span class="pp-g-v">8-colour <i>rotogravure</i></span></div>
-    </div>
-  </section>
-
-  <!-- KEY FEATURES -->
-  <section class="sec">
-    <div class="sec-head" data-reveal>
-      <p class="sec-eyebrow">Key features</p>
-      <h2 class="sec-title">Why brands choose <em>this format.</em></h2>
-    </div>
-    <div class="pp-features" data-reveal>
-      {% for f in product.features %}<div class="pp-feature"><b>{{ f.t }}</b><span>{{ f.d }}</span></div>
-      {% endfor %}
-    </div>
-  </section>
-
-  <!-- STRUCTURE OPTIONS -->
-  <section class="pp-dark">
-    <div class="sec">
-      <div class="sec-head" data-reveal>
-        <p class="sec-eyebrow">Structure options</p>
-        <h2 class="sec-title">Laminate structures, <em>engineered per product.</em></h2>
-        <p class="sec-lead">Barrier, stiffness and seal strength are chosen for what you pack — not off a shelf.</p>
-      </div>
-      <div class="pp-chips" data-reveal>
-        {% for s in structures %}<span class="pp-chip">{{ s }}</span>
-        {% endfor %}<span class="pp-chip is-rec">MDOPE / PE — Recyclable</span>
-      </div>
-      <div class="pp-market-inline" data-reveal>
-        <p class="sec-eyebrow" style="margin-top:36px;">Commonly packed products</p>
-        <div class="pp-apps">
-          {% for a in product.applications %}<span class="pp-app">{{ a }}</span>
-          {% endfor %}
+    <div class="pp-sgrid" style="--pgirth:{{ girth }};--pscale:{{ scale }}">
+      <!-- LEFT — structures -->
+      <div class="pp-sflank pp-sfl-l">
+        <div class="pp-sclu">
+          <div class="pp-sclu-h"><span>Structure options</span></div>
+          <ul>
+            {% for s in structures %}
+            <li{% if s == "MDOPE / PE" %} class="rec"{% endif %} style="--arc:{{ ((arcL[loop.index0] or 0) * girth) | round }}px"><b>{{ s }}</b>{% if lamTags[s] %}<span class="pp-st">{{ lamTags[s] }}</span>{% endif %}</li>
+            {% endfor %}
+          </ul>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- CTA BAND -->
-  <section class="pp-band">
-    <div class="sec">
-      <h2 data-reveal>Spec your <em>{{ product.name | lower }}.</em></h2>
-      <p data-reveal>Send dimensions, quantity, barrier needs and artwork status — structure recommendation within {{ site.quoteTurnaround }}.</p>
-      <a class="cta cta-light" href="/#inquiry" data-reveal>Get a quote <span class="arrow" aria-hidden="true">→</span></a>
-      <p class="pp-terms" data-reveal>
-        MOQ <em>{{ site.moq }}</em><span class="dot">●</span>
-        payment <em>{{ site.payment }}</em><span class="dot">●</span>
-        lead time <em>{{ site.leadTime }}</em>
-      </p>
+      <!-- CENTRE — the product on the shelf -->
+      <div class="pp-smid">
+        <h1>{{ product.name }}<em>.</em></h1>
+        <p class="pp-slede">{{ product.lede }}</p>
+        <div class="pp-pod">
+          {% if product.cut %}
+          <img src="/assets/images/{{ product.cut }}.png" alt="{{ product.name }} — custom printed by G Flexipack" />
+          {% else %}
+          <img class="is-card" src="/assets/images/{{ product.image }}.png" alt="{{ product.name }} — custom printed by G Flexipack" />
+          {% endif %}
+        </div>
+        <div class="pp-underlip">
+          <div class="pp-sctas">
+            <a class="cta cta-light" href="/#inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="cta pp-soline" href="/products/">All formats <span class="arrow" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — markets + built-in -->
+      <div class="pp-sflank pp-sfl-r">
+        <div class="pp-sclu">
+          <div class="pp-sclu-h"><span>Commonly packs</span></div>
+          <ul>
+            {% for a in product.applications %}
+            <li style="--arc:{{ ((arcPacks[loop.index0] or 0) * girth) | round }}px"><b>{{ a }}</b></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="pp-sclu">
+          <div class="pp-sclu-h" style="--arc:{{ ((arcBuilt[0] + 3) * girth) | round }}px"><span>Built in</span></div>
+          <ul>
+            {% for f in builtins %}
+            <li style="--arc:{{ ((arcBuilt[loop.index0] or 0) * girth) | round }}px"><b>{{ f.t }}</b>{% if f.opt %}<span class="pp-sopt">Optional</span>{% elif f.tag %}<span class="pp-st">{{ f.tag }}</span>{% endif %}</li>
+            {% endfor %}
+          </ul>
+          {% if product.finishes %}
+          <p class="pp-sfin" style="--arc:2px"><b>Finishes</b> — {% for fi in product.finishes %}{{ fi }}{% if not loop.last %}<i>·</i>{% endif %}{% endfor %}</p>
+          {% endif %}
+        </div>
+      </div>
     </div>
   </section>
 
