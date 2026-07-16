@@ -837,18 +837,38 @@
       gap: 18px;
     }
     .why-card {
-      border: 1px solid var(--ink-line);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(59, 42, 32, 0.10);
       border-radius: 12px;
-      background: var(--cream);
+      background:
+        radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--wc, var(--burnt)) 9%, transparent) 0%, rgba(0, 0, 0, 0) 55%),
+        #fbf8f2;
       padding: 34px 30px 30px;
-      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1);
+      box-shadow: 0 12px 28px -18px rgba(59, 42, 32, 0.30), 0 2px 5px -3px rgba(59, 42, 32, 0.10);
+      transition: transform 0.35s cubic-bezier(0.2, 0.6, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .why-card:hover { transform: translateY(-4px); }
+    .why-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--wc, var(--burnt));
+      opacity: 0.9;
+    }
+    .why-card:hover {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--wc, var(--burnt)) 45%, transparent);
+      box-shadow: 0 22px 36px -20px rgba(59, 42, 32, 0.42), 0 3px 8px -4px rgba(59, 42, 32, 0.14);
+    }
     .why-glyph {
       width: 46px;
       height: 46px;
       border-radius: 999px;
-      border: 1px solid var(--wc, var(--burnt));
+      border: 1px solid color-mix(in srgb, var(--wc, var(--burnt)) 28%, transparent);
+      background: color-mix(in srgb, var(--wc, var(--burnt)) 12%, transparent);
       color: var(--wc, var(--burnt));
       display: inline-flex;
       align-items: center;
