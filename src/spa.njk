@@ -43,7 +43,10 @@ noindex: true
         <a href="#/quality" data-nav="/quality">Quality</a>
         <a href="#/infrastructure" data-nav="/infrastructure">Infrastructure</a>
       </nav>
-      <a class="nav-cta" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+      <div class="nav-actions" style="display:flex; align-items:center; gap:12px;">
+        <a class="nav-cta nav-cta-secondary" href="#/inquiry" style="border-color:transparent; background:transparent; padding:10px 4px;">Talk to a packaging expert</a>
+        <a class="nav-cta" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
     </div>
     <div class="nav-progress" id="navProgress" aria-hidden="true"></div>
   </header>
@@ -55,10 +58,9 @@ noindex: true
         <div class="hh-hero-text">
           <p class="hh-eyebrow">Flexible packaging · Est. {{ site.founded }}</p>
           <h1 class="hh-hero-title">Packaging built for <em>shelf impact.</em></h1>
-          <p class="hh-hero-sub">G Flexipack is a flexible packaging manufacturer in Bharuch, Gujarat — custom-printed pouches for food, beverage and lifestyle brands. Fourteen formats, printed, laminated and converted under one roof.</p>
+          <p class="hh-hero-sub">G Flexipack is a flexible packaging manufacturer in Bharuch, Gujarat — custom-printed pouches for food, beverage, pharma, agrochemical and industrial brands. Fourteen formats, printed, laminated and converted under one roof.</p>
           <div class="hh-hero-ctas">
             <a class="cta cta-primary" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
-            <a class="cta hh-cta-ghost" href="#/#infrastructure">See the plant <span class="arrow" aria-hidden="true">→</span></a>
           </div>
         </div>
         <div class="hh-marquee" aria-label="Formats we print and sectors we pack for">
@@ -77,16 +79,16 @@ noindex: true
     </section>
 
     <section class="hh-meta" aria-label="At a glance">
-      <div><strong>Fourteen <em>formats</em>.</strong> Stand-up, zipper, gusseted, spout, retort and more — all printed to spec, in-house.</div>
-      <div><strong>From <em>{{ site.moq }}</em>.</strong> One of the lowest rotogravure MOQs in the market — trial orders welcome.</div>
-      <div><strong>Quote in <em>{{ site.quoteTurnaround }}</em>.</strong> Send artwork, size, quantity and target ship-by date. We come back the next business day.</div>
+      <div><strong>ISO <em>Certified</em>.</strong> 9001:2015 quality management system, audited across every stage of production.</div>
+      <div><strong><em>300+ MT</em> capacity.</strong> Printing, lamination and pouching lines running at scale, in-house.</div>
+      <div><strong>Exporting to <em>10+ countries</em>.</strong> Sea freight coordinated worldwide, with full export documentation.</div>
     </section>
 
     <section class="sec welcome" id="about-teaser">
       <div class="sec-head">
         <p class="sec-eyebrow">Welcome to our company</p>
         <h2 class="sec-title">Quality packaging, <em>since {{ site.founded }}.</em></h2>
-        <p class="sec-lead">G Flexipack is a flexible packaging manufacturer in Bharuch, Gujarat, built on the {{ site.group }}'s 20+ years of manufacturing heritage. We print, laminate, slit and convert custom pouches for brands across food, pharma, personal care and industry — in a climate-controlled, dust-free plant designed to international hygiene standards.</p>
+        <p class="sec-lead">G Flexipack is a Bharuch-based flexible packaging manufacturer producing custom-printed pouches for food, beverage, pharma, personal care, agrochemical, industrial and household brands — 14 formats, printed, laminated and converted under one roof.</p>
         <p style="text-align:center; margin-top:26px;"><a class="cta cta-ghost" href="#/about">More about us <span class="arrow" aria-hidden="true">→</span></a></p>
       </div>
     </section>
@@ -100,13 +102,12 @@ noindex: true
 
     <div class="ticker" aria-hidden="true"><div class="ticker-track">
       {% for i in [1,2] %}<div class="ticker-set">
-        <span class="ticker-item"><em>8-colour</em> rotogravure</span><span class="ticker-star">✻</span>
+        <span class="ticker-item">Upto <em>9-colour</em> printing</span><span class="ticker-star">✻</span>
         <span class="ticker-item">Food-grade <em>barrier films</em></span><span class="ticker-star">✻</span>
         <span class="ticker-item">ISO <em>9001:2015</em></span><span class="ticker-star">✻</span>
-        <span class="ticker-item"><em>300+ MT</em> a month</span><span class="ticker-star">✻</span>
-        <span class="ticker-item">Solvent-less <em>lamination</em></span><span class="ticker-star">✻</span>
-        <span class="ticker-item"><em>8,000 sq ft</em> climate-controlled plant</span><span class="ticker-star">✻</span>
-        <span class="ticker-item">Exporting from <em>Mundra Port</em></span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>300+ metric ton</em> capacity</span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>60,000+ sq ft</em> climate-controlled plant</span><span class="ticker-star">✻</span>
+        <span class="ticker-item">Exporting to <em>10+ countries</em></span><span class="ticker-star">✻</span>
       </div>{% endfor %}
     </div></div>
 
@@ -149,16 +150,16 @@ noindex: true
     </section>
 
     <section class="sec" id="infrastructure">
-      <div class="sec-head"><p class="sec-eyebrow">Infrastructure</p><h2 class="sec-title">8,000 sq ft in <em>Bharuch, Gujarat.</em></h2><p class="sec-lead">See full specs — press, lamination, slitting and pouching lines. <a href="#/infrastructure" style="color:var(--accent); text-decoration:underline;">Explore the plant →</a></p></div>
+      <div class="sec-head"><p class="sec-eyebrow">Infrastructure</p><h2 class="sec-title">60,000+ sq ft in <em>Bharuch, Gujarat.</em></h2><p class="sec-lead">See full specs — press, lamination, slitting and pouching lines. <a href="#/infrastructure" style="color:var(--accent); text-decoration:underline;">Explore the plant →</a></p></div>
       <div class="scrolly">
         <div class="scrolly-sticky"><div class="sc-stage" id="scStage">
-          <figure class="sc-shot is-active" data-shot="1" style="margin:0;">{{ img("printing-machine", "8-colour rotogravure printing press") }}<figcaption>8-colour rotogravure</figcaption></figure>
+          <figure class="sc-shot is-active" data-shot="1" style="margin:0;">{{ img("printing-machine", "9-colour rotogravure printing press") }}<figcaption>9-colour rotogravure</figcaption></figure>
           <figure class="sc-shot" data-shot="2" style="margin:0;">{{ img("lami", "Solvent-less lamination machine") }}<figcaption>Solvent-less lamination</figcaption></figure>
           <figure class="sc-shot" data-shot="3" style="margin:0;">{{ img("slitting-machine", "Slitting machine") }}<figcaption>Slitting line</figcaption></figure>
           <figure class="sc-shot" data-shot="4" style="margin:0;">{{ img("pouch", "Pouching line") }}<figcaption>Pouching machines</figcaption></figure>
         </div></div>
         <div class="scrolly-steps">
-          <div class="sc-step is-active" data-step="1"><figure class="sc-inline" style="margin:0;">{{ img("printing-machine", "8-colour rotogravure printing press") }}</figure><p class="sc-num">i</p><h3>8-Colour Rotogravure Press</h3><p>Auto registration and web guiding for precise multi-colour print — deep, repeatable colour across long runs.</p></div>
+          <div class="sc-step is-active" data-step="1"><figure class="sc-inline" style="margin:0;">{{ img("printing-machine", "9-colour rotogravure printing press") }}</figure><p class="sc-num">i</p><h3>9-Colour Rotogravure Press</h3><p>Auto registration and web guiding for precise multi-colour print — deep, repeatable colour across long runs.</p></div>
           <div class="sc-step" data-step="2"><figure class="sc-inline" style="margin:0;">{{ img("lami", "Solvent-less lamination machine") }}</figure><p class="sc-num">ii</p><h3>Solvent-Less &amp; Solvent-Based Lamination</h3><p>Food-safe multi-layer bonding and specialised barrier structures, matched to the product inside.</p></div>
           <div class="sc-step" data-step="3"><figure class="sc-inline" style="margin:0;">{{ img("slitting-machine", "Slitting machine") }}</figure><p class="sc-num">iii</p><h3>Precision Slitting Lines</h3><p>Tension-controlled winding to exact reel widths, ready for downstream pouching or delivery as film rolls.</p></div>
           <div class="sc-step" data-step="4"><figure class="sc-inline" style="margin:0;">{{ img("pouch", "Pouching line") }}</figure><p class="sc-num">iv</p><h3>Centre- &amp; Side-Seal Pouching</h3><p>Finished pouches converted in-house — every format from stand-up to spout, sealed and inspected on line.</p></div>
@@ -167,12 +168,12 @@ noindex: true
     </section>
 
     <section class="sec" id="why-us">
-      <div class="sec-head"><p class="sec-eyebrow">Why us</p><h2 class="sec-title">What sets us <em>apart.</em></h2></div>
+      <div class="sec-head"><p class="sec-eyebrow">Why us</p><h2 class="sec-title">What sets us <em>apart.</em></h2><p class="sec-lead">Six reasons brands stay with us past the first order.</p></div>
       <div class="why-grid stagger">
         <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">i</span><h4>Assured Quality</h4><p>ISO 9001:2015 systems and an in-house ASTM lab — eight tests on every batch, full documentation at dispatch.</p></div>
-        <div class="why-card" style="--wc:#c89a3a;"><span class="why-glyph">ii</span><h4>On-Time Delivery</h4><p>3–5 week production lead times, honestly quoted and tracked — with sea freight coordinated from Mundra Port.</p></div>
+        <div class="why-card" style="--wc:#c89a3a;"><span class="why-glyph">ii</span><h4>On-Time Delivery</h4><p>3–5 week production lead times, honestly quoted and tracked — exporting to 10+ countries via sea freight.</p></div>
         <div class="why-card" style="--wc:#7a6e3f;"><span class="why-glyph">iii</span><h4>Customized Solutions</h4><p>Structure, size, barrier and finish engineered per product — recommendation within 24 hours of your brief.</p></div>
-        <div class="why-card" style="--wc:#7a8a6c;"><span class="why-glyph">iv</span><h4>Advanced Machinery</h4><p>8-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p></div>
+        <div class="why-card" style="--wc:#7a8a6c;"><span class="why-glyph">iv</span><h4>Advanced Machinery</h4><p>9-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p></div>
         <div class="why-card" style="--wc:#3b2a20;"><span class="why-glyph">v</span><h4>Skilled Workforce</h4><p>An experienced production and QC team under the Gangamani group's 20+ years of manufacturing discipline.</p></div>
         <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">vi</span><h4>100% Recyclable Options</h4><p>Mono-material LLDPE structures for EPR-compliant brands — sustainability without sacrificing shelf appeal.</p></div>
       </div>
@@ -293,7 +294,7 @@ noindex: true
     <section class="pp-hero" style="display:block; text-align:center; padding-bottom:40px;">
       <p class="pp-crumbs" style="text-align:center;"><a href="#/">Home</a><span>/</span>Products</p>
       <h1 style="margin:0 auto 20px;">Fourteen formats, <em>printed to spec.</em></h1>
-      <p class="pp-intro" style="margin:0 auto;">Every format below is custom-made to your dimensions, laminate structure and barrier level, printed in up to 8-colour rotogravure, and converted in-house in Bharuch, Gujarat — from a low MOQ of {{ site.moq }}.</p>
+      <p class="pp-intro" style="margin:0 auto;">Every format below is custom-made to your dimensions, laminate structure and barrier level, printed in up to 9-colour rotogravure, and converted in-house in Bharuch, Gujarat — from a low MOQ of {{ site.moq }}.</p>
     </section>
     <section class="sec" style="padding-top:20px;">
       <div class="pp-grid">
@@ -324,7 +325,7 @@ noindex: true
       <div class="pp-g-item"><span class="pp-g-k">Lead time</span><span class="pp-g-v">{{ site.leadTime }}</span></div>
       <div class="pp-g-item"><span class="pp-g-k">Structures</span><span class="pp-g-v">{{ structures | length }} <i>laminates</i></span></div>
       <div class="pp-g-item"><span class="pp-g-k">Closure</span><span class="pp-g-v">{{ p.closure }}</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Print</span><span class="pp-g-v">8-colour <i>rotogravure</i></span></div>
+      <div class="pp-g-item"><span class="pp-g-k">Print</span><span class="pp-g-v">9-colour <i>rotogravure</i></span></div>
       <div class="pp-g-item"><span class="pp-g-k">Shipping</span><span class="pp-g-v">{{ site.incoterms }}</span></div>
     </div></section>
     <section class="sec">
@@ -387,7 +388,7 @@ noindex: true
       <div class="sec-head"><p class="sec-eyebrow">Recommended formats</p><h2 class="sec-title">Formats that suit <em>{{ s.short | lower }}.</em></h2></div>
       <div class="pp-related">{% for slug in s.formats %}{% for p in products %}{% if p.slug == slug %}<a href="#/products/{{ p.slug }}" style="color:var(--cream); border-color:rgba(244,239,231,0.32);">{{ p.name }} →</a>{% endif %}{% endfor %}{% endfor %}</div>
     </div></section>
-    <section class="pp-band"><div class="sec"><h2>Packaging for your <em>{{ s.short | lower }} brand.</em></h2><p>Share your product, format and quantity — structure recommendation within {{ site.quoteTurnaround }}, quote in two business days.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
+    <section class="pp-band"><div class="sec"><h2>Packaging for your <em>{{ s.short | lower }} brand.</em></h2><p>Share your product, format and quantity — structure recommendation within {{ site.quoteTurnaround }}, quote in 48 hours.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
   </main>
   {% endfor %}
 
@@ -411,14 +412,14 @@ noindex: true
       <div class="sec-head"><p class="sec-eyebrow">Why us</p><h2 class="sec-title">What sets us <em>apart.</em></h2></div>
       <div class="why-grid stagger">
         <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">i</span><h4>Assured Quality</h4><p>ISO 9001:2015 systems and an in-house ASTM lab — eight tests on every batch, full documentation at dispatch.</p></div>
-        <div class="why-card" style="--wc:#c89a3a;"><span class="why-glyph">ii</span><h4>On-Time Delivery</h4><p>3–5 week production lead times, honestly quoted and tracked — with sea freight coordinated from Mundra Port.</p></div>
+        <div class="why-card" style="--wc:#c89a3a;"><span class="why-glyph">ii</span><h4>On-Time Delivery</h4><p>3–5 week production lead times, honestly quoted and tracked — exporting to 10+ countries via sea freight.</p></div>
         <div class="why-card" style="--wc:#7a6e3f;"><span class="why-glyph">iii</span><h4>Customized Solutions</h4><p>Structure, size, barrier and finish engineered per product — recommendation within 24 hours of your brief.</p></div>
-        <div class="why-card" style="--wc:#7a8a6c;"><span class="why-glyph">iv</span><h4>Advanced Machinery</h4><p>8-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p></div>
+        <div class="why-card" style="--wc:#7a8a6c;"><span class="why-glyph">iv</span><h4>Advanced Machinery</h4><p>9-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p></div>
         <div class="why-card" style="--wc:#3b2a20;"><span class="why-glyph">v</span><h4>Skilled Workforce</h4><p>An experienced production and QC team under the Gangamani group's 20+ years of manufacturing discipline.</p></div>
         <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">vi</span><h4>100% Recyclable Options</h4><p>Mono-material LLDPE structures for EPR-compliant brands — sustainability without sacrificing shelf appeal.</p></div>
       </div>
     </section>
-    <section class="pp-band"><div class="sec"><h2>Let's build your <em>next pouch.</em></h2><p>Tell us what you pack — structure recommendation within {{ site.quoteTurnaround }}, detailed quote in two business days.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
+    <section class="pp-band"><div class="sec"><h2>Let's build your <em>next pouch.</em></h2><p>Tell us what you pack — structure recommendation within {{ site.quoteTurnaround }}, detailed quote in 48 hours.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
   </main>
 
   <!-- ============================================================ QUALITY (certs + lab + anatomy) ============================================================ -->
@@ -487,7 +488,7 @@ noindex: true
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <div class="footer-brand">{{ img("logo", "G Flexipack") }}<p>Flexible packaging, made in Bharuch, Gujarat. ISO 9001:2015 certified, exporting worldwide from Mundra Port since {{ site.founded }}.</p></div>
+      <div class="footer-brand">{{ img("logo", "G Flexipack") }}<p>Flexible packaging, made in Bharuch, Gujarat. ISO 9001:2015 certified, exporting to 10+ countries since {{ site.founded }}.</p></div>
       <div class="footer-col"><h5>Products</h5><ul>
         <li><a href="#/products/stand-up-pouches">Stand-Up Pouches</a></li>
         <li><a href="#/products/spout-pouches">Spout &amp; Zipper Pouches</a></li>

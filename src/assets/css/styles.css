@@ -1106,6 +1106,7 @@
     @media (max-width: 900px) {
       .nav-inner { grid-template-columns: auto auto; padding: 14px 20px; gap: 16px; }
       .nav-links { display: none; }
+      .nav-cta-secondary { display: none; }
 
       .slider { height: 640px; }
       .slide-inner {

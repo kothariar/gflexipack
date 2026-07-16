@@ -3,7 +3,7 @@ permalink: "/onepage.html"
 eleventyExcludeFromCollections: true
 noindex: true
 title: "G Flexipack — Flexible Packaging Manufacturer · Bharuch, India"
-description: "Custom-printed flexible packaging from Bharuch, Gujarat. Fourteen pouch formats, 8-colour rotogravure print, ISO 9001:2015, 300+ MT/month capacity, MOQ 5,000."
+description: "Custom-printed flexible packaging from Bharuch, Gujarat. Fourteen pouch formats, 9-colour rotogravure print, ISO 9001:2015, 300+ MT/month capacity, MOQ 5,000."
 pageImage: "/assets/images/standup.png"
 ---
 <!doctype html>
@@ -29,9 +29,10 @@ pageImage: "/assets/images/standup.png"
         <a href="#quality">Quality</a>
         <a href="#infrastructure">Infrastructure</a>
       </nav>
-      <a class="nav-cta" href="#inquiry">
-        Get a quote <span class="arrow" aria-hidden="true">→</span>
-      </a>
+      <div class="nav-actions" style="display:flex; align-items:center; gap:12px;">
+        <a class="nav-cta nav-cta-secondary" href="#inquiry" style="border-color:transparent; background:transparent; padding:10px 4px;">Talk to a packaging expert</a>
+        <a class="nav-cta" href="#inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
     </div>
     <div class="nav-progress" id="navProgress" aria-hidden="true"></div>
   </header>
@@ -44,11 +45,10 @@ pageImage: "/assets/images/standup.png"
         <h1 class="hh-hero-title">Packaging built for <em>shelf impact.</em></h1>
         <p class="hh-hero-sub">
           G Flexipack is a flexible packaging manufacturer in Bharuch, Gujarat — custom-printed pouches
-          for food, beverage and lifestyle brands. Fourteen formats, printed, laminated and converted under one roof.
+          for food, beverage, pharma, agrochemical and industrial brands. Fourteen formats, printed, laminated and converted under one roof.
         </p>
         <div class="hh-hero-ctas">
           <a class="cta cta-primary" href="#inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
-          <a class="cta hh-cta-ghost" href="#infrastructure">See the plant <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
       <div class="hh-marquee" aria-label="Formats we print and sectors we pack for">
@@ -71,9 +71,9 @@ pageImage: "/assets/images/standup.png"
   </section>
 
   <section class="hh-meta" aria-label="At a glance">
-    <div><strong>Fourteen <em>formats</em>.</strong> Stand-up, zipper, gusseted, spout, retort and more — all printed to spec, in-house.</div>
-    <div><strong>From <em>{{ site.moq }}</em>.</strong> One of the lowest rotogravure MOQs in the market — trial orders welcome.</div>
-    <div><strong>Quote in <em>{{ site.quoteTurnaround }}</em>.</strong> Send artwork, size, quantity and target ship-by date. We come back the next business day.</div>
+    <div><strong>ISO <em>Certified</em>.</strong> 9001:2015 quality management system, audited across every stage of production.</div>
+    <div><strong><em>300+ MT</em> capacity.</strong> Printing, lamination and pouching lines running at scale, in-house.</div>
+    <div><strong>Exporting to <em>10+ countries</em>.</strong> Sea freight coordinated worldwide, with full export documentation.</div>
   </section>
 
   <!-- ============ WELCOME ============ -->
@@ -82,10 +82,7 @@ pageImage: "/assets/images/standup.png"
       <p class="sec-eyebrow">Welcome to our company</p>
       <h2 class="sec-title">Quality packaging, <em>since {{ site.founded }}.</em></h2>
       <p class="sec-lead">
-        G Flexipack is a flexible packaging manufacturer in Bharuch, Gujarat, built on the
-        {{ site.group }}'s 20+ years of manufacturing heritage. We print, laminate, slit and
-        convert custom pouches for brands across food, pharma, personal care and industry —
-        in a climate-controlled, dust-free plant designed to international hygiene standards.
+        G Flexipack is a Bharuch-based flexible packaging manufacturer producing custom-printed pouches for food, beverage, pharma, personal care, agrochemical, industrial and household brands — 14 formats, printed, laminated and converted under one roof.
       </p>
     </div>
   </section>
@@ -108,13 +105,12 @@ pageImage: "/assets/images/standup.png"
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
       {% for i in [1, 2] %}<div class="ticker-set">
-        <span class="ticker-item"><em>8-colour</em> rotogravure</span><span class="ticker-star">✻</span>
+        <span class="ticker-item">Upto <em>9-colour</em> printing</span><span class="ticker-star">✻</span>
         <span class="ticker-item">Food-grade <em>barrier films</em></span><span class="ticker-star">✻</span>
         <span class="ticker-item">ISO <em>9001:2015</em></span><span class="ticker-star">✻</span>
-        <span class="ticker-item"><em>300+ MT</em> a month</span><span class="ticker-star">✻</span>
-        <span class="ticker-item">Solvent-less <em>lamination</em></span><span class="ticker-star">✻</span>
-        <span class="ticker-item"><em>8,000 sq ft</em> climate-controlled plant</span><span class="ticker-star">✻</span>
-        <span class="ticker-item">Exporting from <em>Mundra Port</em></span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>300+ metric ton</em> capacity</span><span class="ticker-star">✻</span>
+        <span class="ticker-item"><em>60,000+ sq ft</em> climate-controlled plant</span><span class="ticker-star">✻</span>
+        <span class="ticker-item">Exporting to <em>10+ countries</em></span><span class="ticker-star">✻</span>
       </div>{% endfor %}
     </div>
   </div>
@@ -167,13 +163,13 @@ pageImage: "/assets/images/standup.png"
   <section class="sec" id="infrastructure">
     <div class="sec-head" data-reveal>
       <p class="sec-eyebrow">Infrastructure</p>
-      <h2 class="sec-title">8,000 sq ft in <em>Bharuch, Gujarat.</em></h2>
+      <h2 class="sec-title">60,000+ sq ft in <em>Bharuch, Gujarat.</em></h2>
       <p class="sec-lead">See full specs — press, lamination, slitting and pouching lines. <a href="/infrastructure/" style="color:var(--accent); text-decoration:underline;">Explore the plant →</a></p>
     </div>
     <div class="scrolly">
       <div class="scrolly-sticky">
         <div class="sc-stage" id="scStage">
-          <figure class="sc-shot is-active" data-shot="1" style="margin:0;"><img src="/assets/images/printing-machine.png" alt="8-colour rotogravure printing press" /><figcaption>8-colour rotogravure</figcaption></figure>
+          <figure class="sc-shot is-active" data-shot="1" style="margin:0;"><img src="/assets/images/printing-machine.png" alt="9-colour rotogravure printing press" /><figcaption>9-colour rotogravure</figcaption></figure>
           <figure class="sc-shot" data-shot="2" style="margin:0;"><img src="/assets/images/lami.png" alt="Solvent-less lamination machine" /><figcaption>Solvent-less lamination</figcaption></figure>
           <figure class="sc-shot" data-shot="3" style="margin:0;"><img src="/assets/images/slitting-machine.png" alt="Slitting machine" /><figcaption>Slitting line</figcaption></figure>
           <figure class="sc-shot" data-shot="4" style="margin:0;"><img src="/assets/images/pouch.png" alt="Pouching line" /><figcaption>Pouching machines</figcaption></figure>
@@ -181,8 +177,8 @@ pageImage: "/assets/images/standup.png"
       </div>
       <div class="scrolly-steps">
         <div class="sc-step is-active" data-step="1">
-          <figure class="sc-inline" style="margin:0;"><img src="/assets/images/printing-machine.png" alt="8-colour rotogravure printing press" loading="lazy" /></figure>
-          <p class="sc-num">i</p><h3>8-Colour Rotogravure Press</h3>
+          <figure class="sc-inline" style="margin:0;"><img src="/assets/images/printing-machine.png" alt="9-colour rotogravure printing press" loading="lazy" /></figure>
+          <p class="sc-num">i</p><h3>9-Colour Rotogravure Press</h3>
           <p>Auto registration and web guiding for precise multi-colour print — deep, repeatable colour across long runs.</p>
         </div>
         <div class="sc-step" data-step="2">
@@ -226,12 +222,13 @@ pageImage: "/assets/images/standup.png"
     <div class="sec-head" data-reveal>
       <p class="sec-eyebrow">Why us</p>
       <h2 class="sec-title">What sets us <em>apart.</em></h2>
+      <p class="sec-lead">Six reasons brands stay with us past the first order.</p>
     </div>
     <div class="why-grid stagger" data-reveal>
       <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">i</span><h4>Assured Quality</h4><p>ISO 9001:2015 systems and an in-house ASTM lab — eight tests on every batch, full documentation at dispatch.</p></div>
-      <div class="why-card" style="--wc:#c89a3a;"><span class="why-glyph">ii</span><h4>On-Time Delivery</h4><p>3–5 week production lead times, honestly quoted and tracked — with sea freight coordinated from Mundra Port.</p></div>
+      <div class="why-card" style="--wc:#c89a3a;"><span class="why-glyph">ii</span><h4>On-Time Delivery</h4><p>3–5 week production lead times, honestly quoted and tracked — exporting to 10+ countries via sea freight.</p></div>
       <div class="why-card" style="--wc:#7a6e3f;"><span class="why-glyph">iii</span><h4>Customized Solutions</h4><p>Structure, size, barrier and finish engineered per product — recommendation within 24 hours of your brief.</p></div>
-      <div class="why-card" style="--wc:#7a8a6c;"><span class="why-glyph">iv</span><h4>Advanced Machinery</h4><p>8-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p></div>
+      <div class="why-card" style="--wc:#7a8a6c;"><span class="why-glyph">iv</span><h4>Advanced Machinery</h4><p>9-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p></div>
       <div class="why-card" style="--wc:#3b2a20;"><span class="why-glyph">v</span><h4>Skilled Workforce</h4><p>An experienced production and QC team under the Gangamani group's 20+ years of manufacturing discipline.</p></div>
       <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">vi</span><h4>100% Recyclable Options</h4><p>Mono-material LLDPE structures for EPR-compliant brands — sustainability without sacrificing shelf appeal.</p></div>
     </div>

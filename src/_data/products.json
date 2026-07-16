@@ -34,7 +34,7 @@
         "opt": true
       },
       {
-        "t": "8-colour rotogravure",
+        "t": "9-colour rotogravure",
         "tag": "Print"
       }
     ],
@@ -57,7 +57,7 @@
         "opt": true
       },
       {
-        "t": "8-colour print",
+        "t": "9-colour print",
         "d": "Rotogravure — matte, gloss or metallic finish.",
         "x": 26,
         "y": 56,
@@ -91,7 +91,7 @@
       },
       {
         "t": "Full-colour print",
-        "d": "Up to 8-colour rotogravure with matte, gloss or metallic finishes and spot effects."
+        "d": "Up to 9-colour rotogravure with matte, gloss or metallic finishes and spot effects."
       }
     ]
   },
