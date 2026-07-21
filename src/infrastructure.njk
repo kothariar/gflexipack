@@ -30,65 +30,86 @@ pageImage: "/assets/images/printing-machine.png"
       <span class="pp-chip">03 · Lamination</span><span style="color:var(--ink-soft); margin:0 8px;">→</span>
       <span class="pp-chip">04 · Slitting</span><span style="color:var(--ink-soft); margin:0 8px;">→</span>
       <span class="pp-chip">05 · Pouching &amp; sealing</span><span style="color:var(--ink-soft); margin:0 8px;">→</span>
-      <span class="pp-chip is-rec">06 · QC &amp; dispatch</span>
+      <a class="pp-chip is-qc" href="/quality/">06 · QC &amp; dispatch <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
   <!-- ============ STAGE 02 · ROTOGRAVURE ============ -->
   <section class="pp-dark"><div class="sec">
-    <div class="sec-head"><p class="sec-eyebrow">Stage 02 · Machine 01</p><h2 class="sec-title">Rotogravure <em>printing press.</em></h2><p class="sec-lead">{{ site.print | capitalize }} with automatic registration control — sharp detail and consistent shade-matching, run after run. Every printed roll is inline-inspected before it moves to lamination.</p></div>
-    <div class="pp-glance-inner" style="padding:0; margin-bottom:28px;">
-      <div class="pp-g-item"><span class="pp-g-k">Colours</span><span class="pp-g-v">{{ site.print | replace(" rotogravure", "") }}</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Max web width</span><span class="pp-g-v">1,000mm</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Print speed</span><span class="pp-g-v">Up to 250 m/min</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Registration</span><span class="pp-g-v">Automatic</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Substrates</span><span class="pp-g-v">BOPP, PET, PE, metalised film</span></div>
+    <div class="mach-row">
+      <figure class="mach-photo" style="margin:0;"><img src="/assets/images/printing-machine.png" alt="Rotogravure printing press" loading="lazy" /></figure>
+      <div class="mach-text">
+        <h2 class="sec-title" style="text-align:left;">Rotogravure <em>printing press.</em></h2>
+        <p class="sec-lead" style="text-align:left; margin:14px 0 22px;">9-colour rotogravure with automatic registration control — sharp detail and consistent shade-matching, run after run. Cylinders are engraved per job, so repeat orders reprint to the same shade months later, not just within a single run. Every printed roll is inline-inspected before it moves to lamination, catching registration drift or colour variance before it compounds downstream.</p>
+        <div class="pp-glance-inner" style="padding:0; margin-bottom:22px; justify-content:flex-start; gap:28px 40px;">
+          <div class="pp-g-item"><span class="pp-g-k">Colours</span><span class="pp-g-v">9-colour</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Max web width</span><span class="pp-g-v">1,000mm</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Print speed</span><span class="pp-g-v">Up to 250 m/min</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Registration</span><span class="pp-g-v">Automatic</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Substrates</span><span class="pp-g-v">BOPP, PET, PE, metalised film</span></div>
+        </div>
+        <p style="margin:0; font-size:14px; color:var(--cream-soft); line-height:1.6;"><strong style="color:var(--pale-gold);">What this means for your order:</strong> the shade you approve on the first run is the shade you get on the fiftieth — no re-matching, no drift batch to batch.</p>
+      </div>
     </div>
-    <figure style="margin:0; border-radius:12px; overflow:hidden;"><img src="/assets/images/printing-machine.png" alt="Rotogravure printing press" loading="lazy" style="width:100%; display:block;" /></figure>
-    <p style="max-width:640px; margin:20px 0 0; font-size:14px; color:var(--cream-soft); line-height:1.6;"><strong style="color:var(--pale-gold);">What this means for your order:</strong> the shade you approve on the first run is the shade you get on the fiftieth — no re-matching, no drift batch to batch.</p>
   </div></section>
 
   <!-- ============ STAGE 03 · LAMINATION ============ -->
-  <section class="sec"><div class="sec-head" style="max-width:1440px; margin:0 auto; padding:0 56px;">
-    <p class="sec-eyebrow">Stage 03 · Machine 02</p><h2 class="sec-title">Solvent-less &amp; solvent-based <em>lamination.</em></h2><p class="sec-lead">Food-safe multi-layer bonding — the barrier structure is matched to what's going inside the pouch, not a one-size-fits-all laminate.</p>
-    <div class="pp-glance-inner" style="padding:0; margin:28px 0;">
-      <div class="pp-g-item"><span class="pp-g-k">Bonding type</span><span class="pp-g-v">Solvent-less &amp; solvent-based</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Max web width</span><span class="pp-g-v">1,000mm</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Line speed</span><span class="pp-g-v">Up to 400 m/min</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Structures</span><span class="pp-g-v">2–3 ply laminates</span></div>
+  <section class="sec">
+    <div class="mach-row mach-row-rev">
+      <figure class="mach-photo" style="margin:0;"><img src="/assets/images/lami.png" alt="Solvent-less lamination machine" loading="lazy" /></figure>
+      <div class="mach-text">
+        <h2 class="sec-title" style="text-align:left;">Solvent-less &amp; solvent-based <em>lamination.</em></h2>
+        <p class="sec-lead" style="text-align:left; margin:14px 0 22px;">Food-safe multi-layer bonding — the barrier structure is matched to what's going inside the pouch, not a one-size-fits-all laminate. Solvent-less bonding is our standard for food-contact layers, avoiding residual solvent entirely, while solvent-based lamination is available where a structure calls for it — retort-grade adhesion or specific barrier films, for example.</p>
+        <div class="pp-glance-inner" style="padding:0; margin-bottom:22px; justify-content:flex-start; gap:28px 40px;">
+          <div class="pp-g-item"><span class="pp-g-k">Bonding type</span><span class="pp-g-v">Solvent-less &amp; solvent-based</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Max web width</span><span class="pp-g-v">1,000mm</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Line speed</span><span class="pp-g-v">Up to 400 m/min</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Structures</span><span class="pp-g-v">2–3 ply laminates</span></div>
+        </div>
+        <p style="margin:0; font-size:14px; color:var(--ink-soft); line-height:1.6;"><strong style="color:var(--ink);">What this means for your order:</strong> solvent-less as standard keeps residual solvent off food-contact layers, with solvent-based available for structures that need it.</p>
+      </div>
     </div>
-    <figure style="margin:0; border-radius:12px; overflow:hidden; max-width:1440px;"><img src="/assets/images/lami.png" alt="Solvent-less lamination machine" loading="lazy" style="width:100%; display:block;" /></figure>
-    <p style="max-width:640px; margin:20px 0 0; font-size:14px; color:var(--ink-soft); line-height:1.6;"><strong style="color:var(--ink);">What this means for your order:</strong> solvent-less as standard keeps residual solvent off food-contact layers, with solvent-based available for structures that need it.</p>
-  </div></section>
+  </section>
 
   <!-- ============ STAGE 04 · SLITTING ============ -->
   <section class="pp-dark"><div class="sec">
-    <div class="sec-head"><p class="sec-eyebrow">Stage 04 · Machine 03</p><h2 class="sec-title">Precision <em>slitting lines.</em></h2><p class="sec-lead">Tension-controlled winding to exact reel widths — output either goes straight to pouching or ships as finished film rolls.</p></div>
-    <div class="pp-glance-inner" style="padding:0; margin-bottom:28px;">
-      <div class="pp-g-item"><span class="pp-g-k">Max unwind width</span><span class="pp-g-v">1,250mm</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Slit tolerance</span><span class="pp-g-v">±0.5mm</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Speed</span><span class="pp-g-v">Up to 500 m/min</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Winding</span><span class="pp-g-v">Tension-controlled</span></div>
+    <div class="mach-row">
+      <figure class="mach-photo" style="margin:0;"><img src="/assets/images/slitting-machine.png" alt="Slitting machine" loading="lazy" /></figure>
+      <div class="mach-text">
+        <h2 class="sec-title" style="text-align:left;">Precision <em>slitting lines.</em></h2>
+        <p class="sec-lead" style="text-align:left; margin:14px 0 22px;">Tension-controlled winding to exact reel widths — output either goes straight to pouching or ships as finished film rolls. Consistent tension across the reel prevents telescoping and wrinkling in transit, so what leaves our slitting line arrives at yours ready to run, not needing to be re-wound first.</p>
+        <div class="pp-glance-inner" style="padding:0; margin-bottom:22px; justify-content:flex-start; gap:28px 40px;">
+          <div class="pp-g-item"><span class="pp-g-k">Max unwind width</span><span class="pp-g-v">1,250mm</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Slit tolerance</span><span class="pp-g-v">±0.5mm</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Speed</span><span class="pp-g-v">Up to 500 m/min</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Winding</span><span class="pp-g-v">Tension-controlled</span></div>
+        </div>
+        <p style="margin:0; font-size:14px; color:var(--cream-soft); line-height:1.6;"><strong style="color:var(--pale-gold);">What this means for your order:</strong> tight tolerance means every reel feeds your pouching line cleanly — no jams, no wasted film from misaligned edges.</p>
+      </div>
     </div>
-    <figure style="margin:0; border-radius:12px; overflow:hidden;"><img src="/assets/images/slitting-machine.png" alt="Slitting machine" loading="lazy" style="width:100%; display:block;" /></figure>
-    <p style="max-width:640px; margin:20px 0 0; font-size:14px; color:var(--cream-soft); line-height:1.6;"><strong style="color:var(--pale-gold);">What this means for your order:</strong> tight tolerance means every reel feeds your pouching line cleanly — no jams, no wasted film from misaligned edges.</p>
   </div></section>
 
   <!-- ============ STAGE 05 · POUCHING ============ -->
-  <section class="sec"><div class="sec-head" style="max-width:1440px; margin:0 auto; padding:0 56px;">
-    <p class="sec-eyebrow">Stage 05 · Machine 04</p><h2 class="sec-title">Pouching &amp; <em>bag-making lines.</em></h2><p class="sec-lead">Stand-up, flat-bottom, 3-side seal, centre-seal, zipper and spouted formats — fourteen pouch styles, converted in-house.</p>
-    <div class="pp-glance-inner" style="padding:0; margin:28px 0;">
-      <div class="pp-g-item"><span class="pp-g-k">Formats</span><span class="pp-g-v">14 pouch styles</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Fill weight range</span><span class="pp-g-v">5g – 25kg</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Output</span><span class="pp-g-v">Up to 100 pouches/min</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Closures</span><span class="pp-g-v">Heat seal, zipper, spout</span></div>
+  <section class="sec">
+    <div class="mach-row mach-row-rev">
+      <figure class="mach-photo" style="margin:0;"><img src="/assets/images/pouch.png" alt="Pouching and bag-making line" loading="lazy" /></figure>
+      <div class="mach-text">
+        <h2 class="sec-title" style="text-align:left;">Pouching &amp; <em>bag-making lines.</em></h2>
+        <p class="sec-lead" style="text-align:left; margin:14px 0 22px;">Stand-up, flat-bottom, 3-side seal, centre-seal, zipper and spouted formats — fourteen pouch styles, converted in-house. Seal strength and closure fitment are checked continuously through the run, not spot-checked at the end, so a pack that fails a seal test gets caught before it reaches your case count, not after it's already boxed.</p>
+        <div class="pp-glance-inner" style="padding:0; margin-bottom:22px; justify-content:flex-start; gap:28px 40px;">
+          <div class="pp-g-item"><span class="pp-g-k">Formats</span><span class="pp-g-v">14 pouch styles</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Fill weight range</span><span class="pp-g-v">5g – 25kg</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Output</span><span class="pp-g-v">Up to 100 pouches/min</span></div>
+          <div class="pp-g-item"><span class="pp-g-k">Closures</span><span class="pp-g-v">Heat seal, zipper, spout</span></div>
+        </div>
+        <p style="margin:0; font-size:14px; color:var(--ink-soft); line-height:1.6;"><strong style="color:var(--ink);">What this means for your order:</strong> from a 5g sachet to a 25kg industrial sack, it's the same in-house line and the same QC checklist.</p>
+      </div>
     </div>
-    <figure style="margin:0; border-radius:12px; overflow:hidden; max-width:1440px;"><img src="/assets/images/pouch.png" alt="Pouching and bag-making line" loading="lazy" style="width:100%; display:block;" /></figure>
-    <p style="max-width:640px; margin:20px 0 0; font-size:14px; color:var(--ink-soft); line-height:1.6;"><strong style="color:var(--ink);">What this means for your order:</strong> from a 5g sachet to a 25kg industrial sack, it's the same in-house line and the same QC checklist.</p>
-  </div></section>
+  </section>
 
   <!-- ============ STAGE 06 · QC ============ -->
-  <section class="sec" aria-label="Quality checkpoint">
+  <section class="sec" aria-label="Quality checkpoint" style="padding-top:0;">
+    <div style="max-width:1200px; margin:0 auto 64px; border-top:1px solid var(--ink-line);"></div>
     <div class="sec-head" data-reveal><p class="sec-eyebrow">Stage 06</p><h2 class="sec-title">Inspected <em>before it ships, not after.</em></h2><p class="sec-lead">Every stage above ends with a check, not a handoff — printed rolls are inspected before lamination, laminated rolls before slitting, finished pouches before packing. <a href="/quality/" style="color:var(--accent); text-decoration:underline;">See our full QC process →</a></p></div>
   </section>
 

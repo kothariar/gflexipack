@@ -1,0 +1,65 @@
+---
+layout: layouts/base.njk
+permalink: "/faqs/"
+title: "Frequently Asked Questions | G Flexipack"
+description: "Answers to what brands ask before their first order with G Flexipack — MOQ, lead times, quote turnaround, pouch formats, export, certifications, print method and payment terms."
+pageImage: "/assets/images/standup.png"
+---
+
+{% set faqs = [
+  { q: "What's the minimum order quantity?", a: "Reach out with your product and target quantity — we'll confirm what works for a trial or first order." },
+  { q: "How long does production take?", a: "3–5 weeks from artwork approval to dispatch, depending on structure and print complexity. We confirm a firm date before production starts." },
+  { q: "How fast can I get a quote?", a: "Structure recommendation within 24 hours of your brief, full quote within 48 hours." },
+  { q: "Can you recommend a structure if I'm not sure what I need?", a: "Yes — send your product, target shelf life and rough budget, and we'll recommend a laminate structure within 24 hours." },
+  { q: "What pouch formats do you make?", a: "Fourteen formats, including stand-up, zipper, gusseted, spout, retort, vacuum, centre seal, 3-side seal, 4-side seal, patch handle, poly film rolls, breathing pouches and shape pouches.", link: { href: "/products/", text: "See all formats →" } },
+  { q: "What industries do you serve?", a: "Food & grocery, beverages, pharmaceuticals, personal care, agrochemical, household and industrial.", link: { href: "/industries/", text: "See all industries →" } },
+  { q: "Do you export outside India?", a: "Yes, we export to 10+ countries via sea freight, with full export documentation." },
+  { q: "What certifications do you hold?", a: "ISO 9001:2015 certified, with ASTM-standard QC testing on every batch and recyclable mono-material options available.", link: { href: "/quality/", text: "See our full quality process →" } },
+  { q: "What print method do you use?", a: "Upto 9-colour rotogravure with automatic registration, for sharp detail and consistent shade-matching across long runs." },
+  { q: "What are your payment terms?", a: "30% advance, 70% before dispatch, as standard. Structured differently for repeat or larger accounts on request." }
+] %}
+
+  <!-- HERO / INTRO -->
+  <section class="sec" style="padding-bottom:20px;">
+    <div class="sec-head" data-reveal>
+      <p class="pp-crumbs" style="text-align:center;"><a href="/">Home</a><span>/</span>FAQs</p>
+      <p class="sec-eyebrow">FAQs</p>
+      <h1 class="sec-title" style="margin:0 auto 20px;">Common <em>questions.</em></h1>
+      <p class="pp-intro" style="margin:0 auto;">Answers to what most brands ask before their first order. Can't find yours — send it to us directly.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec" style="padding-top:0;">
+    <div class="faq" data-reveal>
+      {% for f in faqs %}<details{% if loop.first %} open{% endif %}>
+        <summary>{{ f.q }}</summary>
+        <p>{{ f.a }}{% if f.link %} <a href="{{ f.link.href }}" style="color:var(--accent); text-decoration:underline;">{{ f.link.text }}</a>{% endif %}</p>
+      </details>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="pp-band">
+    <div class="sec">
+      <h2 data-reveal>Still have <em>a question?</em></h2>
+      <p data-reveal>Send it to us directly — structure recommendation within 24 hours, quote in 48.</p>
+      <a class="cta cta-light" href="/#inquiry" data-reveal>Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for f in faqs %}{
+        "@type": "Question",
+        "name": "{{ f.q }}",
+        "acceptedAnswer": { "@type": "Answer", "text": "{{ f.a }}" }
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>
