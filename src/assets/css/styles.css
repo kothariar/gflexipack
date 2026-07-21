@@ -2039,6 +2039,48 @@
 /* ============================================================
    PRODUCT + INDUSTRY PAGES
    ============================================================ */
+/* ===== Industry split-glance hero ===== */
+.ih { display: grid; grid-template-columns: 46% 54%; min-height: calc(100vh - 66px); }
+.ih-left { padding: 40px 60px 44px; display: flex; flex-direction: column; background: var(--cream); }
+.ih-crumbs { font-size: 13px; color: var(--ink-soft); margin: 0; }
+.ih-crumbs a { color: var(--ink-soft); }
+.ih-crumbs a:hover { color: var(--ink); }
+.ih-crumbs b { color: var(--ink); font-weight: 500; }
+.ih-mid { margin: auto 0; }
+.ih-eyebrow { font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 18px; }
+.ih-title { font-family: var(--serif); font-weight: 400; font-size: clamp(44px,4.6vw,66px); line-height: 1.0; letter-spacing: -0.005em; margin: 0; max-width: 9ch; color: var(--ink); }
+.ih-title .p { color: var(--accent); }
+.ih-lead { font-size: 16px; line-height: 1.62; color: var(--ink-soft); margin: 22px 0 0; max-width: 410px; }
+.ih-rule { height: 1px; background: var(--ink-line); margin: 30px 0 20px; max-width: 410px; }
+.ih-packs-l { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+.ih-packs { font-size: 15px; line-height: 1.7; color: var(--ink); max-width: 440px; margin: 0; }
+.ih-packs .sep { color: var(--ink-line); padding: 0 7px; }
+.ih-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.ih-right { position: relative; background: #4a5741; overflow: hidden; }
+.ih-right::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 46px 46px; background-position: center; }
+.ih-pouch { position: absolute; left: 50%; top: 49%; transform: translate(-50%,-50%); filter: drop-shadow(0 40px 46px rgba(0,0,0,0.4)); }
+.ih-fdot { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--cream); transform: translate(-50%,-50%); z-index: 5; box-shadow: 0 0 0 4px rgba(74,87,65,0.5); }
+.ih-conn { position: absolute; height: 1px; background: rgba(244,239,231,0.28); z-index: 4; transform: translateY(-50%); }
+.ih-lbl { position: absolute; width: 176px; transform: translateY(-50%); z-index: 5; }
+.ih-lbl .l { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--cream); margin: 0 0 5px; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.ih-lbl .l i { font-style: normal; font-size: 9px; letter-spacing: 0.1em; border: 1px solid rgba(244,239,231,0.28); border-radius: 999px; padding: 2px 7px; color: rgba(244,239,231,0.7); }
+.ih-lbl .d { font-size: 12.5px; line-height: 1.45; color: rgba(244,239,231,0.7); margin: 0; }
+.ih-lbl.r { right: 34px; text-align: left; }
+.ih-lbl.l { left: 34px; text-align: right; }
+.ih-lbl.l .l { justify-content: flex-end; }
+.ih-dim { position: absolute; left: 8%; right: 8%; bottom: 34px; display: flex; align-items: center; justify-content: center; gap: 14px; z-index: 5; }
+.ih-dim .bar { flex: 1; height: 1px; background: rgba(244,239,231,0.28); position: relative; }
+.ih-dim .bar::before { content: ""; position: absolute; height: 9px; width: 1px; background: rgba(244,239,231,0.28); top: -4px; }
+.ih-dim .bar.l::before { left: 0; }
+.ih-dim .bar.r::before { right: 0; }
+.ih-dim .txt { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); background: rgba(217,200,147,0.28); padding: 3px 9px; border-radius: 2px; white-space: nowrap; }
+@media (max-width: 900px) {
+  .ih { grid-template-columns: 1fr; min-height: 0; }
+  .ih-left { padding: 32px 24px 40px; }
+  .ih-right { min-height: 68vh; }
+  .ih-fdot, .ih-conn, .ih-lbl { display: none; }
+}
+
 .pp-hero { max-width: 1440px; margin: 0 auto; padding: 44px 56px 64px; display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,0.9fr); gap: 64px; align-items: center; }
 .pp-crumbs { font-size: 13px; letter-spacing: 0.04em; color: var(--ink-soft); margin: 0 0 24px; }
 .pp-crumbs a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(59,42,32,0.3); }

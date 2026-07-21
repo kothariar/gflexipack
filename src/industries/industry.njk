@@ -11,42 +11,41 @@ eleventyComputed:
   pageImage: "/assets/images/{{ sector.image }}.png"
 ---
 
-  <section class="pp-hero">
-    <div>
-      <p class="pp-crumbs">
-        <a href="/">Home</a><span>/</span><a href="/industries/">Industries</a><span>/</span>{{ sector.name }}
-      </p>
-      <h1>{{ sector.name }} <em>packaging.</em></h1>
-      <p class="pp-intro">{{ sector.intro }}</p>
-      <div class="pp-hero-ctas">
+  <!-- ============ SPLIT-GLANCE HERO ============ -->
+  <section class="ih">
+    <div class="ih-left">
+      <p class="ih-crumbs"><a href="/">Home</a> → <a href="/industries/">Industries</a> → <b>{{ sector.name }}</b></p>
+      <div class="ih-mid">
+        <p class="ih-eyebrow">Sector {{ sector.num }}</p>
+        <h1 class="ih-title">{{ sector.name }}<span class="p">.</span></h1>
+        <p class="ih-lead">{{ sector.heroLead }}</p>
+        <div class="ih-rule"></div>
+        <p class="ih-packs-l">Commonly packs</p>
+        <p class="ih-packs">{% for a in sector.applications %}{{ a }}{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}</p>
+      </div>
+      <div class="ih-ctas">
         <a class="cta cta-primary" href="/#inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
-        <a class="cta cta-ghost" href="/industries/">All industries <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="cta cta-ghost" href="#formats">See recommended formats <span aria-hidden="true">↓</span></a>
       </div>
     </div>
-    <div class="pp-photo" style="--cream-2:{{ sector.accent }};" data-reveal>
-      <img src="/assets/images/{{ sector.image }}.png" alt="{{ sector.name }} packaging by G Flexipack" />
-    </div>
-  </section>
-
-  <!-- APPLICATIONS -->
-  <section class="sec">
-    <div class="sec-head" data-reveal>
-      <p class="sec-eyebrow">What we pack</p>
-      <h2 class="sec-title">Built for the <em>{{ sector.short | lower }} shelf.</em></h2>
-    </div>
-    <div class="pp-apps" data-reveal>
-      {% for a in sector.applications %}<span class="pp-app">{{ a }}</span>
+    <div class="ih-right">
+      <img class="ih-pouch" style="height:{{ sector.ph }}%" src="/assets/images/{{ sector.cutout }}.png" alt="{{ sector.name }} packaging by G Flexipack" />
+      {% for f in sector.features %}
+      <span class="ih-fdot" style="left:{{ f.x }}%;top:{{ f.y }}%"></span>
+      <span class="ih-conn" style="top:{{ f.y }}%;{% if f.side == 'r' %}left:{{ f.x }}%;right:210px{% else %}left:210px;right:{{ 100 - f.x }}%{% endif %}"></span>
+      <div class="ih-lbl {{ f.side }}" style="top:{{ f.y }}%"><p class="l">{{ f.label }}{% if f.pill %} <i>{{ f.pill }}</i>{% endif %}</p><p class="d">{{ f.desc }}</p></div>
       {% endfor %}
+      <div class="ih-dim"><span class="bar l"></span><span class="txt">{{ sector.tagline }}</span><span class="bar r"></span></div>
     </div>
-    <p style="text-align:center; max-width:640px; margin:34px auto 0; color:var(--ink-soft); font-size:15px; line-height:1.65;"><strong style="color:var(--ink); font-weight:500;">Typical build:</strong> {{ sector.build }}</p>
   </section>
 
-  <!-- RECOMMENDED FORMATS -->
-  <section class="pp-dark">
+  <!-- ============ RECOMMENDED FORMATS ============ -->
+  <section class="pp-dark" id="formats">
     <div class="sec">
       <div class="sec-head" data-reveal>
         <p class="sec-eyebrow">Recommended formats</p>
         <h2 class="sec-title">Formats that suit <em>{{ sector.short | lower }}.</em></h2>
+        <p class="sec-lead">{{ sector.build }}</p>
       </div>
       <div class="pp-related" data-reveal>
         {% for slug in sector.formats %}{% for p in products %}{% if p.slug == slug %}<a href="/products/{{ p.slug }}/" style="color:var(--cream); border-color:rgba(244,239,231,0.32);">{{ p.name }} →</a>{% endif %}{% endfor %}{% endfor %}
@@ -54,7 +53,7 @@ eleventyComputed:
     </div>
   </section>
 
-  <!-- CTA BAND -->
+  <!-- ============ CTA BAND ============ -->
   <section class="pp-band">
     <div class="sec">
       <h2 data-reveal>Packaging for your <em>{{ sector.short | lower }} brand.</em></h2>
