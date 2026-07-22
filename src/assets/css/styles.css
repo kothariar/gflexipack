@@ -786,8 +786,8 @@
       align-items: center;
       justify-content: center;
       width: auto;
-      height: 90px;
-      margin: 0 28px;
+      height: 128px;
+      margin: 0 24px;
       padding: 0;
       background: transparent;
       border: none;
@@ -795,7 +795,9 @@
       overflow: visible;
       flex-shrink: 0;
     }
-    .client-badge img { width: auto; height: 100%; max-width: 220px; object-fit: contain; }
+    /* Logos ship on white tiles; multiply blends those tiles into the cream
+       background so only the mark shows — no visible box, no asset edits. */
+    .client-badge img { width: auto; height: 100%; max-width: 300px; object-fit: contain; mix-blend-mode: multiply; }
     .client-badge b {
       font-family: var(--serif);
       font-weight: 400;
@@ -1159,8 +1161,8 @@
       .infra-photos { grid-template-columns: 1fr 1fr; gap: 10px; }
 
       .clientele .sec { padding: 64px 20px; }
-      .client-badge { width: auto; height: 56px; padding: 0; margin: 0 18px; }
-      .client-badge img { max-width: 140px; }
+      .client-badge { width: auto; height: 80px; padding: 0; margin: 0 16px; }
+      .client-badge img { max-width: 190px; }
 
       .why-grid { grid-template-columns: 1fr; }
 
