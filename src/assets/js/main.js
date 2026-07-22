@@ -113,9 +113,14 @@
     const accDesktop = () => window.matchMedia("(min-width: 901px)").matches;
     accPanels.forEach((p) => {
       p.addEventListener("mouseenter", () => { if (accDesktop()) openAcc(p); });
-      p.addEventListener("click", () => {
-        if (!accDesktop() && p.classList.contains("is-open")) { p.classList.remove("is-open"); return; }
-        openAcc(p);
+      p.addEventListener("click", (e) => {
+        // On touch/mobile, the first tap only previews the sector; a second tap
+        // (panel already open) follows the link. On desktop the panel is already
+        // open from hover, so a click navigates straight through.
+        if (!accDesktop() && !p.classList.contains("is-open")) {
+          e.preventDefault();
+          openAcc(p);
+        }
       });
     });
   }
