@@ -125,24 +125,6 @@
     });
   }
 
-  // ---------- infrastructure scrollytelling — active step drives the pinned shot ----------
-  const scStage = document.getElementById("scStage");
-  if (scStage) {
-    const shots = scStage.querySelectorAll(".sc-shot");
-    const scSteps = document.querySelectorAll(".sc-step");
-    const setShot = (n) => shots.forEach((s) => s.classList.toggle("is-active", s.dataset.shot === n));
-    const scIO = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          scSteps.forEach((s) => s.classList.remove("is-active"));
-          e.target.classList.add("is-active");
-          setShot(e.target.dataset.step);
-        }
-      });
-    }, { rootMargin: "-45% 0px -45% 0px" });
-    scSteps.forEach((s) => scIO.observe(s));
-  }
-
   // ---------- anatomy scrollytelling ("Inside the Film") ----------
   const stack = document.getElementById("filmStack");
   if (stack) {
