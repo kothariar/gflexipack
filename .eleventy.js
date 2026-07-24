@@ -17,6 +17,23 @@ module.exports = function (eleventyConfig) {
     }
   });
 
+  // Base64 data-URI for a binary asset (used to embed images into the standalone build)
+  eleventyConfig.addFilter("dataUri", function (p) {
+    try {
+      const abs = path.join(__dirname, p);
+      const ext = path.extname(abs).slice(1).toLowerCase();
+      const mime =
+        ext === "webp" ? "image/webp" :
+        ext === "png" ? "image/png" :
+        ext === "svg" ? "image/svg+xml" :
+        ext === "jpg" || ext === "jpeg" ? "image/jpeg" :
+        ext === "gif" ? "image/gif" : "application/octet-stream";
+      return "data:" + mime + ";base64," + fs.readFileSync(abs).toString("base64");
+    } catch (e) {
+      return "";
+    }
+  });
+
   // Static assets (css, js, images) → /assets/…
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   // Root files

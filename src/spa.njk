@@ -3,8 +3,28 @@ permalink: "/gflexipack-standalone.html"
 eleventyExcludeFromCollections: true
 noindex: true
 ---
+{% import "partials/icons.njk" as icons %}
 {% set ph = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" %}
 {% set defaultStructures = ["PET / METPET / PE", "MATTE BOPP / METPET / PE", "PET / PE", "BOPA / PE", "PET / Alu / PE", "PET / Alu / BOPA / PE", "PE / PE", "Alox PET / PE"] %}
+{% set lamTags = {
+  "PET / METPET / PE": "High barrier",
+  "MATTE BOPP / METPET / PE": "High · matte",
+  "PET / PE": "Everyday",
+  "BOPA / PE": "Puncture-resist",
+  "PET / Alu / PE": "Ultra barrier",
+  "PET / Alu / BOPA / PE": "Max barrier",
+  "PE / PE": "Economical",
+  "Alox PET / PE": "Clear barrier",
+  "MDOPE / PE": "Recyclable",
+  "BOPA / PE (nylon-PE)": "Puncture-resist",
+  "High-clarity PA / PE": "High clarity",
+  "PET / Alu / CPP": "Retort-grade",
+  "PET / BOPA / Alu / CPP": "Retort · tough",
+  "PET / Nylon / CPP (transparent retort)": "Transparent"
+} %}
+{% set arcMid = { "3": [26, 34, 26], "4": [20, 33, 33, 20], "5": [16, 28, 34, 28, 16], "9": [8, 19, 28, 35, 38, 35, 28, 19, 8] } %}
+{% set arcRise = { "3": [10, 20, 28], "4": [8, 15, 22, 27], "5": [8, 16, 22, 26, 28] } %}
+{% set arcFall = { "3": [22, 14, 6], "4": [24, 18, 11, 5], "5": [26, 21, 15, 9, 4] } %}
 {% macro img(name, alt, cls) %}<img{% if cls %} class="{{ cls }}"{% endif %} data-img="{{ name }}" src="{{ ph }}" alt="{{ alt }}" loading="lazy" />{% endmacro %}
 <!doctype html>
 <html lang="en">
@@ -112,20 +132,37 @@ noindex: true
     </div></div>
 
     <section id="products-teaser">
-      <div class="sec" style="padding-bottom:30px;">
+      <div class="sec">
         <div class="sec-head">
           <p class="sec-eyebrow">Our products</p>
           <h2 class="sec-title">One roof, <em>every format.</em></h2>
           <p class="sec-lead">Custom dimensions, laminate structures, barrier levels and full-colour rotogravure print — all produced in-house.</p>
         </div>
-        <div class="pp-grid">
-          {% for p in products %}<a class="pp-card" href="#/products/{{ p.slug }}">
-            <span class="pp-card-fig" style="--tbg:{{ p.tbg }};">{{ img(p.image, p.name) }}</span>
-            <span class="pp-card-body"><h3>{{ p.name }}</h3><p>{{ p.applications | join(' · ') }}.</p><span class="pp-card-link">View details →</span></span>
+      </div>
+
+      <div class="rail-wrap">
+        <div class="rail" id="formatRail">
+          {% for p in products %}<a class="r-card" href="#/products/{{ p.slug }}">
+            <span class="r-fig" style="--tbg:{{ p.tbg }};">{{ img(p.image, p.name) }}</span>
+            <span class="r-body"><span class="r-name">{{ p.name }}</span><span class="r-link">View details →</span></span>
           </a>
           {% endfor %}
         </div>
+        <div class="rail-btns">
+          <button class="rail-btn" id="railPrev" aria-label="Previous formats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
+          <button class="rail-btn" id="railNext" aria-label="Next formats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"></polyline></svg></button>
+        </div>
       </div>
+
+      <div class="rail-nav">
+        <span class="rail-hint hint-desktop">Drag, or use the arrows</span>
+        <span class="rail-hint hint-mobile">Swipe to explore →</span>
+        <div class="rail-progress">
+          <div class="rail-track"><div class="rail-fill" id="railFill"></div></div>
+          <span class="rail-count"><em id="railCurrent">01</em> / {{ products | length }}</span>
+        </div>
+      </div>
+      <div style="height: 40px;"></div>
     </section>
 
     <section class="industries" id="industries-teaser">
@@ -139,8 +176,8 @@ noindex: true
           {% for s in industries %}<div class="acc-panel{% if loop.first %} is-open{% endif %}" style="--ic:{{ s.accent }};">
             {{ img(s.image, s.name + " sector packaging", "acc-photo") }}
             <div class="acc-photo-scrim"></div>
-            <div class="acc-closed"><span class="acc-num">{{ s.num }}</span><span class="acc-name-v">{{ s.short }}</span></div>
-            <div class="acc-open"><span class="acc-num">{{ s.num }}</span><h3>{{ s.name }}</h3><p>{{ s.applications | join(' · ') }}.</p><a class="r-link" href="#/industries/{{ s.slug }}">Explore sector →</a></div>
+            <div class="acc-closed"><span class="acc-name-v">{{ s.short }}</span></div>
+            <div class="acc-open"><h3>{{ s.name }}</h3><p>{{ s.applications | join(' · ') }}.</p><a class="r-link" href="#/industries/{{ s.slug }}">Explore sector →</a></div>
           </div>
           {% endfor %}
         </div>
@@ -181,7 +218,7 @@ noindex: true
         <div class="sec-head"><p class="sec-eyebrow">Our clientele</p><h2 class="sec-title">Trusted across sectors <em>and borders.</em></h2></div>
         <div class="client-marquee"><div class="client-track">
           {% for i in [1,2] %}<div class="client-set"{% if i == 2 %} aria-hidden="true"{% endif %}>
-            {% for c in clients %}{% if c.text %}<span class="client-badge client-badge-text"><b>{{ c.text }}</b></span>{% else %}<span class="client-badge"><img src="/assets/images/clients/{{ c.img }}.webp" alt="{{ c.name }} logo" loading="lazy" /></span>{% endif %}
+            {% for c in clients %}{% if c.text %}<span class="client-badge client-badge-text"><b>{{ c.text }}</b></span>{% else %}<span class="client-badge"><img src="{{ ('src/assets/images/clients/' + c.img + '.webp') | dataUri }}" alt="{{ c.name }} logo" loading="lazy" /></span>{% endif %}
             {% endfor %}
           </div>{% endfor %}
         </div></div>
@@ -219,6 +256,7 @@ noindex: true
       </div>
     </section>
 
+    <!-- ============ PROCESS FLOW ============ -->
     <section class="sec" style="padding-top:8px; padding-bottom:8px;">
       <div style="max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:0; padding:0 20px;">
         <span class="pp-chip">01 · Film unwind</span><span style="color:var(--ink-soft); margin:0 8px;">→</span>
@@ -226,60 +264,86 @@ noindex: true
         <span class="pp-chip">03 · Lamination</span><span style="color:var(--ink-soft); margin:0 8px;">→</span>
         <span class="pp-chip">04 · Slitting</span><span style="color:var(--ink-soft); margin:0 8px;">→</span>
         <span class="pp-chip">05 · Pouching &amp; sealing</span><span style="color:var(--ink-soft); margin:0 8px;">→</span>
-        <span class="pp-chip is-rec">06 · QC &amp; dispatch</span>
+        <a class="pp-chip is-qc" href="#/quality">06 · QC &amp; dispatch <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
+    <!-- ============ STAGE 02 · ROTOGRAVURE ============ -->
     <section class="pp-dark"><div class="sec">
-      <div class="sec-head"><p class="sec-eyebrow">Stage 02 · Machine 01</p><h2 class="sec-title">Rotogravure <em>printing press.</em></h2><p class="sec-lead">{{ site.print | capitalize }} with automatic registration control — sharp detail and consistent shade-matching, run after run. Every printed roll is inline-inspected before it moves to lamination.</p></div>
-      <div class="pp-glance-inner" style="padding:0; margin-bottom:28px;">
-        <div class="pp-g-item"><span class="pp-g-k">Colours</span><span class="pp-g-v">{{ site.print | replace(" rotogravure", "") }}</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Max web width</span><span class="pp-g-v">1,000mm</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Print speed</span><span class="pp-g-v">Up to 250 m/min</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Registration</span><span class="pp-g-v">Automatic</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Substrates</span><span class="pp-g-v">BOPP, PET, PE, metalised film</span></div>
+      <div class="mach-row">
+        <figure class="mach-photo" style="margin:0;">{{ img("printing-machine", "Rotogravure printing press") }}</figure>
+        <div class="mach-text">
+          <h2 class="sec-title" style="text-align:left;">Rotogravure <em>printing press.</em></h2>
+          <p class="sec-lead" style="text-align:left; margin:14px 0 22px;">9-colour rotogravure with automatic registration control — sharp detail and consistent shade-matching, run after run. Cylinders are engraved per job, so repeat orders reprint to the same shade months later, not just within a single run. Every printed roll is inline-inspected before it moves to lamination, catching registration drift or colour variance before it compounds downstream.</p>
+          <div class="pp-glance-inner" style="padding:0; margin-bottom:22px; justify-content:flex-start; gap:28px 40px;">
+            <div class="pp-g-item"><span class="pp-g-k">Colours</span><span class="pp-g-v">9-colour</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Max web width</span><span class="pp-g-v">1,000mm</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Print speed</span><span class="pp-g-v">Up to 250 m/min</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Registration</span><span class="pp-g-v">Automatic</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Substrates</span><span class="pp-g-v">BOPP, PET, PE, metalised film</span></div>
+          </div>
+          <p style="margin:0; font-size:14px; color:var(--cream-soft); line-height:1.6;"><strong style="color:var(--pale-gold);">What this means for your order:</strong> the shade you approve on the first run is the shade you get on the fiftieth — no re-matching, no drift batch to batch.</p>
+        </div>
       </div>
-      <figure style="margin:0; border-radius:12px; overflow:hidden;">{{ img("printing-machine", "Rotogravure printing press") }}</figure>
-      <p style="max-width:640px; margin:20px 0 0; font-size:14px; color:var(--cream-soft); line-height:1.6;"><strong style="color:var(--pale-gold);">What this means for your order:</strong> the shade you approve on the first run is the shade you get on the fiftieth — no re-matching, no drift batch to batch.</p>
     </div></section>
 
-    <section class="sec"><div class="sec-head" style="max-width:1440px; margin:0 auto; padding:0 56px;">
-      <p class="sec-eyebrow">Stage 03 · Machine 02</p><h2 class="sec-title">Solvent-less &amp; solvent-based <em>lamination.</em></h2><p class="sec-lead">Food-safe multi-layer bonding — the barrier structure is matched to what's going inside the pouch, not a one-size-fits-all laminate.</p>
-      <div class="pp-glance-inner" style="padding:0; margin:28px 0;">
-        <div class="pp-g-item"><span class="pp-g-k">Bonding type</span><span class="pp-g-v">Solvent-less &amp; solvent-based</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Max web width</span><span class="pp-g-v">1,000mm</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Line speed</span><span class="pp-g-v">Up to 400 m/min</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Structures</span><span class="pp-g-v">2–3 ply laminates</span></div>
+    <!-- ============ STAGE 03 · LAMINATION ============ -->
+    <section class="sec">
+      <div class="mach-row mach-row-rev">
+        <figure class="mach-photo" style="margin:0;">{{ img("lami", "Solvent-less lamination machine") }}</figure>
+        <div class="mach-text">
+          <h2 class="sec-title" style="text-align:left;">Solvent-less &amp; solvent-based <em>lamination.</em></h2>
+          <p class="sec-lead" style="text-align:left; margin:14px 0 22px;">Food-safe multi-layer bonding — the barrier structure is matched to what's going inside the pouch, not a one-size-fits-all laminate. Solvent-less bonding is our standard for food-contact layers, avoiding residual solvent entirely, while solvent-based lamination is available where a structure calls for it — retort-grade adhesion or specific barrier films, for example.</p>
+          <div class="pp-glance-inner" style="padding:0; margin-bottom:22px; justify-content:flex-start; gap:28px 40px;">
+            <div class="pp-g-item"><span class="pp-g-k">Bonding type</span><span class="pp-g-v">Solvent-less &amp; solvent-based</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Max web width</span><span class="pp-g-v">1,000mm</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Line speed</span><span class="pp-g-v">Up to 400 m/min</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Structures</span><span class="pp-g-v">2–3 ply laminates</span></div>
+          </div>
+          <p style="margin:0; font-size:14px; color:var(--ink-soft); line-height:1.6;"><strong style="color:var(--ink);">What this means for your order:</strong> solvent-less as standard keeps residual solvent off food-contact layers, with solvent-based available for structures that need it.</p>
+        </div>
       </div>
-      <figure style="margin:0; border-radius:12px; overflow:hidden; max-width:1440px;">{{ img("lami", "Solvent-less lamination machine") }}</figure>
-      <p style="max-width:640px; margin:20px 0 0; font-size:14px; color:var(--ink-soft); line-height:1.6;"><strong style="color:var(--ink);">What this means for your order:</strong> solvent-less as standard keeps residual solvent off food-contact layers, with solvent-based available for structures that need it.</p>
-    </div></section>
+    </section>
 
+    <!-- ============ STAGE 04 · SLITTING ============ -->
     <section class="pp-dark"><div class="sec">
-      <div class="sec-head"><p class="sec-eyebrow">Stage 04 · Machine 03</p><h2 class="sec-title">Precision <em>slitting lines.</em></h2><p class="sec-lead">Tension-controlled winding to exact reel widths — output either goes straight to pouching or ships as finished film rolls.</p></div>
-      <div class="pp-glance-inner" style="padding:0; margin-bottom:28px;">
-        <div class="pp-g-item"><span class="pp-g-k">Max unwind width</span><span class="pp-g-v">1,250mm</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Slit tolerance</span><span class="pp-g-v">±0.5mm</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Speed</span><span class="pp-g-v">Up to 500 m/min</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Winding</span><span class="pp-g-v">Tension-controlled</span></div>
+      <div class="mach-row">
+        <figure class="mach-photo" style="margin:0;">{{ img("slitting-machine", "Slitting machine") }}</figure>
+        <div class="mach-text">
+          <h2 class="sec-title" style="text-align:left;">Precision <em>slitting lines.</em></h2>
+          <p class="sec-lead" style="text-align:left; margin:14px 0 22px;">Tension-controlled winding to exact reel widths — output either goes straight to pouching or ships as finished film rolls. Consistent tension across the reel prevents telescoping and wrinkling in transit, so what leaves our slitting line arrives at yours ready to run, not needing to be re-wound first.</p>
+          <div class="pp-glance-inner" style="padding:0; margin-bottom:22px; justify-content:flex-start; gap:28px 40px;">
+            <div class="pp-g-item"><span class="pp-g-k">Max unwind width</span><span class="pp-g-v">1,250mm</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Slit tolerance</span><span class="pp-g-v">±0.5mm</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Speed</span><span class="pp-g-v">Up to 500 m/min</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Winding</span><span class="pp-g-v">Tension-controlled</span></div>
+          </div>
+          <p style="margin:0; font-size:14px; color:var(--cream-soft); line-height:1.6;"><strong style="color:var(--pale-gold);">What this means for your order:</strong> tight tolerance means every reel feeds your pouching line cleanly — no jams, no wasted film from misaligned edges.</p>
+        </div>
       </div>
-      <figure style="margin:0; border-radius:12px; overflow:hidden;">{{ img("slitting-machine", "Slitting machine") }}</figure>
-      <p style="max-width:640px; margin:20px 0 0; font-size:14px; color:var(--cream-soft); line-height:1.6;"><strong style="color:var(--pale-gold);">What this means for your order:</strong> tight tolerance means every reel feeds your pouching line cleanly — no jams, no wasted film from misaligned edges.</p>
     </div></section>
 
-    <section class="sec"><div class="sec-head" style="max-width:1440px; margin:0 auto; padding:0 56px;">
-      <p class="sec-eyebrow">Stage 05 · Machine 04</p><h2 class="sec-title">Pouching &amp; <em>bag-making lines.</em></h2><p class="sec-lead">Stand-up, flat-bottom, 3-side seal, centre-seal, zipper and spouted formats — fourteen pouch styles, converted in-house.</p>
-      <div class="pp-glance-inner" style="padding:0; margin:28px 0;">
-        <div class="pp-g-item"><span class="pp-g-k">Formats</span><span class="pp-g-v">14 pouch styles</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Fill weight range</span><span class="pp-g-v">5g – 25kg</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Output</span><span class="pp-g-v">Up to 100 pouches/min</span></div>
-        <div class="pp-g-item"><span class="pp-g-k">Closures</span><span class="pp-g-v">Heat seal, zipper, spout</span></div>
+    <!-- ============ STAGE 05 · POUCHING ============ -->
+    <section class="sec">
+      <div class="mach-row mach-row-rev">
+        <figure class="mach-photo" style="margin:0;">{{ img("pouch", "Pouching and bag-making line") }}</figure>
+        <div class="mach-text">
+          <h2 class="sec-title" style="text-align:left;">Pouching &amp; <em>bag-making lines.</em></h2>
+          <p class="sec-lead" style="text-align:left; margin:14px 0 22px;">Stand-up, flat-bottom, 3-side seal, centre-seal, zipper and spouted formats — fourteen pouch styles, converted in-house. Seal strength and closure fitment are checked continuously through the run, not spot-checked at the end, so a pack that fails a seal test gets caught before it reaches your case count, not after it's already boxed.</p>
+          <div class="pp-glance-inner" style="padding:0; margin-bottom:22px; justify-content:flex-start; gap:28px 40px;">
+            <div class="pp-g-item"><span class="pp-g-k">Formats</span><span class="pp-g-v">14 pouch styles</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Fill weight range</span><span class="pp-g-v">5g – 25kg</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Output</span><span class="pp-g-v">Up to 100 pouches/min</span></div>
+            <div class="pp-g-item"><span class="pp-g-k">Closures</span><span class="pp-g-v">Heat seal, zipper, spout</span></div>
+          </div>
+          <p style="margin:0; font-size:14px; color:var(--ink-soft); line-height:1.6;"><strong style="color:var(--ink);">What this means for your order:</strong> from a 5g sachet to a 25kg industrial sack, it's the same in-house line and the same QC checklist.</p>
+        </div>
       </div>
-      <figure style="margin:0; border-radius:12px; overflow:hidden; max-width:1440px;">{{ img("pouch", "Pouching and bag-making line") }}</figure>
-      <p style="max-width:640px; margin:20px 0 0; font-size:14px; color:var(--ink-soft); line-height:1.6;"><strong style="color:var(--ink);">What this means for your order:</strong> from a 5g sachet to a 25kg industrial sack, it's the same in-house line and the same QC checklist.</p>
-    </div></section>
+    </section>
 
-    <section class="sec" aria-label="Quality checkpoint">
+    <!-- ============ STAGE 06 · QC ============ -->
+    <section class="sec" aria-label="Quality checkpoint" style="padding-top:0;">
+      <div style="max-width:1200px; margin:0 auto 64px; border-top:1px solid var(--ink-line);"></div>
       <div class="sec-head"><p class="sec-eyebrow">Stage 06</p><h2 class="sec-title">Inspected <em>before it ships, not after.</em></h2><p class="sec-lead">Every stage above ends with a check, not a handoff — printed rolls are inspected before lamination, laminated rolls before slitting, finished pouches before packing. <a href="#/quality" style="color:var(--accent); text-decoration:underline;">See our full QC process →</a></p></div>
     </section>
 
@@ -287,11 +351,11 @@ noindex: true
   </main>
 
   <!-- ============================================================ PRODUCTS INDEX ============================================================ -->
-  <main class="view" data-route="/products" data-title="Flexible Packaging Formats — 14 Pouch Types | G Flexipack">
+  <main class="view" data-route="/products" data-title="Flexible Packaging Formats — 13 Custom Pouch Types | G Flexipack">
     <section class="pp-hero" style="display:block; text-align:center; padding-bottom:40px;">
       <p class="pp-crumbs" style="text-align:center;"><a href="#/">Home</a><span>/</span>Products</p>
-      <h1 style="margin:0 auto 20px;">One roof, <em>every format.</em></h1>
-      <p class="pp-intro" style="margin:0 auto;">Every format below is custom-made to your dimensions, laminate structure and barrier level, printed in up to 9-colour rotogravure, and converted in-house in Bharuch, Gujarat — from a low MOQ of {{ site.moq }}.</p>
+      <h1 style="margin:0 auto 20px;">Custom-printed pouches, <em>made to spec.</em></h1>
+      <p class="pp-intro" style="margin:0 auto;">Custom-printed flexible pouches for food, beverage, pharma, personal care, agrochemical, industrial and household brands — engineered to your dimensions, laminate structure and barrier level, printed in up to 9-colour rotogravure and converted in-house in Bharuch, Gujarat. MOQ from {{ site.moq }}.</p>
     </section>
     <section class="sec" style="padding-top:20px;">
       <div class="pp-grid">
@@ -306,44 +370,83 @@ noindex: true
   </main>
 
   <!-- ============================================================ PRODUCT PAGES ============================================================ -->
-  {% for p in products %}{% set structures = p.structures or defaultStructures %}
-  <main class="view" data-route="/products/{{ p.slug }}" data-title="{{ p.name }} Manufacturer | G Flexipack">
-    <section class="pp-hero">
-      <div>
-        <p class="pp-crumbs"><a href="#/">Home</a><span>/</span><a href="#/products">Products</a><span>/</span>{{ p.name }}</p>
-        <h1>{{ p.name }}<em>.</em></h1>
-        <p class="pp-intro">{{ p.intro }}</p>
-        <div class="pp-hero-ctas"><a class="cta cta-primary" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a><a class="cta cta-ghost" href="#/products">All formats <span class="arrow" aria-hidden="true">→</span></a></div>
+  {% for p in products %}
+  {% if p.structures %}{% set structures = p.structures %}{% else %}{% set structures = defaultStructures.concat(["MDOPE / PE"]) %}{% endif %}
+  {% set builtins = p.builtin or p.features %}
+  {% set nStruct = (structures | length) ~ "" %}
+  {% set nPacks = (p.applications | length) ~ "" %}
+  {% set nBuilt = (builtins | length) ~ "" %}
+  {% set arcL = arcMid[nStruct] or arcRise[nStruct] %}
+  {% set arcPacks = arcRise[nPacks] %}
+  {% set arcBuilt = arcFall[nBuilt] %}
+  {% set girth = p.girth or 1 %}
+  {% set scale = p.scale or 1 %}
+  <main class="view" data-route="/products/{{ p.slug }}" data-title="{{ p.name }} Manufacturer | G Flexipack · Bharuch, India">
+    <!-- SHELF SHEET — everything at a glance -->
+    <section class="pp-sheet">
+      <div class="pp-floor"></div>
+      <div class="pp-wglow" style="--pglow:{{ p.tbg }}"></div>
+      <p class="pp-crumbs pp-crumbs--sheet">
+        <a href="#/">Home</a><span>/</span><a href="#/products">Products</a><span>/</span>{{ p.name }}
+      </p>
+
+      <div class="pp-sgrid" style="--pgirth:{{ girth }};--pscale:{{ scale }}">
+        <!-- LEFT — structures -->
+        <div class="pp-sflank pp-sfl-l">
+          <div class="pp-sclu">
+            <div class="pp-sclu-h"><span>Structure options</span></div>
+            <ul>
+              {% for s in structures %}
+              <li{% if s == "MDOPE / PE" %} class="rec"{% endif %} style="--arc:{{ ((arcL[loop.index0] or 0) * girth) | round }}px"><b>{{ s }}</b>{% if lamTags[s] %}<span class="pp-st">{{ lamTags[s] }}</span>{% endif %}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <!-- CENTRE — the product on the shelf -->
+        <div class="pp-smid">
+          <h1>{{ p.name }}<em>.</em></h1>
+          <p class="pp-slede">{{ p.lede }}</p>
+          <div class="pp-pod">
+            {% if p.cut %}{{ img(p.cut, p.name + " — custom printed by G Flexipack") }}{% else %}{{ img(p.image, p.name + " — custom printed by G Flexipack", "is-card") }}{% endif %}
+          </div>
+          <div class="pp-underlip">
+            <div class="pp-sctas">
+              <a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="cta pp-soline" href="#/products">All formats <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT — markets + built-in -->
+        <div class="pp-sflank pp-sfl-r">
+          <div class="pp-sclu">
+            <div class="pp-sclu-h"><span>Commonly packs</span></div>
+            <ul>
+              {% for a in p.applications %}
+              <li style="--arc:{{ ((arcPacks[loop.index0] or 0) * girth) | round }}px"><b>{{ a }}</b></li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="pp-sclu">
+            <div class="pp-sclu-h" style="--arc:{{ ((arcBuilt[0] + 3) * girth) | round }}px"><span>Built in</span></div>
+            <ul>
+              {% for f in builtins %}
+              <li style="--arc:{{ ((arcBuilt[loop.index0] or 0) * girth) | round }}px"><b>{{ f.t }}</b>{% if f.opt %}<span class="pp-sopt">Optional</span>{% elif f.tag %}<span class="pp-st">{{ f.tag }}</span>{% endif %}</li>
+              {% endfor %}
+            </ul>
+            {% if p.finishes %}
+            <p class="pp-sfin" style="--arc:2px"><b>Finishes</b> — {% for fi in p.finishes %}{{ fi }}{% if not loop.last %}<i>·</i>{% endif %}{% endfor %}</p>
+            {% endif %}
+          </div>
+        </div>
       </div>
-      <div class="pp-photo">{{ img(p.image, p.name + " — custom printed by G Flexipack") }}</div>
     </section>
-    <section class="pp-glance" aria-label="At a glance"><div class="pp-glance-inner">
-      <div class="pp-g-item"><span class="pp-g-k">Lead time</span><span class="pp-g-v">{{ site.leadTime }}</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Structures</span><span class="pp-g-v">{{ structures | length }} <i>laminates</i></span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Closure</span><span class="pp-g-v">{{ p.closure }}</span></div>
-      <div class="pp-g-item"><span class="pp-g-k">Print</span><span class="pp-g-v">{{ site.print | replace(" rotogravure", "") }} <i>rotogravure</i></span></div>
-    </div></section>
-    <section class="sec">
-      <div class="sec-head"><p class="sec-eyebrow">Key features</p><h2 class="sec-title">Why brands choose <em>this format.</em></h2></div>
-      <div class="pp-features">{% for f in p.features %}<div class="pp-feature"><b>{{ f.t }}</b><span>{{ f.d }}</span></div>
-        {% endfor %}</div>
-    </section>
-    <section class="pp-dark"><div class="sec">
-      <div class="sec-head"><p class="sec-eyebrow">Structure options</p><h2 class="sec-title">Laminate structures, <em>engineered per product.</em></h2><p class="sec-lead">Barrier, stiffness and seal strength are chosen for what you pack — not off a shelf.</p></div>
-      <div class="pp-chips">{% for s in structures %}<span class="pp-chip">{{ s }}</span>
-        {% endfor %}<span class="pp-chip is-rec">MDOPE / PE — Recyclable</span></div>
-    </div></section>
-    <section class="sec">
-      <div class="sec-head"><p class="sec-eyebrow">Product market</p><h2 class="sec-title">Commonly <em>packed products.</em></h2></div>
-      <div class="pp-apps">{% for a in p.applications %}<span class="pp-app">{{ a }}</span>
-        {% endfor %}</div>
-    </section>
-    <section class="pp-band"><div class="sec"><h2>Spec your <em>{{ p.name | lower }}.</em></h2><p>Send dimensions, quantity, barrier needs and artwork status — structure recommendation within {{ site.quoteTurnaround }}.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a><p class="pp-terms">payment <em>{{ site.payment }}</em><span class="dot">●</span> lead time <em>{{ site.leadTime }}</em></p></div></section>
   </main>
   {% endfor %}
 
   <!-- ============================================================ INDUSTRIES INDEX ============================================================ -->
-  <main class="view" data-route="/industries" data-title="Industries We Serve | G Flexipack">
+  <main class="view" data-route="/industries" data-title="Industries We Serve — Flexible Packaging by Sector | G Flexipack">
     <section class="pp-hero" style="display:block; text-align:center; padding-bottom:40px;">
       <p class="pp-crumbs" style="text-align:center;"><a href="#/">Home</a><span>/</span>Industries</p>
       <h1 style="margin:0 auto 20px;">The sector changes. <em>The standard doesn't.</em></h1>
@@ -363,57 +466,115 @@ noindex: true
 
   <!-- ============================================================ INDUSTRY PAGES ============================================================ -->
   {% for s in industries %}
-  <main class="view" data-route="/industries/{{ s.slug }}" data-title="{{ s.name }} Packaging | G Flexipack">
-    <section class="pp-hero">
-      <div>
-        <p class="pp-crumbs"><a href="#/">Home</a><span>/</span><a href="#/industries">Industries</a><span>/</span>{{ s.name }}</p>
-        <h1>{{ s.name }} <em>packaging.</em></h1>
-        <p class="pp-intro">{{ s.intro }}</p>
-        <div class="pp-hero-ctas"><a class="cta cta-primary" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a><a class="cta cta-ghost" href="#/industries">All industries <span class="arrow" aria-hidden="true">→</span></a></div>
+  <main class="view" data-route="/industries/{{ s.slug }}" data-title="{{ s.name }} Packaging | G Flexipack · Bharuch, India">
+    <!-- ============ SPLIT-GLANCE HERO ============ -->
+    <section class="ih">
+      <div class="ih-left">
+        <p class="ih-crumbs"><a href="#/">Home</a> → <a href="#/industries">Industries</a> → <b>{{ s.name }}</b></p>
+        <div class="ih-mid">
+          <p class="ih-eyebrow">Sector {{ s.num }}</p>
+          <h1 class="ih-title">{{ s.name }}<span class="p">.</span></h1>
+          <p class="ih-lead">{{ s.heroLead }}</p>
+          <div class="ih-rule"></div>
+          <p class="ih-packs-l">Commonly packs</p>
+          <p class="ih-packs">{% for a in s.applications %}{{ a }}{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}</p>
+        </div>
+        <div class="ih-ctas">
+          <a class="cta cta-primary" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="cta cta-ghost" href="#formats">See recommended formats <span aria-hidden="true">↓</span></a>
+        </div>
       </div>
-      <div class="pp-photo" style="--cream-2:{{ s.accent }};">{{ img(s.image, s.name + " packaging by G Flexipack") }}</div>
+      <div class="ih-right">
+        <img class="ih-pouch" style="height:{{ s.ph }}%" data-img="{{ s.cutout }}" src="{{ ph }}" alt="{{ s.name }} packaging by G Flexipack" loading="lazy" />
+        {% for f in s.features %}
+        <span class="ih-fdot" style="left:{{ f.x }}%;top:{{ f.y }}%"></span>
+        <span class="ih-conn" style="top:{{ f.y }}%;{% if f.side == 'r' %}left:{{ f.x }}%;right:210px{% else %}left:210px;right:{{ 100 - f.x }}%{% endif %}"></span>
+        <div class="ih-lbl {{ f.side }}" style="top:{{ f.y }}%"><p class="l">{{ f.label }}{% if f.pill %} <i>{{ f.pill }}</i>{% endif %}</p><p class="d">{{ f.desc }}</p></div>
+        {% endfor %}
+        <div class="ih-dim"><span class="bar l"></span><span class="txt">{{ s.tagline }}</span><span class="bar r"></span></div>
+      </div>
     </section>
-    <section class="sec">
-      <div class="sec-head"><p class="sec-eyebrow">What we pack</p><h2 class="sec-title">Built for the <em>{{ s.short | lower }} shelf.</em></h2></div>
-      <div class="pp-apps">{% for a in s.applications %}<span class="pp-app">{{ a }}</span>
-        {% endfor %}</div>
-      <p style="text-align:center; max-width:640px; margin:34px auto 0; color:var(--ink-soft); font-size:15px; line-height:1.65;"><strong style="color:var(--ink); font-weight:500;">Typical build:</strong> {{ s.build }}</p>
+
+    <!-- ============ RECOMMENDED FORMATS ============ -->
+    <section class="pp-dark" id="formats">
+      <div class="sec">
+        <div class="sec-head">
+          <p class="sec-eyebrow">Recommended formats</p>
+          <h2 class="sec-title">Formats that suit <em>{{ s.short | lower }}.</em></h2>
+          <p class="sec-lead">{{ s.build }}</p>
+        </div>
+        <div class="pp-related">
+          {% for slug in s.formats %}{% for p in products %}{% if p.slug == slug %}<a href="#/products/{{ p.slug }}" style="color:var(--cream); border-color:rgba(244,239,231,0.32);">{{ p.name }} →</a>{% endif %}{% endfor %}{% endfor %}
+        </div>
+      </div>
     </section>
-    <section class="pp-dark"><div class="sec">
-      <div class="sec-head"><p class="sec-eyebrow">Recommended formats</p><h2 class="sec-title">Formats that suit <em>{{ s.short | lower }}.</em></h2></div>
-      <div class="pp-related">{% for slug in s.formats %}{% for p in products %}{% if p.slug == slug %}<a href="#/products/{{ p.slug }}" style="color:var(--cream); border-color:rgba(244,239,231,0.32);">{{ p.name }} →</a>{% endif %}{% endfor %}{% endfor %}</div>
-    </div></section>
-    <section class="pp-band"><div class="sec"><h2>Packaging for your <em>{{ s.short | lower }} brand.</em></h2><p>Share your product, format and quantity — structure recommendation within {{ site.quoteTurnaround }}, quote in 48 hours.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
+
+    <!-- ============ CTA BAND ============ -->
+    <section class="pp-band">
+      <div class="sec">
+        <h2>Packaging for your <em>{{ s.short | lower }} brand.</em></h2>
+        <p>Share your product, format and quantity — structure recommendation within {{ site.quoteTurnaround }}, quote in 48 hours.</p>
+        <a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </section>
   </main>
   {% endfor %}
 
   <!-- ============================================================ ABOUT ============================================================ -->
-  <main class="view" data-route="/about" data-title="About G Flexipack — Bharuch, Gujarat">
+  <main class="view" data-route="/about" data-title="About G Flexipack — Flexible Packaging Manufacturer, Bharuch">
+    <!-- INTRO -->
     <section class="sec welcome" style="padding-bottom:40px;">
       <div class="sec-head">
         <p class="pp-crumbs" style="text-align:center;"><a href="#/">Home</a><span>/</span>About</p>
-        <p class="sec-eyebrow">Our company</p>
-        <h2 class="sec-title">Quality packaging, <em>since {{ site.founded }}.</em></h2>
-        <p class="sec-lead">G Flexipack is a flexible packaging manufacturer in {{ site.address.city }}, {{ site.address.region }}, established in {{ site.founded }} on the {{ site.group }}'s 20+ years of manufacturing heritage. We print, laminate, slit and convert custom pouches for brands across food, beverage, pharma, personal care and industry — in a climate-controlled, dust-free plant of {{ site.plantSize }}, with a capacity of {{ site.capacity }}, exporting worldwide from {{ site.port }}.</p>
+        <p class="sec-eyebrow">About G Flexipack · {{ site.address.city }}, {{ site.address.region }} · Est. {{ site.founded }}</p>
+        <h2 class="sec-title">The pouches behind India's <em>everyday brands.</em></h2>
+        <p class="sec-lead">G Flexipack was established in {{ site.founded }} as a partnership firm in Bharuch, Gujarat, under the umbrella of Gangamani Industries and Gangamani Enterprise — group companies with 20+ years in manufacturing. That discipline carried straight into flexible packaging: we convert BOPP, polyester and PET/PE laminates into custom-printed pouches for the food, beverage, pharmaceutical and agrochemical brands that stock India's shelves, pharmacies and farms.</p>
+        <p class="sec-lead">One roof, fourteen pouch formats, seven industries served — every pouch printed, laminated and converted in-house, start to finish.</p>
       </div>
     </section>
-    <section class="sec vm" aria-label="Vision and mission">
-      <div class="vm-grid">
-        <div class="vm-panel" style="--vc:#b25c2e;"><span class="vm-label">Our Vision</span><p class="vm-quote">To be the flexible packaging <em>partner of choice</em> for brands that care how their product lands on shelf.</p></div>
-        <div class="vm-panel" style="--vc:#7a6e3f;"><span class="vm-label">Our Mission</span><p class="vm-quote">Design and print custom pouches that <em>protect the product</em> and represent the brand.</p></div>
+
+    <!-- BUILT FOR BRANDS -->
+    <section class="sec" style="padding-top:0;">
+      <div class="sec-head"><h2 class="sec-title">Built for brands that <em>can't afford compromises.</em></h2></div>
+      <div class="pp-features">
+        <div class="pp-feature" style="--wc:#b25c2e;"><span class="pp-feat-icon" aria-hidden="true">{{ icons.icon('factory') }}</span><b>In-house, start to finish</b><span>Print, laminate, convert — every step happens under our supervision. No vendor chains, no quality drift.</span></div>
+        <div class="pp-feature" style="--wc:#c89a3a;"><span class="pp-feat-icon" aria-hidden="true">{{ icons.icon('grid') }}</span><b>Every format, one supplier</b><span>From stand-up pouches to retort packs to spouted formats — you don't need multiple suppliers.</span></div>
+        <div class="pp-feature" style="--wc:#7a8a6c;"><span class="pp-feat-icon" aria-hidden="true">{{ icons.icon('flask') }}</span><b>Compliance-ready films</b><span>Food-grade, pharma-approved, agrochemical-tough. The right barrier for the right shelf.</span></div>
+        <div class="pp-feature" style="--wc:#7a6e3f;"><span class="pp-feat-icon" aria-hidden="true">{{ icons.icon('trending-up') }}</span><b>Growth-friendly MOQs</b><span>Whether you're launching or scaling, we make it work — without dropping standards.</span></div>
+        <div class="pp-feature" style="--wc:#3b2a20;"><span class="pp-feat-icon" aria-hidden="true">{{ icons.icon('printer') }}</span><b>Consistent, every single run</b><span>Rotogravure precision, consistent shade-matching, artwork that survives the supply chain.</span></div>
+        <div class="pp-feature" style="--wc:#b25c2e;"><span class="pp-feat-icon" aria-hidden="true">{{ icons.icon('clock') }}</span><b>Quoted in 48 hours</b><span>Structure recommendation within {{ site.quoteTurnaround }} of your brief, full quote within 48.</span></div>
       </div>
     </section>
+
+    <!-- FOUR VALUES -->
+    <section class="sec vm" aria-label="Our values">
+      <div class="sec-head"><h2 class="sec-title">Four values, <em>one standard.</em></h2></div>
+      <div class="values-grid">
+        <div class="vm-panel" style="--vc:#b25c2e;"><span class="vm-label">Precision</span><p class="vm-quote">Every micron, every millimetre, every registration mark — <em>measured and matched.</em></p></div>
+        <div class="vm-panel" style="--vc:#c89a3a;"><span class="vm-label">Partnership</span><p class="vm-quote">We treat your pouch like a product, not a purchase order — <em>we stay in the loop.</em></p></div>
+        <div class="vm-panel" style="--vc:#7a6e3f;"><span class="vm-label">Pace</span><p class="vm-quote">From artwork approval to airtight pouch — <em>we own every step.</em></p></div>
+        <div class="vm-panel" style="--vc:#7a8a6c;"><span class="vm-label">Proof</span><p class="vm-quote">Quality-checked, shade-verified, seal-tested — <em>if it doesn't meet the standard, it doesn't ship.</em></p></div>
+      </div>
+    </section>
+
+    <!-- WHY US -->
     <section class="sec">
-      <div class="sec-head"><p class="sec-eyebrow">Why us</p><h2 class="sec-title">What sets us <em>apart.</em></h2></div>
+      <div class="sec-head">
+        <p class="sec-eyebrow">Why us</p>
+        <h2 class="sec-title">What sets us <em>apart.</em></h2>
+        <p class="sec-lead">Six reasons brands stay with us past the first order.</p>
+      </div>
       <div class="why-grid stagger">
-        <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">i</span><h4>Assured Quality</h4><p>ISO 9001:2015 systems and an in-house ASTM lab — eight tests on every batch, full documentation at dispatch.</p></div>
-        <div class="why-card" style="--wc:#c89a3a;"><span class="why-glyph">ii</span><h4>On-Time Delivery</h4><p>3–5 week production lead times, honestly quoted and tracked — exporting to 10+ countries via sea freight.</p></div>
-        <div class="why-card" style="--wc:#7a6e3f;"><span class="why-glyph">iii</span><h4>Customized Solutions</h4><p>Structure, size, barrier and finish engineered per product — recommendation within 24 hours of your brief.</p></div>
-        <div class="why-card" style="--wc:#7a8a6c;"><span class="why-glyph">iv</span><h4>Advanced Machinery</h4><p>9-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p></div>
-        <div class="why-card" style="--wc:#3b2a20;"><span class="why-glyph">v</span><h4>Skilled Workforce</h4><p>An experienced production and QC team under the Gangamani group's 20+ years of manufacturing discipline.</p></div>
-        <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph">vi</span><h4>100% Recyclable Options</h4><p>Mono-material LLDPE structures for EPR-compliant brands — sustainability without sacrificing shelf appeal.</p></div>
+        <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph" aria-hidden="true">{{ icons.icon('shield') }}</span><h4>Assured Quality</h4><p>ISO 9001:2015 systems and an in-house ASTM lab — eight tests on every batch, full documentation at dispatch.</p></div>
+        <div class="why-card" style="--wc:#c89a3a;"><span class="why-glyph" aria-hidden="true">{{ icons.icon('truck') }}</span><h4>On-Time Delivery</h4><p>3–5 week production lead times, honestly quoted and tracked — exporting to 10+ countries via sea freight.</p></div>
+        <div class="why-card" style="--wc:#7a6e3f;"><span class="why-glyph" aria-hidden="true">{{ icons.icon('sliders') }}</span><h4>Customized Solutions</h4><p>Structure, size, barrier and finish engineered per product — recommendation within 24 hours of your brief.</p></div>
+        <div class="why-card" style="--wc:#7a8a6c;"><span class="why-glyph" aria-hidden="true">{{ icons.icon('gear') }}</span><h4>Advanced Machinery</h4><p>9-colour rotogravure with auto registration, solvent-less lamination, precision slitting and pouching lines.</p></div>
+        <div class="why-card" style="--wc:#3b2a20;"><span class="why-glyph" aria-hidden="true">{{ icons.icon('users') }}</span><h4>Skilled Workforce</h4><p>An experienced production and QC team under the Gangamani group's 20+ years of manufacturing discipline.</p></div>
+        <div class="why-card" style="--wc:#b25c2e;"><span class="why-glyph" aria-hidden="true">{{ icons.icon('recycle') }}</span><h4>100% Recyclable Options</h4><p>Mono-material LLDPE structures for EPR-compliant brands — sustainability without sacrificing shelf appeal.</p></div>
       </div>
     </section>
+
+    <!-- CTA BAND -->
     <section class="pp-band"><div class="sec"><h2>Let's build your <em>next pouch.</em></h2><p>Tell us what you pack — structure recommendation within {{ site.quoteTurnaround }}, detailed quote in 48 hours.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
   </main>
 
@@ -478,6 +639,29 @@ noindex: true
         </div>
       </div>
     </section>
+
+    <!-- FAQ -->
+    {% set faqs = [
+      { q: "Are your pouches food-safe?", a: "Yes. We use food-grade inner seal layers (LLDPE or CPP) and food-safe lamination adhesives, and every batch is tested and documented before dispatch under our ISO 9001:2015 system." },
+      { q: "What quality tests do you run?", a: "Eight tests on every batch to ASTM standards — GSM, coefficient of friction (COF), bond strength, puncture resistance, burst strength, scrub resistance, heat-seal strength and tear strength — with full documentation at dispatch." },
+      { q: "Do you offer recyclable packaging?", a: "Yes. We produce 100% recyclable mono-material MDOPE/PE structures for EPR-compliant, sustainability-first brands, without sacrificing barrier or shelf appeal." },
+      { q: "What certifications does G Flexipack hold?", a: "We operate an ISO 9001:2015 certified quality management system across procurement, production and dispatch, and run ASTM-standard QC in an in-house laboratory." },
+      { q: "Is quality documented for each order?", a: "Yes. Raw material is inspected on arrival, colour is verified before print, the product is tested in-line at every stage, and a documentation pack accompanies dispatch." }
+    ] %}
+    <section class="sec">
+      <div class="sec-head">
+        <p class="sec-eyebrow">Questions</p>
+        <h2 class="sec-title">Quality, <em>answered.</em></h2>
+      </div>
+      <div class="faq">
+        {% for f in faqs %}<details{% if loop.first %} open{% endif %}>
+          <summary>{{ f.q }}</summary>
+          <p>{{ f.a }}</p>
+        </details>
+        {% endfor %}
+      </div>
+    </section>
+
     <section class="pp-band"><div class="sec"><h2>Packaging you can <em>document and defend.</em></h2><p>Every order ships with test documentation. Send your brief for a structure recommendation within {{ site.quoteTurnaround }}.</p><a class="cta cta-light" href="#/inquiry">Get a quote <span class="arrow" aria-hidden="true">→</span></a></div></section>
   </main>
 
@@ -528,6 +712,11 @@ noindex: true
         var scrollId = null;
         if (target === "/inquiry") { target = "/"; scrollId = "inquiry"; }
         if (target === "/#infrastructure") { target = "/"; scrollId = "infrastructure"; }
+        // in-page anchor within the current view (e.g. #formats) — scroll, don't re-route
+        if (target.charAt(0) !== "/") {
+          var anchor = document.getElementById(target);
+          if (anchor) { anchor.scrollIntoView({ behavior: "smooth" }); return; }
+        }
         var match = views.filter(function (v) { return v.getAttribute("data-route") === target; })[0];
         if (!match) { match = views.filter(function (v) { return v.getAttribute("data-route") === "/"; })[0]; target = "/"; }
         views.forEach(function (v) { v.classList.toggle("is-active", v === match); });

@@ -149,8 +149,8 @@ pageImage: "/assets/images/standup.png"
         {% for s in industries %}<div class="acc-panel{% if loop.first %} is-open{% endif %}" style="--ic:{{ s.accent }};">
           <img class="acc-photo" src="/assets/images/{{ s.image }}.png" alt="{{ s.name }} sector packaging" loading="lazy" />
           <div class="acc-photo-scrim"></div>
-          <div class="acc-closed"><span class="acc-num">{{ s.num }}</span><span class="acc-name-v">{{ s.short }}</span></div>
-          <div class="acc-open"><span class="acc-num">{{ s.num }}</span><h3>{{ s.name }}</h3><p>{{ s.applications | join(' · ') }}.</p><a class="r-link" href="/industries/{{ s.slug }}/">Explore sector →</a></div>
+          <div class="acc-closed"><span class="acc-name-v">{{ s.short }}</span></div>
+          <div class="acc-open"><h3>{{ s.name }}</h3><p>{{ s.applications | join(' · ') }}.</p><a class="r-link" href="/industries/{{ s.slug }}/">Explore sector →</a></div>
         </div>
         {% endfor %}
       </div>
